@@ -21,7 +21,7 @@ export async function POST(req) {
     console.log("Received chatInput:", chatInput);
 
     // --- call n8n webhook ---
-    const n8nRes = await fetch(process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL, {
+   const n8nRes = await fetch("https://n8n.srv943460.hstgr.cloud/webhook/9880443f-5de1-4ba8-a190-aa6f08f32aca/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chatInput, sessionId, metadata }),
