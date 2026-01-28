@@ -51,7 +51,7 @@ export default function Footer() {
         <hr className="border-t border-black my-6" />
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} className="flex justify-between items-center text-sm md:text-base">
-          <p className="text-black">RADICAL THINKING © 2025</p>
+          <p className="text-black">RADICAL THINKING © 2026</p>
           <div className="flex justify-center">
             <Link href="/" className="cursor-pointer">
               <img src="/logos/RT-Logo-New.svg" alt="RT Logo" className="w-10 h-10" />
