@@ -88,59 +88,69 @@ export default function RootLayout({ children }) {
 
         {/*  Global Structured Data (Organization + hasPart pages) */}
         <Script id="ld-json-org" type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Radical Thinking",
-            url: "https://radical-thinking.net",
-            logo: "https://radical-thinking.net/images/logo.png",
-            foundingDate: "2008",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Dubai",
-              addressCountry: "AE",
-            },
-            description:
-              "An AI-native agency that brings bold ideas to life by combining creativity, experience, and technology.",
-            contactPoint: {
-              "@type": "ContactPoint",
-              contactType: "customer support",
-              email: "stephan@radical-thinking.net",
-            },
-            sameAs: [
-              "https://www.linkedin.com/company/radicalthinking",
-              "https://twitter.com/radicalthinking",
-              "https://www.instagram.com/radicalthinking",
-            ],
-            mainEntityOfPage: {
-              "@type": "WebPage",
-              "@id": "https://radical-thinking.net",
-            },
-            hasPart: [
-              {
-                "@type": "WebPage",
-                name: "Talk to Our AI",
-                url: "https://radical-thinking.net/chat",
-                description:
-                  "Engage in a direct conversation with the official AI agent of Radical Thinking.",
-              },
-              {
-                "@type": "WebPage",
-                name: "Privacy Policy",
-                url: "https://radical-thinking.net/privacy-policy",
-                description:
-                  "Understand how we collect, use, and protect your data when you interact with our website and AI-native services.",
-              },
-              {
-                "@type": "WebPage",
-                name: "Terms of Use",
-                url: "https://radical-thinking.net/terms-of-use",
-                description:
-                  "Official terms governing your access to and use of the Radical Thinking website, AI agent, and other services.",
-              },
-            ],
-          })}
-        </Script>
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService", // More specific than Organization
+    "name": "Radical Thinking",
+    "alternateName": "RT",
+    "url": "https://radical-thinking.net",
+    "logo": "https://radical-thinking.net/images/logo.png",
+    "image": "https://radical-thinking.net/images/social-share.jpg",
+    "foundingDate": "2008",
+    "description": "An AI-native agency in Dubai that brings bold ideas to life by combining creativity, experience, and technology.",
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "AI Agents",
+      "Web Development",
+      "Digital Innovation",
+      "UX Design"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Stephan", // Add your full name here
+      "jobTitle": "Founder"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dubai",
+      "addressCountry": "AE",
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "stephan@radical-thinking.net",
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/radicalthinking",
+      "https://twitter.com/radicalthinking",
+      "https://www.instagram.com/radicalthinking",
+    ],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://radical-thinking.net",
+    },
+    "hasPart": [
+      {
+        "@type": "WebPage",
+        "name": "Talk to Our AI",
+        "url": "https://radical-thinking.net/chat",
+        "description": "Engage in a direct conversation with the official AI agent of Radical Thinking.",
+      },
+      {
+        "@type": "WebPage",
+        "name": "Privacy Policy",
+        "url": "https://radical-thinking.net/privacy-policy",
+        "description": "Understand how we collect, use, and protect your data.",
+      },
+      {
+        "@type": "WebPage",
+        "name": "Terms of Use",
+        "url": "https://radical-thinking.net/terms-of-use",
+        "description": "Official terms governing your access to Radical Thinking services.",
+      },
+    ],
+  })}
+</Script>
       </body>
     </html>
   );
