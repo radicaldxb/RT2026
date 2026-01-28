@@ -243,7 +243,7 @@ export default function Home() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 px-1">
+          <div className="flex gap-6 overflow-x-auto no-scrollbar pb-8 px-5 snap-x snap-mandatory">
             {mobileImages.map((item, index) => (
               <motion.div
                 key={index}
@@ -252,7 +252,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ delay: index * 0.1, duration: 0.4, type: "spring" }}
-                className="bg-white w-[220px] h-[180px] rounded-[22px] px-10 shadow-md flex items-center justify-center flex-shrink-0"
+                className="bg-white w-[280px] h-[180px] rounded-[22px] px-10 shadow-md flex items-center justify-center flex-shrink-0 snap-center"
               >
                 <Link href={item.link} target="_blank">
                   <img src={item.src} alt={`Mobile Logo ${index + 1}`} className="max-h-[60%] object-contain" />
