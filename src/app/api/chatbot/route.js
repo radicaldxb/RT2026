@@ -21,11 +21,12 @@ export async function POST(req) {
     console.log("Received chatInput:", chatInput);
 
     // --- call n8n webhook ---
-   const n8nRes = await fetch(process.env.N8N_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chatInput, sessionId, metadata }),
-    });
+const n8nRes = await fetch(process.env.N8N_WEBHOOK_URL, { 
+  // Make sure this is exactly N8N_WEBHOOK_URL
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ chatInput, sessionId, metadata }),
+});
 
     const rawText = await n8nRes.text();
     console.log("📨 n8n raw response:", rawText);
