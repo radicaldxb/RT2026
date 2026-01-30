@@ -23,12 +23,9 @@ export const metadata = {
 
 export default function ChatPage() {
     return (
-        <main className="w-full relative h-screen overflow-hidden bg-white">
+        <main className="w-full relative min-h-screen">
             <ChatUI />
             <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL" />
-            <Script id="gtag-init" strategy="afterInteractive">
-                {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-FXY9Q2TXCL');`}
-            </Script>
         </main>
     );
 }
