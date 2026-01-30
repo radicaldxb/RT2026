@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 /* 1. STABILIZE VIEWPORT */
-/* Prevent the whole page from scrolling */
+/* Locks the entire browser window so it cannot scroll */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden; 
   font-family: 'Helvetica Neue', sans-serif;
-  background-color: #ffffff;
 }
 
 /* 2. THE ANIMATED BACKGROUND */
@@ -16,7 +15,7 @@ html, body {
   background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
   background-size: 600% 600%;
   animation: gradientShift 30s ease infinite;
-  position: fixed; /* Ensures background is locked */
+  position: fixed; 
   inset: 0;
   z-index: -1;
 }
@@ -38,10 +37,7 @@ html, body {
 
 /* 4. MOBILE INPUT FIX */
 @media (max-width: 640px) {
-  /* Prevents iOS/Android auto-zoom when tapping the input */
   input[type="text"] {
-    font-size: 16px !important;
+    font-size: 16px !important; /* Prevents auto-zoom */
   }
 }
-
-/* ... keep your other @font-face and @keyframes here ... */
