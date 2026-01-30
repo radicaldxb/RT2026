@@ -1,43 +1,30 @@
 @import "tailwindcss";
 
-/* 1. STABILIZE VIEWPORT */
-/* Locks the entire browser window so it cannot scroll */
+/* RESTORED: Allow natural vertical scrolling */
 html, body {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; 
+  overflow-x: hidden; 
+  overflow-y: auto; 
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* 2. THE ANIMATED BACKGROUND */
+/* BACKGROUND STAYS FIXED */
 .gradient-animated {
   background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
   background-size: 600% 600%;
   animation: gradientShift 30s ease infinite;
-  position: fixed; 
+  position: fixed; /* Background doesn't move when you scroll */
   inset: 0;
   z-index: -1;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+.fog-center { pointer-events: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* 3. SCROLLING UTILITIES */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* 4. MOBILE INPUT FIX */
+/* MOBILE TOUCH FIX */
 @media (max-width: 640px) {
-  input[type="text"] {
-    font-size: 16px !important; /* Prevents auto-zoom */
-  }
+  input { font-size: 16px !important; }
 }
