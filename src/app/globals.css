@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* RESTORED: Allow natural vertical scrolling */
+/* 1. RESTORE NORMAL SCROLLING */
 html, body {
   min-height: 100%;
   margin: 0;
@@ -10,21 +10,36 @@ html, body {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* BACKGROUND STAYS FIXED */
+/* 2. GRADIENT RESTORATION */
 .gradient-animated {
   background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
   background-size: 600% 600%;
   animation: gradientShift 30s ease infinite;
-  position: fixed; /* Background doesn't move when you scroll */
+  position: fixed;
   inset: 0;
   z-index: -1;
 }
 
-.fog-center { pointer-events: none; }
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 3. ROTATE ANIMATION RESTORATION */
+@keyframes rotate360 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.rotate-slow {
+  animation: rotate360 8s linear infinite;
+}
+
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* MOBILE TOUCH FIX */
+/* 4. MOBILE INPUT FIX */
 @media (max-width: 640px) {
   input { font-size: 16px !important; }
 }
