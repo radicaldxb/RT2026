@@ -38,7 +38,7 @@ export default function Chat() {
     const quickMessages = ['I want to start a project', 'What AI solutions have you built?', 'I need help with an AI solution', 'Tell me about your services'];
 
     return (
-        <div className="main-viewport w-full">
+        <div className="main-viewport w-full text-black">
             <div className="gradient-animated" />
             <SoftBackground />
             <header className="w-full max-w-7xl mx-auto p-6 z-20 flex justify-start">
@@ -48,7 +48,7 @@ export default function Chat() {
                 <AnimatePresence>
                     {!showChat ? (
                         <div className="flex flex-col items-center justify-center flex-1 gap-10">
-                            <h1 className="text-3xl font-bold text-center text-black tracking-tighter">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
+                            <h1 className="text-3xl font-bold text-center tracking-tighter">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
                             <img src="/logos/AI-Chat.svg" alt="Chat" onClick={() => setShowChat(true)} className="w-40 h-40 cursor-pointer rotate-slow" />
                         </div>
                     ) : (
