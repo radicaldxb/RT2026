@@ -44,7 +44,7 @@ export default function Chat() {
             <header className="w-full max-w-7xl mx-auto p-6 z-20 flex justify-start">
                 <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="Logo" className="w-12 h-12" /></Link>
             </header>
-            <main className="flex-1 w-full max-w-2xl mx-auto px-4 overflow-y-auto no-scrollbar pb-10 z-10 flex flex-col">
+            <main className="flex-1 w-full max-w-2xl mx-auto px-4 overflow-y-auto no-scrollbar z-10 flex flex-col">
                 <AnimatePresence>
                     {!showChat ? (
                         <div className="flex flex-col items-center justify-center flex-1 gap-10">
@@ -67,14 +67,14 @@ export default function Chat() {
                     )}
                 </AnimatePresence>
             </main>
-            <div className="w-full max-w-2xl mx-auto p-4 z-30 bg-white/40 backdrop-blur-xl rounded-t-3xl border-t border-white/20">
-                <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 px-2 pb-1">
+            <div className="w-full max-w-2xl mx-auto p-4 z-30 bg-white/40 backdrop-blur-xl rounded-t-3xl border-t border-white/20 shadow-2xl">
+                <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 px-1 pb-1">
                     {quickMessages.map((q, i) => (
                         <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-2 text-[10px] rounded-full bg-white text-black shadow-md border border-gray-100 font-bold shrink-0">{q}</button>
                     ))}
                 </div>
                 <div className="flex items-center gap-2 bg-white rounded-full shadow-lg p-1 pl-5 border border-gray-100">
-                    <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} placeholder="What’s on your mind?" className="flex-1 bg-transparent py-3 text-sm text-black outline-none" />
+                    <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} placeholder="What’s on your mind?" className="flex-1 bg-transparent py-3 text-sm text-black outline-none placeholder:text-black/40" />
                     <button onClick={() => sendMessage()} className="p-3 bg-gray-50 rounded-full shrink-0 shadow-sm" style={{ background: 'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)' }}><Image src="/logos/Chat.svg" alt="Send" width={24} height={24} className="w-6 h-6" /></button>
                 </div>
                 <Footer />
