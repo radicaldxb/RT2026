@@ -3,9 +3,12 @@ import Script from "next/script";
 
 export const metadata = {
   title: "Radical Thinking | AI-Native Agency in Dubai",
-  description: "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
+  description: "Why browse a static website when you can have a conversation? Talk directly to our AI agent to get the answers you need.",
   metadataBase: new URL("https://radical-thinking.net"),
-  alternates: { canonical: "https://radical-thinking.net" },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
     url: "https://radical-thinking.net",
@@ -22,7 +25,7 @@ export default function RootLayout({ children }) {
         <meta name="geo.region" content="AE" />
         <meta name="geo.placename" content="Dubai" />
       </head>
-      <body className="antialiased m-0 p-0 min-h-full">
+      <body className="antialiased m-0 p-0 min-h-full bg-white">
         {children}
         <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL" />
         <Script id="gtag-init" strategy="afterInteractive">
