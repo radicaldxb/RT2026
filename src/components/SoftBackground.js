@@ -1,32 +1,9 @@
 const SoftBackground = () => {
   return (
-    <div className="absolute inset-0 z-[-1] overflow-hidden">
-      {/* Animated Gradient Overlay */}
-      <div className="absolute inset-0 gradient-animated opacity-70" />
-
-      {/* Edge Fog Blobs */}
-      <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] fog-blob-1"
-        style={{ top: "20%", left: "15%" }}
-      />
-      <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] fog-blob-2"
-        style={{ top: "25%", right: "10%" }}
-      />
-      <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] fog-blob-3"
-        style={{ bottom: "20%", left: "20%" }}
-      />
-      <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] fog-blob-4"
-        style={{ bottom: "10%", right: "15%" }}
-      />
-
-      {/* Center Floating Fog Blob */}
-      <div
-        className="absolute w-[700px] h-[700px] rounded-full blur-[180px] fog-center"
-        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
-      />
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-transparent">
+      <div className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-30 bg-blue-100/20 top-[20%] left-[15%]" />
+      <div className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-30 bg-pink-100/20 top-[25%] right-[10%]" />
+      <div className="absolute w-[700px] h-[700px] rounded-full blur-[180px] opacity-40 bg-white/50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fog-center" />
     </div>
   );
 };
