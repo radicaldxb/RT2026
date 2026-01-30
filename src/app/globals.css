@@ -36,6 +36,16 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes fogDrift {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-48%, -52%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.fog-center {
+  animation: fogDrift 40s ease-in-out infinite;
+}
+
 .rotate-slow {
   animation: rotate360 8s linear infinite;
 }
