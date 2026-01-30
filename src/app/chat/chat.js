@@ -36,7 +36,7 @@ export default function Chat() {
         );
     }, []);
 
-    // FIXED: Direct pixel scroll to bottom
+    /* FIXED AUTO-SCROLL: Direct pixel calculation to snap to bottom */
     useEffect(() => {
         if (isAutoScrollRef.current && chatContainerRef.current) {
             chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -79,40 +79,33 @@ export default function Chat() {
         setLoading(false);
     };
 
-    const quickMessages = [
-        'I want to start a project',
-        'What AI solutions have you built?',
-        'I need help with an AI solution',
-        'Tell me about your services',
-    ];
+    const quickMessages = ['I want to start a project', 'What AI solutions have you built?', 'I need help with an AI solution', 'Tell me about your services'];
 
     return (
-        <main className="h-screen w-full flex flex-col items-center text-black relative overflow-hidden gradient-animated">
+        <main className="h-full w-full flex flex-col items-center text-black relative overflow-hidden">
             <SoftBackground />
 
-            {/* HEADER AREA */}
+            {/* HEADER AREA - shrink-0 keeps it from collapsing */}
             <div className="w-full px-6 py-4 z-20 shrink-0">
                 <Link href="/" className="cursor-pointer">
                     <img src="/logos/RT-Logo-New.svg" alt="RT Logo" className="w-12 h-12" />
                 </Link>
             </div>
 
-            {/* MIDDLE SECTION - MESSAGES */}
+            {/* MIDDLE SECTION - flex-1 expands to fill space */}
             <section className="flex-1 w-full flex flex-col items-center justify-center relative overflow-hidden z-10 min-h-0">
                 <AnimatePresence>
                     {!showChat ? (
-                        <motion.div 
-                            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-                            className="flex flex-col items-center gap-6"
-                        >
-                            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-center px-4">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
+                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="flex flex-col items-center gap-6">
+                            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-center px-4 text-black">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
                             <img src="/logos/AI-Chat.svg" alt="AI Chat" onClick={() => setShowChat(true)} className="cursor-pointer w-40 h-40 rotate-slow" />
                         </motion.div>
                     ) : (
                         <motion.div
                             key="chat" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                             ref={chatContainerRef} onScroll={handleScroll}
-                            className="w-full max-w-2xl flex-1 flex flex-col gap-4 items-start p-6 overflow-y-auto no-scrollbar pb-32"
+                            /* pb-40 prevents the bot reply from hiding behind input bar */
+                            className="w-full max-w-2xl flex-1 flex flex-col gap-4 items-start p-6 overflow-y-auto no-scrollbar pb-40"
                         >
                             {messages.map((msg, i) => (
                                 <div key={i} className={`flex w-full ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
@@ -124,17 +117,16 @@ export default function Chat() {
                                     </div>
                                 </div>
                             ))}
-                            {loading && <div className="p-2 bg-[#FFFBEF] rounded-2xl animate-pulse">...</div>}
                         </motion.div>
                     )}
                 </AnimatePresence>
             </section>
 
-            {/* STICKY FOOTER AREA */}
+            {/* FOOTER INPUT AREA - Fixed at bottom */}
             <footer className="w-full max-w-3xl flex flex-col gap-3 p-4 shrink-0 z-20 bg-white/20 backdrop-blur-md">
                 <div className="flex gap-2 overflow-x-auto no-scrollbar px-2">
                     {quickMessages.map((q, i) => (
-                        <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-1.5 text-[11px] md:text-sm rounded-full bg-white border border-gray-100 shadow-lg shrink-0">
+                        <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-1.5 text-xs rounded-full bg-white border border-gray-100 shadow-md shrink-0">
                             {q}
                         </button>
                     ))}
