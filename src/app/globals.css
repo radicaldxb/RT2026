@@ -1,42 +1,132 @@
 @import "tailwindcss";
 
-/* ... keep your @font-face and @keyframes as they are ... */
+/* ===== FONT FACES ===== */
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype");
+}
 
-/* 1. STABILIZE VIEWPORT: Prevent the whole page from scrolling */
+@font-face {
+  font-family: "HelveticaNeue-Bold";
+  src: url("/fonts/HelveticaNeue-Bold.ttf") format("truetype");
+}
+
+/* ===== 1. STABILIZE VIEWPORT ===== */
+/* Prevent the whole page from scrolling to fix the "poor desktop experience" */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Fixes the poor desktop experience you mentioned */
+  overflow: hidden; 
   font-family: 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
 }
 
-/* 2. LAYOUT WRAPPER: Force the app structure */
+/* ===== 2. KEYFRAMES & ANIMATIONS ===== */
+@keyframes fogDrift {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-48%, -52%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes colorFlow {
+  0%   { background: rgba(255, 200, 200, 0.6); }
+  25%  { background: rgba(255, 255, 200, 0.6); }
+  50%  { background: rgba(200, 255, 255, 0.6); }
+  75%  { background: rgba(255, 200, 255, 0.6); }
+  100% { background: rgba(255, 200, 200, 0.6); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes gradientLoop {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes rotate360 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== 3. ANIMATION CLASSES ===== */
+.fog-center {
+  animation: fogDrift 40s ease-in-out infinite, colorFlow 25s ease-in-out infinite;
+  pointer-events: none; /* Background shouldn't block chat interaction */
+}
+
+.gradient-animated {
+  background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
+  background-size: 600% 600%;
+  animation: gradientShift 30s ease infinite;
+}
+
+.animate-gradient-loop {
+  background-image: linear-gradient(
+    90deg, #00E2FF, #AB6387, #B35D81, #CB7464, #F29A33, #FAA229, #5603F4
+  );
+  background-size: 300% 300%;
+  animation: gradientLoop 8s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rotate-slow {
+  animation: rotate360 8s linear infinite;
+}
+
+/* ===== 4. CHAT STRUCTURE & SCROLLING ===== */
+/* Container to force the app structure */
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh; /* Locked to viewport height */
   width: 100%;
 }
 
-/* 3. SCROLLABLE AREA: Ensure messages don't hide behind buttons */
+/* The middle section that actually scrolls */
 .chat-messages-pane {
-  flex: 1; /* Grows to fill available space */
+  flex: 1; /* Grows to fill available space between header and footer */
   overflow-y: auto;
-  padding-bottom: 2rem; /* Adds clearance for the "first fold" */
+  padding-bottom: 2rem; /* Adds clearance so last message is on the "first fold" */
   scroll-behavior: smooth;
 }
 
-/* 4. MOBILE INPUT FIXES */
+/* Hide scrollbars but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== 5. MOBILE-SPECIFIC FIXES ===== */
 @media (max-width: 640px) {
+  /* Smaller chips to bring messages closer to input */
   .suggestion-chip {
-    @apply text-xs py-1 px-3; /* Smaller suggestions for mobile */
+    @apply text-xs py-1 px-3; 
   }
 
-  /* Make input wider and send button a smaller touch target */
+  /* Optimize mobile input layout */
   .mobile-input-row {
     @apply flex items-center gap-2 p-2;
   }
+  
+  /* Prevent iOS zoom on input focus */
+  input[type="text"] {
+    font-size: 16px;
+  }
 }
-
-/* ... keep your .fog-center, .gradient-animated, and animation classes ... */
