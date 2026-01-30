@@ -17,7 +17,7 @@ export default function Chat() {
     const [messages, setMessages] = useState([{ from: 'bot', content: 'Hello! This your Radical Thinking agent! How can I help you today?', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
     const [loading, setLoading] = useState(false);
 
-    // This anchor ensures the latest message is always in view
+    // Anchor to ensure the latest message is always in view
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -62,7 +62,7 @@ export default function Chat() {
             <SoftBackground />
 
             {/* Header */}
-            <div className="w-full max-w-7xl px-6 py-6 z-20">
+            <div className="w-full max-w-7xl px-6 py-6 z-20 text-black">
                 <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="RT" className="w-12 h-12" /></Link>
             </div>
 
@@ -71,11 +71,11 @@ export default function Chat() {
                 <AnimatePresence>
                     {!showChat ? (
                         <div className="flex flex-col items-center gap-10 mt-20">
-                            <h1 className="text-3xl font-bold text-center text-black">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
+                            <h1 className="text-3xl font-bold text-center text-black leading-tight">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
                             <div className="relative">
                                 <img 
                                     src="/logos/AI-Chat.svg" 
-                                    alt="Chat" 
+                                    alt="AI Chat" 
                                     onClick={() => setShowChat(true)} 
                                     className="cursor-pointer w-40 h-40 md:w-48 md:h-48 transition-all duration-500 rotate-slow" 
                                 />
@@ -102,7 +102,7 @@ export default function Chat() {
             <div className="w-full max-w-2xl p-4 z-30 sticky bottom-0 bg-white/40 backdrop-blur-lg border-t border-white/50 rounded-t-3xl">
                 <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4">
                     {quickMessages.map((q, i) => (
-                        <button key={i} onClick={() => sendMessage(q)} className="px-4 py-1.5 bg-white rounded-full text-xs shadow-md whitespace-nowrap">{q}</button>
+                        <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-1.5 bg-white rounded-full text-xs shadow-md text-black">{q}</button>
                     ))}
                 </div>
                 <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export default function Chat() {
                 </div>
             </div>
 
-            <Footer />
+            <Footer /> {/* Site Navigation Restored */}
         </div>
     );
 }
