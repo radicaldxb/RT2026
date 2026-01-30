@@ -10,11 +10,7 @@ import SoftBackground from '@/components/SoftBackground';
 export default function Chat() {
     const [query, setQuery] = useState('');
     const [showChat, setShowChat] = useState(false);
-    const [messages, setMessages] = useState([{ 
-        from: 'bot', 
-        content: 'Hello! I am your Radical Thinking agent. How can I help you today? You can speak to me in any language!', 
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
-    }]);
+    const [messages, setMessages] = useState([{ from: 'bot', content: 'Hello! I am your Radical Thinking agent. How can I help you today? You can speak to me in any language!', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef(null);
 
@@ -36,48 +32,50 @@ export default function Chat() {
     const quickMessages = ['I want to start a project', 'What AI solutions have you built?', 'I need help with an AI solution', 'Tell me about your services'];
 
     return (
-        <div className="main-viewport text-black">
+        <div className="main-viewport text-black min-h-screen relative">
             <SoftBackground />
-            <header className="w-full p-6 z-20 shrink-0">
-                <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="RT Logo" className="w-12 h-12" /></Link>
+            <header className="w-full p-8 z-20 shrink-0 flex justify-start">
+                <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="RT Logo" className="w-14 h-14 object-contain" /></Link>
             </header>
-            <div className="chat-scroll-container w-full max-w-2xl mx-auto px-4">
+            
+            <div className="flex-1 w-full max-w-2xl mx-auto px-4 z-10 flex flex-col">
                 <AnimatePresence>
                     {!showChat ? (
-                        <div className="flex flex-col items-center justify-center min-h-[55vh]">
-                            <h1 className="text-4xl font-black text-center tracking-tighter mb-2 uppercase">WE BRING BOLD IDEAS TO LIFE.</h1>
-                            <p className="formula-gradient text-xl mb-12 tracking-widest uppercase">BI = C + Ex × T²</p>
-                            <img src="/logos/AI-Chat.svg" alt="AI Circle" onClick={() => setShowChat(true)} className="w-44 h-44 cursor-pointer rotate-slow" />
+                        <div className="flex-1 flex flex-col items-center justify-center py-20">
+                            <h1 className="text-4xl font-black text-center tracking-tighter mb-4 uppercase leading-tight">WE BRING BOLD IDEAS TO LIFE.</h1>
+                            <p className="formula-gradient text-2xl mb-12 tracking-widest uppercase">BI = C + Ex × T²</p>
+                            <img src="/logos/AI-Chat.svg" alt="Chat" onClick={() => setShowChat(true)} className="w-48 h-48 cursor-pointer hover:scale-105 transition-transform" />
                         </div>
                     ) : (
-                        <div className="space-y-6 pt-4">
+                        <div className="space-y-6 pt-4 flex-1">
                             {messages.map((msg, i) => (
                                 <div key={i} className={`flex w-full ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                    <div className={`p-5 rounded-3xl max-w-[90%] shadow-sm ${msg.from === 'user' ? 'bg-[#E5FEEE]/90' : 'bg-white/90'}`}>
-                                        <ReactMarkdown className="prose prose-sm text-black">{msg.content}</ReactMarkdown>
-                                        <div className="text-[10px] mt-1 opacity-30">{msg.timestamp}</div>
+                                    <div className={`p-5 rounded-3xl max-w-[90%] bg-white/60 backdrop-blur-md border border-white/40 shadow-sm text-black`}>
+                                        <ReactMarkdown className="prose prose-sm">{msg.content}</ReactMarkdown>
                                     </div>
                                 </div>
                             ))}
-                            {loading && <div className="text-xs text-gray-400 animate-pulse px-2">Thinking...</div>}
-                            <div ref={messagesEndRef} className="h-10" />
+                            <div ref={messagesEndRef} className="h-20" />
                         </div>
                     )}
                 </AnimatePresence>
             </div>
-            <div className="glass-bottom-tray shrink-0 px-4 pt-4 pb-2">
-                <div className="max-w-2xl mx-auto">
-                    <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 px-1">
+
+            <div className="w-full max-w-2xl mx-auto p-4 z-30 sticky bottom-0">
+                <div className="bg-white/40 backdrop-blur-2xl rounded-3xl border border-white/20 p-4 shadow-2xl">
+                    <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 px-1 pb-1">
                         {quickMessages.map((q, i) => (
                             <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-2 text-[10px] rounded-full bg-white text-black shadow-sm border border-black/5 font-bold shrink-0">{q}</button>
                         ))}
                     </div>
-                    <div className="flex items-center gap-2 bg-white rounded-full shadow-lg p-1 pl-5 border border-black/5 mb-2">
-                        <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} placeholder="What’s on your mind?" className="flex-1 bg-transparent py-3 text-sm outline-none" />
-                        <button onClick={() => sendMessage()} className="p-3 bg-gray-50 rounded-full" style={{ background: 'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)' }}><Image src="/logos/Chat.svg" alt="Send" width={24} height={24} /></button>
+                    <div className="flex items-center gap-2 bg-white rounded-full shadow-lg p-1 pl-5 border border-black/5">
+                        <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} placeholder="What’s on your mind?" className="flex-1 bg-transparent py-3 text-sm outline-none font-bold" />
+                        <button onClick={() => sendMessage()} className="p-3 bg-gray-100 rounded-full shrink-0" style={{ background: 'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)' }}>
+                            <Image src="/logos/Chat.svg" alt="Send" width={24} height={24} />
+                        </button>
                     </div>
-                    <Footer />
                 </div>
+                <Footer />
             </div>
         </div>
     );
