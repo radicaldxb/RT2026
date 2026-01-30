@@ -37,10 +37,10 @@ export const metadata = {
 export default function ChatPage() {
     return (
         /* FIX: h-screen locks the height to exactly 100% of the viewport.
-           overflow-hidden prevents the document body from scrolling, 
-           forcing the chat.js container to handle internal scrolling.
+           overflow-hidden prevents the body from scrolling, 
+           ensuring the chat.js container handles all internal movement.
         */
-        <main className="h-screen w-full overflow-hidden relative">
+        <main className="h-screen w-full overflow-hidden relative gradient-animated">
             <ChatUI />
             
             {/* Google Analytics */}
@@ -64,7 +64,7 @@ export default function ChatPage() {
                     "@type": "WebPage",
                     name: "Talk to the Radical Thinking AI",
                     description:
-                        "Engage in a direct conversation with the official AI agent of Radical Thinking. This interactive page allows users to ask questions about our services, portfolio, and process, and receive intelligent, real-time answers.",
+                        "Engage in a direct conversation with the official AI agent of Radical Thinking.",
                     url: "https://radical-thinking.net/chat",
                     publisher: {
                         "@type": "Organization",
