@@ -1,13 +1,26 @@
 @import "tailwindcss";
-@font-face { font-family: "HelveticaNeue"; src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype"); font-weight: 300; }
 
+/* Font faces */
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "HelveticaNeue-Bold";
+  src: url("/fonts/HelveticaNeue-Bold.ttf") format("truetype");
+}
+
+/* Global styles */
 body {
-  font-family: 'HelveticaNeue', Arial, sans-serif;
-  margin: 0; padding: 0;
-  overflow: hidden; /* THE LOCK: Stops the bouncing */
+  font-family: 'HelveticaNeue', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent bounce scrolling */
   height: 100dvh;
 }
 
+/* Main viewport container */
 .main-viewport {
   height: 100dvh;
   display: flex;
@@ -20,20 +33,32 @@ body {
   background-attachment: fixed;
 }
 
+/* Chat scroll container styles */
 .chat-scroll-container {
-  flex: 1; overflow-y: auto; scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
-.chat-scroll-container::-webkit-scrollbar { display: none; }
 
+.chat-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Gradient text for formulas */
 .formula-gradient {
   background: linear-gradient(90deg, #70a1ff, #ff7eb3, #ffcc33);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  font-weight: 900; letter-spacing: -0.05em;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  letter-spacing: -0.05em;
 }
 
+/* Glass style bottom tray */
 .glass-bottom-tray {
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
