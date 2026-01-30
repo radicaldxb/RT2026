@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* 1. RESTORE NORMAL SCROLLING */
+/* RESTORED: Stable scrolling */
 html, body {
   min-height: 100%;
   margin: 0;
@@ -10,7 +10,7 @@ html, body {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* 2. GRADIENT RESTORATION */
+/* RESTORED: Your exact gradient values */
 .gradient-animated {
   background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
   background-size: 600% 600%;
@@ -26,7 +26,7 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 
-/* 3. ROTATE ANIMATION RESTORATION */
+/* RESTORED: AI Circle Rotation */
 @keyframes rotate360 {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -38,8 +38,3 @@ html, body {
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* 4. MOBILE INPUT FIX */
-@media (max-width: 640px) {
-  input { font-size: 16px !important; }
-}
