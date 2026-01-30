@@ -150,8 +150,9 @@ export default function Chat() {
         }
     }, [showChat]);
 
-    return (
-        <main className="w-full flex flex-col items-center justify-between text-black p-3 relative overflow-hidden">
+ return (
+    /* h-screen locks the height to the window; flex-col enables the vertical stack */
+    <main className="h-screen w-full flex flex-col items-center text-black relative overflow-hidden">
             <SoftBackground />
 
             <div className="md:w-3/4 md:mx-auto w-full px-4 md:px-20 z-10">
@@ -164,7 +165,8 @@ export default function Chat() {
                 </Link>
             </div>
 
-            <section className="flex flex-col items-center justify-center text-center gap-6 mt-10 w-full px-4 z-10">
+            /* flex-1 forces this section to take up all space between the logo and the input footer */
+<section className="flex-1 w-full flex flex-col items-center justify-center relative overflow-hidden z-10 min-h-0">
                 <AnimatePresence>
                     {!showChat && (
                         <motion.div
@@ -198,7 +200,8 @@ export default function Chat() {
                             transition={{ duration: 0.5 }}
                             ref={chatContainerRef}
                             onScroll={handleScroll}
-                            className="w-full max-w-2xl flex flex-col gap-4 items-start h-[28rem] p-6 overflow-y-auto"
+                            /* h-full ensures it fills the flex-1 container; padding-bottom prevents the last message from hiding */
+                             className="w-full max-w-2xl flex-1 flex flex-col gap-4 items-start p-6 overflow-y-auto no-scrollbar pb-32"
                         >
                             {messages.map((msg, i) => (
                                 <div
