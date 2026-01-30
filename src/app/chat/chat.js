@@ -9,7 +9,6 @@ import Footer from '../../components/Footer';
 import Link from 'next/link';
 import './../globals.css';
 import Image from 'next/image';
-import Script from 'next/script';
 
 export default function Chat() {
     const [query, setQuery] = useState('');
@@ -17,69 +16,32 @@ export default function Chat() {
     const [messages, setMessages] = useState([{ from: 'bot', content: 'Hello! This your Radical Thinking agent! How can I help you today?', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
     const [loading, setLoading] = useState(false);
 
-    // Anchor to ensure the latest message is always in view
     const messagesEndRef = useRef(null);
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
-
-    useEffect(() => {
-        if (showChat) scrollToBottom();
-    }, [messages, loading]);
+    useEffect(() => { if (showChat) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading]);
 
     const sendMessage = async (customMessage) => {
         const msg = (customMessage ?? query).trim();
         if (!msg) return;
         setMessages((prev) => [...prev, { from: 'user', content: msg, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
-        setQuery('');
-        setShowChat(true);
-        setLoading(true);
-
+        setQuery(''); setShowChat(true); setLoading(true);
         try {
-            const res = await fetch(`/api/chatbot`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chatInput: msg }),
-            });
+            const res = await fetch(`/api/chatbot`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chatInput: msg }) });
             const data = await res.json();
             setMessages((prev) => [...prev, { from: 'bot', content: data.reply || data.output, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
-        } catch (err) {
-            setMessages((prev) => [...prev, { from: 'bot', content: 'Error contacting server.' }]);
-        }
+        } catch (err) { setMessages((prev) => [...prev, { from: 'bot', content: 'Error contacting server.' }]); }
         setLoading(false);
     };
-
-    const quickMessages = [
-        'I want to start a project',
-        'What AI solutions have you built?',
-        'I need help with an AI solution',
-        'Tell me about your services',
-    ];
 
     return (
         <div className="flex flex-col items-center w-full min-h-screen relative overflow-x-hidden">
             <SoftBackground />
-
-            {/* Header */}
-            <div className="w-full max-w-7xl px-6 py-6 z-20 text-black">
-                <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="RT" className="w-12 h-12" /></Link>
-            </div>
-
-            {/* Chat Content */}
-            <section className="flex-1 w-full max-w-2xl px-4 z-10">
+            <div className="w-full max-w-7xl px-6 py-6 z-20"><Link href="/"><img src="/logos/RT-Logo-New.svg" alt="RT" className="w-12 h-12" /></Link></div>
+            <section className="flex-1 w-full max-w-2xl px-4 z-10 pb-40">
                 <AnimatePresence>
                     {!showChat ? (
                         <div className="flex flex-col items-center gap-10 mt-20">
-                            <h1 className="text-3xl font-bold text-center text-black leading-tight">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
-                            <div className="relative">
-                                <img 
-                                    src="/logos/AI-Chat.svg" 
-                                    alt="AI Chat" 
-                                    onClick={() => setShowChat(true)} 
-                                    className="cursor-pointer w-40 h-40 md:w-48 md:h-48 transition-all duration-500 rotate-slow" 
-                                />
-                            </div>
+                            <h1 className="text-3xl font-bold text-center text-black">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
+                            <img src="/logos/AI-Chat.svg" alt="Chat" onClick={() => setShowChat(true)} className="w-40 h-40 cursor-pointer rotate-slow" />
                         </div>
                     ) : (
                         <div className="space-y-6 pt-10">
@@ -91,34 +53,24 @@ export default function Chat() {
                                     </div>
                                 </div>
                             ))}
-                            {loading && <div className="text-sm text-gray-400 animate-pulse">Thinking...</div>}
-                            <div ref={messagesEndRef} className="h-24" />
+                            <div ref={messagesEndRef} className="h-10" />
                         </div>
                     )}
                 </AnimatePresence>
             </section>
-
-            {/* Sticky Input Bar */}
+            {/* STABLE INPUT BAR */}
             <div className="w-full max-w-2xl p-4 z-30 sticky bottom-0 bg-white/40 backdrop-blur-lg border-t border-white/50 rounded-t-3xl">
                 <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4">
-                    {quickMessages.map((q, i) => (
-                        <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-1.5 bg-white rounded-full text-xs shadow-md text-black">{q}</button>
+                    {['I want to start a project', 'Tell me about your services'].map((q, i) => (
+                        <button key={i} onClick={() => sendMessage(q)} className="px-4 py-1.5 bg-white rounded-full text-xs shadow-md whitespace-nowrap text-black">{q}</button>
                     ))}
                 </div>
                 <div className="flex items-center gap-2">
-                    <input 
-                        type="text" value={query} onChange={(e) => setQuery(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-                        placeholder="What’s on your mind?"
-                        className="flex-1 px-6 py-3 bg-white rounded-full shadow-lg outline-none border border-gray-100 text-black placeholder:text-gray-500"
-                    />
-                    <button onClick={() => sendMessage()} className="p-3 bg-white rounded-full shadow-lg shrink-0">
-                        <Image src="/logos/Chat.svg" alt="Send" width={32} height={32} />
-                    </button>
+                    <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} placeholder="What’s on your mind?" className="flex-1 px-6 py-3 bg-white rounded-full shadow-lg outline-none border border-gray-100 text-black" />
+                    <button onClick={() => sendMessage()} className="p-3 bg-white rounded-full shadow-lg"><Image src="/logos/Chat.svg" alt="Send" width={32} height={32} /></button>
                 </div>
             </div>
-
-            <Footer /> {/* Site Navigation Restored */}
+            <Footer />
         </div>
     );
 }
