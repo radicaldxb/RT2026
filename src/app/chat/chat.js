@@ -14,35 +14,24 @@ export default function Chat() {
     const [showChat, setShowChat] = useState(false);
     const [messages, setMessages] = useState([{ from: 'bot', content: 'Hello! This your Radical Thinking agent! How can I help you today?', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
     const [loading, setLoading] = useState(false);
-
     const messagesEndRef = useRef(null);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
-
     useEffect(() => {
-        if (showChat) scrollToBottom();
+        if (showChat) {
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
     }, [messages, loading]);
 
     const sendMessage = async (customMessage) => {
         const msg = (customMessage ?? query).trim();
         if (!msg) return;
         setMessages(prev => [...prev, { from: 'user', content: msg, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
-        setQuery('');
-        setShowChat(true);
-        setLoading(true);
+        setQuery(''); setShowChat(true); setLoading(true);
         try {
-            const res = await fetch(`/api/chatbot`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chatInput: msg }),
-            });
+            const res = await fetch(`/api/chatbot`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chatInput: msg }) });
             const data = await res.json();
             setMessages(prev => [...prev, { from: 'bot', content: data.reply || data.output || 'No response.', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
-        } catch (err) {
-            setMessages(prev => [...prev, { from: 'bot', content: 'Error contacting server.' }]);
-        }
+        } catch (err) { setMessages(prev => [...prev, { from: 'bot', content: 'Error contacting server.' }]); }
         setLoading(false);
     };
 
@@ -52,24 +41,15 @@ export default function Chat() {
         <div className="main-viewport w-full">
             <div className="gradient-animated" />
             <SoftBackground />
-
             <header className="w-full max-w-7xl mx-auto p-6 z-20 flex justify-start">
-                <Link href="/">
-                    <img src="/logos/RT-Logo-New.svg" alt="Logo" className="w-12 h-12" />
-                </Link>
+                <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="Logo" className="w-12 h-12" /></Link>
             </header>
-
             <main className="flex-1 w-full max-w-2xl mx-auto px-4 overflow-y-auto no-scrollbar pb-10 z-10 flex flex-col">
                 <AnimatePresence>
                     {!showChat ? (
                         <div className="flex flex-col items-center justify-center flex-1 gap-10">
-                            <h1 className="text-3xl font-bold text-center text-black">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
-                            <img 
-                                src="/logos/AI-Chat.svg" 
-                                alt="Chat" 
-                                onClick={() => setShowChat(true)} 
-                                className="w-44 h-44 cursor-pointer rotate-slow" 
-                            />
+                            <h1 className="text-3xl font-bold text-center text-black tracking-tighter">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
+                            <img src="/logos/AI-Chat.svg" alt="Chat" onClick={() => setShowChat(true)} className="w-40 h-40 cursor-pointer rotate-slow" />
                         </div>
                     ) : (
                         <div className="space-y-6 pt-4 flex-1">
@@ -87,34 +67,16 @@ export default function Chat() {
                     )}
                 </AnimatePresence>
             </main>
-
-            <div className="w-full max-w-2xl mx-auto p-4 z-30 bg-white/40 backdrop-blur-md rounded-t-3xl border-t border-white/20">
+            <div className="w-full max-w-2xl mx-auto p-4 z-30 bg-white/40 backdrop-blur-xl rounded-t-3xl border-t border-white/20">
                 <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 px-2 pb-1">
                     {quickMessages.map((q, i) => (
-                        <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-2 text-xs rounded-full bg-white text-black shadow-md border border-gray-100 font-medium shrink-0">
-                            {q}
-                        </button>
+                        <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-2 text-[10px] rounded-full bg-white text-black shadow-md border border-gray-100 font-bold shrink-0">{q}</button>
                     ))}
                 </div>
-
-                <div className="flex items-center gap-2 bg-white rounded-full shadow-2xl p-1 pl-5 border border-gray-100">
-                    <input 
-                        type="text" 
-                        value={query} 
-                        onChange={(e) => setQuery(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-                        placeholder="What’s on your mind?"
-                        className="flex-1 bg-transparent py-3 text-base text-black outline-none"
-                    />
-                    <button 
-                        onClick={() => sendMessage()} 
-                        className="p-3 bg-gray-50 rounded-full shrink-0"
-                        style={{ background: 'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)' }}
-                    >
-                        <Image src="/logos/Chat.svg" alt="Send" width={28} height={28} className="w-7 h-7" />
-                    </button>
+                <div className="flex items-center gap-2 bg-white rounded-full shadow-lg p-1 pl-5 border border-gray-100">
+                    <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} placeholder="What’s on your mind?" className="flex-1 bg-transparent py-3 text-sm text-black outline-none" />
+                    <button onClick={() => sendMessage()} className="p-3 bg-gray-50 rounded-full shrink-0 shadow-sm" style={{ background: 'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)' }}><Image src="/logos/Chat.svg" alt="Send" width={24} height={24} className="w-6 h-6" /></button>
                 </div>
-                <div className="w-full h-4" />
                 <Footer />
             </div>
         </div>
