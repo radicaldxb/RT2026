@@ -7,14 +7,17 @@
 
 body {
   font-family: 'Helvetica Neue', sans-serif;
-  @apply overflow-x-hidden m-0 p-0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-/* Stable Viewport to prevent jumping */
 .main-viewport {
-  height: 100dvh; /* Accounts for mobile browser bars */
+  height: 100dvh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
 .gradient-animated {
@@ -23,7 +26,7 @@ body {
   animation: gradientShift 30s ease infinite;
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 @keyframes gradientShift {
@@ -41,6 +44,10 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* Utility to hide scrollbars on the suggestion tray */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
