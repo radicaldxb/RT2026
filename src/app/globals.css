@@ -1,22 +1,15 @@
 @import "tailwindcss";
-
-@font-face {
-  font-family: "HelveticaNeue";
-  src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype");
-}
+@font-face { font-family: "HelveticaNeue"; src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype"); font-weight: 300; }
 
 body {
-  font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* THE FIX: Stops the site from bouncing */
+  font-family: 'HelveticaNeue', Arial, sans-serif;
+  margin: 0; padding: 0;
+  overflow: hidden; /* THE LOCK: Stops the bouncing */
   height: 100dvh;
-  background-color: white;
 }
 
 .main-viewport {
   height: 100dvh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -28,26 +21,19 @@ body {
 }
 
 .chat-scroll-container {
-  flex: 1;
-  overflow-y: auto;
+  flex: 1; overflow-y: auto; scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 .chat-scroll-container::-webkit-scrollbar { display: none; }
 
 .formula-gradient {
   background: linear-gradient(90deg, #70a1ff, #ff7eb3, #ffcc33);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 900;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-weight: 900; letter-spacing: -0.05em;
 }
-
-.rotate-slow { animation: rotate360 15s linear infinite; }
-@keyframes rotate360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 .glass-bottom-tray {
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
