@@ -5,6 +5,156 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from "react-markdown";
 import SoftBackground from '@/components/SoftBackground';
+/* Website Footer removed to prevent layout displacement in app-mode */
+import Link from 'next/link';
+import './../globals.css';
+import Image from 'next/image';
+import Script from 'next/script';
+
+export default function Chat() {
+    const [query, setQuery] = useState('');
+    const [showChat, setShowChat] = useState(false);
+    const [messages, setMessages] = useState([
+        {
+            from: 'bot',
+            type: 'text',
+            content: 'Hello! This your Radical Thinking agent! How can I help you today?',
+        },
+    ]);
+    const [loading, setLoading] = useState(false);
+
+    const chatContainerRef = useRef(null);
+    const isAutoScrollRef = useRef(true);
+
+    function getTime() {
+        const now = new Date();
+        return now.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    }
+
+    // add timestamp to first bot msg
+    useEffect(() => {
+        setMessages((prev) =>
+            prev.map((msg, i) =>
+                i === 0 ? { ...msg, timestamp: getTime() } : msg
+            )
+        );
+    }, []);
+
+    // handle auto-scroll only when new message added
+    useEffect(() => {
+        if (isAutoScrollRef.current && chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [messages, loading]);
+
+    // detect manual scroll
+    const handleScroll = () => {
+        if (!chatContainerRef.current) return;
+        const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+        const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+        isAutoScrollRef.current = isNearBottom;
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') sendMessage();
+    };
+
+    const sendMessage = async (customMessage) => {
+        const msg = (customMessage ?? query).trim();
+        if (!msg) return;
+
+        const userMsg = {
+            from: 'user',
+            type: 'text',
+            content: msg,
+            timestamp: getTime(),
+        };
+        setMessages((prev) => [...prev, userMsg]);
+        setQuery('');
+        setShowChat(true);
+        setLoading(true);
+
+        try {
+            const res = await fetch(`${window.location.origin}/api/chatbot`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chatInput: msg }),
+            });
+
+            const data = await res.json();
+
+            let botReply = null;
+            if (data) {
+                if (data.reply) botReply = data.reply;
+                else if (data.output) botReply = data.output;
+                else if (typeof data === 'string') botReply = data;
+                else if (data.error) botReply = `Error: ${data.error}`;
+            }
+            if (!botReply) botReply = 'No response received.';
+
+            setMessages((prev) => [
+                ...prev,
+                { from: 'bot', type: 'text', content: botReply, timestamp: getTime() },
+            ]);
+        } catch (err) {
+            console.error('Error talking to API:', err);
+            setMessages((prev) => [
+                ...prev,
+                { from: 'bot', type: 'text', content: 'Error contacting server.', timestamp: getTime() },
+            ]);
+        }
+
+        setLoading(false);
+    };
+
+    const quickMessages = [
+        'I want to start a project',
+        'What AI solutions have you built?',
+        'I need help with an AI solution',
+        'Tell me about your services',
+    ];
+
+    return (
+        /* h-screen locks height; flex-col enables vertical stack */
+        <main className="h-screen w-full flex flex-col items-center text-black relative overflow-hidden gradient-animated">
+            <SoftBackground />
+
+            {/* HEADER AREA - Shrink-0 prevents it from squashing */}
+            <div className="w-full px-6 py-4 z-20 shrink-0">
+                <Link href="/" className="cursor-pointer">
+                    <img
+                        src="/logos/RT-Logo-New.svg"
+                        alt="RT Logo"
+                        className="w-12 h-12"
+                    />
+                </Link>
+            </div>
+
+            {/* MIDDLE SECTION - flex-1 fills remaining space */}
+            <section className="flex-1 w-full flex flex-col items-center justify-center relative overflow-hidden z-10 min-h-0">
+                <AnimatePresence>
+                    {!showChat && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            className="flex flex-col items-center gap-6"
+                        >
+                            <h1 className="text-3xl sm:text-2xl md:text-4xl font-bold tracking-tight text-black text-center px-4">
+                                LET’S BRING YOUR BOLD IDEA TO LIFE!
+                            </h1>
+                            <div className="relative">
+                                <img
+                                    src="/logos/AI/* eslint-disable @next/next/no-img-element */
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from "react-markdown";
+import SoftBackground from '@/components/SoftBackground';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import './../globals.css';
