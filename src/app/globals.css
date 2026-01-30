@@ -1,23 +1,34 @@
 @import "tailwindcss";
 
-/* RESTORED: Stable scrolling */
-html, body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; 
-  overflow-y: auto; 
+/* Font face */
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "HelveticaNeue-Bold";
+  src: url("/fonts/HelveticaNeue-Bold.ttf") format("truetype");
+}
+
+/* Apply globally */
+body {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* RESTORED: Your exact gradient values */
-.gradient-animated {
-  background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
-  background-size: 600% 600%;
-  animation: gradientShift 30s ease infinite;
-  position: fixed;
-  inset: 0;
-  z-index: -1;
+
+@keyframes fogDrift {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-48%, -52%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes colorFlow {
+  0%   { background: rgba(255, 200, 200, 0.6); }
+  25%  { background: rgba(255, 255, 200, 0.6); }
+  50%  { background: rgba(200, 255, 255, 0.6); }
+  75%  { background: rgba(255, 200, 255, 0.6); }
+  100% { background: rgba(255, 200, 200, 0.6); }
 }
 
 @keyframes gradientShift {
@@ -26,15 +37,82 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 
-/* RESTORED: AI Circle Rotation */
+.fog-center {
+  animation: fogDrift 40s ease-in-out infinite, colorFlow 25s ease-in-out infinite;
+}
+
+.gradient-animated {
+  background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
+  background-size: 600% 600%;
+  animation: gradientShift 30s ease infinite;
+}
+
+@keyframes snakeMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== Chat AI Icon float ===== */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* ===== Hide Scrollbar ===== */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== Gradient Text Loop ===== */
+@keyframes gradientLoop {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-loop {
+  background-image: linear-gradient(
+    90deg,
+    #00E2FF,
+    #AB6387,
+    #B35D81,
+    #CB7464,
+    #F29A33,
+    #FAA229,
+    #5603F4
+  );
+  background-size: 300% 300%;
+  animation: gradientLoop 8s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Animated Background for Chat Search Bar ===== */
+@keyframes animatedGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* chat circle */
 @keyframes rotate360 {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .rotate-slow {
   animation: rotate360 8s linear infinite;
 }
 
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
