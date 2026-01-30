@@ -36,14 +36,10 @@ export const metadata = {
 
 export default function ChatPage() {
     return (
-        /* FIX: h-screen locks the height to exactly 100% of the viewport.
-           overflow-hidden prevents the body from scrolling, 
-           ensuring the chat.js container handles all internal movement.
-        */
+        /* h-screen locks height; overflow-hidden prevents document-level scrolling */
         <main className="h-screen w-full overflow-hidden relative gradient-animated">
             <ChatUI />
             
-            {/* Google Analytics */}
             <Script
                 strategy="afterInteractive"
                 src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL"
@@ -57,14 +53,12 @@ export default function ChatPage() {
             `}
             </Script>
 
-            {/* JSON-LD structured data */}
             <Script id="ld-json-chat" type="application/ld+json">
                 {JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "WebPage",
                     name: "Talk to the Radical Thinking AI",
-                    description:
-                        "Engage in a direct conversation with the official AI agent of Radical Thinking.",
+                    description: "Engage in a direct conversation with the official AI agent of Radical Thinking.",
                     url: "https://radical-thinking.net/chat",
                     publisher: {
                         "@type": "Organization",
