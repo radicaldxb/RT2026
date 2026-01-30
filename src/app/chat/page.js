@@ -23,29 +23,11 @@ export const metadata = {
 
 export default function ChatPage() {
     return (
-        <main className="min-h-screen w-full relative bg-white">
+        <main className="w-full relative h-screen overflow-hidden bg-white">
             <ChatUI />
             <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL" />
             <Script id="gtag-init" strategy="afterInteractive">
                 {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-FXY9Q2TXCL');`}
-            </Script>
-            <Script id="ld-json-chat" type="application/ld+json">
-                {JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "WebPage",
-                    name: "Talk to the Radical Thinking AI",
-                    description: "Engage in a direct conversation with the official AI agent of Radical Thinking. This interactive page allows users to ask questions about our services, portfolio, and process, and receive intelligent, real-time answers.",
-                    url: "https://radical-thinking.net/chat",
-                    publisher: {
-                        "@type": "Organization",
-                        name: "Radical Thinking",
-                        url: "https://radical-thinking.net",
-                        logo: {
-                            "@type": "ImageObject",
-                            url: "https://radical-thinking.net/images/logo.png",
-                        },
-                    },
-                })}
             </Script>
         </main>
     );
