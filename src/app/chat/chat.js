@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from "react-markdown";
 import SoftBackground from '@/components/SoftBackground';
-import Footer from '../../components/Footer'; // RESTORED: Critical navigation
+import Footer from '../../components/Footer'; 
 import Link from 'next/link';
 import './../globals.css';
 import Image from 'next/image';
@@ -50,8 +50,15 @@ export default function Chat() {
         setLoading(false);
     };
 
+    const quickMessages = [
+        'I want to start a project',
+        'What AI solutions have you built?',
+        'I need help with an AI solution',
+        'Tell me about your services',
+    ];
+
     return (
-        <div className="flex flex-col items-center w-full min-h-screen overflow-x-hidden">
+        <div className="flex flex-col items-center w-full min-h-screen relative overflow-x-hidden">
             <SoftBackground />
 
             {/* Header */}
@@ -59,13 +66,20 @@ export default function Chat() {
                 <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="RT" className="w-12 h-12" /></Link>
             </div>
 
-            {/* Chat Area */}
-            <section className="flex-1 w-full max-w-2xl px-4 z-10 pb-10">
+            {/* Chat Content */}
+            <section className="flex-1 w-full max-w-2xl px-4 z-10">
                 <AnimatePresence>
                     {!showChat ? (
                         <div className="flex flex-col items-center gap-10 mt-20">
                             <h1 className="text-3xl font-bold text-center text-black">LET’S BRING YOUR BOLD IDEA TO LIFE!</h1>
-                            <img src="/logos/AI-Chat.svg" alt="Chat" onClick={() => setShowChat(true)} className="w-40 h-40 cursor-pointer rotate-slow" />
+                            <div className="relative">
+                                <img 
+                                    src="/logos/AI-Chat.svg" 
+                                    alt="Chat" 
+                                    onClick={() => setShowChat(true)} 
+                                    className="cursor-pointer w-40 h-40 md:w-48 md:h-48 transition-all duration-500 rotate-slow" 
+                                />
+                            </div>
                         </div>
                     ) : (
                         <div className="space-y-6 pt-10">
@@ -78,7 +92,7 @@ export default function Chat() {
                                 </div>
                             ))}
                             {loading && <div className="text-sm text-gray-400 animate-pulse">Thinking...</div>}
-                            <div ref={messagesEndRef} className="h-24" /> {/* Scroll Anchor */}
+                            <div ref={messagesEndRef} className="h-24" />
                         </div>
                     )}
                 </AnimatePresence>
@@ -87,7 +101,7 @@ export default function Chat() {
             {/* Sticky Input Bar */}
             <div className="w-full max-w-2xl p-4 z-30 sticky bottom-0 bg-white/40 backdrop-blur-lg border-t border-white/50 rounded-t-3xl">
                 <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4">
-                    {['I want to start a project', 'Tell me about your services'].map((q, i) => (
+                    {quickMessages.map((q, i) => (
                         <button key={i} onClick={() => sendMessage(q)} className="px-4 py-1.5 bg-white rounded-full text-xs shadow-md whitespace-nowrap">{q}</button>
                     ))}
                 </div>
@@ -96,7 +110,7 @@ export default function Chat() {
                         type="text" value={query} onChange={(e) => setQuery(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                         placeholder="What’s on your mind?"
-                        className="flex-1 px-6 py-3 bg-white rounded-full shadow-lg outline-none border border-gray-100"
+                        className="flex-1 px-6 py-3 bg-white rounded-full shadow-lg outline-none border border-gray-100 text-black placeholder:text-gray-500"
                     />
                     <button onClick={() => sendMessage()} className="p-3 bg-white rounded-full shadow-lg shrink-0">
                         <Image src="/logos/Chat.svg" alt="Send" width={32} height={32} />
@@ -104,7 +118,7 @@ export default function Chat() {
                 </div>
             </div>
 
-            <Footer /> {/* RESTORED: Site Navigation */}
+            <Footer />
         </div>
     );
 }
