@@ -16,36 +16,18 @@ export const metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Talk to the Radical Thinking AI",
-        description: "Why browse a static website when you can have a conversation? Get the answers you need about our work and process directly from our AI agent.",
+        description: "Why browse a website when you can have a conversation? Get the answers you need about our work and process directly from our AI agent.",
         images: ["https://radical-thinking.net/images/chat-social-share.jpg"],
     },
 };
 
 export default function ChatPage() {
     return (
-        <main className="min-h-screen w-full relative bg-white">
+        <main className="min-h-screen w-full relative">
             <ChatUI />
             <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL" />
             <Script id="gtag-init" strategy="afterInteractive">
                 {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-FXY9Q2TXCL');`}
-            </Script>
-            <Script id="ld-json-chat" type="application/ld+json">
-                {JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "WebPage",
-                    name: "Talk to the Radical Thinking AI",
-                    description: "Engage in a direct conversation with the official AI agent of Radical Thinking. This interactive page allows users to ask questions about our services, portfolio, and process, and receive intelligent, real-time answers.",
-                    url: "https://radical-thinking.net/chat",
-                    publisher: {
-                        "@type": "Organization",
-                        name: "Radical Thinking",
-                        url: "https://radical-thinking.net",
-                        logo: {
-                            "@type": "ImageObject",
-                            url: "https://radical-thinking.net/images/logo.png",
-                        },
-                    },
-                })}
             </Script>
         </main>
     );
