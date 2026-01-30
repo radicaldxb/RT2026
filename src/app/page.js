@@ -1,6 +1,5 @@
-// src/app/page.js
-import Home from './home'
+import Home from "./home/page";
 
 export default function Page() {
-  return <Home />
+  return <Home />;
 }
