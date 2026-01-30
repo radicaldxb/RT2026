@@ -36,9 +36,13 @@ export const metadata = {
 
 export default function ChatPage() {
     return (
-       // h-screen locks the height; overflow-hidden stops the body from scrolling
-<main className="h-screen overflow-hidden">
+        /* FIX: h-screen locks the height to exactly 100% of the viewport.
+           overflow-hidden prevents the document body from scrolling, 
+           forcing the chat.js container to handle internal scrolling.
+        */
+        <main className="h-screen w-full overflow-hidden relative">
             <ChatUI />
+            
             {/* Google Analytics */}
             <Script
                 strategy="afterInteractive"
