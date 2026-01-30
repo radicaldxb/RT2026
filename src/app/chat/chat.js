@@ -83,4 +83,56 @@ export default function Chat() {
                                 className="w-44 h-44 cursor-pointer rotate-slow" 
                             />
                         </div>
-                    ) :
+                    ) : (
+                        <div className="space-y-6 pt-4 flex-1">
+                            {messages.map((msg, i) => (
+                                <div key={i} className={`flex w-full ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                    <div className={`p-4 rounded-2xl max-w-[85%] shadow-sm ${msg.from === 'user' ? 'bg-[#E5FEEE] text-gray-800' : 'bg-[#FFFBEF] text-gray-900'}`}>
+                                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                                        <div className="text-[10px] mt-1 opacity-50">{msg.timestamp}</div>
+                                    </div>
+                                </div>
+                            ))}
+                            {loading && <div className="text-xs text-gray-400 animate-pulse text-left px-2">Thinking...</div>}
+                            <div ref={messagesEndRef} className="h-4" />
+                        </div>
+                    )}
+                </AnimatePresence>
+            </main>
+
+            <div className="w-full max-w-2xl mx-auto p-4 z-30 sticky bottom-0">
+                <div className="bg-white/40 backdrop-blur-xl rounded-3xl border border-white/20 p-4 shadow-2xl">
+                    <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 px-1 pb-1">
+                        {quickMessages.map((q, i) => (
+                            <button 
+                                key={i} 
+                                onClick={() => sendMessage(q)} 
+                                className="whitespace-nowrap px-4 py-2 text-[10px] rounded-full bg-white text-black shadow-md border border-gray-100 font-bold shrink-0 transition-transform active:scale-95"
+                            >
+                                {q}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="flex items-center gap-2 bg-white rounded-full shadow-lg p-1 pl-5 border border-gray-100">
+                        <input 
+                            type="text" 
+                            value={query} 
+                            onChange={(e) => setQuery(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+                            placeholder="What’s on your mind?"
+                            className="flex-1 bg-transparent py-3 text-sm text-black outline-none placeholder:text-black/40"
+                        />
+                        <button 
+                            onClick={() => sendMessage()} 
+                            className="p-3 bg-gray-50 rounded-full shrink-0 shadow-sm"
+                            style={{ background: 'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)' }}
+                        >
+                            <Image src="/logos/Chat.svg" alt="Send" width={24} height={24} className="w-6 h-6" />
+                        </button>
+                    </div>
+                </div>
+                <Footer />
+            </div>
+        </div>
+    );
+}
