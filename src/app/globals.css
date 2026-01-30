@@ -9,7 +9,7 @@ body {
   font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* CRITICAL: Prevents bouncing/scrolling globally */
+  overflow: hidden; /* THE FIX: Stops the site from bouncing */
   height: 100dvh;
   background-color: white;
 }
@@ -32,7 +32,6 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding-bottom: 20px;
 }
 .chat-scroll-container::-webkit-scrollbar { display: none; }
 
@@ -43,14 +42,8 @@ body {
   font-weight: 900;
 }
 
-.rotate-slow {
-  animation: rotate360 15s linear infinite;
-}
-
-@keyframes rotate360 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+.rotate-slow { animation: rotate360 15s linear infinite; }
+@keyframes rotate360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 .glass-bottom-tray {
   background: rgba(255, 255, 255, 0.4);
