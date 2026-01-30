@@ -9,5 +9,7 @@ const SoftBackground = () => {
 };
 
 export default function SoftBackground() {
-  return <div className="fixed inset-0 pointer-events-none z-0 bg-transparent" />;
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 bg-transparent" />
+  );
 }
