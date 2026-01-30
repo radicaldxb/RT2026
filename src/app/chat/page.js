@@ -11,12 +11,7 @@ export const metadata = {
         title: "Talk to the Radical Thinking AI",
         description: "Why browse a static website when you can have a conversation? Get the answers you need about our work and process directly from our AI agent.",
         siteName: "Radical Thinking",
-        images: [{ 
-            url: "https://radical-thinking.net/images/chat-social-share.jpg", 
-            width: 1200, 
-            height: 630, 
-            alt: "Radical Thinking Chat AI" 
-        }],
+        images: [{ url: "https://radical-thinking.net/images/chat-social-share.jpg", width: 1200, height: 630, alt: "Radical Thinking Chat AI" }],
     },
     twitter: {
         card: "summary_large_image",
