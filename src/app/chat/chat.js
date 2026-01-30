@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
+import SoftBackground from '@/components/SoftBackground';
 
 export default function Chat() {
     const [query, setQuery] = useState('');
@@ -17,9 +18,7 @@ export default function Chat() {
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef(null);
 
-    useEffect(() => {
-        if (showChat) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages, loading]);
+    useEffect(() => { if (showChat) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading]);
 
     const sendMessage = async (customMessage) => {
         const msg = (customMessage ?? query).trim();
@@ -38,10 +37,10 @@ export default function Chat() {
 
     return (
         <div className="main-viewport text-black">
+            <SoftBackground />
             <header className="w-full p-6 z-20 shrink-0">
                 <Link href="/"><img src="/logos/RT-Logo-New.svg" alt="RT Logo" className="w-12 h-12" /></Link>
             </header>
-            
             <div className="chat-scroll-container w-full max-w-2xl mx-auto px-4">
                 <AnimatePresence>
                     {!showChat ? (
@@ -66,10 +65,9 @@ export default function Chat() {
                     )}
                 </AnimatePresence>
             </div>
-
             <div className="glass-bottom-tray shrink-0 px-4 pt-4 pb-2">
                 <div className="max-w-2xl mx-auto">
-                    <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4">
+                    <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 px-1">
                         {quickMessages.map((q, i) => (
                             <button key={i} onClick={() => sendMessage(q)} className="whitespace-nowrap px-4 py-2 text-[10px] rounded-full bg-white text-black shadow-sm border border-black/5 font-bold shrink-0">{q}</button>
                         ))}
