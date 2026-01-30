@@ -26,11 +26,3 @@ export const metadata = {
     },
 };
 
-export default function ChatPage() {
-    return (
-        <main className="w-full relative min-h-screen">
-            <ChatUI />
-            <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL" />
-        </main>
-    );
-}
