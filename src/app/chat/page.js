@@ -36,7 +36,8 @@ export const metadata = {
 
 export default function ChatPage() {
     return (
-        <main className="min-h-screen">
+       // h-screen locks the height; overflow-hidden stops the body from scrolling
+<main className="h-screen overflow-hidden">
             <ChatUI />
             {/* Google Analytics */}
             <Script
