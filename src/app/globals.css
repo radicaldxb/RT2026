@@ -1,118 +1,42 @@
 @import "tailwindcss";
 
-/* Font face */
-@font-face {
-  font-family: "HelveticaNeue";
-  src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype");
-}
+/* ... keep your @font-face and @keyframes as they are ... */
 
-@font-face {
-  font-family: "HelveticaNeue-Bold";
-  src: url("/fonts/HelveticaNeue-Bold.ttf") format("truetype");
-}
-
-/* Apply globally */
-body {
+/* 1. STABILIZE VIEWPORT: Prevent the whole page from scrolling */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Fixes the poor desktop experience you mentioned */
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-
-@keyframes fogDrift {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-48%, -52%) scale(1.05); }
-  100% { transform: translate(-50%, -50%) scale(1); }
+/* 2. LAYOUT WRAPPER: Force the app structure */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
 }
 
-@keyframes colorFlow {
-  0%   { background: rgba(255, 200, 200, 0.6); }
-  25%  { background: rgba(255, 255, 200, 0.6); }
-  50%  { background: rgba(200, 255, 255, 0.6); }
-  75%  { background: rgba(255, 200, 255, 0.6); }
-  100% { background: rgba(255, 200, 200, 0.6); }
+/* 3. SCROLLABLE AREA: Ensure messages don't hide behind buttons */
+.chat-messages-pane {
+  flex: 1; /* Grows to fill available space */
+  overflow-y: auto;
+  padding-bottom: 2rem; /* Adds clearance for the "first fold" */
+  scroll-behavior: smooth;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.fog-center {
-  animation: fogDrift 40s ease-in-out infinite, colorFlow 25s ease-in-out infinite;
-}
-
-.gradient-animated {
-  background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
-  background-size: 600% 600%;
-  animation: gradientShift 30s ease infinite;
-}
-
-@keyframes snakeMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ===== Chat AI Icon float ===== */
-@keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-}
-
-/* ===== Hide Scrollbar ===== */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* ===== Gradient Text Loop ===== */
-@keyframes gradientLoop {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.animate-gradient-loop {
-  background-image: linear-gradient(
-    90deg,
-    #00E2FF,
-    #AB6387,
-    #B35D81,
-    #CB7464,
-    #F29A33,
-    #FAA229,
-    #5603F4
-  );
-  background-size: 300% 300%;
-  animation: gradientLoop 8s ease infinite;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ===== Animated Background for Chat Search Bar ===== */
-@keyframes animatedGradient {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-
-/* chat circle */
-@keyframes rotate360 {
-  0% {
-    transform: rotate(0deg);
+/* 4. MOBILE INPUT FIXES */
+@media (max-width: 640px) {
+  .suggestion-chip {
+    @apply text-xs py-1 px-3; /* Smaller suggestions for mobile */
   }
-  100% {
-    transform: rotate(360deg);
+
+  /* Make input wider and send button a smaller touch target */
+  .mobile-input-row {
+    @apply flex items-center gap-2 p-2;
   }
 }
 
-.rotate-slow {
-  animation: rotate360 8s linear infinite;
-}
-
-
+/* ... keep your .fog-center, .gradient-animated, and animation classes ... */
