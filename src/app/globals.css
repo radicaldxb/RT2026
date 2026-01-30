@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
-/* 1. LOCK THE SCREEN */
+/* 1. STABILIZE VIEWPORT */
+/* Prevent the whole page from scrolling */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden; 
   font-family: 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
 }
 
 /* 2. THE ANIMATED BACKGROUND */
@@ -14,7 +16,7 @@ html, body {
   background: linear-gradient(270deg, #ffe0f0, #ffffff, #e0f7ff);
   background-size: 600% 600%;
   animation: gradientShift 30s ease infinite;
-  position: fixed; /* Ensures it stays behind everything */
+  position: fixed; /* Ensures background is locked */
   inset: 0;
   z-index: -1;
 }
@@ -25,33 +27,21 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 
-/* 3. CHAT STRUCTURE */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
+/* 3. SCROLLING UTILITIES */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.chat-messages-pane {
-  flex: 1;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 5rem; /* Ensures clearance above the buttons */
-}
-
-/* 4. MOBILE-SPECIFIC ADJUSTMENTS */
+/* 4. MOBILE INPUT FIX */
 @media (max-width: 640px) {
-  .suggestion-chip {
-    font-size: 11px !important;
-    padding: 4px 10px !important;
-    white-space: nowrap;
+  /* Prevents iOS/Android auto-zoom when tapping the input */
+  input[type="text"] {
+    font-size: 16px !important;
   }
-  
-  /* Prevent iOS Zoom */
-  input { font-size: 16px !important; }
 }
 
-/* 5. HIDE SCROLLBARS */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+/* ... keep your other @font-face and @keyframes here ... */
