@@ -29,15 +29,6 @@ export default function ChatPage() {
             <Script id="gtag-init" strategy="afterInteractive">
                 {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-FXY9Q2TXCL');`}
             </Script>
-            <Script id="ld-json-chat" type="application/ld+json">
-                {JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "WebPage",
-                    name: "Talk to the Radical Thinking AI",
-                    url: "https://radical-thinking.net/chat",
-                    publisher: { "@type": "Organization", name: "Radical Thinking", url: "https://radical-thinking.net" },
-                })}
-            </Script>
         </main>
     );
 }
