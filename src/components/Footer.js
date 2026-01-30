@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function Footer() {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <footer className="w-full">
       <div className="flex flex-col border-t border-black/10">
