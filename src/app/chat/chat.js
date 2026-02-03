@@ -145,7 +145,6 @@ export default function Chat() {
         if (storedMessages) {
             try {
                 setMessages(JSON.parse(storedMessages));
-                setShowChat(true);
             } catch (e) {
                 console.error("Failed to parse chat history", e);
             }
