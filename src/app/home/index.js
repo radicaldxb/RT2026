@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   const desktopImages = [
-    { src: "/logos/Kahulife-Logo.webp", link: "https://kahulife.com" },
+    { src: "/logos/Kahulife-Logo.png", link: "https://kahulife.com" },
     { src: "/logos/Coming-Soon.svg", link: "#" },
     { src: "/logos/Coming-Soon.svg", link: "#" },
     { src: "/logos/Animal-Intelligence.svg", link: "https://animal-intelligence.ai" },
