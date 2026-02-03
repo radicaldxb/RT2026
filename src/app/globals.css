@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* Font faces */
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/fonts/HelveticaNeue-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global styles */
+body {
+  font-family: 'HelveticaNeue', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+/* Gradient Background */
+.gradient-background {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 0% 0%, #ffeef8 0px, transparent 50%),
+    radial-gradient(at 100% 0%, #eefaff 0px, transparent 50%),
+    radial-gradient(at 100% 100%, #fffbe6 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #f0f7ff 0px, transparent 50%);
+  background-size: 150% 150%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  animation: background-float 20s ease infinite;
+}
+
+/* Chat scroll container styles */
+.chat-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: thin;
+  scrollbar-color: #000000 rgba(0, 0, 0, 0.05);
+}
+
+/* Custom Scrollbar for Chat */
+.chat-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-scroll-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+}
+
+.chat-scroll-container::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 10px;
+}
+
+/* Gradient text for formulas */
+.formula-gradient {
+  background: linear-gradient(90deg, #70a1ff, #ff7eb3, #ffcc33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+/* Glass style bottom tray */
+.glass-bottom-tray {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Animations */
+@keyframes gradient-loop {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-loop {
+  animation: gradient-loop 3s ease infinite;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+@keyframes background-float {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
