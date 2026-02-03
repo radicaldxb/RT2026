@@ -3,7 +3,8 @@
 "use client";
 
 import React from "react";
-import Footer from "om "framer-motion";
+import Footer from "@/components/Footer";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function TermsOfUse() {
