@@ -27,8 +27,10 @@ export default function Footer() {
 
   return (
     <section className="w-full flex justify-center items-center px-4 py-5 relative overflow-hidden">
-      <motion.footer initial={{       <motion.footer whi      <motion.footer initial={{        } : undefined} a      <motion.footer icity:      <motion.footer initial={{ on={{ du      <motion.footer initi }}       <motion.footer initial=ssN      <motion.footer initial={{       <moti20 py-10 text-black">
-        <div class        <div class        <div cet        <div class        <div c gap-6 m        <div class        <div class   x         <div class        <div class        <div cet        <div class        <diviv         <div class        -3        <div class     at         <div class        <div class     te={isC        <dicity: 1, x: 0 } : undefined} transition={{ duration: 0.6, delay: 0.2 }} className="flex flex-col gap-1">
+      <motion.footer initial={{ opacity: 0, y: 40 }} whileInView={!isChat ? { opacity: 1, y: 0 } : undefined} animate={isChat ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 1, ease: "easeOut" }} viewport={{ once: true }} className="md:w-3/4 md:mx-auto w-full px-4 md:px-20 py-10 text-black">
+        <div className="flex md:flex-row justify-between items-start md:items-center gap-6 md:gap-0">
+          <div className="flex flex-row md:flex-row md:gap-16 gap-12 text-sm md:text-base">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1, x: 0 } : undefined} transition={{ duration: 0.6, delay: 0.2 }} className="flex flex-col gap-1">
               {/* use onClick to intercept when already on '/' */}
               <Link href="/chat">CHAT</Link>
               <Link href="/#ideas" onClick={(e) => handleHashClick(e, "ideas")}>IDEAS</Link>
@@ -36,9 +38,24 @@ export default function Footer() {
               <Link href="/#radical" onClick={(e) => handleHashClick(e, "radical")}>RADICAL THINKING</Link>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={!isChat ? { opacity: 1, y: 0 } : undefined} animate={i            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacitassNam            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : u THINKING © 2026</p>
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1, x: 0 } : undefined} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-col gap-1 justify-end md:ml-10 mt-2 md:mt-0">
+              <Link href="/privacy-policy">
+                PRIVACY
+              </Link>
+              <Link href="/terms-of-use">
+                TERMS OF USE
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+
+        <hr className="border-t border-black my-6" />
+
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={!isChat ? { opacity: 1, y: 0 } : undefined} animate={isChat ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 0.6, delay: 0.6 }} className="flex justify-between items-center text-sm md:text-base">
+          <p className="text-black">RADICAL THINKING © 2026</p>
           <div className="flex justify-center">
-            <Link href="/" className="cu            <Lin             <Image src="/logos/RT-Logo-New.svg" alt="RT Logo" width={40} height={40} className="w-10 h-10" />
+            <Link href="/" className="cursor-pointer">
+              <Image src="/logos/RT-Logo-New.svg" alt="RT Logo" width={40} height={40} className="w-10 h-10" />
             </Link>
           </div>
         </motion.div>
