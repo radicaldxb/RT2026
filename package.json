@@ -1,0 +1,28 @@
+{
+  "name": "radical-thinking-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@n8n/chat": "^0.50.0",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.536.0",
+    "next": "16.1.5",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.5",
+    "tailwindcss": "^4"
+  }
+}
