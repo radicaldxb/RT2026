@@ -93,6 +93,8 @@ export default function Home() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
               placeholder="Hi Radical Thinking, I would like to start an AI project"
               className="flex-1 text-sm md:text-xl bg-transparent outline-none text-black placeholder:text-black"
             />
