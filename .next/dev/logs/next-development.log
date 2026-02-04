@@ -2,3 +2,2278 @@
 [00:00:22.032] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:00:22.986] Browser WARN    Image with src "/logos/AI-Chat.svg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:23:46.543] Server  ERROR   ⨯ ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+
+
+
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+
+
+
+./src/app/chat/chat.js:106:1
+Parsing ecmascript source code failed
+  104 |     const [query, setQuery] = useState('');
+  105 |     const [showChat, setShowChat] = useState(false);
+> 106 | <<<<<<< HEAD
+      | ^^^^^^^
+  107 |     const [messages, setMessages] = useState([]);
+  108 | =======
+  109 |     const [messages, setMessages] = useState([
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:108:1
+Parsing ecmascript source code failed
+  106 | <<<<<<< HEAD
+  107 |     const [messages, setMessages] = useState([]);
+> 108 | =======
+      | ^^^^^^^
+  109 |     const [messages, setMessages] = useState([
+  110 |         {
+  111 |             id: 'welcome',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:117:1
+Parsing ecmascript source code failed
+  115 |         },
+  116 |     ]);
+> 117 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  118 |     const [loading, setLoading] = useState(false);
+  119 |     const [isFocused, setIsFocused] = useState(false);
+  120 |     const sessionIdRef = useRef('');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:126:1
+Parsing ecmascript source code failed
+  124 |     const repetitionCountRef = useRef(0);
+  125 |     const lastMessageTimeRef = useRef(0);
+> 126 | <<<<<<< HEAD
+      | ^^^^^^^
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:129:1
+Parsing ecmascript source code failed
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+> 129 | =======
+      | ^^^^^^^
+  130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  131 |
+  132 |     function getTime() {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:130:1
+Parsing ecmascript source code failed
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+> 130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  131 |
+  132 |     function getTime() {
+  133 |         const now = new Date();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:152:1
+Parsing ecmascript source code failed
+  150 |         sessionIdRef.current = storedSessionId;
+  151 |
+> 152 | <<<<<<< HEAD
+      | ^^^^^^^
+  153 |         // Restore verification status
+  154 |         const storedVerified = localStorage.getItem('rt_chat_verified');
+  155 |         if (storedVerified === 'true') {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:159:1
+Parsing ecmascript source code failed
+  157 |         }
+  158 |
+> 159 | =======
+      | ^^^^^^^
+  160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:160:1
+Parsing ecmascript source code failed
+  158 |
+  159 | =======
+> 160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+  163 |         if (storedMessages) {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:190:1
+Parsing ecmascript source code failed
+  188 |     useEffect(() => {
+  189 |         if (messages.length > 0) {
+> 190 | <<<<<<< HEAD
+      | ^^^^^^^
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+  193 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:193:1
+Parsing ecmascript source code failed
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+> 193 | =======
+      | ^^^^^^^
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+  195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  196 |         }
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:195:1
+Parsing ecmascript source code failed
+  193 | =======
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+> 195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  196 |         }
+  197 |     }, [messages]);
+  198 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:204:1
+Parsing ecmascript source code failed
+  202 |
+  203 |     const sendMessage = async (customMessage) => {
+> 204 | <<<<<<< HEAD
+      | ^^^^^^^
+  205 |         if (loading) return;
+  206 | =======
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:206:1
+Parsing ecmascript source code failed
+  204 | <<<<<<< HEAD
+  205 |         if (loading) return;
+> 206 | =======
+      | ^^^^^^^
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:207:1
+Parsing ecmascript source code failed
+  205 |         if (loading) return;
+  206 | =======
+> 207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+  210 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:223:1
+Parsing ecmascript source code failed
+  221 |         setLoading(true);
+  222 |
+> 223 | <<<<<<< HEAD
+      | ^^^^^^^
+  224 |         // --- Verification Guardrail ---
+  225 |         if (!isVerified) {
+  226 |             const answer = msg.toLowerCase().trim();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:269:1
+Parsing ecmascript source code failed
+  267 |         }
+  268 |
+> 269 | =======
+      | ^^^^^^^
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+  272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:272:1
+Parsing ecmascript source code failed
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+> 272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  273 |         if (msg === lastMessageRef.current && (now - lastMessageTimeRef.current < 5000)) {
+  274 |             repetitionCountRef.current += 1;
+  275 |         } else {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:283:1
+Parsing ecmascript source code failed
+  281 |
+  282 |         if (repetitionCountRef.current >= 4) {
+> 283 | <<<<<<< HEAD
+      | ^^^^^^^
+  284 |             if (repetitionCountRef.current === 4) {
+  285 |                 setTimeout(() => {
+  286 |                     setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:295:1
+Parsing ecmascript source code failed
+  293 |                 setLoading(false);
+  294 |             }
+> 295 | =======
+      | ^^^^^^^
+  296 |             // Trigger on the 5th repeated message
+  297 |             setTimeout(() => {
+  298 |                 setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:304:1
+Parsing ecmascript source code failed
+  302 |                 setLoading(false);
+  303 |             }, 600); // Small delay to feel natural
+> 304 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  305 |             return;
+  306 |         }
+  307 |         // -----------------------------------
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:310:1
+Parsing ecmascript source code failed
+  308 |
+  309 |         try {
+> 310 | <<<<<<< HEAD
+      | ^^^^^^^
+  311 |             const res = await fetch('/api/chatbot', {
+  312 | =======
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+[00:23:46.774] Server  LOG     ✓ Compiled in 1775ms
+[00:23:48.106] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:48.106] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:23:48.106] Browser ERROR   ./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+[00:23:49.914] Server  ERROR   ⨯ ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+
+
+
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+
+
+
+./src/app/chat/chat.js:106:1
+Parsing ecmascript source code failed
+  104 |     const [query, setQuery] = useState('');
+  105 |     const [showChat, setShowChat] = useState(false);
+> 106 | <<<<<<< HEAD
+      | ^^^^^^^
+  107 |     const [messages, setMessages] = useState([]);
+  108 | =======
+  109 |     const [messages, setMessages] = useState([
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:108:1
+Parsing ecmascript source code failed
+  106 | <<<<<<< HEAD
+  107 |     const [messages, setMessages] = useState([]);
+> 108 | =======
+      | ^^^^^^^
+  109 |     const [messages, setMessages] = useState([
+  110 |         {
+  111 |             id: 'welcome',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:117:1
+Parsing ecmascript source code failed
+  115 |         },
+  116 |     ]);
+> 117 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  118 |     const [loading, setLoading] = useState(false);
+  119 |     const [isFocused, setIsFocused] = useState(false);
+  120 |     const sessionIdRef = useRef('');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:126:1
+Parsing ecmascript source code failed
+  124 |     const repetitionCountRef = useRef(0);
+  125 |     const lastMessageTimeRef = useRef(0);
+> 126 | <<<<<<< HEAD
+      | ^^^^^^^
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:129:1
+Parsing ecmascript source code failed
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+> 129 | =======
+      | ^^^^^^^
+  130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  131 |
+  132 |     function getTime() {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:130:1
+Parsing ecmascript source code failed
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+> 130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  131 |
+  132 |     function getTime() {
+  133 |         const now = new Date();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:152:1
+Parsing ecmascript source code failed
+  150 |         sessionIdRef.current = storedSessionId;
+  151 |
+> 152 | <<<<<<< HEAD
+      | ^^^^^^^
+  153 |         // Restore verification status
+  154 |         const storedVerified = localStorage.getItem('rt_chat_verified');
+  155 |         if (storedVerified === 'true') {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:159:1
+Parsing ecmascript source code failed
+  157 |         }
+  158 |
+> 159 | =======
+      | ^^^^^^^
+  160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:160:1
+Parsing ecmascript source code failed
+  158 |
+  159 | =======
+> 160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+  163 |         if (storedMessages) {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:190:1
+Parsing ecmascript source code failed
+  188 |     useEffect(() => {
+  189 |         if (messages.length > 0) {
+> 190 | <<<<<<< HEAD
+      | ^^^^^^^
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+  193 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:193:1
+Parsing ecmascript source code failed
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+> 193 | =======
+      | ^^^^^^^
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+  195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  196 |         }
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:195:1
+Parsing ecmascript source code failed
+  193 | =======
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+> 195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  196 |         }
+  197 |     }, [messages]);
+  198 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:204:1
+Parsing ecmascript source code failed
+  202 |
+  203 |     const sendMessage = async (customMessage) => {
+> 204 | <<<<<<< HEAD
+      | ^^^^^^^
+  205 |         if (loading) return;
+  206 | =======
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:206:1
+Parsing ecmascript source code failed
+  204 | <<<<<<< HEAD
+  205 |         if (loading) return;
+> 206 | =======
+      | ^^^^^^^
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:207:1
+Parsing ecmascript source code failed
+  205 |         if (loading) return;
+  206 | =======
+> 207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+  210 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:223:1
+Parsing ecmascript source code failed
+  221 |         setLoading(true);
+  222 |
+> 223 | <<<<<<< HEAD
+      | ^^^^^^^
+  224 |         // --- Verification Guardrail ---
+  225 |         if (!isVerified) {
+  226 |             const answer = msg.toLowerCase().trim();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:269:1
+Parsing ecmascript source code failed
+  267 |         }
+  268 |
+> 269 | =======
+      | ^^^^^^^
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+  272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:272:1
+Parsing ecmascript source code failed
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+> 272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  273 |         if (msg === lastMessageRef.current && (now - lastMessageTimeRef.current < 5000)) {
+  274 |             repetitionCountRef.current += 1;
+  275 |         } else {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:283:1
+Parsing ecmascript source code failed
+  281 |
+  282 |         if (repetitionCountRef.current >= 4) {
+> 283 | <<<<<<< HEAD
+      | ^^^^^^^
+  284 |             if (repetitionCountRef.current === 4) {
+  285 |                 setTimeout(() => {
+  286 |                     setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:295:1
+Parsing ecmascript source code failed
+  293 |                 setLoading(false);
+  294 |             }
+> 295 | =======
+      | ^^^^^^^
+  296 |             // Trigger on the 5th repeated message
+  297 |             setTimeout(() => {
+  298 |                 setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:304:1
+Parsing ecmascript source code failed
+  302 |                 setLoading(false);
+  303 |             }, 600); // Small delay to feel natural
+> 304 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  305 |             return;
+  306 |         }
+  307 |         // -----------------------------------
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:310:1
+Parsing ecmascript source code failed
+  308 |
+  309 |         try {
+> 310 | <<<<<<< HEAD
+      | ^^^^^^^
+  311 |             const res = await fetch('/api/chatbot', {
+  312 | =======
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+[00:23:49.929] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:49.929] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:23:49.929] Browser ERROR   ./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+[00:23:49.929] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:49.929] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:23:49.929] Browser ERROR   ./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+[00:23:49.929] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:49.929] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:23:49.929] Browser ERROR   ./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+[00:23:49.989] Server  ERROR   ⨯ ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+
+
+
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+
+
+
+./src/app/chat/chat.js:106:1
+Parsing ecmascript source code failed
+  104 |     const [query, setQuery] = useState('');
+  105 |     const [showChat, setShowChat] = useState(false);
+> 106 | <<<<<<< HEAD
+      | ^^^^^^^
+  107 |     const [messages, setMessages] = useState([]);
+  108 | =======
+  109 |     const [messages, setMessages] = useState([
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:108:1
+Parsing ecmascript source code failed
+  106 | <<<<<<< HEAD
+  107 |     const [messages, setMessages] = useState([]);
+> 108 | =======
+      | ^^^^^^^
+  109 |     const [messages, setMessages] = useState([
+  110 |         {
+  111 |             id: 'welcome',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:117:1
+Parsing ecmascript source code failed
+  115 |         },
+  116 |     ]);
+> 117 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  118 |     const [loading, setLoading] = useState(false);
+  119 |     const [isFocused, setIsFocused] = useState(false);
+  120 |     const sessionIdRef = useRef('');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:126:1
+Parsing ecmascript source code failed
+  124 |     const repetitionCountRef = useRef(0);
+  125 |     const lastMessageTimeRef = useRef(0);
+> 126 | <<<<<<< HEAD
+      | ^^^^^^^
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:129:1
+Parsing ecmascript source code failed
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+> 129 | =======
+      | ^^^^^^^
+  130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  131 |
+  132 |     function getTime() {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:130:1
+Parsing ecmascript source code failed
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+> 130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  131 |
+  132 |     function getTime() {
+  133 |         const now = new Date();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:152:1
+Parsing ecmascript source code failed
+  150 |         sessionIdRef.current = storedSessionId;
+  151 |
+> 152 | <<<<<<< HEAD
+      | ^^^^^^^
+  153 |         // Restore verification status
+  154 |         const storedVerified = localStorage.getItem('rt_chat_verified');
+  155 |         if (storedVerified === 'true') {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:159:1
+Parsing ecmascript source code failed
+  157 |         }
+  158 |
+> 159 | =======
+      | ^^^^^^^
+  160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:160:1
+Parsing ecmascript source code failed
+  158 |
+  159 | =======
+> 160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+  163 |         if (storedMessages) {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:190:1
+Parsing ecmascript source code failed
+  188 |     useEffect(() => {
+  189 |         if (messages.length > 0) {
+> 190 | <<<<<<< HEAD
+      | ^^^^^^^
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+  193 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:193:1
+Parsing ecmascript source code failed
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+> 193 | =======
+      | ^^^^^^^
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+  195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  196 |         }
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:195:1
+Parsing ecmascript source code failed
+  193 | =======
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+> 195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  196 |         }
+  197 |     }, [messages]);
+  198 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:204:1
+Parsing ecmascript source code failed
+  202 |
+  203 |     const sendMessage = async (customMessage) => {
+> 204 | <<<<<<< HEAD
+      | ^^^^^^^
+  205 |         if (loading) return;
+  206 | =======
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:206:1
+Parsing ecmascript source code failed
+  204 | <<<<<<< HEAD
+  205 |         if (loading) return;
+> 206 | =======
+      | ^^^^^^^
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:207:1
+Parsing ecmascript source code failed
+  205 |         if (loading) return;
+  206 | =======
+> 207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+  210 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:223:1
+Parsing ecmascript source code failed
+  221 |         setLoading(true);
+  222 |
+> 223 | <<<<<<< HEAD
+      | ^^^^^^^
+  224 |         // --- Verification Guardrail ---
+  225 |         if (!isVerified) {
+  226 |             const answer = msg.toLowerCase().trim();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:269:1
+Parsing ecmascript source code failed
+  267 |         }
+  268 |
+> 269 | =======
+      | ^^^^^^^
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+  272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:272:1
+Parsing ecmascript source code failed
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+> 272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  273 |         if (msg === lastMessageRef.current && (now - lastMessageTimeRef.current < 5000)) {
+  274 |             repetitionCountRef.current += 1;
+  275 |         } else {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:283:1
+Parsing ecmascript source code failed
+  281 |
+  282 |         if (repetitionCountRef.current >= 4) {
+> 283 | <<<<<<< HEAD
+      | ^^^^^^^
+  284 |             if (repetitionCountRef.current === 4) {
+  285 |                 setTimeout(() => {
+  286 |                     setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:295:1
+Parsing ecmascript source code failed
+  293 |                 setLoading(false);
+  294 |             }
+> 295 | =======
+      | ^^^^^^^
+  296 |             // Trigger on the 5th repeated message
+  297 |             setTimeout(() => {
+  298 |                 setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:304:1
+Parsing ecmascript source code failed
+  302 |                 setLoading(false);
+  303 |             }, 600); // Small delay to feel natural
+> 304 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  305 |             return;
+  306 |         }
+  307 |         // -----------------------------------
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:310:1
+Parsing ecmascript source code failed
+  308 |
+  309 |         try {
+> 310 | <<<<<<< HEAD
+      | ^^^^^^^
+  311 |             const res = await fetch('/api/chatbot', {
+  312 | =======
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+[00:23:50.062] Server  ERROR   ⨯ ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+
+
+
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+
+
+
+./src/app/chat/chat.js:106:1
+Parsing ecmascript source code failed
+  104 |     const [query, setQuery] = useState('');
+  105 |     const [showChat, setShowChat] = useState(false);
+> 106 | <<<<<<< HEAD
+      | ^^^^^^^
+  107 |     const [messages, setMessages] = useState([]);
+  108 | =======
+  109 |     const [messages, setMessages] = useState([
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:108:1
+Parsing ecmascript source code failed
+  106 | <<<<<<< HEAD
+  107 |     const [messages, setMessages] = useState([]);
+> 108 | =======
+      | ^^^^^^^
+  109 |     const [messages, setMessages] = useState([
+  110 |         {
+  111 |             id: 'welcome',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:117:1
+Parsing ecmascript source code failed
+  115 |         },
+  116 |     ]);
+> 117 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  118 |     const [loading, setLoading] = useState(false);
+  119 |     const [isFocused, setIsFocused] = useState(false);
+  120 |     const sessionIdRef = useRef('');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:126:1
+Parsing ecmascript source code failed
+  124 |     const repetitionCountRef = useRef(0);
+  125 |     const lastMessageTimeRef = useRef(0);
+> 126 | <<<<<<< HEAD
+      | ^^^^^^^
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:129:1
+Parsing ecmascript source code failed
+  127 |     const rapidCountRef = useRef(0);
+  128 |     const [isVerified, setIsVerified] = useState(false);
+> 129 | =======
+      | ^^^^^^^
+  130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  131 |
+  132 |     function getTime() {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:130:1
+Parsing ecmascript source code failed
+  128 |     const [isVerified, setIsVerified] = useState(false);
+  129 | =======
+> 130 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  131 |
+  132 |     function getTime() {
+  133 |         const now = new Date();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:152:1
+Parsing ecmascript source code failed
+  150 |         sessionIdRef.current = storedSessionId;
+  151 |
+> 152 | <<<<<<< HEAD
+      | ^^^^^^^
+  153 |         // Restore verification status
+  154 |         const storedVerified = localStorage.getItem('rt_chat_verified');
+  155 |         if (storedVerified === 'true') {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:159:1
+Parsing ecmascript source code failed
+  157 |         }
+  158 |
+> 159 | =======
+      | ^^^^^^^
+  160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:160:1
+Parsing ecmascript source code failed
+  158 |
+  159 | =======
+> 160 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  161 |         // 2. Restore Chat History
+  162 |         const storedMessages = localStorage.getItem('rt_chat_messages');
+  163 |         if (storedMessages) {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:190:1
+Parsing ecmascript source code failed
+  188 |     useEffect(() => {
+  189 |         if (messages.length > 0) {
+> 190 | <<<<<<< HEAD
+      | ^^^^^^^
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+  193 | =======
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:193:1
+Parsing ecmascript source code failed
+  191 |             // Keep only the last 50 messages to prevent localStorage quota errors
+  192 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
+> 193 | =======
+      | ^^^^^^^
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+  195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  196 |         }
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:195:1
+Parsing ecmascript source code failed
+  193 | =======
+  194 |             localStorage.setItem('rt_chat_messages', JSON.stringify(messages));
+> 195 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  196 |         }
+  197 |     }, [messages]);
+  198 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:204:1
+Parsing ecmascript source code failed
+  202 |
+  203 |     const sendMessage = async (customMessage) => {
+> 204 | <<<<<<< HEAD
+      | ^^^^^^^
+  205 |         if (loading) return;
+  206 | =======
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:206:1
+Parsing ecmascript source code failed
+  204 | <<<<<<< HEAD
+  205 |         if (loading) return;
+> 206 | =======
+      | ^^^^^^^
+  207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:207:1
+Parsing ecmascript source code failed
+  205 |         if (loading) return;
+  206 | =======
+> 207 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  208 |         const msg = (customMessage ?? query).trim();
+  209 |         if (!msg) return;
+  210 |
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:223:1
+Parsing ecmascript source code failed
+  221 |         setLoading(true);
+  222 |
+> 223 | <<<<<<< HEAD
+      | ^^^^^^^
+  224 |         // --- Verification Guardrail ---
+  225 |         if (!isVerified) {
+  226 |             const answer = msg.toLowerCase().trim();
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:269:1
+Parsing ecmascript source code failed
+  267 |         }
+  268 |
+> 269 | =======
+      | ^^^^^^^
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+  272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:272:1
+Parsing ecmascript source code failed
+  270 |         // --- Client-Side Spam Protection ---
+  271 |         const now = Date.now();
+> 272 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  273 |         if (msg === lastMessageRef.current && (now - lastMessageTimeRef.current < 5000)) {
+  274 |             repetitionCountRef.current += 1;
+  275 |         } else {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:283:1
+Parsing ecmascript source code failed
+  281 |
+  282 |         if (repetitionCountRef.current >= 4) {
+> 283 | <<<<<<< HEAD
+      | ^^^^^^^
+  284 |             if (repetitionCountRef.current === 4) {
+  285 |                 setTimeout(() => {
+  286 |                     setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:295:1
+Parsing ecmascript source code failed
+  293 |                 setLoading(false);
+  294 |             }
+> 295 | =======
+      | ^^^^^^^
+  296 |             // Trigger on the 5th repeated message
+  297 |             setTimeout(() => {
+  298 |                 setMessages((prev) => [
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:304:1
+Parsing ecmascript source code failed
+  302 |                 setLoading(false);
+  303 |             }, 600); // Small delay to feel natural
+> 304 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+      | ^^^^^^^
+  305 |             return;
+  306 |         }
+  307 |         // -----------------------------------
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:310:1
+Parsing ecmascript source code failed
+  308 |
+  309 |         try {
+> 310 | <<<<<<< HEAD
+      | ^^^^^^^
+  311 |             const res = await fetch('/api/chatbot', {
+  312 | =======
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+
+./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+
+
+[00:23:51.745] Browser ERROR   uncaughtError: Error: ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+
+
+[00:23:53.035] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:53.035] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:23:53.035] Browser ERROR   ./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+[00:23:53.035] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:53.035] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:23:53.038] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:53.038] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:53.038] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:53.038] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:23:53.038] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:23:53.038] Browser ERROR   ./src/app/chat/chat.js:312:1
+Parsing ecmascript source code failed
+  310 | <<<<<<< HEAD
+  311 |             const res = await fetch('/api/chatbot', {
+> 312 | =======
+      | ^^^^^^^
+  313 |             const res = await fetch(`${window.location.origin}/api/chatbot`, {
+  314 | >>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
+  315 |                 method: 'POST',
+
+Merge conflict marker encountered.
+
+Import trace:
+  Server Component:
+    ./src/app/chat/chat.js
+    ./src/app/chat/page.js
+[00:26:44.044] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:26:44.045] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:30:27.053] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:30:27.057] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+[00:30:30.035] Browser ERROR   ./package.json:9:1
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 | <<<<<<< HEAD
+     | ^
+  10 |     "lint": "next lint",
+  11 |     "clean": "rm -rf .next"
+  12 | =======
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 1
+[00:30:30.037] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/src/app/globals.css:1:1: /Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/package.json (directory description file): SyntaxError: Expected double-quoted property name in JSON at position 170 (line 9 column 1)
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/stephanvanwijk/Library/CloudStorage/Dropbox/Radical Thinking/RT Website/2026/RT2026/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
