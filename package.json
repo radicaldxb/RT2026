@@ -6,12 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-<<<<<<< HEAD
     "lint": "next lint",
     "clean": "rm -rf .next"
-=======
-    "lint": "next lint"
->>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
   },
   "dependencies": {
     "@n8n/chat": "^0.50.0",
