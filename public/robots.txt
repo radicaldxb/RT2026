@@ -1,0 +1,19 @@
+# Welcome to Radical Thinking
+User-agent: *
+Allow: /
+
+# Specifically allow AI Crawlers for SEO/Discovery
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Direct bots to your sitemap (helpful for LLM context mapping)
+Sitemap: https://radical-thinking.net/sitemap.xml
