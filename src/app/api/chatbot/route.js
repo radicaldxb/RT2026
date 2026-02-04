@@ -1,7 +1,6 @@
 // src/app/api/chatbot/route.js
 const rateLimit = new Map();
 
-<<<<<<< HEAD
 // Helper to clean up old rate limit entries to prevent memory leaks
 function cleanupRateLimit() {
   const now = Date.now();
@@ -13,8 +12,6 @@ function cleanupRateLimit() {
   }
 }
 
-=======
->>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
 export async function POST(req) {
   try {
     // Rate Limiting
@@ -24,14 +21,11 @@ export async function POST(req) {
     const limit = 40; // requests
     const windowMs = 60 * 1000; // 1 minute
 
-<<<<<<< HEAD
     // Periodic cleanup if map grows too large
     if (rateLimit.size > 5000) {
       cleanupRateLimit();
     }
 
-=======
->>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
     if (!rateLimit.has(ip)) {
       rateLimit.set(ip, {
         count: 0,
@@ -86,7 +80,6 @@ export async function POST(req) {
       );
     }
 
-<<<<<<< HEAD
     if (process.env.NODE_ENV === 'development') {
       console.log("Received chatInput:", chatInput);
       console.log("Received sessionId:", sessionId);
@@ -104,26 +97,15 @@ export async function POST(req) {
     }
 
     const n8nRes = await fetch(webhookUrl, {
-=======
-    console.log("Received chatInput:", chatInput);
-    console.log("Received sessionId:", sessionId);
-
-    // --- call n8n webhook ---
-    const n8nRes = await fetch(process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL, {
->>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chatInput, sessionId, metadata }),
     });
 
     const rawText = await n8nRes.text();
-<<<<<<< HEAD
     if (process.env.NODE_ENV === 'development') {
       console.log("📨 n8n raw response:", rawText);
     }
-=======
-    console.log("📨 n8n raw response:", rawText);
->>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
 
     let data;
     try {
@@ -132,7 +114,6 @@ export async function POST(req) {
       const item = Array.isArray(parsed) ? (parsed[0] || {}) : (parsed || {});
 
       // Normalize to a single 'reply' field by checking common keys
-<<<<<<< HEAD
       let reply = item.output || item.reply || item.text || item.message || item.content;
 
       // Ensure reply is a string to prevent client rendering errors
@@ -142,10 +123,6 @@ export async function POST(req) {
         reply = typeof item === 'string' ? item : JSON.stringify(item);
       }
       data = { reply: String(reply) };
-=======
-      const reply = item.output || item.reply || item.text || item.message || item.content || (typeof item === 'string' ? item : JSON.stringify(item));
-      data = { reply };
->>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
     } catch {
       console.warn("n8n did not return valid JSON, sending raw text back");
       data = { reply: rawText || " No response from n8n" };
@@ -159,11 +136,7 @@ export async function POST(req) {
     console.error("API route crashed:", error);
     return new Response(
       JSON.stringify({
-<<<<<<< HEAD
         error: (error && error.message) || "Internal Server Error",
-=======
-        error: error.message || "Internal Server Error",
->>>>>>> f1fbcc07c8f81005187e4c1510e5fceaf9ec6950
       }),
       {
         status: 500,
