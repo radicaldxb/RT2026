@@ -213,7 +213,7 @@ export default function Chat() {
                 setTimeout(() => {
                     setMessages((prev) => [
                         ...prev,
-                        { id: `bot-challenge-${Date.now()}`, from: 'bot', type: 'text', content: messages.length === 0 ? "Hello! This is your Radical Thinking agent! Before we get started, please prove you are human: What is 5 + 2?" : "That is incorrect. Please prove you are human: What is 5 + 2?", timestamp: getTime() },
+                        { id: `bot-challenge-${Date.now()}`, from: 'bot', type: 'text', content: messages.length === 0 ? "Before we start lets make sure you are human. Please answer 5 + 2 =" : "That is incorrect. Please prove you are human: What is 5 + 2?", timestamp: getTime() },
                     ]);
                     setLoading(false);
                 }, 600);
