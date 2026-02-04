@@ -356,7 +356,7 @@ export default function Chat() {
                 {showChat && (
                     <button
                         onClick={clearChat}
-                        className="text-sm font-medium text-gray-500 hover:text-black transition-colors px-4 py-2 rounded-full hover:bg-gray-100"
+                        className="text-sm font-medium text-black bg-gray-100 hover:bg-gray-200 transition-colors px-4 py-2 rounded-full"
                     >
                         Clear Chat
                     </button>
