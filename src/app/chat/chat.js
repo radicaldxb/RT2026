@@ -353,7 +353,7 @@ export default function Chat() {
                         className="w-12 h-12"
                     />
                 </Link>
-                {showChat && (
+                {(showChat || messages.length > 0) && (
                     <button
                         onClick={clearChat}
                         className="text-sm font-medium text-black bg-gray-100 hover:bg-gray-200 transition-colors px-4 py-2 rounded-full"
