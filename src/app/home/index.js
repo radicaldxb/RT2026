@@ -8,6 +8,37 @@ import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 import SoftBackground from "@/components/SoftBackground";
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+  }),
+  hover: { scale: 1.05, rotate: 1, transition: { type: "spring", stiffness: 300 } },
+};
+
+const desktopImages = [
+  { src: "/logos/Kahulife-Logo.webp", link: "https://kahulife.com" },
+  { src: "/logos/Tommy-Ellie-Logo.webp", link: "https://www.redbubble.com/people/Tommy-Ellie/shop" },
+  { src: "/logos/Coming-Soon.svg", link: "#" },
+  { src: "/logos/Animal-Intelligence.svg", link: "https://animal-intelligence.ai" },
+  { src: "/logos/Coming-Soon.svg", link: "#" },
+];
+
+// For mobile, just reorder from desktop
+const mobileImages = [
+  desktopImages[0],
+  desktopImages[3],
+  desktopImages[1],
+  desktopImages[2],
+  desktopImages[4],
+];
+
+const textFadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i = 1) => ({ opacity: 1, y: 0, transition: { delay: i * 0.3, duration: 0.6 } }),
+};
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -23,38 +54,6 @@ export default function Home() {
     } else {
       router.push("/chat");
     }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-    }),
-    hover: { scale: 1.05, rotate: 1, transition: { type: "spring", stiffness: 300 } },
-  };
-
-  const desktopImages = [
-    { src: "/logos/Kahulife-Logo.png", link: "https://kahulife.com" },
-    { src: "/logos/Coming-Soon.svg", link: "#" },
-    { src: "/logos/Coming-Soon.svg", link: "#" },
-    { src: "/logos/Animal-Intelligence.svg", link: "https://animal-intelligence.ai" },
-    { src: "/logos/Coming-Soon.svg", link: "#" },
-  ];
-
-  // For mobile, just reorder from desktop
-  const mobileImages = [
-    desktopImages[0],
-    desktopImages[3],
-    desktopImages[1],
-    desktopImages[2],
-    desktopImages[4],
-  ];
-
-  const textFadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i = 1) => ({ opacity: 1, y: 0, transition: { delay: i * 0.3, duration: 0.6 } }),
   };
 
   return (
@@ -134,7 +133,7 @@ export default function Home() {
                 className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-lg flex items-center justify-center p-6"
               >
                 {item.src ? (
-                  <Link href={item.link} target="_blank">
+                  <Link href={item.link} target="_blank" rel="noopener noreferrer">
                     <Image
                       src={item.src}
                       alt={`Card ${i + 1}`}
@@ -162,7 +161,7 @@ export default function Home() {
             className="md:col-start-2 md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6 z-30"
           >
               {desktopImages[3].src ? (
-                <Link href={desktopImages[3].link} target="_blank">
+                <Link href={desktopImages[3].link} target="_blank" rel="noopener noreferrer">
                   <Image
                     src={desktopImages[3].src}
                     alt="Bottom Left"
@@ -188,7 +187,7 @@ export default function Home() {
             className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6"
           >
               {desktopImages[4].src ? (
-                <Link href={desktopImages[4].link} target="_blank">
+                <Link href={desktopImages[4].link} target="_blank" rel="noopener noreferrer">
                   <Image
                     src={desktopImages[4].src}
                     alt="Bottom Right"
@@ -226,7 +225,7 @@ export default function Home() {
                 transition={{ delay: index * 0.1, duration: 0.4, type: "spring" }}
                 className="bg-white w-[220px] h-[180px] rounded-[22px] px-10 shadow-md flex items-center justify-center flex-shrink-0"
               >
-                <Link href={item.link} target="_blank">
+                <Link href={item.link} target="_blank" rel="noopener noreferrer">
                   <Image src={item.src} alt={`Mobile Logo ${index + 1}`} width={150} height={100} className="max-h-[60%] w-auto object-contain" />
                 </Link>
               </motion.div>
@@ -288,9 +287,9 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ x: 50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.2, ease: "easeOut" }} className="text-black text-lg md:text-xl leading-relaxed max-w-3xl text-center">
+          <motion.div initial={{ x: 50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.2, ease: "easeOut" }} className="text-black text-lg md:text-xl leading-relaxed max-w-4xl text-center">
             <p className="mb-6">
-              Let’s be honest, chasing the latest shiny tech trend is a full-time job. Good thing it’s our full-time job. The shiniest one right now is AI, and it’s about to change everything. So, we did what we always do—we took it apart, figured it out, and put it right at the center of our business. It lets us help our clients not just survive the change, but lead it.
+              Let’s be honest, chasing the latest shiny tech trend is a full-time job. Good thing it’s our full-time job. The shiniest one right now is AI, and it’s about to change everything. So, we did what we always do—we took it apart, figured it out, and put it right at the center of our business. It lets us help our clients not just survive the change, but lead&nbsp;it.
             </p>
             <p className="font-bold text-lg">Radical Thinking</p>
           </motion.div>

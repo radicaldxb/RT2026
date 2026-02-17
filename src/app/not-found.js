@@ -20,7 +20,7 @@ export default function NotFound() {
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           >
             <Image
-              src="/images/RT-404-768x581.webp"
+              src="/images/RT-404.webp"
               alt="404 Page Not Found"
               width={768}
               height={581}

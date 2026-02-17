@@ -29,7 +29,7 @@ export const metadata = {
     siteName: "Radical Thinking",
     images: [
       {
-        url: "https://radical-thinking.net/images/social-share.jpg",
+        url: "https://radical-thinking.net/Images/OG/RT-Social-Share.webp",
         width: 1200,
         height: 630,
         alt: "Radical Thinking Agency",
@@ -41,7 +41,7 @@ export const metadata = {
     title: "Radical Thinking | AI-Native Agency in Dubai",
     description:
       "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
-    images: ["https://radical-thinking.net/images/social-share.jpg"],
+    images: ["https://radical-thinking.net/Images/OG/RT-Landing.webp"],
   },
   icons: {
     icon: "/favicon-light.svg",
@@ -93,7 +93,7 @@ export default function RootLayout({ children }) {
             "@type": "Organization",
             name: "Radical Thinking",
             url: "https://radical-thinking.net",
-            logo: "https://radical-thinking.net/images/logo.png",
+            logo: "https://radical-thinking.net/images/logo.webp",
             foundingDate: "2008",
             address: {
               "@type": "PostalAddress",
@@ -123,6 +123,27 @@ export default function RootLayout({ children }) {
                 url: "https://radical-thinking.net/chat",
                 description:
                   "Engage in a direct conversation with the official AI agent of Radical Thinking.",
+              },
+              {
+                "@type": "WebPage",
+                name: "About Us",
+                url: "https://radical-thinking.net/about",
+                description:
+                  "Learn about Radical Thinking, an AI-native agency bridging creativity and technology.",
+              },
+              {
+                "@type": "WebPage",
+                name: "Services",
+                url: "https://radical-thinking.net/services",
+                description:
+                  "Explore our AI strategy, development, and design services.",
+              },
+              {
+                "@type": "WebPage",
+                name: "Portfolio",
+                url: "https://radical-thinking.net/portfolio",
+                description:
+                  "View our selected work and case studies.",
               },
               {
                 "@type": "WebPage",

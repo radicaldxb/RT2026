@@ -100,6 +100,13 @@ const markdownComponents = {
     ),
 };
 
+const quickMessages = [
+    'I want to start a project',
+    'What AI solutions have you built?',
+    'Tell me about your services',
+    'Show me your work',
+];
+
 export default function Chat() {
     const [query, setQuery] = useState('');
     const [showChat, setShowChat] = useState(false);
@@ -114,6 +121,21 @@ export default function Chat() {
     const lastMessageTimeRef = useRef(0);
     const rapidCountRef = useRef(0);
     const [isVerified, setIsVerified] = useState(false);
+    const challengeRef = useRef({ q: "5 + 2 =", a: ["7", "seven"] });
+
+    const generateChallenge = () => {
+        const n1 = Math.floor(Math.random() * 9) + 1;
+        const n2 = Math.floor(Math.random() * 9) + 1;
+        const sum = n1 + n2;
+        const numberWords = {
+            2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 
+            10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen', 
+            16: 'sixteen', 17: 'seventeen', 18: 'eighteen'
+        };
+        const answers = [sum.toString()];
+        if (numberWords[sum]) answers.push(numberWords[sum]);
+        return { q: `${n1} + ${n2} =`, a: answers };
+    };
 
     function getTime() {
         const now = new Date();
@@ -158,12 +180,40 @@ export default function Chat() {
             );
         }
 
-        // 3. Handle Handoff from Homepage
+        // 3. Handle Handoff from Homepage or Portfolio
         const initialMessage = searchParams.get('message');
-        if (initialMessage && !hasRun.current) {
-            hasRun.current = true;
-            // We use a timeout to ensure state is ready if needed, though direct call is usually fine
-            sendMessage(initialMessage);
+        const refParam = searchParams.get('ref');
+
+        if (!hasRun.current) {
+            if (initialMessage) {
+                hasRun.current = true;
+                sendMessage(initialMessage);
+            } else if (refParam) {
+                hasRun.current = true;
+                // Map ref to specific context prompts
+                const projectContexts = {
+                    'animal-intelligence': "I'd like to understand the technical architecture behind the Animal Intelligence platform.",
+                    'kahulife': "Tell me about the AI-driven SOS network in Kahulife.",
+                    'tommy-ellie': "How does the generative AI in Tommy & Ellie work?",
+                    'simon-snelder': "I'd like to learn about the premium branding and wealth management identity for Simon Snelder.",
+                    'austability': "How does the Austability platform handle global defense logistics?",
+                    'austability-video': "Tell me about the corporate storytelling approach in the Austability Video.",
+                    'flexxpay': "How does the FlexxPay product video highlight fintech accessibility?",
+                    'webinarlife': "What features make up the Webinarlife digital ecosystem?",
+                    'ai-networks': "Tell me about the visual identity for AI Networks' hardware.",
+                    'bella-conversational-ai': "How was the persona designed for Bella Conversational AI?",
+                    'crypto-x': "What is the strategy behind the Crypto X visual identity?",
+                    'influence-my-world': "How does Influence My World connect creators and brands?",
+                    'kfas-1001-inventions': "Tell me about the educational web design for KFAS / 1001 Inventions.",
+                    'microsoft-ai': "How does this project showcase Microsoft's AI capabilities?",
+                    'lenovo-campaigns': "Tell me about the multi-channel strategy for Lenovo Campaigns.",
+                    '1001-inventions-games': "How do the 1001 Inventions Games utilize gamification for education?",
+                    'akshaak': "What is the marketplace strategy behind Akshaak?",
+                };
+
+                const startMsg = projectContexts[refParam] || `I'd like to learn more about the ${refParam.replace(/-/g, ' ')} project.`;
+                sendMessage(startMsg);
+            }
         }
     }, [searchParams]);
 
@@ -199,7 +249,7 @@ export default function Chat() {
         // --- Verification Guardrail ---
         if (!isVerified) {
             const answer = msg.toLowerCase().trim();
-            if (answer === '7' || answer === 'seven') {
+            if (challengeRef.current.a.includes(answer)) {
                 setIsVerified(true);
                 localStorage.setItem('rt_chat_verified', 'true');
                 setTimeout(() => {
@@ -210,10 +260,13 @@ export default function Chat() {
                     setLoading(false);
                 }, 600);
             } else {
+                // Generate new challenge on failure or first attempt
+                const newChallenge = generateChallenge();
+                challengeRef.current = newChallenge;
                 setTimeout(() => {
                     setMessages((prev) => [
                         ...prev,
-                        { id: `bot-challenge-${Date.now()}`, from: 'bot', type: 'text', content: messages.length === 0 ? "Before we start lets make sure you are human. Please answer 5 + 2 =" : "That is incorrect. Please prove you are human: What is 5 + 2?", timestamp: getTime() },
+                        { id: `bot-challenge-${Date.now()}`, from: 'bot', type: 'text', content: messages.length === 0 ? `Before we start let's make sure you are human. Please answer ${newChallenge.q}` : `That is incorrect. Please prove you are human: What is ${newChallenge.q}?`, timestamp: getTime() },
                     ]);
                     setLoading(false);
                 }, 600);
@@ -329,13 +382,6 @@ export default function Chat() {
         setMessages([]);
         setShowChat(false);
     };
-
-    const quickMessages = [
-        'I want to start a project',
-        'What AI solutions have you built?',
-        'Tell me about your services',
-        'Show me your work',
-    ];
 
     return (
         <main className={`fixed inset-0 w-full h-[100dvh] flex flex-col bg-white text-black ${showChat ? 'overflow-hidden' : 'overflow-y-auto overflow-x-hidden'}`}>
@@ -530,7 +576,7 @@ export default function Chat() {
                         <div className="max-w-xl text-center mx-auto mt-4">
                             <p className="md:text-sm text-xs text-black opacity-60">
                             Talk to us in your preferred language <br className="md:hidden" /> and we’ll get you on your way!
-                            {showChat && <span className="block sm:inline sm:ml-1 text-[10px] opacity-70">Radical Thinking © 2026</span>}
+                            {showChat && <span className="block mt-1 text-[10px] opacity-70">Radical Thinking © 2026</span>}
                         </p>
                     </div>
                 </div>
