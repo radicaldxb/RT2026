@@ -1,5 +1,4 @@
 import Home from "./home";
 
-export default function Page() {
-  return <Home />;
-}
+// The root page of the application is the Home component.
+export default Home;

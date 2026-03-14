@@ -6,7 +6,7 @@ export const portfolio = [
         link: "/portfolio/ai-networks",
         slug: "ai-networks",
         tags: ["Branding", "AI"],
-        image: "/images/portfolio/ai-networks.webp"
+        image: "/Images/Portfolio/ai-networks.webp"
     },
     {
         title: "Bella Conversational AI",
@@ -15,7 +15,7 @@ export const portfolio = [
         link: "/portfolio/bella-conversational-ai",
         slug: "bella-conversational-ai",
         tags: ["Branding", "AI"],
-        image: "/images/portfolio/bella-ai.webp"
+        image: "/Images/Portfolio/bella-ai.webp"
     },
     {
         title: "1001 Inventions Games",
@@ -24,7 +24,7 @@ export const portfolio = [
         link: "/portfolio/1001-inventions-games",
         slug: "1001-inventions-games",
         tags: ["Interactive", "Education"],
-        image: "/images/portfolio/1001-inventions-games.webp"
+        image: "/Images/Portfolio/1001-inventions-games.webp"
     },
     {
         title: "Akshaak",
@@ -33,7 +33,7 @@ export const portfolio = [
         link: "/portfolio/akshaak",
         slug: "akshaak",
         tags: ["Digital Platforms"],
-        image: "/images/portfolio/akshaak.webp"
+        image: "/Images/Portfolio/akshaak.webp"
     },
     {
         title: "Kahulife",
@@ -42,7 +42,7 @@ export const portfolio = [
         link: "/portfolio/kahulife",
         slug: "kahulife",
         tags: ["AI", "Digital Platforms"],
-        image: "/images/portfolio/kahulife.webp"
+        image: "/Images/Portfolio/kahulife.webp"
     },
     {
         title: "Animal Intelligence",
@@ -51,7 +51,7 @@ export const portfolio = [
         link: "/portfolio/animal-intelligence",
         slug: "animal-intelligence",
         tags: ["AI", "Data"],
-        image: "/images/portfolio/animal-intelligence.webp"
+        image: "/Images/Portfolio/animal-intelligence.webp"
     },
     {
         title: "Austability",
@@ -60,7 +60,7 @@ export const portfolio = [
         link: "/portfolio/austability",
         slug: "austability",
         tags: ["Strategy", "Digital Platforms"],
-        image: "/images/portfolio/austability.webp"
+        image: "/Images/Portfolio/austability.webp"
     },
     {
         title: "Austability Video",
@@ -69,7 +69,7 @@ export const portfolio = [
         link: "/portfolio/austability-video",
         slug: "austability-video",
         tags: ["Video"],
-        image: "/images/portfolio/austability-video.webp"
+        image: "/Images/Portfolio/austability-video.webp"
     },
     {
         title: "Crypto X",
@@ -78,7 +78,7 @@ export const portfolio = [
         link: "/portfolio/crypto-x",
         slug: "crypto-x",
         tags: ["FinTech", "Digital Platforms"],
-        image: "/images/portfolio/crypto-x.webp"
+        image: "/Images/Portfolio/crypto-x.webp"
     },
     {
         title: "FlexxPay",
@@ -87,7 +87,7 @@ export const portfolio = [
         link: "/portfolio/flexxpay",
         slug: "flexxpay",
         tags: ["FinTech", "Video"],
-        image: "/images/portfolio/flexxpay.webp"
+        image: "/Images/Portfolio/flexxpay.webp"
     },
     {
         title: "Influence My World",
@@ -96,7 +96,7 @@ export const portfolio = [
         link: "/portfolio/influence-my-world",
         slug: "influence-my-world",
         tags: ["Digital Platforms", "Marketing"],
-        image: "/images/portfolio/influence-my-world.webp"
+        image: "/Images/Portfolio/influence-my-world.webp"
     },
     {
         title: "KFAS 1001 Inventions",
@@ -105,7 +105,7 @@ export const portfolio = [
         link: "/portfolio/kfas-1001-inventions",
         slug: "kfas-1001-inventions",
         tags: ["Interactive", "Education"],
-        image: "/images/portfolio/kfas-1001-inventions.webp"
+        image: "/Images/Portfolio/kfas-1001-inventions.webp"
     },
     {
         title: "Lenovo Campaigns",
@@ -114,16 +114,16 @@ export const portfolio = [
         link: "/portfolio/lenovo-campaigns",
         slug: "lenovo-campaigns",
         tags: ["Marketing"],
-        image: "/images/portfolio/lenovo-campaigns.webp"
+        image: "/Images/Portfolio/lenovo-campaigns.webp"
     },
     {
         title: "Microsoft AI",
         category: "AI & Technology",
         description: "Showcasing AI capabilities through interactive digital experiences and storytelling.",
-        link: "/portfolio/lmicrosoft-ai",
-        slug: "lmicrosoft-ai",
+        link: "/portfolio/microsoft-ai",
+        slug: "microsoft-ai",
         tags: ["AI", "Interactive"],
-        image: "/images/portfolio/microsoft-ai.webp"
+        image: "/Images/Portfolio/microsoft-ai.webp"
     },
     {
         title: "Simon Snelder",
@@ -132,7 +132,7 @@ export const portfolio = [
         link: "/portfolio/simon-snelder",
         slug: "simon-snelder",
         tags: ["Branding"],
-        image: "/images/portfolio/simon-snelder.webp"
+        image: "/Images/Portfolio/simon-snelder.webp"
     },
     {
         title: "Tommy & Ellie",
@@ -141,7 +141,7 @@ export const portfolio = [
         link: "/portfolio/tommy-ellie",
         slug: "tommy-ellie",
         tags: ["AI", "Interactive"],
-        image: "/images/portfolio/tommy-ellie.webp"
+        image: "/Images/Portfolio/tommy-ellie.webp"
     },
     {
         title: "WebinarLife",
@@ -150,6 +150,15 @@ export const portfolio = [
         link: "/portfolio/webinarlife",
         slug: "webinarlife",
         tags: ["Digital Platforms"],
-        image: "/images/portfolio/webinarlife.webp"
+        image: "/Images/Portfolio/webinarlife.webp"
+    },
+    {
+        title: "FluffyFriends",
+        category: "AI Product Engineering",
+        description: "Autonomous AI pet portrait studio that generates 8K personalized artwork in under 5 minutes using n8n and Google Gemini.",
+        link: "/portfolio/fluffyfriends",
+        slug: "fluffyfriends",
+        tags: ["AI", "Automation"],
+        image: "/Images/Portfolio/fluffyfriends.webp"
     }
 ];

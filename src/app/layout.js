@@ -147,6 +147,13 @@ export default function RootLayout({ children }) {
               },
               {
                 "@type": "WebPage",
+                name: "Radical Insights",
+                url: "https://radical-thinking.net/insights",
+                description:
+                  "Explore articles and insights on AI, technology, and strategy from the Radical Thinking team.",
+              },
+              {
+                "@type": "WebPage",
                 name: "Privacy Policy",
                 url: "https://radical-thinking.net/privacy-policy",
                 description:

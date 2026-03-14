@@ -33,6 +33,7 @@ export default function Footer() {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1, x: 0 } : undefined} transition={{ duration: 0.6, delay: 0.2 }} className="flex flex-col gap-1">
               {/* use onClick to intercept when already on '/' */}
               <Link href="/chat">CHAT</Link>
+              <Link href="/insights">INSIGHTS</Link>
               <Link href="/#ideas" onClick={(e) => handleHashClick(e, "ideas")}>IDEAS</Link>
               <Link href="/#equation" onClick={(e) => handleHashClick(e, "equation")}>BI=C+EX+CT2</Link>
               <Link href="/#radical" onClick={(e) => handleHashClick(e, "radical")}>RADICAL THINKING</Link>

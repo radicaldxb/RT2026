@@ -7,6 +7,7 @@ import SoftBackground from "@/components/SoftBackground";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -45,8 +46,26 @@ const servicesList = [
 ];
 
 export default function Services() {
+    // FAQ Schema for Services
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": servicesList.map(service => ({
+            "@type": "Question",
+            "name": service.title,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": service.description
+            }
+        }))
+    };
+
     return (
         <section className="relative w-full min-h-screen flex flex-col overflow-x-hidden">
+            <Script id="faq-schema" type="application/ld+json">
+                {JSON.stringify(faqSchema)}
+            </Script>
+
             {/* Background */}
             <div className="fixed inset-0 z-0 pointer-events-none gradient-background">
                 <SoftBackground />

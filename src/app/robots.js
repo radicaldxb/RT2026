@@ -1,9 +1,11 @@
 export default function robots() {
+  const baseUrl = "https://radical-thinking.net";
+
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
+      userAgent: "*",
+      allow: "/",
     },
-    sitemap: 'https://radical-thinking.net/sitemap.xml',
-  }
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
 }

@@ -1,6 +1,6 @@
-import Portfolio from './portfolio';
+import Portfolio from "./portfolio";
 import Script from "next/script";
-import { portfolio } from "./projects";
+import { portfolio } from "@/app/portfolio/projects";
 
 export const metadata = {
   title: "Our Work | Radical Thinking Portfolio",
@@ -28,20 +28,6 @@ export default function PortfolioPage() {
   return (
     <main className="min-h-screen">
       <Portfolio />
-      
-      {/* Google Analytics */}
-      <Script
-        strategy="afterInteractive"
-        src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL"
-      />
-      <Script id="gtag-init" strategy="afterInteractive">
-        {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FXY9Q2TXCL');
-            `}
-      </Script>
 
       {/* AEO: CollectionPage Structured Data */}
       <Script id="ld-json-portfolio" type="application/ld+json">

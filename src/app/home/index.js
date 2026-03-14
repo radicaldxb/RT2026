@@ -19,10 +19,10 @@ const cardVariants = {
 };
 
 const desktopImages = [
-  { src: "/logos/Kahulife-Logo.webp", link: "https://kahulife.com" },
+  { src: "/logos/Kahulife-Logo.webp", link: "/portfolio/kahulife" },
   { src: "/logos/Tommy-Ellie-Logo.webp", link: "https://www.redbubble.com/people/Tommy-Ellie/shop" },
-  { src: "/logos/Coming-Soon.svg", link: "#" },
-  { src: "/logos/Animal-Intelligence.svg", link: "https://animal-intelligence.ai" },
+  { src: "/logos/FF-Logo.webp", link: "/portfolio/fluffyfriends" },
+  { src: "/logos/Animal-Intelligence.svg", link: "/portfolio/animal-intelligence" },
   { src: "/logos/Coming-Soon.svg", link: "#" },
 ];
 
@@ -133,7 +133,7 @@ export default function Home() {
                 className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-lg flex items-center justify-center p-6"
               >
                 {item.src ? (
-                  <Link href={item.link} target="_blank" rel="noopener noreferrer">
+                  <Link href={item.link} target={item.link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
                     <Image
                       src={item.src}
                       alt={`Card ${i + 1}`}
@@ -161,7 +161,7 @@ export default function Home() {
             className="md:col-start-2 md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6 z-30"
           >
               {desktopImages[3].src ? (
-                <Link href={desktopImages[3].link} target="_blank" rel="noopener noreferrer">
+                <Link href={desktopImages[3].link} target={desktopImages[3].link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
                   <Image
                     src={desktopImages[3].src}
                     alt="Bottom Left"
@@ -187,7 +187,7 @@ export default function Home() {
             className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6"
           >
               {desktopImages[4].src ? (
-                <Link href={desktopImages[4].link} target="_blank" rel="noopener noreferrer">
+                <Link href={desktopImages[4].link} target={desktopImages[4].link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
                   <Image
                     src={desktopImages[4].src}
                     alt="Bottom Right"
@@ -225,7 +225,7 @@ export default function Home() {
                 transition={{ delay: index * 0.1, duration: 0.4, type: "spring" }}
                 className="bg-white w-[220px] h-[180px] rounded-[22px] px-10 shadow-md flex items-center justify-center flex-shrink-0"
               >
-                <Link href={item.link} target="_blank" rel="noopener noreferrer">
+                <Link href={item.link} target={item.link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
                   <Image src={item.src} alt={`Mobile Logo ${index + 1}`} width={150} height={100} className="max-h-[60%] w-auto object-contain" />
                 </Link>
               </motion.div>

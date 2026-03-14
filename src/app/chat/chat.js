@@ -209,6 +209,8 @@ export default function Chat() {
                     'lenovo-campaigns': "Tell me about the multi-channel strategy for Lenovo Campaigns.",
                     '1001-inventions-games': "How do the 1001 Inventions Games utilize gamification for education?",
                     'akshaak': "What is the marketplace strategy behind Akshaak?",
+                    'ai-is-rocket-fuel': "I've just read the 'AI is Rocket Fuel' article and I'd like to debate or discuss the concepts mentioned.",
+                    'fluffyfriends': "I'm interested in the FluffyFriends autonomous AI factory. How does the quality assurance and n8n workflow function?",
                 };
 
                 const startMsg = projectContexts[refParam] || `I'd like to learn more about the ${refParam.replace(/-/g, ' ')} project.`;
@@ -246,8 +248,13 @@ export default function Chat() {
         setShowChat(true);
         setLoading(true);
 
+        const isSystemMessage = typeof customMessage === 'string' && customMessage.length > 0;
+
         // --- Verification Guardrail ---
-        if (!isVerified) {
+        // Only require the math challenge for free-typed user input.
+        // System-driven prompts (ref/message handoff, quick buttons) bypass this
+        // and rely on server-side rate limiting instead, so the lead flow stays smooth.
+        if (!isVerified && !isSystemMessage) {
             const answer = msg.toLowerCase().trim();
             if (challengeRef.current.a.includes(answer)) {
                 setIsVerified(true);

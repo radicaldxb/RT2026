@@ -115,3 +115,90 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Article body formatting for Insights - full width to match header image */
+.rt-article-body {
+  width: 100%;
+  margin-bottom: 4rem;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #374151; /* gray-700 */
+}
+
+.rt-article-body p + p {
+  margin-top: 1rem;
+}
+
+.rt-article-body blockquote {
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem 1.5rem 1.25rem 1.25rem;
+  border-left: 4px solid #111827;
+  background: rgba(0, 0, 0, 0.04);
+  font-weight: 700;
+  color: #111827;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.rt-article-body blockquote p {
+  margin: 0;
+}
+
+.rt-article-body h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.rt-article-body h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.rt-article-body ul,
+.rt-article-body ol {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.rt-article-body li + li {
+  margin-top: 0.25rem;
+}
+
+.rt-article-body strong {
+  font-weight: 600;
+  color: #111827; /* gray-900 */
+}
+
+.rt-article-body a {
+  color: #000000;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.rt-article-body a:hover {
+  text-decoration: none;
+}
+
+/* Black CTA buttons: keep text white (overrides .rt-article-body a and Tailwind) */
+.rt-article-body a.cta-button,
+a.cta-button,
+.rt-article-body a.bg-black {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+.rt-article-body a.cta-button:hover,
+a.cta-button:hover,
+.rt-article-body a.bg-black:hover {
+  color: #ffffff !important;
+}
+
+/* Better title wrapping */
+.text-balance {
+  text-wrap: balance;
+}
