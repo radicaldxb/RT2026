@@ -3,7 +3,7 @@ import Services from "./services";
 export const metadata = {
   title: "AI Strategy & Services | Radical Thinking",
   description:
-    "Our services range from AI automation and digital ecosystems to strategic branding. We engineer intelligence as a service.",
+    "Radical Thinking offers AI agents, digital platforms, branding, and immersive media — built AI-native from the ground up. Based in Dubai, working globally.",
   alternates: {
     canonical: "https://radical-thinking.net/services",
   },

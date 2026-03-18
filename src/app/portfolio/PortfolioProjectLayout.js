@@ -15,7 +15,7 @@ export function PortfolioProjectCTA({ projectName, chatRef }) {
       </p>
       <div className="pt-2">
         <Link
-          href={`/chat?ref=${chatRef}`}
+          href={`/chat?ref=${chatRef}&source=portfolio`}
           className="cta-button inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg no-underline"
           style={{ color: "#ffffff" }}
         >
@@ -34,6 +34,7 @@ export function PortfolioProjectCTA({ projectName, chatRef }) {
  * Matches insights article page: nav, header, figure, body, share, footer.
  */
 export default function PortfolioProjectLayout({
+  project,
   title,
   description,
   image,
@@ -43,6 +44,7 @@ export default function PortfolioProjectLayout({
   chatRef,
   children,
 }) {
+  const projectData = project || {};
   const shareUrl = slug ? `https://radical-thinking.net/portfolio/${slug}` : "";
 
   return (
@@ -71,7 +73,7 @@ export default function PortfolioProjectLayout({
           </Link>
           {chatRef && (
             <Link
-              href={`/chat?ref=${chatRef}`}
+              href={`/chat?ref=${chatRef}&source=portfolio`}
               className="hidden md:inline-block text-sm font-medium bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-all hover:scale-105"
             >
               Talk to the Agent
@@ -114,6 +116,58 @@ export default function PortfolioProjectLayout({
             </figure>
           )}
 
+          {projectData.overview && (
+            <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl p-6 mb-8">
+              <p className="text-gray-800 leading-relaxed">{projectData.overview}</p>
+            </div>
+          )}
+
+          {projectData.challenge && (
+            <>
+              <h2 className="text-2xl font-bold text-black mb-4 mt-8">The Challenge</h2>
+              <p className="mb-6 text-gray-800 leading-relaxed">{projectData.challenge}</p>
+            </>
+          )}
+
+          {projectData.solution && (
+            <>
+              <h2 className="text-2xl font-bold text-black mb-4 mt-8">The Solution</h2>
+              <p className="mb-6 text-gray-800 leading-relaxed">{projectData.solution}</p>
+            </>
+          )}
+
+          {projectData.outcome && (
+            <>
+              <h2 className="text-2xl font-bold text-black mb-4 mt-8">The Outcome</h2>
+              <p className="mb-6 text-gray-800 leading-relaxed">{projectData.outcome}</p>
+            </>
+          )}
+
+          {projectData.facts && projectData.facts.length > 0 && (
+            <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl p-6 mb-8">
+              <h3 className="text-lg font-bold text-black mb-4">Key Facts</h3>
+              <ul className="space-y-2">
+                {projectData.facts.map((fact, i) => (
+                  <li key={i} className="flex gap-3 text-sm text-gray-800">
+                    <span className="font-semibold text-black min-w-[120px]">{fact.label}</span>
+                    <span>{fact.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {projectData.live && (
+            <a
+              href={projectData.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-blue-600 hover:text-blue-800 font-bold text-lg hover:underline decoration-2 underline-offset-4 transition-all mb-6"
+            >
+              Visit Live Platform &rarr;
+            </a>
+          )}
+
           <div className="rt-article-body">
             {children}
           </div>
@@ -131,7 +185,7 @@ export default function PortfolioProjectLayout({
       {chatRef && (
         <div className="fixed bottom-6 right-6 z-50 md:hidden">
           <Link
-            href={`/chat?ref=${chatRef}`}
+            href={`/chat?ref=${chatRef}&source=portfolio`}
             className="flex items-center justify-center w-14 h-14 bg-black text-white rounded-full shadow-2xl hover:scale-110 transition-transform"
             aria-label="Talk to Agent"
           >

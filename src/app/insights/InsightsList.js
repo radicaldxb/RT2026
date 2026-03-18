@@ -45,7 +45,7 @@ export default function InsightsList({ articles = [] }) {
             RADICAL INSIGHTS
           </h1>
           <p className="text-lg text-gray-600 mt-3">
-            AI, technology, and strategy from the Radical Thinking team.
+            AI, technology, and strategy from Radical Thinking.
           </p>
         </header>
 

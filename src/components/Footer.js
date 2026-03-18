@@ -34,8 +34,8 @@ export default function Footer() {
               {/* use onClick to intercept when already on '/' */}
               <Link href="/chat">CHAT</Link>
               <Link href="/insights">INSIGHTS</Link>
+              <Link href="/#equation" onClick={(e) => handleHashClick(e, "equation")}>BI=C+Ex×T²</Link>
               <Link href="/#ideas" onClick={(e) => handleHashClick(e, "ideas")}>IDEAS</Link>
-              <Link href="/#equation" onClick={(e) => handleHashClick(e, "equation")}>BI=C+EX+CT2</Link>
               <Link href="/#radical" onClick={(e) => handleHashClick(e, "radical")}>RADICAL THINKING</Link>
             </motion.div>
 

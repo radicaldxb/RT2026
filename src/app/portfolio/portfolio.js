@@ -78,7 +78,7 @@ export default function Portfolio() {
                                 className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
                                     activeTag === tag 
                                     ? "bg-black text-white shadow-md scale-105" 
-                                    : "bg-white/50 text-gray-600 hover:bg-white hover:text-black"
+                                    : "bg-white/70 text-gray-600 border border-gray-200 hover:bg-white hover:text-black"
                                 }`}
                             >
                                 {tag}
@@ -122,10 +122,23 @@ export default function Portfolio() {
 
                     {/* CTA */}
                     <motion.div variants={fadeInUp} custom={5} className="text-center pt-8">
-                        <p className="text-lg mb-6">Want to see more?</p>
-                        <Link href="/chat" className="inline-block bg-black text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform">
-                            Ask our AI about our full portfolio
-                        </Link>
+                        <div className="bg-gradient-to-b from-blue-50 to-blue-100 rounded-2xl rounded-br-none p-8 text-center space-y-6 shadow-sm">
+                            <h3 className="text-xl font-bold text-black">Want to see more?</h3>
+                            <p className="text-gray-800">
+                                The agent has access to the full portfolio. Every project, every detail. Ask it anything.
+                            </p>
+                            <div className="pt-2">
+                                <Link
+                                    href="/chat?ref=portfolio"
+                                    className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg"
+                                >
+                                    Talk to the Agent
+                                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                    </svg>
+                                </Link>
+                            </div>
+                        </div>
                     </motion.div>
 
                 </motion.div>

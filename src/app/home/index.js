@@ -72,7 +72,7 @@ export default function Home() {
 
           <div className="text-center space-y-2">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight text-black">WE BRING BOLD IDEAS TO LIFE.</h1>
-            <p className="text-lg md:text-xl text-black">AI NATIVE AT THE CORE, POWERED BY RADICAL THINKING.</p>
+            <p className="text-lg md:text-xl text-black">POWERED BY RADICAL THINKING. AI-NATIVE AT THE CORE.</p>
           </div>
 
           {/* Input with Search Icon */}
@@ -112,127 +112,6 @@ export default function Home() {
 
         </motion.div>
       </section>
-      {/* ===== IDEAS SHOWCASE (id="ideas") ===== */}
-      <section id="ideas" className="relative z-10 w-full py-20 text-black hidden md:block scroll-mt-24">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-10 px-4">
-          <h2 className="text-3xl md:text-4xl font-bold">IDEAS THAT WE MADE REAL</h2>
-          <p className="text-lg mt-2">AND LIVED TO TELL THE TALE</p>
-        </motion.div>
-
-        <div className="relative max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 relative z-10">
-            {desktopImages.slice(0, 3).map((item, i) => (
-              <motion.div
-                key={i}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                viewport={{ once: true }}
-                className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-lg flex items-center justify-center p-6"
-              >
-                {item.src ? (
-                  <Link href={item.link} target={item.link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
-                    <Image
-                      src={item.src}
-                      alt={`Card ${i + 1}`}
-                      width={220}
-                      height={160}
-                      className="object-contain w-auto h-auto max-w-full max-h-full"
-                    />
-                  </Link>
-                ) : (
-                  <span className="text-gray-600 text-lg font-semibold">
-                    {/* COMING SOON! */}
-                  </span>
-                )}
-              </motion.div>
-            ))}
-
-            {/* Bottom Row - Centered/Offset */}
-            <motion.div
-            custom={3}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            whileHover="hover"
-            viewport={{ once: true }}
-            className="md:col-start-2 md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6 z-30"
-          >
-              {desktopImages[3].src ? (
-                <Link href={desktopImages[3].link} target={desktopImages[3].link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
-                  <Image
-                    src={desktopImages[3].src}
-                    alt="Bottom Left"
-                    width={220}
-                    height={160}
-                    className="object-contain w-auto h-auto max-w-full max-h-full"
-                  />
-                </Link>
-              ) : (
-                <span className="text-gray-600 text-lg font-semibold">
-                  {/* COMING SOON! */}
-                </span>
-              )}
-          </motion.div>
-
-          <motion.div
-            custom={4}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            whileHover="hover"
-            viewport={{ once: true }}
-            className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6"
-          >
-              {desktopImages[4].src ? (
-                <Link href={desktopImages[4].link} target={desktopImages[4].link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
-                  <Image
-                    src={desktopImages[4].src}
-                    alt="Bottom Right"
-                    width={220}
-                    height={160}
-                    className="object-contain w-auto h-auto max-w-full max-h-full"
-                  />
-                </Link>
-              ) : (
-                <span className="text-gray-600 text-lg font-semibold">
-                  {/* COMING SOON! */}
-                </span>
-              )}
-          </motion.div>
-          </div>
-        </div>
-
-      </section>
-      {/* Mobile Ideas */}
-      <section id="ideas-mobile" className="relative z-10 md:hidden w-full pt-24 pl-5 text-black scroll-mt-24">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-10 px-4">
-          <h2 className="text-2xl font-bold">IDEAS THAT WE MADE REAL</h2>
-          <p className="text-lg mt-1">AND LIVED TO TELL THE TALE</p>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 px-1">
-            {mobileImages.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ delay: index * 0.1, duration: 0.4, type: "spring" }}
-                className="bg-white w-[220px] h-[180px] rounded-[22px] px-10 shadow-md flex items-center justify-center flex-shrink-0"
-              >
-                <Link href={item.link} target={item.link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
-                  <Image src={item.src} alt={`Mobile Logo ${index + 1}`} width={150} height={100} className="max-h-[60%] w-auto object-contain" />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
       {/* ===== EQUATION (id="equation") ===== */}
       <section id="equation" className="relative z-10 w-full px-4 py-20 md:py-28 flex flex-col items-center justify-center text-center scroll-mt-24">
         <motion.h2 
@@ -262,13 +141,13 @@ export default function Home() {
               title: "EXPERIENCE.",
               color: "#E18949",
               content:
-                "We’re obsessed with the entire experience—not just how it looks, but how it feels. How it sounds, what it makes you think, the impression it leaves long after you’ve walked away. We design for all the senses, creating unforgettable moments that connect with people on a human level.",
+                "The difference between a good idea and a bold one is how it makes you feel, how it sounds, what it makes you think, and the impression it leaves. That's the difference between work that gets noticed and work that gets remembered.",
             },
             {
-              title: "TECHNOLOGY.",
+              title: "TECHNOLOGY².",
               color: "#6B17DA",
               content:
-                "An idea without technology is just a thought. Technology is the amplifier, the engine, and the connector that makes it all happen. We take the most powerful tools—from foundational web tech to game-changing AI—and use them to give your bold ideas the muscle they need to make a real impact in the real world.",
+                "An idea without technology is just a thought. Technology is the amplifier, the engine, and the connector. We take the most powerful tools — from foundational web tech to game-changing AI — and put them to work so your bold ideas land.",
             },
           ].map((item, i) => (
             <motion.div key={i} className="text-center px-6 bg-white/30 backdrop-blur-md shadow-lg hover:shadow-xl transition-all rounded-xl py-6 hover:scale-105 duration-300 border border-white/40" variants={textFadeIn} custom={i + 2}>
@@ -276,6 +155,128 @@ export default function Home() {
               <p className="text-black">{item.content}</p>
             </motion.div>
           ))}
+        </motion.div>
+      </section>
+
+      {/* ===== IDEAS SHOWCASE (id="ideas") ===== */}
+      <section id="ideas" className="relative z-10 w-full py-20 text-black hidden md:block scroll-mt-24">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-10 px-4">
+          <h2 className="text-3xl md:text-4xl font-bold">IDEAS THAT WE MADE REAL</h2>
+          <p className="text-lg mt-2">AND LIVED TO TELL THE TALE</p>
+        </motion.div>
+
+        <div className="relative max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 relative z-10">
+            {desktopImages.slice(0, 3).map((item, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true }}
+                className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-lg flex items-center justify-center p-6"
+              >
+                {item.link === "#" ? (
+                  <span className="text-gray-500 text-3xl md:text-4xl font-semibold tracking-wide">
+                    WHAT IS NEXT?
+                  </span>
+                ) : (
+                  <Link href={item.link} target={item.link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
+                    <Image
+                      src={item.src}
+                      alt={`Card ${i + 1}`}
+                      width={220}
+                      height={160}
+                      className="object-contain w-auto h-auto max-w-full max-h-full"
+                    />
+                  </Link>
+                )}
+              </motion.div>
+            ))}
+
+            {/* Bottom Row - Centered/Offset */}
+            <motion.div
+            custom={3}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            viewport={{ once: true }}
+            className="md:col-start-2 md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6 z-30"
+          >
+              <Link href={desktopImages[3].link} target={desktopImages[3].link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
+                <Image
+                  src={desktopImages[3].src}
+                  alt="Bottom Left"
+                  width={220}
+                  height={160}
+                  className="object-contain w-auto h-auto max-w-full max-h-full"
+                />
+              </Link>
+          </motion.div>
+
+          <motion.div
+            custom={4}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            viewport={{ once: true }}
+            className="md:col-span-2 bg-white aspect-[4/3] rounded-2xl shadow-xl flex items-center justify-center p-6"
+          >
+              {desktopImages[4].link === "#" ? (
+                <span className="text-gray-500 text-lg font-semibold tracking-wide">
+                  WHAT IS NEXT?
+                </span>
+              ) : (
+                <Link href={desktopImages[4].link} target={desktopImages[4].link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
+                  <Image
+                    src={desktopImages[4].src}
+                    alt="Bottom Right"
+                    width={220}
+                    height={160}
+                    className="object-contain w-auto h-auto max-w-full max-h-full"
+                  />
+                </Link>
+              )}
+          </motion.div>
+          </div>
+        </div>
+
+      </section>
+      {/* Mobile Ideas */}
+      <section id="ideas-mobile" className="relative z-10 md:hidden w-full pt-24 pl-5 text-black scroll-mt-24">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-10 px-4">
+          <h2 className="text-2xl font-bold">IDEAS THAT WE MADE REAL</h2>
+          <p className="text-lg mt-1">AND LIVED TO TELL THE TALE</p>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
+          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 px-1">
+            {mobileImages.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ delay: index * 0.1, duration: 0.4, type: "spring" }}
+                className="bg-white w-[220px] h-[180px] rounded-[22px] px-10 shadow-md flex items-center justify-center flex-shrink-0"
+              >
+                {item.link === "#" ? (
+                  <span className="text-gray-500 text-lg font-semibold tracking-wide">
+                    WHAT IS NEXT?
+                  </span>
+                ) : (
+                  <Link href={item.link} target={item.link.startsWith("/") ? "_self" : "_blank"} rel="noopener noreferrer">
+                    <Image src={item.src} alt={`Mobile Logo ${index + 1}`} width={150} height={100} className="max-h-[60%] w-auto object-contain" />
+                  </Link>
+                )}
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </section>
       {/* ===== RADICAL (id="radical") ===== */}
@@ -289,7 +290,7 @@ export default function Home() {
 
           <motion.div initial={{ x: 50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.2, ease: "easeOut" }} className="text-black text-lg md:text-xl leading-relaxed max-w-4xl text-center">
             <p className="mb-6">
-              Let’s be honest, chasing the latest shiny tech trend is a full-time job. Good thing it’s our full-time job. The shiniest one right now is AI, and it’s about to change everything. So, we did what we always do—we took it apart, figured it out, and put it right at the center of our business. It lets us help our clients not just survive the change, but lead&nbsp;it.
+              Let's be honest, chasing the latest shiny tech trend is a full-time job. Good thing it's our full-time job. AI isn't a trend we spotted — it's the moment the tools finally caught up with how we've always worked. Fast, lean, and built to make bold ideas land. We took it apart, figured it out, and put it at the centre of everything. Not to survive the change. To be the reason our clients lead it.
             </p>
             <p className="font-bold text-lg">Radical Thinking</p>
           </motion.div>

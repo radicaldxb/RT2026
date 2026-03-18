@@ -6,16 +6,6 @@ export const metadata = {
   title: "Radical Thinking | AI-Native Agency in Dubai",
   description:
     "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
-  keywords: [
-    "AI Agency",
-    "Artificial Intelligence",
-    "AI Solutions",
-    "Machine Learning",
-    "AI Development",
-    "AI Consulting",
-    "Radical Thinking",
-    "Dubai AI Agency",
-  ],
   authors: [{ name: "Radical Thinking" }],
   creator: "Radical Thinking",
   publisher: "Radical Thinking",
@@ -41,7 +31,7 @@ export const metadata = {
     title: "Radical Thinking | AI-Native Agency in Dubai",
     description:
       "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
-    images: ["https://radical-thinking.net/Images/OG/RT-Landing.webp"],
+    images: ["https://radical-thinking.net/Images/OG/RT-Social-Share.webp"],
   },
   icons: {
     icon: "/favicon-light.svg",
@@ -61,7 +51,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Favicon & Manifest */}
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="manifest" href="/manifest.webmanifest" />
 
         {/* Extra SEO Geo Tags (Dubai targeting) */}
         <meta name="geo.region" content="AE" />
@@ -93,8 +83,8 @@ export default function RootLayout({ children }) {
             "@type": "Organization",
             name: "Radical Thinking",
             url: "https://radical-thinking.net",
-            logo: "https://radical-thinking.net/images/logo.webp",
-            foundingDate: "2008",
+            logo: "https://radical-thinking.net/logos/RT-Logo-New.svg",
+            foundingDate: "2009",
             address: {
               "@type": "PostalAddress",
               addressLocality: "Dubai",
@@ -119,10 +109,10 @@ export default function RootLayout({ children }) {
             hasPart: [
               {
                 "@type": "WebPage",
-                name: "Talk to Our AI",
+                name: "Talk to the Agent",
                 url: "https://radical-thinking.net/chat",
                 description:
-                  "Engage in a direct conversation with the official AI agent of Radical Thinking.",
+                  "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking.",
               },
               {
                 "@type": "WebPage",
@@ -150,7 +140,7 @@ export default function RootLayout({ children }) {
                 name: "Radical Insights",
                 url: "https://radical-thinking.net/insights",
                 description:
-                  "Explore articles and insights on AI, technology, and strategy from the Radical Thinking team.",
+                  "Articles and insights on AI, technology, and strategy from Radical Thinking.",
               },
               {
                 "@type": "WebPage",
@@ -166,6 +156,24 @@ export default function RootLayout({ children }) {
                 description:
                   "Official terms governing your access to and use of the Radical Thinking website, AI agent, and other services.",
               },
+            ],
+          })}
+        </Script>
+
+        <Script id="ld-json-person" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Stephan Snelder",
+            jobTitle: "Founder",
+            worksFor: {
+              "@type": "Organization",
+              name: "Radical Thinking",
+              url: "https://radical-thinking.net",
+            },
+            url: "https://radical-thinking.net/about",
+            sameAs: [
+              "https://www.linkedin.com/in/stephansnelder",
             ],
           })}
         </Script>

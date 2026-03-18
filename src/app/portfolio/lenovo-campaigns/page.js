@@ -8,6 +8,9 @@ const project = portfolio.find((p) => p.slug === slug);
 export const metadata = {
   title: `${project.title} | Radical Thinking`,
   description: project.description,
+  alternates: {
+    canonical: "https://radical-thinking.net/portfolio/lenovo-campaigns",
+  },
   openGraph: {
     title: project.title,
     description: project.description,
@@ -19,13 +22,7 @@ export const metadata = {
 export default function LenovoCampaignsPage() {
   return (
     <>
-      <PortfolioProjectLayout title={project.title} description={project.description} image={project.image} imageAlt={project.title} slug={slug} tags={project.tags} chatRef={slug}>
-        <h2 className="text-2xl font-bold text-black mb-4 mt-8">AI-Native Methodology</h2>
-        <p className="mb-6">
-          This platform was architected using Radical Thinking&apos;s proprietary AI-Native methodologies.
-          By integrating Multi-channel Marketing principles with Digital Campaigns, we&apos;ve created a system that
-          learns from engagement data to optimize brand awareness in real-time.
-        </p>
+      <PortfolioProjectLayout title={project.title} description={project.description} image={project.image} imageAlt={`${project.title} Interface`} slug={slug} tags={project.tags} chatRef={slug} project={project}>
         <PortfolioProjectCTA projectName={project.title} chatRef={slug} />
       </PortfolioProjectLayout>
       <Script id="ld-json-project" type="application/ld+json">
