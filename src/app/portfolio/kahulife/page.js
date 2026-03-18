@@ -8,6 +8,9 @@ const project = portfolio.find((p) => p.slug === slug);
 export const metadata = {
   title: `What is the ${project.title} Platform? | Radical Thinking`,
   description: project.description,
+  alternates: {
+    canonical: "https://radical-thinking.net/portfolio/kahulife",
+  },
   openGraph: {
     title: `What is the ${project.title} Platform?`,
     description: "A comprehensive digital ecosystem for pet management and AI-driven SOS network.",
@@ -28,13 +31,8 @@ export default function KahulifePage() {
         slug={slug}
         tags={project.tags}
         chatRef={slug}
+        project={project}
       >
-        <h2 className="text-2xl font-bold text-black mb-4 mt-8">AI-Native Methodology</h2>
-        <p className="mb-6">
-          This platform was architected using Radical Thinking&apos;s proprietary AI-Native methodologies.
-          By integrating PetTech SaaS principles with Digital Passport technology, we&apos;ve created a system that
-          learns from health data to optimize pet care in real-time.
-        </p>
         <PortfolioProjectCTA projectName={project.title} chatRef={slug} />
       </PortfolioProjectLayout>
       <Script id="ld-json-project" type="application/ld+json">

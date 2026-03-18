@@ -1,16 +1,15 @@
 import { Suspense } from 'react';
 import Chat from './chat';
-import Script from "next/script";
 
 export const metadata = {
-    title: "Talk to Our AI | Radical Thinking",
-    description: "Engage in a direct conversation with the official AI agent of Radical Thinking.",
+    title: "Talk to the Agent | Radical Thinking",
+    description: "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking. Start a conversation.",
     alternates: {
         canonical: "https://radical-thinking.net/chat",
     },
     openGraph: {
-        title: "Talk to Our AI | Radical Thinking",
-        description: "Engage in a direct conversation with the official AI agent of Radical Thinking.",
+        title: "Talk to the Agent | Radical Thinking",
+        description: "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking. Start a conversation.",
         url: "https://radical-thinking.net/chat",
         siteName: "Radical Thinking",
         images: [
@@ -30,20 +29,6 @@ export default function ChatPage() {
             <Suspense fallback={<div className="min-h-screen" />}>
                 <Chat />
             </Suspense>
-            
-            {/* Google Analytics */}
-            <Script
-                strategy="afterInteractive"
-                src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL"
-            />
-            <Script id="gtag-init" strategy="afterInteractive">
-                {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FXY9Q2TXCL');
-            `}
-            </Script>
         </main>
     );
 }

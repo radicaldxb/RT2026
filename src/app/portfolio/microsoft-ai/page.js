@@ -8,6 +8,9 @@ const project = portfolio.find((p) => p.slug === slug);
 export const metadata = {
   title: `${project.title} | Radical Thinking`,
   description: project.description,
+  alternates: {
+    canonical: "https://radical-thinking.net/portfolio/microsoft-ai",
+  },
   openGraph: {
     title: project.title,
     description: project.description,
@@ -19,13 +22,7 @@ export const metadata = {
 export default function MicrosoftAIPage() {
   return (
     <>
-      <PortfolioProjectLayout title={project.title} description={project.description} image={project.image} imageAlt={project.title} slug={slug} tags={project.tags} chatRef={slug}>
-        <h2 className="text-2xl font-bold text-black mb-4 mt-8">AI-Native Methodology</h2>
-        <p className="mb-6">
-          This platform was architected using Radical Thinking&apos;s proprietary AI-Native methodologies.
-          By integrating Microsoft Partner Design principles with AI Showcase, we&apos;ve created a system that
-          learns from user interaction to optimize digital experiences in real-time.
-        </p>
+      <PortfolioProjectLayout title={project.title} description={project.description} image={project.image} imageAlt={`${project.title} Interface`} slug={slug} tags={project.tags} chatRef={slug} project={project}>
         <PortfolioProjectCTA projectName={project.title} chatRef={slug} />
       </PortfolioProjectLayout>
       <Script id="ld-json-project" type="application/ld+json">

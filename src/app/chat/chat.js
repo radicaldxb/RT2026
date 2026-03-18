@@ -114,6 +114,7 @@ export default function Chat() {
     const [loading, setLoading] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const sessionIdRef = useRef('');
+    const pageContextRef = useRef({ ref: null, source: null }); // ref/source from URL so n8n can pull data from Google Sheets
     const searchParams = useSearchParams();
     const hasRun = useRef(false);
     const lastMessageRef = useRef('');
@@ -183,6 +184,11 @@ export default function Chat() {
         // 3. Handle Handoff from Homepage or Portfolio
         const initialMessage = searchParams.get('message');
         const refParam = searchParams.get('ref');
+        const sourceParam = searchParams.get('source'); // optional: "portfolio" | "insights" | "services"
+
+        if (refParam || sourceParam) {
+            pageContextRef.current = { ref: refParam || null, source: sourceParam || null };
+        }
 
         if (!hasRun.current) {
             if (initialMessage) {
@@ -327,10 +333,18 @@ export default function Chat() {
         // -----------------------------------
 
         try {
+            const metadata = {};
+            if (pageContextRef.current.ref) metadata.ref = pageContextRef.current.ref;
+            if (pageContextRef.current.source) metadata.source = pageContextRef.current.source;
+
             const res = await fetch('/api/chatbot', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chatInput: msg, sessionId: sessionIdRef.current }),
+                body: JSON.stringify({
+                    chatInput: msg,
+                    sessionId: sessionIdRef.current,
+                    ...(Object.keys(metadata).length > 0 && { metadata }),
+                }),
             });
 
             if (res.status === 429) {

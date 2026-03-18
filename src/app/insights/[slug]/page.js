@@ -114,7 +114,7 @@ export default async function InsightArticlePage({ params }) {
             ← Back to Insights
           </Link>
           <Link
-            href="/chat"
+            href={`/chat?ref=${article.slug}&source=insights`}
             className="hidden md:inline-block text-sm font-medium bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-all hover:scale-105"
           >
             Talk to the Agent
@@ -175,7 +175,7 @@ export default async function InsightArticlePage({ params }) {
       {/* Mobile: Talk to the Agent */}
       <div className="fixed bottom-6 right-6 z-50 md:hidden">
         <Link
-          href="/chat"
+          href={`/chat?ref=${article.slug}&source=insights`}
           className="flex items-center justify-center w-14 h-14 bg-black text-white rounded-full shadow-2xl hover:scale-110 transition-transform"
           aria-label="Talk to the Agent"
         >

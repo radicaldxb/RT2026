@@ -8,6 +8,9 @@ const project = portfolio.find((p) => p.slug === slug);
 export const metadata = {
   title: `What is the ${project.title} Platform? | Radical Thinking`,
   description: project.description,
+  alternates: {
+    canonical: "https://radical-thinking.net/portfolio/akshaak",
+  },
   openGraph: {
     title: `What is the ${project.title} Platform?`,
     description: "Strategic branding for an e-commerce marketplace ecosystem.",
@@ -28,13 +31,8 @@ export default function AkshaakPage() {
         slug={slug}
         tags={project.tags}
         chatRef={slug}
+        project={project}
       >
-        <h2 className="text-2xl font-bold text-black mb-4 mt-8">AI-Native Methodology</h2>
-        <p className="mb-6">
-          This platform was architected using Radical Thinking&apos;s proprietary AI-Native methodologies.
-          By integrating E-commerce Branding principles with Marketplace Strategy, we&apos;ve created a system that
-          learns from shopper behavior to optimize retail identity in real-time.
-        </p>
         <PortfolioProjectCTA projectName={project.title} chatRef={slug} />
       </PortfolioProjectLayout>
       <Script id="ld-json-project" type="application/ld+json">

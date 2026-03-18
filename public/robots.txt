@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://radical-thinking.net/sitemap.xml

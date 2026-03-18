@@ -57,6 +57,8 @@ export async function POST(req) {
     const chatInput = body.chatInput;
     const sessionId = body.sessionId || "test-123"; // default session
     const metadata = body.metadata || {};
+    // metadata.ref (e.g. "fluffyfriends", "services", "ai-is-rocket-fuel") and optional metadata.source ("portfolio" | "insights" | "services")
+    // are forwarded to n8n so the workflow can look up context from Google Sheets by ref and inject into the agent prompt.
 
     //  Validate chatInput
     if (!chatInput || typeof chatInput !== "string") {
@@ -96,10 +98,13 @@ export async function POST(req) {
       );
     }
 
+    const n8nPayload = { chatInput, sessionId };
+    if (Object.keys(metadata).length > 0) n8nPayload.metadata = metadata;
+
     const n8nRes = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chatInput, sessionId, metadata }),
+      body: JSON.stringify(n8nPayload),
     });
 
     const rawText = await n8nRes.text();
