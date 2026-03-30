@@ -13,6 +13,13 @@ function formatDateDDMMYYYY(iso) {
 }
 
 export default function InsightsList({ articles = [] }) {
+  const sortedArticles = [...(articles || [])].sort((a, b) => {
+    const aDate = a?.publishedDate ? String(a.publishedDate) : "";
+    const bDate = b?.publishedDate ? String(b.publishedDate) : "";
+    // Newest first (publishedDate is stored as YYYY-MM-DD)
+    return bDate.localeCompare(aDate);
+  });
+
   return (
     <main className="min-h-screen bg-white text-black relative flex flex-col">
       <div className="fixed inset-0 z-0 pointer-events-none gradient-background">
@@ -50,7 +57,7 @@ export default function InsightsList({ articles = [] }) {
         </header>
 
         <ul className="space-y-10">
-          {(articles || []).map((article) => (
+          {sortedArticles.map((article) => (
             <li key={article?.slug || article?.title}>
               <Link
                 href={`/insights/${article?.slug ?? ""}`}

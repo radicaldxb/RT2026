@@ -43,4 +43,48 @@ For anyone paying attention, the mandate is clear: adapt AI into your workflow t
 **"We stopped building Honda Civics. We re-engineered Radical Thinking to run on rocket fuel."**
     `,
   },
+  {
+    slug: "our-pet-project",
+    title: "The 80/20 AI Rule: Building a Zero-Touch Business in 4 Weeks",
+    description:
+      "You can generate AI images for free. But can you build an automated, self-correcting business out of it? Inside our ultimate 'Pet Project'.",
+    image: "/Images/insights/petproject.webp",
+    publishedDate: "2026-03-30",
+    author: "Stephan Snelder",
+    readTime: "5 mins",
+    tags: ["Strategy", "AI Transformation", "Future of Work"],
+    content: `
+> **"Prompting isn't the product. Architecture is."**
+
+The wellbeing of animals is a core passion at Radical Thinking. We have supported 1001Paws.com (an international non-profit for stray animals) for years. This commitment is the driving force behind upcoming initiatives like KahuLife and Animal Intelligence—and it led us to build our ultimate test case: **FluffyFriends**.
+
+## The "I Can Do That For Free" Fallacy
+Many people assume they can easily generate pet portraits using free tools like Gemini or ChatGPT.
+
+However, consumer AI outputs often hallucinate (for example: floating paws, extra ears, warped anatomy) and they are not print-ready. We realized that true value architecture is required to bridge the gap between a "fun AI toy" and a flawless, premium physical product.
+
+## The End-to-End Architecture
+We transformed a process that usually gets users stuck into a fully automated flow:
+
+1. **Computer Vision Validation:** Our AI instantly checks uploads and rejects unclear pet faces before the customer even pays.
+2. **Theme Matching:** The system isolates the pet's exact features and integrates them into complex, pre-engineered themes.
+3. **Identity Locking:** It automatically embeds the pet's specific name directly into the geometry of the artwork.
+4. **Autonomous Quality Assurance:** A secondary AI checks the output for hallucinations. If it fails our quality standard, it silently retries the generation.
+5. **8K Upscaling:** Approved images are rendered in massive, print-ready resolutions (portrait and landscape).
+6. **Delivery:** The user receives the files alongside a print guide and template for local printing.
+
+## The 80/20 Rule of AI Engineering
+We built this entire product relying on an 80/20 split:
+
+- **80%** is pure AI automation
+- **20%** is human logic
+
+It took us exactly **4 weeks**. While AI wrote the code and processes the images, a human **Solution Architect** was required to think through the business process, map edge cases, and guide the machine.
+
+The value of an agency is no longer in typing the code—it is in guiding the machine.
+
+## Try FluffyFriends.online
+Visit **[FluffyFriends.online](https://fluffyfriends.online)** and use the code **Fluffy15** to get **15% off** your first order.
+    `,
+  },
 ];
