@@ -164,7 +164,7 @@ export default function RootLayout({ children }) {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
-            name: "Stephan Snelder",
+            name: "Stephan van Wijk",
             jobTitle: "Founder",
             worksFor: {
               "@type": "Organization",

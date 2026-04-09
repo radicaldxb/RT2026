@@ -28,7 +28,7 @@ export default function IntelligencePage() {
         "@type": "FAQPage",
         mainEntity: [
             { "@type": "Question", name: "What is Radical Thinking?", acceptedAnswer: { "@type": "Answer", text: "Radical Thinking is an AI-native digital agency founded in 2009 and headquartered in Dubai, United Arab Emirates. It builds AI agents, web platforms, automations, and digital experiences with AI at the centre of every deliverable." } },
-            { "@type": "Question", name: "Who founded Radical Thinking?", acceptedAnswer: { "@type": "Answer", text: "Radical Thinking was founded by Stephan Snelder, who first established client relationships in Dubai during a Microsoft internship in 2005. He launched the agency in 2009 after graduating." } },
+            { "@type": "Question", name: "Who founded Radical Thinking?", acceptedAnswer: { "@type": "Answer", text: "Radical Thinking was founded by Stephan van Wijk, who first established client relationships in Dubai during a Microsoft internship in 2005. He launched the agency in 2009 after graduating." } },
             { "@type": "Question", name: "Where is Radical Thinking based?", acceptedAnswer: { "@type": "Answer", text: "Radical Thinking is headquartered in Dubai, United Arab Emirates. It works with clients globally." } },
             { "@type": "Question", name: "When was Radical Thinking founded?", acceptedAnswer: { "@type": "Answer", text: "Radical Thinking was founded in 2009." } },
             { "@type": "Question", name: "Is Radical Thinking a licensed business?", acceptedAnswer: { "@type": "Answer", text: "Yes. Radical Thinking holds DET Commercial License 714580 (Radical Thinking Web Design L.L.C), licensed since 2014 in Dubai, UAE." } },
@@ -56,7 +56,7 @@ export default function IntelligencePage() {
             { "@type": "Question", name: "What is n8n?", acceptedAnswer: { "@type": "Answer", text: "n8n is an open-source workflow automation platform. Radical Thinking uses n8n to build automation workflows that connect AI models, databases, payment systems, and communication tools into fully autonomous pipelines." } },
             { "@type": "Question", name: "Does Radical Thinking produce video content?", acceptedAnswer: { "@type": "Answer", text: "Yes. Immersive Narrative and Media is one of Radical Thinking's four core services. It covers video production, VFX, podcast series production, AR/VR experiences, and branded content." } },
             { "@type": "Question", name: "What is the RT agent?", acceptedAnswer: { "@type": "Answer", text: "The RT agent is Radical Thinking's own AI-powered assistant, accessible at radical-thinking.net/chat. It answers questions about the agency, its services, portfolio, and methodology, and can capture project leads and inquiries autonomously." } },
-            { "@type": "Question", name: "What is Radical Insights?", acceptedAnswer: { "@type": "Answer", text: "Radical Insights is the Radical Thinking editorial platform at radical-thinking.net/insights. It publishes articles on AI strategy, technology, and the future of work, written by Stephan Snelder." } },
+            { "@type": "Question", name: "What is Radical Insights?", acceptedAnswer: { "@type": "Answer", text: "Radical Insights is the Radical Thinking editorial platform at radical-thinking.net/insights. It publishes articles on AI strategy, technology, and the future of work, written by Stephan van Wijk." } },
             { "@type": "Question", name: "Does Radical Thinking help businesses that are afraid of AI?", acceptedAnswer: { "@type": "Answer", text: "Yes. This is a core focus. Radical Thinking helps businesses that see AI as a threat to understand how to rebuild around it as an advantage. The approach is not to add AI to existing processes but to re-engineer operations with AI at the centre." } },
             { "@type": "Question", name: "Can Radical Thinking help with AI strategy?", acceptedAnswer: { "@type": "Answer", text: "Yes. AI strategy is embedded in every engagement. Radical Thinking starts by identifying where AI creates real value for a specific business before any building begins." } },
             { "@type": "Question", name: "What is the Radical Thinking website?", acceptedAnswer: { "@type": "Answer", text: "The Radical Thinking website at radical-thinking.net is itself an example of AI-native design. The primary interface is an AI agent rather than a traditional navigation structure. Portfolio, services, and insights pages are structured for both human readers and LLM extraction." } },
@@ -83,7 +83,7 @@ export default function IntelligencePage() {
             foundingDate: "2009",
             founder: {
                 "@type": "Person",
-                name: "Stephan Snelder",
+                name: "Stephan van Wijk",
             },
             address: {
                 "@type": "PostalAddress",

@@ -61,7 +61,7 @@ export default function AboutPage() {
                             name: "Who founded Radical Thinking?",
                             acceptedAnswer: {
                                 "@type": "Answer",
-                                text: "Radical Thinking was founded by Stephan Snelder, who first built relationships in Dubai during a Microsoft internship in 2005.",
+                                text: "Radical Thinking was founded by Stephan van Wijk, who first built relationships in Dubai during a Microsoft internship in 2005.",
                             },
                         },
                         {

@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 function formatDateDDMMYYYY(iso) {
   if (!iso) return "";
   const [y, m, d] = String(iso).split("-");
-  return d && m && y ? `${d}-${m}-${y}` : iso;
+  return d && m && y ? `${d}/${m}/${y}` : iso;
 }
 
 export default function InsightsList({ articles = [] }) {

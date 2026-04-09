@@ -1,12 +1,76 @@
 export const articles = [
   {
+    slug: "the-agency-is-not-the-answer-anymore",
+    title: "The Agency Is Not the Answer Anymore — But You Can Be",
+    description:
+      "The traditional agency model is being dismantled. Not by AI itself, but by the translation gap between knowing AI exists and knowing how to use it. Here is what that means for agencies and the clients they serve.",
+    image: "/Images/insights/agency-not-the-answer.webp",
+    publishedDate: "2026-04-06",
+    author: "Stephan van Wijk",
+    readTime: "5 mins",
+    tags: ["Strategy", "AI Transformation", "Future of Work"],
+    content: `
+> **"If you have been running an agency for more than five years, you already know something is wrong. The pitches are taking longer to convert. Clients are asking questions they never used to ask."**
+
+## Nobody is coming to save the old model
+
+The traditional agency model — retainers, billable hours, a team of specialists for every discipline — was built for a world where the tools were complex, the access was exclusive, and the expertise was genuinely hard to find.
+
+That world is gone.
+
+Not because agencies stopped being good at what they do. But because the gap between what an agency can do and what a business owner can now do themselves has collapsed faster than anyone predicted. Strategy, copy, creative, campaigns, social content, analytics. A business owner with the right setup can now do in an afternoon what used to take a team of six and a six-week timeline.
+
+That is not a prediction. That is Monday morning.
+
+## The gap is not the technology. It is the translation.
+
+Here is the thing nobody is saying clearly enough: most business owners do not want to become AI experts. That is not why they built their business. They are trying to run a great restaurant, grow their shop, or focus on the craft they have spent years developing.
+
+AI can't cut hair. AI can't cook. AI can't build the kind of trust that keeps a local community coming back.
+
+But AI *can* handle the 40% of the week that sits between a business owner and their core work. The social posts that never go out. The follow-up emails that pile up. The content calendar that exists only in someone's head. The admin that quietly eats the hours that should go toward the actual work.
+
+The businesses that figure this out — even modestly, even imperfectly — will have a compounding advantage over the ones that wait. And the gap between a business using AI intelligently and one that is not is only going to widen from here.
+
+That is where you come in.
+
+## The agency that survives is the one that closes that gap
+
+Your clients are not going to fire you because AI exists. They are going to fire you if someone else helps them understand it first.
+
+The agencies that will still be here in five years are not the ones that ignored AI or the ones that panicked about it. They are the ones that rebuilt around it — quietly, practically, without making it the whole personality of the business.
+
+Not AI for AI's sake. AI where it actually saves time, reduces cost, and produces better work. That is a completely different conversation from what most people are having right now.
+
+> **"Your clients are not going to fire you because AI exists. They are going to fire you if someone else helps them understand it first."**
+
+For years the agency model worked because the expertise was real and the tools were hard to access. Some of that is still true. But a growing portion of what agencies bill for is execution — production, content, management — that can now be handled differently. The agencies that acknowledge this and rebuild around it will be the ones clients trust with the work that still genuinely needs a human.
+
+## Why this moment matters
+
+The learning curve flattens fast once you are in it. The problem is most agency owners are too busy running the business to start.
+
+That is not a criticism. It is the reality of running any service business. The urgent always beats the important.
+
+But the cost of doing nothing is rising every week. Not dramatically, not all at once — just quietly, steadily, in the form of clients asking harder questions, margins getting thinner, and competitors who figured it out six months earlier starting to show up in your pitches.
+
+You do not need to become a technology company. You need one person in your corner who has already done the work of figuring out where AI creates real value and where it does not — and can help you build it into how you operate without turning your business upside down.
+
+That is exactly what Radical Thinking does.
+
+---
+
+*Radical Insights. One sharp idea every week.*
+    `,
+  },
+  {
     slug: "ai-is-rocket-fuel",
     title: "Stop trying to put Rocket Fuel (AI) in a Honda Civic and expect it to fly.",
     description:
       "Why the traditional agency model is dead, and why adapting to AI requires rebuilding your entire business engine from the ground up.",
     image: "/Images/insights/rocket-fuel.webp",
     publishedDate: "2026-02-23",
-    author: "Stephan Snelder",
+    author: "Stephan van Wijk",
     readTime: "4 mins",
     tags: ["Strategy", "AI Transformation", "Future of Work"],
     content: `
@@ -50,7 +114,7 @@ For anyone paying attention, the mandate is clear: adapt AI into your workflow t
       "You can generate AI images for free. But can you build an automated, self-correcting business out of it? Inside our ultimate 'Pet Project'.",
     image: "/Images/insights/petproject.webp",
     publishedDate: "2026-03-30",
-    author: "Stephan Snelder",
+    author: "Stephan van Wijk",
     readTime: "5 mins",
     tags: ["Strategy", "AI Transformation", "Future of Work"],
     content: `
@@ -83,8 +147,15 @@ It took us exactly **4 weeks**. While AI wrote the code and processes the images
 
 The value of an agency is no longer in typing the code—it is in guiding the machine.
 
-## Try FluffyFriends.online
-Visit **[FluffyFriends.online](https://fluffyfriends.online)** and use the code **Fluffy15** to get **15% off** your first order.
+> **"The value of an agency is no longer in typing the code. It is in guiding the machine."**
+
+## Try it yourself
+
+Visit **[FluffyFriends.online](https://fluffyfriends.online)** and use the code **Fluffy15** to get 15% off your first order.
+
+---
+
+*Radical Insights. One sharp idea every week.*
     `,
   },
 ];

@@ -82,7 +82,7 @@ export default async function InsightArticlePage({ params }) {
   const formatDateDDMMYYYY = (iso) => {
     if (!iso) return "";
     const [y, m, d] = String(iso).split("-");
-    return d && m && y ? `${d}-${m}-${y}` : iso;
+    return d && m && y ? `${d}/${m}/${y}` : iso;
   };
 
   return (
