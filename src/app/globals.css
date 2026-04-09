@@ -129,6 +129,20 @@ body {
   margin-top: 1rem;
 }
 
+.rt-article-body hr {
+  margin: 1.75rem 0;
+  border: 0;
+  border-top: 1px solid rgba(17, 24, 39, 0.15);
+}
+
+.rt-article-body em {
+  display: inline-block;
+}
+
+.rt-article-body hr + p {
+  margin-top: 0.75rem;
+}
+
 .rt-article-body blockquote {
   margin: 1.5rem 0 2rem;
   padding: 1.25rem 1.5rem 1.25rem 1.25rem;

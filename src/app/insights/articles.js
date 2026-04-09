@@ -4,7 +4,7 @@ export const articles = [
     title: "The Agency Is Not the Answer Anymore — But You Can Be",
     description:
       "The traditional agency model is being dismantled. Not by AI itself, but by the translation gap between knowing AI exists and knowing how to use it. Here is what that means for agencies and the clients they serve.",
-    image: "/Images/insights/agency-not-the-answer.webp",
+    image: "/Images/insights/agency.webp",
     publishedDate: "2026-04-06",
     author: "Stephan van Wijk",
     readTime: "5 mins",
@@ -105,6 +105,10 @@ AI can write the code, but you need an architect to tell it *what* to code and t
 For anyone paying attention, the mandate is clear: adapt AI into your workflow today, or get left behind tomorrow. It will take jobs, but it creates massive new opportunities for those willing to learn how to operate the new machinery.
 
 **"We stopped building Honda Civics. We re-engineered Radical Thinking to run on rocket fuel."**
+
+---
+
+*Radical Insights. One sharp idea every week.*
     `,
   },
   {
