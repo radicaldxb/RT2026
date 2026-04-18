@@ -1,5 +1,87 @@
 export const articles = [
   {
+    slug: "why-most-ai-rollouts-fail",
+    title: "Why Most AI Rollouts Fail",
+    description:
+      "Most companies don't fail at AI because the tech isn't ready. They fail because rollouts preserve the old workflow instead of the new capability. Here is the gap between access and understanding—and five patterns that give it away.",
+    image: "/Images/insights/ai-fail.webp",
+    publishedDate: "2026-04-13",
+    author: "Stephan van Wijk",
+    readTime: "7 mins",
+    tags: ["Strategy", "AI Transformation", "Future of Work"],
+    content: `
+> **"What would this look like if we could do it however we wanted?"** That's the question most companies never ask. They're too busy automating the broken thing.
+
+Last week I said the businesses building AI capabilities now will have a compounding advantage. That's true. But I should have added the caveat: most won't build them at all. They'll try, fail quietly, and go back to what they know.
+
+Not because AI doesn't work. Because rollouts are designed to fail.
+
+## The gap between "can" and "actually does"
+
+There's a massive difference between "AI can do X" and "AI does X reliably in my workflow every week."
+
+One is a possibility. The other is a system.
+
+Most rollouts collapse in that gap. Someone reads about ChatGPT, gets excited, opens a tab, types a prompt, and gets a mediocre result. They try again. Different output. Nothing feels reliable, so they stop. The tool sits unused, and they tell themselves "AI just isn't ready yet."
+
+What they're really saying is: "Nobody helped me build a system around it."
+
+## The real problem: they don't actually know what AI can do
+
+Here's what I see constantly: someone builds a three-step workflow to do something. They've optimised it, trained the team on it, it works. Then they try to automate it with AI so they build a three-step prompt sequence to match the three-step workflow.
+
+The workflow exists because of tool constraints that no longer apply. Those three steps were never the right way to do it. They were the way to do it with email and spreadsheets and manual handoffs.
+
+AI doesn't care about those constraints.
+
+One prompt (with the right context and the right instructions) can do what took three workflows and four people to coordinate. But they never find that because they're still thinking inside the old system's shape.
+
+They automate the broken thing instead of replacing it.
+
+This is why rollouts fail. It's not discipline. It's **understanding**. Most people building with AI today don't actually grasp what the technology can do because they're still constrained by how they've always had to do it.
+
+**The five patterns are symptoms of this gap:**
+
+**1. They automate workflows instead of rethinking them.**
+
+They take the process that exists and try to speed it up with AI. But the process exists because it had to, given the old constraints. AI removes those constraints. So they end up building elaborate prompt chains to replicate something that could be one sentence tomorrow.
+
+**2. Inconsistency kills adoption because they're over-engineering.**
+
+Prompt 1 feeds into Prompt 2 feeds into Prompt 3, with manual review in between. Each step adds fragility. Each handoff is a chance for the output to drift. They think they need complexity. They actually just need to step back and let AI do the whole thing at once.
+
+**3. The person who benefits isn't learning what's possible.**
+
+The owner wants their social posts done. But they never sit down and experiment with the AI themselves. So they don't discover that one good prompt can generate, refine, and schedule a whole week of posts. They just get told "the admin will handle it," and the admin is working from last year's mental model of what's possible.
+
+**4. They're building systems that will be obsolete in three months.**
+
+They deploy a workflow today that works. But next month the models get better. In six months, something that needed five steps works in one. Instead of staying curious about capability shifts, they freeze the system and move on. The gap between what's actually possible and what they built just keeps widening.
+
+**5. Nobody's measuring what's actually available versus what they're using.**
+
+They don't track: "This used to take four hours. Now it takes 30 minutes, but could it take five?" Because they're not comparing against the full capability, they're comparing against the old way of doing things. So they miss the gap entirely.
+
+## The compounding advantage belongs to those who actually learn
+
+Last week's thesis still holds: the businesses that start building AI capabilities now will have an edge.
+
+But here's the thing: that edge doesn't come from moving faster. It comes from understanding what the technology can actually do and then having the courage to let go of the workflows it replaces.
+
+Most rollouts fail because people are trying to preserve the shape of the old system. They're automating constraint, not capability.
+
+The businesses that win are the ones that ask: "What would this look like if we could do it however we wanted?" And then they build that. Not the old way with AI on top. The new way, from scratch.
+
+That takes understanding. Not discipline. Understanding takes time and curiosity and willingness to experiment.
+
+The gap between "we have access to AI" and "we understand what it can do" is where most companies stay stuck. And every week they stay stuck, the gap between what's possible and what they've built gets wider.
+
+---
+
+*Radical Insights. One sharp idea every week.*
+    `,
+  },
+  {
     slug: "the-agency-is-not-the-answer-anymore",
     title: "The Agency Is Not the Answer Anymore — But You Can Be",
     description:
