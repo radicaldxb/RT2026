@@ -19,9 +19,10 @@ export async function generateMetadata({ params }) {
   if (!article) return { title: "Article Not Found" };
 
   const baseUrl = "https://radical-thinking.net";
-  const imageUrl = article.image && article.image.startsWith("http")
-    ? article.image
-    : `${baseUrl}${article.image}`;
+  const ogSrc = article.ogImage || article.image;
+  const imageUrl = ogSrc && ogSrc.startsWith("http")
+    ? ogSrc
+    : `${baseUrl}${ogSrc}`;
 
   return {
     title: `${article.title} | Radical Thinking Insights`,
@@ -47,6 +48,7 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title: article.title,
       description: article.description,
+      images: [imageUrl],
     },
   };
 }
@@ -64,9 +66,9 @@ export default async function InsightArticlePage({ params }) {
     "@type": "Article",
     headline: article.title,
     description: article.description,
-    image: article.image && article.image.startsWith("http")
-      ? article.image
-      : article.image ? `https://radical-thinking.net${article.image}` : undefined,
+    image: (article.ogImage || article.image) && (article.ogImage || article.image).startsWith("http")
+      ? (article.ogImage || article.image)
+      : (article.ogImage || article.image) ? `https://radical-thinking.net${article.ogImage || article.image}` : undefined,
     datePublished: article.publishedDate,
     author: {
       "@type": "Person",

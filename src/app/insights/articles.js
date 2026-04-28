@@ -1,9 +1,135 @@
 export const articles = [
   {
+    slug: "what-actually-works",
+    title: "What Actually Works",
+    description:
+      "Most AI rollouts fail because they try to rebuild everything at once. The ones that work start with one workflow, measure obsessively, rebuild instead of retrofit, and push through the brutal Month 2 learning curve.",
+    ogImage: "/Images/OG/OG-insight-ai-that-works.webp",
+    image: "/Images/insights/ai-that-works.webp",
+    publishedDate: "2026-04-20",
+    author: "Stephan van Wijk",
+    readTime: "6 mins",
+    tags: ["Strategy", "AI Transformation", "Future of Work"],
+    content: `
+Last week I said most AI rollouts fail because people are automating broken things instead of replacing them.
+
+The obvious follow-up is: so what does replacing look like?
+
+I've watched enough implementations succeed and fail to see the pattern. It's not complicated. It's not even particularly surprising. But it's the opposite of what most people do.
+
+## Start absurdly small
+
+The ones that work start absurdly small.
+
+Not "we'll automate our top 5 priorities."
+
+One thing. A single workflow that's stealing time from what actually matters.
+
+At Radical Thinking, it was lead qualification. We were spending hours deciding if an inquiry was worth a response. The bot just does that now.
+
+At FluffyFriends, it was image generation. One thing. That's it.
+
+Most failures come from the opposite: trying to rebuild the entire operation at once. Email handling **and** content generation **and** analytics in month one. By month three, when nothing works perfectly, people pull the plug.
+
+The ones that work spend month one on one thing. They get it working. They measure it. Then they move to the next thing.
+
+Why? Because you learn by doing, not by planning. And the learning is the most valuable part.
+
+## Measure relentlessly
+
+They measure relentlessly.
+
+Not "this feels faster."
+
+Actually measure it. Hours saved. Error rates. Consistency. How often does it need human intervention.
+
+You'd be shocked how many companies think they're saving time but have no idea how much.
+
+Here's what I see: once you measure, you often realise you've been solving the wrong problem.
+
+> **"If we didn't have these old constraints, what would this look like?"** That's the question they ask when they're ready to replace, not retrofit.
+
+We thought our bottleneck was response speed. Measurement showed us it was actually qualification accuracy. So we optimised for that instead. Different system entirely.
+
+The businesses that win don't assume they know where the problem is. They measure and find out.
+
+## Rebuild instead of retrofit
+
+They rebuild instead of retrofit.
+
+This is the hard part.
+
+Your process exists because of constraints that don't exist anymore. You know that. But letting go of it is harder than it sounds.
+
+We had an approval step in our workflow because feedback used to be slow. Now it's instant. We kept the approval step anyway.
+
+Then I realised: we're not optimising, we're just adding AI to the old system. So we deleted the step. Built something new from scratch that didn't assume we needed approval at all.
+
+The ones that fail try to make AI fit into their existing process. The ones that work ask what the system would look like without the old constraints. Then they build that.
+
+## Expect Month 2 to be brutal
+
+They expect Month 2 to be brutal.
+
+Most rollouts have a pattern:
+
+Month 1 is exciting. You get something working. It's fragile, but it works.
+
+Month 2 is crushing. Every edge case you didn't plan for shows up. The system breaks in weird ways. You realise you don't understand the tool as well as you thought.
+
+This is when people quit.
+
+The ones that win know Month 2 is coming. They budget for it. They know that if they push through, Month 3 is when it clicks.
+
+By Month 4 they can build the next thing because the foundation is solid.
+
+The ones that fail see Month 2 and assume the whole thing is a waste of time.
+
+It's not. Month 2 is just the learning curve. It sucks, but it's necessary.
+
+## Have someone obsessed
+
+They have someone obsessed.
+
+Every working system has one person who genuinely cares about how it works.
+
+Not a consultant. Not an external expert. Someone inside the company who's willing to spend the time learning the tool, fixing things when they break, and understanding why.
+
+This person becomes irreplaceable because they're the only one who understands the system deeply enough to improve it.
+
+You can't hire this. You have to grow it.
+
+The person is usually not technical. They just care enough to learn.
+
+## So what actually works?
+
+Start with one thing.
+
+Measure it obsessively.
+
+Rebuild instead of retrofitting.
+
+Budget for Month 2 being rough.
+
+Find one person who's genuinely curious about how it all works.
+
+That's it.
+
+Not revolutionary. Not expensive. Not complicated.
+
+Just disciplined about understanding before you scale.
+
+---
+
+*Radical Insights. One sharp idea every week.*
+    `,
+  },
+  {
     slug: "why-most-ai-rollouts-fail",
     title: "Why Most AI Rollouts Fail",
     description:
       "Most companies don't fail at AI because the tech isn't ready. They fail because rollouts preserve the old workflow instead of the new capability. Here is the gap between access and understanding—and five patterns that give it away.",
+    ogImage: "/Images/OG/OG-Insight-AI-Fail.webp",
     image: "/Images/insights/ai-fail.webp",
     publishedDate: "2026-04-13",
     author: "Stephan van Wijk",
@@ -86,6 +212,7 @@ The gap between "we have access to AI" and "we understand what it can do" is whe
     title: "The Agency Is Not the Answer Anymore — But You Can Be",
     description:
       "The traditional agency model is being dismantled. Not by AI itself, but by the translation gap between knowing AI exists and knowing how to use it. Here is what that means for agencies and the clients they serve.",
+    ogImage: "/Images/OG/OG-Insight-Agency.webp",
     image: "/Images/insights/agency.webp",
     publishedDate: "2026-04-06",
     author: "Stephan van Wijk",
@@ -150,6 +277,7 @@ That is exactly what Radical Thinking does.
     title: "Stop trying to put Rocket Fuel (AI) in a Honda Civic and expect it to fly.",
     description:
       "Why the traditional agency model is dead, and why adapting to AI requires rebuilding your entire business engine from the ground up.",
+    ogImage: "/Images/OG/OG-Insight-Rocket.webp",
     image: "/Images/insights/rocket-fuel.webp",
     publishedDate: "2026-02-23",
     author: "Stephan van Wijk",
@@ -198,6 +326,7 @@ For anyone paying attention, the mandate is clear: adapt AI into your workflow t
     title: "The 80/20 AI Rule: Building a Zero-Touch Business in 4 Weeks",
     description:
       "You can generate AI images for free. But can you build an automated, self-correcting business out of it? Inside our ultimate 'Pet Project'.",
+    ogImage: "/Images/OG/OG-Insight-Pet.webp",
     image: "/Images/insights/petproject.webp",
     publishedDate: "2026-03-30",
     author: "Stephan van Wijk",
