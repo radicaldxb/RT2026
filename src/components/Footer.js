@@ -28,26 +28,44 @@ export default function Footer() {
   return (
     <section className="w-full flex justify-center items-center px-4 py-5 relative overflow-hidden">
       <motion.footer initial={{ opacity: 0, y: 40 }} whileInView={!isChat ? { opacity: 1, y: 0 } : undefined} animate={isChat ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 1, ease: "easeOut" }} viewport={{ once: true }} className="md:w-3/4 md:mx-auto w-full px-4 md:px-20 py-10 text-black">
-        <div className="flex md:flex-row justify-between items-start md:items-center gap-6 md:gap-0">
-          <div className="flex flex-row md:flex-row md:gap-16 gap-12 text-sm md:text-base">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1, x: 0 } : undefined} transition={{ duration: 0.6, delay: 0.2 }} className="flex flex-col gap-1">
-              {/* use onClick to intercept when already on '/' */}
-              <Link href="/chat">CHAT</Link>
-              <Link href="/insights">INSIGHTS</Link>
-              <Link href="/#equation" onClick={(e) => handleHashClick(e, "equation")}>BI=C+Ex×T²</Link>
-              <Link href="/#ideas" onClick={(e) => handleHashClick(e, "ideas")}>IDEAS</Link>
-              <Link href="/#radical" onClick={(e) => handleHashClick(e, "radical")}>RADICAL THINKING</Link>
-            </motion.div>
+        <div className="flex flex-col md:flex-row md:justify-between items-start md:items-start gap-8 md:gap-0">
 
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={!isChat ? { opacity: 1, x: 0 } : undefined} animate={isChat ? { opacity: 1, x: 0 } : undefined} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-col gap-1 justify-end md:ml-10 mt-2 md:mt-0">
-              <Link href="/privacy-policy">
-                PRIVACY
-              </Link>
-              <Link href="/terms-of-use">
-                TERMS OF USE
-              </Link>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={!isChat ? { opacity: 1, x: 0 } : undefined}
+            animate={isChat ? { opacity: 1, x: 0 } : undefined}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col gap-2 text-sm"
+          >
+            <Link href="/chat">CHAT</Link>
+            <Link href="/#how" onClick={(e) => handleHashClick(e, "how")}>HOW WE WORK</Link>
+            <Link href="/#playbook" onClick={(e) => handleHashClick(e, "playbook")}>PLAYBOOK</Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={!isChat ? { opacity: 1, y: 0 } : undefined}
+            animate={isChat ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col gap-2 text-sm"
+          >
+            <Link href="/insights">INSIGHTS</Link>
+            <Link href="/portfolio">WORK</Link>
+            <Link href="/#formula" onClick={(e) => handleHashClick(e, "formula")}>BI=C+EX×T²</Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={!isChat ? { opacity: 1, x: 0 } : undefined}
+            animate={isChat ? { opacity: 1, x: 0 } : undefined}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col gap-2 text-sm"
+          >
+            <Link href="/#radical" onClick={(e) => handleHashClick(e, "radical")}>RADICAL THINKING</Link>
+            <Link href="/privacy-policy">PRIVACY</Link>
+            <Link href="/terms-of-use">TERMS OF USE</Link>
+          </motion.div>
+
         </div>
 
         <hr className="border-t border-black my-6" />

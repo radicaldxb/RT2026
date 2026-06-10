@@ -3,6 +3,7 @@
 
 import React from "react";
 import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
 import SoftBackground from "@/components/SoftBackground";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -95,18 +96,10 @@ export default function Services() {
                 <SoftBackground />
             </div>
 
-            {/* Back Button */}
-            <div className="absolute top-6 left-6 z-20">
-                <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
-                    </svg>
-                    <span className="font-medium">Back to Home</span>
-                </Link>
-            </div>
+            <Nav />
 
             {/* Main Content */}
-            <div className="relative z-10 flex-1 flex flex-col items-center pt-24 px-4 pb-20">
+            <div className="relative z-10 flex-1 flex flex-col items-center pt-20 md:pt-24 px-4 pb-20">
                 <motion.div
                     initial="hidden"
                     animate="visible"

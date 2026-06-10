@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SoftBackground from "@/components/SoftBackground";
 import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
 
 function formatDateDDMMYYYY(iso) {
   if (!iso) return "";
@@ -26,27 +27,10 @@ export default function InsightsList({ articles = [] }) {
         <SoftBackground />
       </div>
 
-      {/* Nav: same as article page */}
-      <nav className="relative z-20 w-full px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
-        <Link href="/" aria-label="Home">
-          <Image
-            src="/logos/RT-Logo-New.svg"
-            alt="Radical Thinking Logo"
-            width={48}
-            height={48}
-            className="w-12 h-12"
-          />
-        </Link>
-        <Link
-          href="/"
-          className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
-        >
-          ← Back to Home
-        </Link>
-      </nav>
+      <Nav />
 
       {/* Content: same max-w-3xl and padding as article page */}
-      <div className="relative z-10 flex-1 w-full max-w-3xl mx-auto px-6 py-8 md:py-12">
+      <div className="relative z-10 flex-1 w-full max-w-3xl mx-auto px-6 pt-20 md:pt-24 pb-8 md:pb-12">
         <header className="mb-10">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight text-balance max-w-2xl">
             RADICAL INSIGHTS
