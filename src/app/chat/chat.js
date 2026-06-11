@@ -2,13 +2,12 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ReactMarkdown from "react-markdown";
 import SoftBackground from '@/components/SoftBackground';
 import Footer from '@/components/Footer';
-import Link from 'next/link';
+import Nav from '@/components/Nav';
 import Image from 'next/image';
-import Script from 'next/script';
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
 
@@ -16,88 +15,47 @@ const ChatImage = ({ node, ...props }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
+    useEffect(() => { setMounted(true); }, []);
     return (
         <div className="relative my-2">
             {isLoading && (
-                <div className="w-full h-48 bg-gray-100 animate-pulse rounded-lg flex items-center justify-center border border-gray-200">
-                    <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                <div className="w-full h-48 bg-white/10 animate-pulse rounded-lg flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </div>
             )}
             <img
                 {...props}
-                className={`max-w-full h-auto rounded-lg shadow-sm cursor-pointer hover:opacity-95 transition-opacity ${isLoading ? 'opacity-0 absolute top-0 left-0' : 'opacity-100'}`}
+                className={`max-w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity ${isLoading ? 'opacity-0 absolute top-0 left-0' : 'opacity-100'}`}
                 style={{ maxHeight: '300px', width: 'auto' }}
                 alt={props.alt || 'Chat Image'}
                 onLoad={() => setIsLoading(false)}
                 onError={() => setIsLoading(false)}
                 onClick={() => setIsOpen(true)}
             />
-
             {mounted && isOpen && createPortal(
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
-                        onClick={() => setIsOpen(false)}
-                    >
-                        <motion.img
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            src={props.src}
-                            alt={props.alt || 'Full screen image'}
-                            className="max-w-full max-h-[90vh] object-contain rounded-lg"
-                            onClick={(e) => e.stopPropagation()}
-                        />
-                        <button
-                            className="absolute top-5 right-5 text-white/80 hover:text-white p-2"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                        </button>
-                    </motion.div>,
-                    document.body
+                <motion.div
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+                    onClick={() => setIsOpen(false)}
+                >
+                    <motion.img
+                        initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+                        src={props.src} alt={props.alt || 'Full screen image'}
+                        className="max-w-full max-h-[90vh] object-contain rounded-lg"
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                    <button className="absolute top-5 right-5 text-white/60 hover:text-white p-2" onClick={() => setIsOpen(false)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </motion.div>,
+                document.body
             )}
         </div>
     );
-};
-
-const markdownComponents = {
-    ul: ({ node, ...props }) => (
-        <ul className="list-disc pl-5 space-y-1" {...props} />
-    ),
-    ol: ({ node, ...props }) => (
-        <ol className="list-decimal pl-5 space-y-1" {...props} />
-    ),
-    li: ({ node, ...props }) => (
-        <li className="leading-relaxed" {...props} />
-    ),
-    strong: ({ node, ...props }) => (
-        <strong className="font-semibold" {...props} />
-    ),
-    p: ({ node, ...props }) => (
-        <p className="mb-2 last:mb-0" {...props} />
-    ),
-    img: ChatImage,
-    a: ({ node, ...props }) => (
-        <a
-            {...props}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline break-all"
-        />
-    ),
 };
 
 const quickMessages = [
@@ -107,14 +65,17 @@ const quickMessages = [
     'Show me your work',
 ];
 
+const FONT = "'HelveticaNeue', sans-serif";
+
 export default function Chat() {
     const [query, setQuery] = useState('');
     const [showChat, setShowChat] = useState(false);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
     const sessionIdRef = useRef('');
-    const pageContextRef = useRef({ ref: null, source: null }); // ref/source from URL so n8n can pull data from Google Sheets
+    const pageContextRef = useRef({ ref: null, source: null });
     const searchParams = useSearchParams();
     const hasRun = useRef(false);
     const lastMessageRef = useRef('');
@@ -128,11 +89,7 @@ export default function Chat() {
         const n1 = Math.floor(Math.random() * 9) + 1;
         const n2 = Math.floor(Math.random() * 9) + 1;
         const sum = n1 + n2;
-        const numberWords = {
-            2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 
-            10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen', 
-            16: 'sixteen', 17: 'seventeen', 18: 'eighteen'
-        };
+        const numberWords = { 2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve',13:'thirteen',14:'fourteen',15:'fifteen',16:'sixteen',17:'seventeen',18:'eighteen' };
         const answers = [sum.toString()];
         if (numberWords[sum]) answers.push(numberWords[sum]);
         return { q: `${n1} + ${n2} =`, a: answers };
@@ -140,15 +97,10 @@ export default function Chat() {
 
     function getTime() {
         const now = new Date();
-        return now.toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-        });
+        return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    // Initialize session, load history, and handle incoming messages
     useEffect(() => {
-        // 1. Restore or create Session ID
         let storedSessionId = localStorage.getItem('rt_chat_session_id');
         if (!storedSessionId) {
             storedSessionId = typeof crypto !== 'undefined' && crypto.randomUUID
@@ -158,37 +110,26 @@ export default function Chat() {
         }
         sessionIdRef.current = storedSessionId;
 
-        // Restore verification status
         const storedVerified = localStorage.getItem('rt_chat_verified');
-        if (storedVerified === 'true') {
-            setIsVerified(true);
-        }
+        if (storedVerified === 'true') setIsVerified(true);
 
-        // 2. Restore Chat History
         const storedMessages = localStorage.getItem('rt_chat_messages');
         if (storedMessages) {
             try {
-                setMessages(JSON.parse(storedMessages));
+                const parsed = JSON.parse(storedMessages);
+                setMessages(parsed);
+                if (parsed.length > 0) setShowChat(true);
             } catch (e) {
                 console.error("Failed to parse chat history", e);
             }
         } else {
-            // Initialize default welcome message timestamp
-            setMessages((prev) =>
-                prev.map((msg, i) =>
-                    i === 0 ? { ...msg, timestamp: getTime() } : msg
-                )
-            );
+            setMessages((prev) => prev.map((msg, i) => i === 0 ? { ...msg, timestamp: getTime() } : msg));
         }
 
-        // 3. Handle Handoff from Homepage or Portfolio
         const initialMessage = searchParams.get('message');
         const refParam = searchParams.get('ref');
-        const sourceParam = searchParams.get('source'); // optional: "portfolio" | "insights" | "services"
-
-        if (refParam || sourceParam) {
-            pageContextRef.current = { ref: refParam || null, source: sourceParam || null };
-        }
+        const sourceParam = searchParams.get('source');
+        if (refParam || sourceParam) pageContextRef.current = { ref: refParam || null, source: sourceParam || null };
 
         if (!hasRun.current) {
             if (initialMessage) {
@@ -196,7 +137,6 @@ export default function Chat() {
                 sendMessage(initialMessage);
             } else if (refParam) {
                 hasRun.current = true;
-                // Map ref to specific context prompts
                 const projectContexts = {
                     'animal-intelligence': "I'd like to understand the technical architecture behind the Animal Intelligence platform.",
                     'kahulife': "Tell me about the AI-driven SOS network in Kahulife.",
@@ -218,37 +158,24 @@ export default function Chat() {
                     'ai-is-rocket-fuel': "I've just read the 'AI is Rocket Fuel' article and I'd like to debate or discuss the concepts mentioned.",
                     'fluffyfriends': "I'm interested in the FluffyFriends autonomous AI factory. How does the quality assurance and n8n workflow function?",
                 };
-
                 const startMsg = projectContexts[refParam] || `I'd like to learn more about the ${refParam.replace(/-/g, ' ')} project.`;
                 sendMessage(startMsg);
             }
         }
     }, [searchParams]);
 
-    // Persist messages to localStorage whenever they change
     useEffect(() => {
-        if (messages.length > 0) {
-            // Keep only the last 50 messages to prevent localStorage quota errors
-            localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
-        }
+        if (messages.length > 0) localStorage.setItem('rt_chat_messages', JSON.stringify(messages.slice(-50)));
     }, [messages]);
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') sendMessage();
-    };
+    const handleKeyDown = (e) => { if (e.key === 'Enter') sendMessage(); };
 
     const sendMessage = async (customMessage) => {
         if (loading) return;
         const msg = (customMessage ?? query).trim();
         if (!msg) return;
 
-        const userMsg = {
-            id: `user-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-            from: 'user',
-            type: 'text',
-            content: msg,
-            timestamp: getTime(),
-        };
+        const userMsg = { id: `user-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'user', type: 'text', content: msg, timestamp: getTime() };
         setMessages((prev) => [...prev, userMsg]);
         setQuery('');
         setShowChat(true);
@@ -256,145 +183,73 @@ export default function Chat() {
 
         const isSystemMessage = typeof customMessage === 'string' && customMessage.length > 0;
 
-        // --- Verification Guardrail ---
-        // Only require the math challenge for free-typed user input.
-        // System-driven prompts (ref/message handoff, quick buttons) bypass this
-        // and rely on server-side rate limiting instead, so the lead flow stays smooth.
         if (!isVerified && !isSystemMessage) {
             const answer = msg.toLowerCase().trim();
             if (challengeRef.current.a.includes(answer)) {
                 setIsVerified(true);
                 localStorage.setItem('rt_chat_verified', 'true');
                 setTimeout(() => {
-                    setMessages((prev) => [
-                        ...prev,
-                        { id: `bot-verified-${Date.now()}`, from: 'bot', type: 'text', content: "That is correct! How can I help you today?", timestamp: getTime() },
-                    ]);
+                    setMessages((prev) => [...prev, { id: `bot-verified-${Date.now()}`, from: 'bot', type: 'text', content: "That is correct! How can I help you today?", timestamp: getTime() }]);
                     setLoading(false);
                 }, 600);
             } else {
-                // Generate new challenge on failure or first attempt
                 const newChallenge = generateChallenge();
                 challengeRef.current = newChallenge;
                 setTimeout(() => {
-                    setMessages((prev) => [
-                        ...prev,
-                        { id: `bot-challenge-${Date.now()}`, from: 'bot', type: 'text', content: messages.length === 0 ? `Before we start let's make sure you are human. Please answer ${newChallenge.q}` : `That is incorrect. Please prove you are human: What is ${newChallenge.q}?`, timestamp: getTime() },
-                    ]);
+                    setMessages((prev) => [...prev, { id: `bot-challenge-${Date.now()}`, from: 'bot', type: 'text', content: messages.length === 0 ? `Before we start let's make sure you are human. Please answer ${newChallenge.q}` : `That is incorrect. Please prove you are human: What is ${newChallenge.q}?`, timestamp: getTime() }]);
                     setLoading(false);
                 }, 600);
             }
             return;
         }
 
-        // --- Client-Side Spam Protection ---
         const now = Date.now();
-
-        if (now - lastMessageTimeRef.current < 2000) {
-            rapidCountRef.current += 1;
-        } else {
-            rapidCountRef.current = 0;
-        }
-
+        if (now - lastMessageTimeRef.current < 2000) { rapidCountRef.current += 1; } else { rapidCountRef.current = 0; }
         if (rapidCountRef.current >= 2) {
-            if (rapidCountRef.current === 2) {
-                setMessages((prev) => [
-                    ...prev,
-                    { id: `rapid-limit-${Date.now()}`, from: 'bot', type: 'text', content: "You're typing a bit too fast. Please slow down.", timestamp: getTime() },
-                ]);
-            }
+            if (rapidCountRef.current === 2) setMessages((prev) => [...prev, { id: `rapid-limit-${Date.now()}`, from: 'bot', type: 'text', content: "You're typing a bit too fast. Please slow down.", timestamp: getTime() }]);
             setLoading(false);
             return;
         }
-
-        if (msg === lastMessageRef.current && (now - lastMessageTimeRef.current < 5000)) {
-            repetitionCountRef.current += 1;
-        } else {
-            repetitionCountRef.current = 0;
-        }
-
+        if (msg === lastMessageRef.current && (now - lastMessageTimeRef.current < 5000)) { repetitionCountRef.current += 1; } else { repetitionCountRef.current = 0; }
         lastMessageRef.current = msg;
         lastMessageTimeRef.current = now;
-
         if (repetitionCountRef.current >= 4) {
-            if (repetitionCountRef.current === 4) {
-                setTimeout(() => {
-                    setMessages((prev) => [
-                        ...prev,
-                        { id: `bot-spam-${Date.now()}`, from: 'bot', type: 'text', content: "I know a bot when I see one, I'll wait for now with responding.", timestamp: getTime() },
-                    ]);
-                    setLoading(false);
-                }, 600); // Small delay to feel natural
-            } else {
-                setLoading(false);
-            }
+            if (repetitionCountRef.current === 4) setTimeout(() => { setMessages((prev) => [...prev, { id: `bot-spam-${Date.now()}`, from: 'bot', type: 'text', content: "I know a bot when I see one, I'll wait for now with responding.", timestamp: getTime() }]); setLoading(false); }, 600);
+            else setLoading(false);
             return;
         }
-        // -----------------------------------
 
         try {
             const metadata = {};
             if (pageContextRef.current.ref) metadata.ref = pageContextRef.current.ref;
             if (pageContextRef.current.source) metadata.source = pageContextRef.current.source;
-
             const res = await fetch('/api/chatbot', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chatInput: msg,
-                    sessionId: sessionIdRef.current,
-                    ...(Object.keys(metadata).length > 0 && { metadata }),
-                }),
+                body: JSON.stringify({ chatInput: msg, sessionId: sessionIdRef.current, ...(Object.keys(metadata).length > 0 && { metadata }) }),
             });
-
-            if (res.status === 429) {
-                setMessages((prev) => [
-                    ...prev,
-                    { id: `rate-limit-${Date.now()}`, from: 'bot', type: 'text', content: "Whoa there! You're sending messages a bit too fast. Please take a breather and try again in a minute.", timestamp: getTime() },
-                ]);
-                setLoading(false);
-                return;
-            }
-
-            if (!res.ok) {
-                throw new Error(`Server error: ${res.status}`);
-            }
-
+            if (res.status === 429) { setMessages((prev) => [...prev, { id: `rate-limit-${Date.now()}`, from: 'bot', type: 'text', content: "Whoa there! You're sending messages a bit too fast. Please take a breather and try again in a minute.", timestamp: getTime() }]); setLoading(false); return; }
+            if (!res.ok) throw new Error(`Server error: ${res.status}`);
             const data = await res.json();
-
             let botReply = null;
-            if (data) { // Check for data object
+            if (data) {
                 if ('reply' in data) botReply = data.reply;
                 else if ('output' in data) botReply = data.output;
                 else if (typeof data === 'string') botReply = data;
                 else if ('error' in data) botReply = `Error: ${data.error}`;
             }
-
             if (botReply === null || botReply === undefined) botReply = 'No response received.';
-
-            // Ensure content is a string to prevent rendering crashes
             const safeContent = typeof botReply === 'object' ? JSON.stringify(botReply) : String(botReply);
-
-            setMessages((prev) => [
-                ...prev,
-                { id: `bot-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'bot', type: 'text', content: safeContent, timestamp: getTime() },
-            ]);
+            setMessages((prev) => [...prev, { id: `bot-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'bot', type: 'text', content: safeContent, timestamp: getTime() }]);
         } catch (err) {
             console.error('Error talking to API:', err);
-            setMessages((prev) => [
-                ...prev,
-                { id: `error-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'bot', type: 'text', content: 'Error contacting server.', timestamp: getTime() },
-            ]);
+            setMessages((prev) => [...prev, { id: `error-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'bot', type: 'text', content: 'Error contacting server.', timestamp: getTime() }]);
         }
-
         setLoading(false);
     };
 
     const clearChat = () => {
-        // Reset Session ID
-        const newSessionId = typeof crypto !== 'undefined' && crypto.randomUUID
-            ? crypto.randomUUID()
-            : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        const newSessionId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
         sessionIdRef.current = newSessionId;
         localStorage.setItem('rt_chat_session_id', newSessionId);
         localStorage.removeItem('rt_chat_messages');
@@ -404,217 +259,242 @@ export default function Chat() {
         setShowChat(false);
     };
 
+    const theme = {
+        bg: darkMode ? '#0d0d0d' : '#fafaf8',
+        surface: darkMode ? '#1a1a1a' : '#ffffff',
+        border: darkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)',
+        text: darkMode ? '#f2f2f2' : '#0a0a0a',
+        subtle: darkMode ? 'rgba(255,255,255,0.72)' : 'rgba(0,0,0,0.72)',
+        botLabel: '#1ACDEB',
+        userLabel: darkMode ? '#E18949' : '#6B17DA',
+        inputCaret: darkMode ? '#ffffff' : '#000000',
+        blinker: darkMode ? '#ffffff' : '#000000',
+        challenge: '#E18949',
+    };
+
+    const titleBarBtn = {
+        background: 'rgba(255,255,255,0.2)',
+        color: '#ffffff',
+        border: '1px solid rgba(255,255,255,0.35)',
+    };
+
+    const markdownComponents = {
+        ul: ({ node, ...props }) => <ul className="list-disc pl-5 space-y-1" {...props} />,
+        ol: ({ node, ...props }) => <ol className="list-decimal pl-5 space-y-1" {...props} />,
+        li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
+        strong: ({ node, ...props }) => <strong className="font-semibold" {...props} />,
+        p: ({ node, ...props }) => <p className="mb-2 last:mb-0" {...props} />,
+        img: ChatImage,
+        a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70 transition-opacity break-all" style={{ color: '#1ACDEB' }} />,
+    };
+
     return (
-        <main className={`fixed inset-0 w-full h-[100dvh] flex flex-col bg-white text-black ${showChat ? 'overflow-hidden' : 'overflow-y-auto overflow-x-hidden'}`}>
+        <main className="relative min-h-screen flex flex-col overflow-x-hidden" style={{ fontFamily: FONT }}>
             <div className="fixed inset-0 z-0 pointer-events-none gradient-background">
                 <SoftBackground />
             </div>
 
-            <div className="relative z-20 w-full p-2 flex-none flex justify-between items-center">
-                <Link href="/" className="cursor-pointer">
-                    <Image
-                        src="/logos/RT-Logo-New.svg"
-                        alt="RT Logo"
-                        width={48}
-                        height={48}
-                        className="w-12 h-12"
-                    />
-                </Link>
-                {(showChat || messages.length > 0) && (
-                    <button
-                        onClick={clearChat}
-                        className="text-sm font-medium text-black bg-gray-100 hover:bg-gray-200 transition-colors px-4 py-2 rounded-full"
+            <Nav />
+
+            <section className="relative z-10 flex-1 w-full px-4 pt-24 pb-12 md:pb-16">
+                <div className="max-w-[700px] mx-auto text-center">
+                    <h1 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.2] text-black mb-4">
+                        Tell us about your bold idea.
+                    </h1>
+                    <p className="text-base text-gray-600 leading-relaxed mb-8 md:mb-10 max-w-[560px] mx-auto">
+                        Our agent thinks the way we do. Ask it anything about your business, your challenge, or where to start. It will tell you honestly what it thinks.
+                    </p>
+
+                    <div
+                        className="rounded-2xl text-left"
+                        style={{
+                            boxShadow: '0 32px 80px rgba(0,0,0,0.22), 0 12px 32px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08)',
+                        }}
                     >
-                        Clear Chat
-                    </button>
-                )}
-            </div>
-
-            <div className={`relative z-10 flex-1 w-full md:max-w-3xl max-w-2xl mx-auto flex flex-col ${showChat ? 'overflow-hidden' : ''}`}>
-                <AnimatePresence mode="wait">
-                    {!showChat && (
-                        <motion.div
-                            key="hero"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="flex-1 flex flex-col items-center justify-center gap-6 p-4 text-center"
-                        >
-                            <h1 className="text-3xl sm:text-2xl md:text-4xl font-bold tracking-tight text-black md:whitespace-nowrap">
-                                LET’S BRING YOUR BOLD IDEA TO LIFE!
-                            </h1>
-                            <div className="relative">
-                                <Image
-                                    src="/logos/AI-Chat.svg"
-                                    alt="AI Chat"
-                                    width={192}
-                                    height={192}
-                                    onClick={() => setShowChat(true)}
-                                    className="cursor-pointer w-40 h-40 md:w-48 md:h-48 transition-all duration-500 rotate-slow"
-                                />
+                        <div className="rounded-2xl overflow-hidden">
+                        {/* Terminal title bar */}
+                        <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 flex-nowrap" style={{ background: '#181818' }}>
+                            <div className="flex items-center gap-1.5 flex-shrink-0">
+                                <span className="w-3 h-3 rounded-full bg-[#ff5f57] flex-shrink-0" />
+                                <span className="w-3 h-3 rounded-full bg-[#ffbd2e] flex-shrink-0" />
+                                <span className="w-3 h-3 rounded-full bg-[#28ca41] flex-shrink-0" />
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                            <span className="ml-1 text-xs text-white tracking-wide whitespace-nowrap">RT Agent</span>
+                            <div className="ml-auto flex items-center gap-1.5 flex-shrink-0">
+                                <button
+                                    type="button"
+                                    onClick={() => setDarkMode(!darkMode)}
+                                    aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                                    className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"
+                                    style={titleBarBtn}
+                                >
+                                    <span>{darkMode ? '◑' : '●'}</span>
+                                    <span className="hidden sm:inline">{darkMode ? 'Light' : 'Dark'}</span>
+                                </button>
+                                {(showChat || messages.length > 0) && (
+                                    <button
+                                        type="button"
+                                        onClick={clearChat}
+                                        aria-label="Clear chat"
+                                        className="px-2.5 sm:px-3 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"
+                                        style={titleBarBtn}
+                                    >
+                                        Clear
+                                    </button>
+                                )}
+                            </div>
+                        </div>
 
-                <AnimatePresence>
-                    {showChat && (
-                        <motion.div
-                            key="chat"
-                            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                            transition={{ duration: 0.5 }}
-                            className="flex-1 overflow-y-auto flex flex-col-reverse p-6 chat-scroll-container min-h-0"
+                        {/* Terminal body */}
+                        <div
+                            className="flex flex-col transition-colors duration-300"
+                            style={{
+                                background: theme.bg,
+                                color: theme.text,
+                                minHeight: 'min(70vh, 560px)',
+                                maxHeight: 'min(70vh, 560px)',
+                            }}
                         >
-                            {loading && (
-                                <div className="flex justify-start items-center gap-1 mb-4">
-                                    <div className="px-2 py-2 rounded-2xl bg-[#FFFBEF]">
-                                        <div className="flex space-x-1 items-center">
-                                            <span className="w-[4px] h-[6px] bg-gray-600 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                                            <span className="w-[4px] h-[6px] bg-gray-600 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                                            <span className="w-[4px] h-[6px] bg-gray-600 rounded-full animate-bounce"></span>
+                            <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="flex-1 overflow-y-auto flex flex-col-reverse px-4 md:px-6 py-5 gap-5 min-h-0 chat-scroll-container font-mono text-sm leading-relaxed"
+                                >
+                                    <div className="w-full flex justify-start">
+                                        <div className="max-w-[85%] text-left">
+                                            <div className="text-xs font-semibold uppercase tracking-wide mb-1.5" style={{ color: theme.botLabel }}>
+                                                › Radical Thinking
+                                            </div>
+                                            <div className="text-sm leading-relaxed" style={{ color: theme.text }}>
+                                                Tell us about your bold idea.
+                                                <span
+                                                    className="inline-block w-2 h-4 ml-1 align-text-bottom"
+                                                    style={{ background: theme.blinker, animation: 'rt-blink 1s step-end infinite' }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {loading && (
+                                        <div className="w-full flex justify-start">
+                                            <div className="flex items-center gap-2 max-w-[85%]" style={{ color: theme.botLabel }}>
+                                                <span className="text-xs font-semibold uppercase tracking-wide">› Radical Thinking</span>
+                                                <span className="inline-flex gap-1">
+                                                    <span className="w-1 h-3 rounded-sm animate-bounce [animation-delay:-0.3s]" style={{ background: theme.text }} />
+                                                    <span className="w-1 h-3 rounded-sm animate-bounce [animation-delay:-0.15s]" style={{ background: theme.text }} />
+                                                    <span className="w-1 h-3 rounded-sm animate-bounce" style={{ background: theme.text }} />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {[...messages].reverse().map((msg) => {
+                                        const isUser = msg.from === 'user';
+                                        const isChallenge = msg.from === 'bot' && (msg.id?.startsWith('bot-challenge') || msg.content?.includes('prove you are human'));
+                                        const labelColor = isUser ? theme.userLabel : isChallenge ? theme.challenge : theme.botLabel;
+                                        const label = isUser ? 'You ›' : '› Radical Thinking';
+
+                                        return (
+                                            <div key={msg.id} className={`w-full flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+                                                <div className={`max-w-[85%] ${isUser ? 'text-right' : 'text-left'}`}>
+                                                    <div className="text-xs font-semibold uppercase tracking-wide mb-1.5" style={{ color: labelColor }}>
+                                                        {label}
+                                                    </div>
+                                                    <div className="text-sm leading-relaxed" style={{ color: theme.text, wordBreak: 'break-word' }}>
+                                                        <ReactMarkdown components={markdownComponents}>
+                                                            {msg.content}
+                                                        </ReactMarkdown>
+                                                    </div>
+                                                    <div className="text-[10px] mt-1.5" style={{ color: theme.subtle }}>
+                                                        {msg.timestamp}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </motion.div>
+                            </div>
+
+                            <div className="flex-none px-4 md:px-6 pt-3 pb-4 flex flex-col gap-3" style={{ borderTop: `0.5px solid ${theme.border}` }}>
+                                {isVerified && (
+                                    <div className="w-full overflow-x-auto no-scrollbar">
+                                        <div className="flex gap-2 w-max md:w-full md:flex-wrap">
+                                            {quickMessages.map((q, i) => (
+                                                <button
+                                                    key={i}
+                                                    type="button"
+                                                    onClick={() => sendMessage(q)}
+                                                    className="flex-shrink-0 px-4 py-1.5 text-xs rounded-full transition-all duration-200 whitespace-nowrap"
+                                                    style={{
+                                                        background: theme.surface,
+                                                        border: `0.5px solid ${theme.border}`,
+                                                        color: theme.text,
+                                                    }}
+                                                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1ACDEB'; }}
+                                                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = theme.border; }}
+                                                >
+                                                    {q}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className="flex items-center gap-3">
+                                    <span className="text-base flex-shrink-0 font-mono" style={{ color: theme.userLabel }}>›</span>
+                                    <input
+                                        type="text"
+                                        aria-label="Chat input"
+                                        placeholder="Start typing your answer..."
+                                        className="flex-1 bg-transparent outline-none text-sm md:text-base font-mono"
+                                        style={{ color: theme.text, caretColor: theme.inputCaret }}
+                                        value={query}
+                                        onChange={(e) => setQuery(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        onFocus={() => setIsFocused(true)}
+                                        onBlur={() => setIsFocused(false)}
+                                    />
+                                    <div className="flex-shrink-0">
+                                        <div
+                                            className="rounded-full shadow-lg backdrop-blur-md transition-all duration-300"
+                                            style={{
+                                                backgroundImage: darkMode
+                                                    ? 'linear-gradient(80deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08), rgba(255,255,255,0.12), rgba(255,255,255,0.06))'
+                                                    : 'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)',
+                                            }}
+                                        >
+                                            <button
+                                                type="button"
+                                                onClick={() => sendMessage()}
+                                                aria-label="Send message"
+                                                className="p-3 md:p-3.5 rounded-full hover:scale-105 transition-transform duration-200 active:scale-95"
+                                            >
+                                                <Image
+                                                    src="/logos/Chat.svg"
+                                                    alt=""
+                                                    width={48}
+                                                    height={48}
+                                                    className={`w-7 h-7 md:w-8 md:h-8 transition-transform duration-200 hover:rotate-12 active:rotate-0 ${darkMode ? 'brightness-0 invert' : ''}`}
+                                                />
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            )}
-                            {[...messages].reverse().map((msg) => {
-                                const isChallenge = msg.from === 'bot' && (msg.id?.startsWith('bot-challenge') || msg.content?.includes('prove you are human'));
-                                return (
-                                    <div
-                                        key={msg.id}
-                                        className={`flex w-full ${msg.from === "user" ? "justify-end" : "justify-start"
-                                            }`}
-                                    >
-                                        <div className="flex flex-col max-w-[75%]">
-                                            <div
-                                                className={`
-                    px-4 py-2 rounded-2xl text-[14px] leading-relaxed
-                    ${msg.from === "user"
-                                                        ? "bg-[#E5FEEE] text-gray-800 rounded-br-none shadow-sm"
-                                                        : isChallenge
-                                                            ? "bg-orange-200 border border-orange-300 text-gray-900 rounded-bl-none shadow-sm text-left"
-                                                            : "bg-[#FFFBEF] text-gray-900 rounded-bl-none shadow-sm text-left"
-                                                    }`}
-                                                style={{
-                                                    wordBreak: "break-word",
-                                                }}
-                                            >
-                                                <ReactMarkdown
-                                                    components={markdownComponents}
-                                                >
-                                                    {msg.content}
-                                                </ReactMarkdown>
-                                            </div>
-                                            <div
-                                                className={`text-[10px] mt-1 text-gray-500 ${msg.from === "user" ? "text-right" : "text-left"
-                                                    }`}
-                                            >
-                                                {msg.timestamp}
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-
-            {/* Input Tray + Footer */}
-            <div className="relative z-20 w-full flex-none">
-                <div className={`w-full max-w-2xl mx-auto px-4 pt-1 flex flex-col gap-1 ${showChat ? 'pb-4' : 'pb-1'}`}>
-                    {/* Quick buttons */}
-                    {isVerified && (
-                        <div className="w-full overflow-x-auto no-scrollbar py-4 px-4">
-                            <div className="flex gap-2 w-max mx-auto md:w-full md:flex-wrap md:justify-center">
-                                {quickMessages.map((q, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={() => sendMessage(q)}
-                                        className="flex-shrink-0 px-3 py-2 text-xs sm:text-sm md:text-base md:px-6 rounded-full cursor-pointer bg-[#FFFCFD] text-[#000] shadow-lg hover:shadow-xl transition-all text-center whitespace-nowrap"
-                                    >
-                                        {q}
-                                    </button>
-                                ))}
                             </div>
                         </div>
-                    )}
-
-                    {/* Input */}
-                    <div className="w-full">
-                    <div className=" flex flex-row gap-2 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className={`w-full rounded-full shadow-lg backdrop-blur-md transition-all duration-300 ${isFocused ? 'animate-gradient-loop' : ''}`}
-                            style={{
-                                backgroundImage: isFocused ? 'linear-gradient(90deg, #DAE7F5, #EDF5E9, #FCF7D2, #DAE7F5)' : 'none',
-                                backgroundSize: '200% 100%'
-                            }}
-                        >
-                            <input
-                                type="text"
-                                aria-label="Chat input"
-                                placeholder="What’s on your mind?"
-                                className="flex-1 bg-white shadow-2xl w-full items-center px-4 py-2 md:py-3 md:px-6 rounded-full outline-none text-lg text-black placeholder:text-black pr-4"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                                onFocus={() => setIsFocused(true)}
-                                onBlur={() => setIsFocused(false)}
-                            />
-                        </motion.div>
-                        <div className="flex-shrink-0">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="rounded-full shadow-lg backdrop-blur-md transition-all duration-300"
-                                style={{
-                                    backgroundImage:
-                                        'linear-gradient(80deg, #DAE7F5, #EDF5E9BF, #FCF7D2E7, #FFF8FF)',
-                                }}
-
-                            >
-                                <button
-                                    onClick={() => sendMessage()}
-                                    className="p-3 md:p-4 rounded-full hover:scale-105 transition-transform duration-200 active:scale-95"
-                                    aria-label="Chat with us"
-                                >
-                                    <Image
-                                        src="/logos/Chat.svg"
-                                        alt="Chat Icon"
-                                        width={48}
-                                        height={48}
-                                        className="w-6 h-6 md:w-12 md:h-12 cursor-pointer transition-transform duration-200 hover:rotate-12 active:rotate-0"
-                                    />
-                                </button>
-                            </motion.div>
                         </div>
                     </div>
-                        <div className="max-w-xl text-center mx-auto mt-4">
-                            <p className="md:text-sm text-xs text-black opacity-60">
-                            Talk to us in your preferred language <br className="md:hidden" /> and we’ll get you on your way!
-                            {showChat && <span className="block mt-1 text-[10px] opacity-70">Radical Thinking © 2026</span>}
-                        </p>
-                    </div>
+
+                    <p className="text-center text-[10px] tracking-wider uppercase text-[#8a8780] mt-6">
+                        Talk to us in your preferred language
+                    </p>
                 </div>
-                </div>
-                <AnimatePresence>
-                    {!showChat && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden pb-[50px]"
-                        >
-                            <Footer />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+            </section>
+
+            <div className="relative z-10">
+                <Footer />
             </div>
         </main>
     );

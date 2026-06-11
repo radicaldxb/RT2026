@@ -7,28 +7,19 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  if (pathname === "/chat") return null;
+  const isChatPage = pathname === "/chat";
 
   const links = [
     { label: "The Formula", href: "/#formula" },
     { label: "How We Work", href: "/#how" },
     { label: "Playbook", href: "/#playbook" },
     { label: "Insights", href: "/insights" },
-    { label: "Talk to Us", href: "/#agent" },
+    ...(isChatPage ? [] : [{ label: "Talk to Us", href: "/#agent" }]),
   ];
 
   return (
@@ -37,9 +28,7 @@ export default function Nav() {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 md:py-5 transition-all duration-500 ${
-          scrolled ? "bg-white/90 backdrop-blur-md border-b border-[#e8e4dc]" : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 md:py-5 transition-all duration-500 bg-transparent"
       >
         <Link href="/">
           <Image
@@ -52,22 +41,27 @@ export default function Nav() {
           />
         </Link>
         <div className="flex items-center gap-3">
-          <Link
-            href="/#agent"
-            className="hidden md:inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-80 transition-opacity"
-          >
-            Talk to Us
-            <span className="w-1.5 h-1.5 rounded-full bg-white" />
-          </Link>
+          {!isChatPage && (
+            <Link
+              href="/#agent"
+              className="hidden md:inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-80 transition-opacity"
+            >
+              Talk to Us
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
+            </Link>
+          )}
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-black/15 text-xs font-semibold uppercase tracking-widest hover:bg-black/5 transition-colors"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="flex items-center justify-center transition-colors w-11 h-11 rounded-full border-0 bg-white hover:bg-gray-50 md:w-auto md:h-auto md:gap-2.5 md:px-4 md:py-2.5 md:rounded-full md:border md:border-black/20 md:bg-transparent md:hover:bg-black/5"
           >
-            {open ? "Close" : "Menu"}
+            <span className="hidden md:inline text-xs font-semibold uppercase tracking-widest">
+              {open ? "Close" : "Menu"}
+            </span>
             <span className="flex flex-col gap-[3.5px]">
               <span className={`block w-3.5 h-[1.5px] bg-black transition-all duration-300 ${open ? "rotate-45 translate-y-[5px]" : ""}`} />
-              <span className={`block w-3.5 h-[1.5px] bg-black transition-all duration-300 ${open ? "-rotate-45 -translate-y-[0px]" : ""}`} />
+              <span className={`block w-3.5 h-[1.5px] bg-black transition-all duration-300 ${open ? "-rotate-45" : ""}`} />
             </span>
           </button>
         </div>
@@ -94,8 +88,8 @@ export default function Nav() {
                   <Link
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="font-serif block text-[clamp(2.5rem,7vw,5rem)] font-bold text-black hover:text-[#8a8780] transition-colors leading-none"
-                    style={{ fontFamily: "'DM Serif Display', serif" }}
+                    className="block text-[clamp(2.5rem,7vw,5rem)] font-bold text-black hover:text-[#8a8780] transition-colors leading-none"
+                    style={{ fontFamily: "HelveticaNeue, sans-serif" }}
                   >
                     {l.label}
                   </Link>

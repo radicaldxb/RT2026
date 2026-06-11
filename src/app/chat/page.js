@@ -25,10 +25,8 @@ export const metadata = {
 
 export default function ChatPage() {
     return (
-        <main className="min-h-screen">
-            <Suspense fallback={<div className="min-h-screen" />}>
-                <Chat />
-            </Suspense>
-        </main>
+        <Suspense fallback={<div className="min-h-screen gradient-background" />}>
+            <Chat />
+        </Suspense>
     );
 }

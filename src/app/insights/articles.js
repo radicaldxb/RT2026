@@ -11,19 +11,13 @@ export const articles = [
     readTime: "6 mins",
     tags: ["Strategy", "AI Transformation", "Future of Work"],
     content: `
-Last week I said most AI rollouts fail because people are automating broken things instead of replacing them.
-
-The obvious follow-up is: so what does replacing look like?
+Last week I said most AI rollouts fail because people are automating broken things instead of replacing them. The obvious follow-up is: so what does replacing look like?
 
 I've watched enough implementations succeed and fail to see the pattern. It's not complicated. It's not even particularly surprising. But it's the opposite of what most people do.
 
 ## Start absurdly small
 
-The ones that work start absurdly small.
-
-Not "we'll automate our top 5 priorities."
-
-One thing. A single workflow that's stealing time from what actually matters.
+The ones that work start absurdly small. Not "we'll automate our top 5 priorities." One thing: a single workflow that's stealing time from what actually matters.
 
 At Radical Thinking, it was lead qualification. We were spending hours deciding if an inquiry was worth a response. The bot just does that now.
 
@@ -37,11 +31,7 @@ Why? Because you learn by doing, not by planning. And the learning is the most v
 
 ## Measure relentlessly
 
-They measure relentlessly.
-
-Not "this feels faster."
-
-Actually measure it. Hours saved. Error rates. Consistency. How often does it need human intervention.
+They measure relentlessly. Not "this feels faster." Actually measure it: hours saved, error rates, consistency, how often it needs human intervention.
 
 You'd be shocked how many companies think they're saving time but have no idea how much.
 
@@ -55,11 +45,9 @@ The businesses that win don't assume they know where the problem is. They measur
 
 ## Rebuild instead of retrofit
 
-They rebuild instead of retrofit.
+They rebuild instead of retrofit. This is the hard part.
 
-This is the hard part.
-
-Your process exists because of constraints that don't exist anymore. You know that. But letting go of it is harder than it sounds.
+Your process exists because of constraints that don't exist anymore. You know that, but letting go of it is harder than it sounds.
 
 We had an approval step in our workflow because feedback used to be slow. Now it's instant. We kept the approval step anyway.
 
@@ -71,53 +59,25 @@ The ones that fail try to make AI fit into their existing process. The ones that
 
 They expect Month 2 to be brutal.
 
-Most rollouts have a pattern:
+Most rollouts have a pattern. Month 1 is exciting: you get something working. It's fragile, but it works. Month 2 is crushing: every edge case you didn't plan for shows up, the system breaks in weird ways, and you realise you don't understand the tool as well as you thought. This is when people quit.
 
-Month 1 is exciting. You get something working. It's fragile, but it works.
+The ones that win know Month 2 is coming. They budget for it. They know that if they push through, Month 3 is when it clicks. By Month 4 they can build the next thing because the foundation is solid.
 
-Month 2 is crushing. Every edge case you didn't plan for shows up. The system breaks in weird ways. You realise you don't understand the tool as well as you thought.
-
-This is when people quit.
-
-The ones that win know Month 2 is coming. They budget for it. They know that if they push through, Month 3 is when it clicks.
-
-By Month 4 they can build the next thing because the foundation is solid.
-
-The ones that fail see Month 2 and assume the whole thing is a waste of time.
-
-It's not. Month 2 is just the learning curve. It sucks, but it's necessary.
+The ones that fail see Month 2 and assume the whole thing is a waste of time. It's not. Month 2 is just the learning curve. It sucks, but it's necessary.
 
 ## Have someone obsessed
 
-They have someone obsessed.
-
-Every working system has one person who genuinely cares about how it works.
+They have someone obsessed. Every working system has one person who genuinely cares about how it works.
 
 Not a consultant. Not an external expert. Someone inside the company who's willing to spend the time learning the tool, fixing things when they break, and understanding why.
 
-This person becomes irreplaceable because they're the only one who understands the system deeply enough to improve it.
-
-You can't hire this. You have to grow it.
-
-The person is usually not technical. They just care enough to learn.
+This person becomes irreplaceable because they're the only one who understands the system deeply enough to improve it. You can't hire this. You have to grow it. The person is usually not technical, they just care enough to learn.
 
 ## So what actually works?
 
-Start with one thing.
+Start with one thing. Measure it obsessively. Rebuild instead of retrofitting. Budget for Month 2 being rough. Find one person who's genuinely curious about how it all works.
 
-Measure it obsessively.
-
-Rebuild instead of retrofitting.
-
-Budget for Month 2 being rough.
-
-Find one person who's genuinely curious about how it all works.
-
-That's it.
-
-Not revolutionary. Not expensive. Not complicated.
-
-Just disciplined about understanding before you scale.
+That's it. Not revolutionary. Not expensive. Not complicated. Just disciplined about understanding before you scale.
 
 ---
 
