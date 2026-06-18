@@ -1,3 +1,4 @@
+// src/app/sitemap.js
 import { portfolio } from "@/app/portfolio/projects";
 import { articles } from "@/app/insights/articles";
 
@@ -26,6 +27,18 @@ export default function sitemap() {
       priority: 1,
     },
     {
+      url: `${baseUrl}/playbook`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/roadmap`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/services`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
@@ -35,7 +48,7 @@ export default function sitemap() {
       url: `${baseUrl}/portfolio`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/about`,
@@ -55,13 +68,13 @@ export default function sitemap() {
       url: `${baseUrl}/intelligence`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.75,
     },
     {
       url: `${baseUrl}/chat`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/terms-of-use`,

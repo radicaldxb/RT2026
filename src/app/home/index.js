@@ -19,6 +19,107 @@ const VP1 = { once: true, margin: "0px 0px -100px 0px" };
 
 const serif = { fontFamily: "HelveticaNeue, sans-serif" };
 
+const formulaCards = [
+  {
+    letter: "C",
+    label: "Creative",
+    color: "#1ACDEB",
+    badge: "The dream",
+    badgeBg: "rgba(26,205,235,0.1)",
+    title: "The idea. The dream. The passion.",
+    body: "Every business starts here. A founder with a vision, something they want to create in the world. The creative spark is what makes your business worth building in the first place.",
+    flipRange: [0.22, 0.42],
+  },
+  {
+    letter: "Ex",
+    label: "Experience",
+    color: "#E18949",
+    badge: "The reality",
+    badgeBg: "rgba(225,137,73,0.1)",
+    title: "The feeling your customer actually has.",
+    body: "The pain, the stress, the delight, the loyalty. Every touchpoint is either proving your bold idea is real, or quietly undermining it. Most businesses have never mapped the gap.",
+    flipRange: [0.44, 0.64],
+  },
+  {
+    letter: "T²",
+    label: "Technology",
+    color: "#6B17DA",
+    badge: "The amplifier",
+    badgeBg: "rgba(107,23,218,0.08)",
+    title: "The amplifier. For better or worse.",
+    body: "Your CRM, website, app, AI, social media. Technology does not fix the gap between your dream and your customer's reality. It amplifies whatever is already there.",
+    flipRange: [0.66, 0.86],
+  },
+];
+
+function FormulaFlipCard({ scrollYProgress, card }) {
+  const rotateY = useTransform(scrollYProgress, card.flipRange, [0, 180]);
+
+  return (
+    <div className="relative h-[340px] md:h-[360px] [perspective:1200px]">
+      <motion.div
+        className="relative w-full h-full [transform-style:preserve-3d]"
+        style={{ rotateY }}
+      >
+        {/* Card back — playing card face */}
+        <div
+          className="absolute inset-0 rounded-2xl bg-white overflow-hidden [backface-visibility:hidden]"
+          style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)", border: "0.5px solid rgba(232,228,220,0.9)" }}
+        >
+          <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl" style={{ background: card.color }} />
+          <div className="absolute bottom-0 left-0 right-0 h-1.5 rounded-b-2xl" style={{ background: card.color }} />
+          <Image
+            src="/logos/RT-Logo-New.svg"
+            alt=""
+            width={28}
+            height={28}
+            className="absolute top-5 left-5 w-7 h-7 opacity-80"
+            aria-hidden
+          />
+          <Image
+            src="/logos/RT-Logo-New.svg"
+            alt=""
+            width={28}
+            height={28}
+            className="absolute bottom-5 right-5 w-7 h-7 opacity-80 rotate-180"
+            aria-hidden
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+            <p
+              className="font-bold text-[clamp(4.5rem,12vw,6.5rem)] leading-none mb-3"
+              style={{ ...serif, color: card.color }}
+            >
+              {card.letter}
+            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8a8780]">
+              {card.label}
+            </p>
+          </div>
+        </div>
+
+        {/* Card front — detail content */}
+        <div
+          className="absolute inset-0 rounded-2xl bg-white px-8 py-9 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
+          style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)", border: "0.5px solid rgba(232,228,220,0.9)" }}
+        >
+          <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl" style={{ background: card.color }} />
+          <div className="absolute bottom-0 left-0 right-0 h-1.5 rounded-b-2xl" style={{ background: card.color }} />
+          <p className="font-bold text-[3rem] leading-none mb-4" style={{ ...serif, color: card.color }}>{card.letter}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a8780] mb-2">{card.label}</p>
+          <h3 className="text-[1.2rem] font-bold mb-3 leading-snug text-black" style={serif}>{card.title}</h3>
+          <p className="text-sm text-gray-600 leading-relaxed mb-4">{card.body}</p>
+          <span
+            className="inline-block text-[0.6rem] font-semibold uppercase tracking-[0.12em] rounded-full px-3 py-1"
+            style={{ background: card.badgeBg, color: card.color }}
+          >
+            {card.badge}
+          </span>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
@@ -35,6 +136,13 @@ export default function Home() {
   const { scrollYProgress: fP } = useScroll({ target: formulaRef, offset: ["start end", "center center"] });
   const eqScale = useTransform(fP, [0, 1], [0.7, 1]);
   const eqOp = useTransform(fP, [0, 0.55], [0, 1]);
+
+  // Formula cards scroll-linked flip — flips while cards are in the fold, then normal scroll continues
+  const cardsRef = useRef(null);
+  const { scrollYProgress: cardsP } = useScroll({
+    target: cardsRef,
+    offset: ["start 0.8", "start 0.12"],
+  });
 
   const handleSubmit = () => {
     if (query.trim()) {
@@ -206,62 +314,10 @@ export default function Home() {
             Every bold idea that lands in the real world, the kind that actually changes how people feel, act, or buy, is the product of these three things working together. Most businesses have all three. They are just not connected.
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-            {/* C — from left */}
-            <motion.div
-              initial={{ opacity: 0, x: -60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, ease: E }}
-              viewport={VP}
-              whileHover={{ y: -6, boxShadow: "0 24px 56px rgba(0,0,0,0.1)", transition: { type: "spring", stiffness: 300 } }}
-              className="bg-white rounded-2xl px-8 py-9 relative overflow-hidden"
-              style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)", border: "0.5px solid rgba(232,228,220,0.9)" }}
-            >
-              <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl" style={{ background: "#1ACDEB" }} />
-              <p className="font-bold text-[3rem] leading-none mb-4" style={{ ...serif, color: "#1ACDEB" }}>C</p>
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a8780] mb-2">Creative</p>
-              <h3 className="text-[1.2rem] font-bold mb-3 leading-snug text-black" style={serif}>The idea. The dream. The passion.</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">Every business starts here. A founder with a vision, something they want to create in the world. The creative spark is what makes your business worth building in the first place.</p>
-              <span className="inline-block text-[0.6rem] font-semibold uppercase tracking-[0.12em] rounded-full px-3 py-1" style={{ background: "rgba(26,205,235,0.1)", color: "#1ACDEB" }}>The dream</span>
-            </motion.div>
-
-            {/* Ex — from below */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: E }}
-              viewport={VP}
-              whileHover={{ y: -6, boxShadow: "0 24px 56px rgba(0,0,0,0.1)", transition: { type: "spring", stiffness: 300 } }}
-              className="bg-white rounded-2xl px-8 py-9 relative overflow-hidden"
-              style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)", border: "0.5px solid rgba(232,228,220,0.9)" }}
-            >
-              <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl" style={{ background: "#E18949" }} />
-              <p className="font-bold text-[3rem] leading-none mb-4" style={{ ...serif, color: "#E18949" }}>Ex</p>
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a8780] mb-2">Experience</p>
-              <h3 className="text-[1.2rem] font-bold mb-3 leading-snug text-black" style={serif}>The feeling your customer actually has.</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">The pain, the stress, the delight, the loyalty. Every touchpoint is either proving your bold idea is real, or quietly undermining it. Most businesses have never mapped the gap.</p>
-              <span className="inline-block text-[0.6rem] font-semibold uppercase tracking-[0.12em] rounded-full px-3 py-1" style={{ background: "rgba(225,137,73,0.1)", color: "#E18949" }}>The reality</span>
-            </motion.div>
-
-            {/* T² — from right */}
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: E }}
-              viewport={VP}
-              whileHover={{ y: -6, boxShadow: "0 24px 56px rgba(0,0,0,0.1)", transition: { type: "spring", stiffness: 300 } }}
-              className="bg-white rounded-2xl px-8 py-9 relative overflow-hidden"
-              style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)", border: "0.5px solid rgba(232,228,220,0.9)" }}
-            >
-              <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl" style={{ background: "#6B17DA" }} />
-              <p className="font-bold text-[3rem] leading-none mb-4" style={{ ...serif, color: "#6B17DA" }}>T²</p>
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a8780] mb-2">Technology</p>
-              <h3 className="text-[1.2rem] font-bold mb-3 leading-snug text-black" style={serif}>The amplifier. For better or worse.</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">Your CRM, website, app, AI, social media. Technology does not fix the gap between your dream and your customer's reality. It amplifies whatever is already there.</p>
-              <span className="inline-block text-[0.6rem] font-semibold uppercase tracking-[0.12em] rounded-full px-3 py-1" style={{ background: "rgba(107,23,218,0.08)", color: "#6B17DA" }}>The amplifier</span>
-            </motion.div>
-
+          <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {formulaCards.map((card) => (
+              <FormulaFlipCard key={card.label} scrollYProgress={cardsP} card={card} />
+            ))}
           </div>
         </div>
       </section>
@@ -414,27 +470,27 @@ export default function Home() {
             {[
               {
                 num: "1", color: "#1ACDEB", bg: "rgba(26,205,235,0.1)",
-                label: "Step 1: The Audit",
+                label: "Step 1: The Inside Look",
                 title: "Find the real problem.",
                 body: "We spend time inside your operation. We talk to your team, your customers, and your data. We map what your business intends to deliver versus what it actually delivers at every touchpoint. Then we tell you honestly where AI can close the gap and where it cannot.",
                 what: "You walk away with a prioritised action plan built around your reality, not a generic template. Fixed price. Fixed timeframe. No surprises.",
-                cta: "Start with the Audit",
+                cta: "Start with The Inside Look",
               },
               {
                 num: "2", color: "#E18949", bg: "rgba(225,137,73,0.1)",
-                label: "Step 2: The Build",
+                label: "Step 2: The Work",
                 title: "Build it properly. Not a pilot.",
                 body: "We take the top priority from the Audit and build it to production standard. Not a demo. Not a proof of concept. Something your team uses every day, documented, and built to survive the next model update. The medium depends on the gap.",
                 what: "30 days. Fixed price. One thing done right, running in your business.",
-                cta: "Talk about the Build",
+                cta: "Talk about The Work",
               },
               {
                 num: "3", color: "#6B17DA", bg: "rgba(107,23,218,0.08)",
-                label: "Step 3: The Retainer",
+                label: "Step 3: The Momentum",
                 title: "Stay ahead. Not catch up.",
                 body: "The AI landscape resets every few months. New models, new capabilities, new ways to close gaps you did not know existed. The businesses that win are not the ones who built something once. They are the ones with a partner continuously asking if they are still building the right thing.",
                 what: "Monthly capability review. Quarterly upgrades. Direct access when something changes or breaks. Cancel anytime.",
-                cta: "Ask about the Retainer",
+                cta: "Ask about The Momentum",
               },
             ].map((item, i) => (
               <motion.div

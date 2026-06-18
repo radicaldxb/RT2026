@@ -17,7 +17,7 @@ export default function Nav() {
   const links = [
     { label: "The Formula", href: "/#formula" },
     { label: "How We Work", href: "/#how" },
-    { label: "Playbook", href: "/#playbook" },
+    { label: "Playbook", href: "/playbook" },
     { label: "Insights", href: "/insights" },
     ...(isChatPage ? [] : [{ label: "Talk to Us", href: "/#agent" }]),
   ];

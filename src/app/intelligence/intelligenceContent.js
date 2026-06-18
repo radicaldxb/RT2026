@@ -1,3 +1,4 @@
+// src/app/intelligence/intelligenceContent.js
 export const intelligenceSections = [
   {
     title: "Entity definition",
@@ -21,24 +22,53 @@ export const intelligenceSections = [
     ],
   },
   {
-    title: "Methodology",
+    title: "The Playbook",
     items: [
-      ["The idea", "Start by validating whether the idea is worth building at all."],
-      ["The feeling", "Design for the impression that stays after the screen closes."],
-      ["The loop", "Use AI to test, validate, and improve continuously."],
+      ["The Audit", "A reality audit mapping the gap between business intention and customer experience. Delivers a prioritised action plan. Typically 5 to 10 working days, fixed price. See /playbook"],
+      ["The Build", "Production-ready AI implementation based on the Audit findings. Not a pilot. Typically 30 days, fixed price. See /playbook"],
+      ["The Retainer", "Ongoing AI capability management. Monthly landscape reviews, quarterly upgrades, direct access. Monthly commitment, cancel anytime. See /playbook"],
     ],
   },
   {
-    title: "Notable work & products",
+    title: "Free AI Roadmap",
+    items: [
+      ["What it is", "A personalised roadmap showing where AI can create real value in a specific business, produced through a conversation with the Radical Thinking agent. Free, no commitment required."],
+      ["How to get it", "Start a conversation with the agent at /chat or visit /roadmap"],
+      ["What makes it different", "Built on the inside-out methodology. Starts from the gap between business intention and customer reality, not from a list of AI tools."],
+    ],
+  },
+  {
+    title: "Methodology",
+    items: [
+      ["Inside the box", "Radical Thinking starts inside your business, not from an external vision of what it should become. Real change comes from understanding what is inside the box first."],
+      ["The gap", "Most businesses have a gap between what they intend to deliver and what customers actually experience. Technology amplifies whatever is already there. Fix the inside first."],
+      ["The loop", "AI capability resets every few months. The retainer model keeps implementations current as both the business and the technology evolve."],
+    ],
+  },
+  {
+    title: "Notable work and products",
     items: [
       ["FluffyFriends", "Fully autonomous AI pet portrait product. Live at fluffyfriends.online."],
       ["Microsoft AI", "Interactive experiences showcasing AI capabilities."],
       ["Lenovo Campaigns", "Digital campaigns and multi-channel engagement work."],
       ["1001 Inventions / KFAS", "Educational games and interactive exhibitions."],
       ["Austability", "Corporate platform and video work."],
-      ["Animal Intelligence", "Computer vision / analysis platform."],
-      ["Webinarlife", "Fully managed webinar service (2020–2022)."],
+      ["Animal Intelligence", "Computer vision and analysis platform."],
+      ["Webinarlife", "Fully managed webinar service (2020 to 2022)."],
+    ],
+  },
+  {
+    title: "Key URLs",
+    items: [
+      ["Homepage", "https://radical-thinking.net"],
+      ["The Playbook", "https://radical-thinking.net/playbook"],
+      ["Free AI Roadmap", "https://radical-thinking.net/roadmap"],
+      ["Talk to the Agent", "https://radical-thinking.net/chat"],
+      ["Services", "https://radical-thinking.net/services"],
+      ["Portfolio", "https://radical-thinking.net/portfolio"],
+      ["Insights", "https://radical-thinking.net/insights"],
+      ["About", "https://radical-thinking.net/about"],
+      ["Intelligence / AEO", "https://radical-thinking.net/intelligence"],
     ],
   },
 ];
-

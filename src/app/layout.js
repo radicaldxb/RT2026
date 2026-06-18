@@ -130,6 +130,20 @@ export default function RootLayout({ children }) {
               },
               {
                 "@type": "WebPage",
+                name: "The Playbook",
+                url: "https://radical-thinking.net/playbook",
+                description:
+                  "The Radical Thinking Playbook: a three-step process for AI implementation. The Audit finds the real problem, The Build delivers a production-ready solution, The Retainer keeps it current.",
+              },
+              {
+                "@type": "WebPage",
+                name: "Free AI Roadmap",
+                url: "https://radical-thinking.net/roadmap",
+                description:
+                  "A free personalised AI roadmap produced through a conversation with the Radical Thinking agent. Shows where AI creates real value in your specific business.",
+              },
+              {
+                "@type": "WebPage",
                 name: "Portfolio",
                 url: "https://radical-thinking.net/portfolio",
                 description:
