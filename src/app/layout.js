@@ -1,6 +1,7 @@
 // File: app/layout.js
 import "./globals.css";
 import Script from "next/script";
+import { roboto, robotoSlab } from "@/lib/fonts";
 
 export const metadata = {
   title: "Radical Thinking | AI-Native Agency in Dubai",
@@ -19,7 +20,7 @@ export const metadata = {
     siteName: "Radical Thinking",
     images: [
       {
-        url: "https://radical-thinking.net/Images/OG/RT-Social-Share.webp",
+        url: "https://radical-thinking.net/Images/OG/OG-Homepage.webp",
         width: 1200,
         height: 630,
         alt: "Radical Thinking Agency",
@@ -31,7 +32,7 @@ export const metadata = {
     title: "Radical Thinking | AI-Native Agency in Dubai",
     description:
       "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
-    images: ["https://radical-thinking.net/Images/OG/RT-Social-Share.webp"],
+    images: ["https://radical-thinking.net/Images/OG/OG-Homepage.webp"],
   },
   icons: {
     icon: "/favicon-light.svg",
@@ -59,15 +60,16 @@ export default function RootLayout({ children }) {
         <meta name="geo.position" content="25.276987;55.296249" />
         <meta name="ICBM" content="25.276987, 55.296249" />
       </head>
-      <body className="antialiased" suppressHydrationWarning>
+      <body className={`${roboto.className} antialiased font-light`} suppressHydrationWarning>
+        <span className={robotoSlab.className} hidden aria-hidden />
         {children}
 
         {/* Google Analytics */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL"
         />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -137,15 +139,8 @@ export default function RootLayout({ children }) {
               },
               {
                 "@type": "WebPage",
-                name: "Free AI Roadmap",
-                url: "https://radical-thinking.net/roadmap",
-                description:
-                  "A free personalised AI roadmap produced through a conversation with the Radical Thinking agent. Shows where AI creates real value in your specific business.",
-              },
-              {
-                "@type": "WebPage",
-                name: "Portfolio",
-                url: "https://radical-thinking.net/portfolio",
+                name: "Work",
+                url: "https://radical-thinking.net/work",
                 description:
                   "View our selected work and case studies.",
               },

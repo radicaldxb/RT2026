@@ -15,11 +15,12 @@ export default function Nav() {
   const isChatPage = pathname === "/chat";
 
   const links = [
-    { label: "The Formula", href: "/#formula" },
     { label: "How We Work", href: "/#how" },
     { label: "Playbook", href: "/playbook" },
+    { label: "Chat", href: "/chat" },
     { label: "Insights", href: "/insights" },
-    ...(isChatPage ? [] : [{ label: "Talk to Us", href: "/#agent" }]),
+    { label: "Work", href: "/work" },
+    { label: "About", href: "/about" },
   ];
 
   return (
@@ -89,7 +90,6 @@ export default function Nav() {
                     href={l.href}
                     onClick={() => setOpen(false)}
                     className="block text-[clamp(2.5rem,7vw,5rem)] font-bold text-black hover:text-[#8a8780] transition-colors leading-none"
-                    style={{ fontFamily: "HelveticaNeue, sans-serif" }}
                   >
                     {l.label}
                   </Link>

@@ -13,7 +13,7 @@ export const metadata = {
         siteName: "Radical Thinking",
         images: [
             {
-                url: "https://radical-thinking.net/Images/OG/RT-Privacy.webp",
+                url: "https://radical-thinking.net/Images/OG/OG-Privacy.webp",
                 width: 1200,
                 height: 630,
                 alt: "Radical Thinking Privacy Policy",
@@ -23,9 +23,5 @@ export const metadata = {
 };
 
 export default function PrivacyPage() {
-    return (
-        <main className="min-h-screen">
-            <Privacy />
-        </main>
-    );
+    return <Privacy />;
 }

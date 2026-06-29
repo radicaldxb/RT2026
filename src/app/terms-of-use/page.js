@@ -13,7 +13,7 @@ export const metadata = {
         siteName: "Radical Thinking",
         images: [
             {
-                url: "https://radical-thinking.net/Images/OG/RT-Terms.webp",
+                url: "https://radical-thinking.net/Images/OG/OG-Terms.webp",
                 width: 1200,
                 height: 630,
                 alt: "Radical Thinking Terms of Use",
@@ -23,9 +23,5 @@ export const metadata = {
 };
 
 export default function TermsPage() {
-    return (
-        <main className="min-h-screen">
-            <TermsOfUse />
-        </main>
-    );
+    return <TermsOfUse />;
 }

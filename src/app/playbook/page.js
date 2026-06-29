@@ -16,7 +16,7 @@ export const metadata = {
     siteName: "Radical Thinking",
     images: [
       {
-        url: "https://radical-thinking.net/Images/OG/RT-Landing.webp",
+        url: "https://radical-thinking.net/Images/OG/OG-Playbook.webp",
         width: 1200,
         height: 630,
         alt: "The Radical Thinking Playbook",

@@ -1,14 +1,7 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import Script from "next/script";
 import { articles } from "@/app/insights/articles";
-import SoftBackground from "@/components/SoftBackground";
-import Footer from "@/components/Footer";
-import Nav from "@/components/Nav";
-import ShareButtons from "@/components/ShareButtons";
+import InsightArticleLayout from "../InsightArticleLayout";
 
 export function generateStaticParams() {
   return Array.isArray(articles) ? articles.map((a) => ({ slug: a.slug })) : [];
@@ -21,9 +14,7 @@ export async function generateMetadata({ params }) {
 
   const baseUrl = "https://radical-thinking.net";
   const ogSrc = article.ogImage || article.image;
-  const imageUrl = ogSrc && ogSrc.startsWith("http")
-    ? ogSrc
-    : `${baseUrl}${ogSrc}`;
+  const imageUrl = ogSrc && ogSrc.startsWith("http") ? ogSrc : `${baseUrl}${ogSrc}`;
 
   return {
     title: `${article.title} | Radical Thinking Insights`,
@@ -62,14 +53,37 @@ export default async function InsightArticlePage({ params }) {
     notFound();
   }
 
+  const byDateDesc = (a, b) => String(b?.publishedDate || "").localeCompare(String(a?.publishedDate || ""));
+  const overlapCount = (aTags, bTags) => {
+    const setA = new Set(aTags || []);
+    let n = 0;
+    (bTags || []).forEach((t) => {
+      if (setA.has(t)) n += 1;
+    });
+    return n;
+  };
+
+  const relatedArticles = (Array.isArray(articles) ? articles : [])
+    .filter((a) => a?.slug && a.slug !== slug)
+    .sort((a, b) => {
+      const oa = overlapCount(article.tags, a.tags);
+      const ob = overlapCount(article.tags, b.tags);
+      if (ob !== oa) return ob - oa;
+      return byDateDesc(a, b);
+    })
+    .slice(0, 4);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
     description: article.description,
-    image: (article.ogImage || article.image) && (article.ogImage || article.image).startsWith("http")
-      ? (article.ogImage || article.image)
-      : (article.ogImage || article.image) ? `https://radical-thinking.net${article.ogImage || article.image}` : undefined,
+    image:
+      (article.ogImage || article.image) && (article.ogImage || article.image).startsWith("http")
+        ? article.ogImage || article.image
+        : article.ogImage || article.image
+          ? `https://radical-thinking.net${article.ogImage || article.image}`
+          : undefined,
     datePublished: article.publishedDate,
     author: {
       "@type": "Person",
@@ -82,86 +96,12 @@ export default async function InsightArticlePage({ params }) {
     },
   };
 
-  const formatDateDDMMYYYY = (iso) => {
-    if (!iso) return "";
-    const [y, m, d] = String(iso).split("-");
-    return d && m && y ? `${d}/${m}/${y}` : iso;
-  };
-
   return (
-    <main className="min-h-screen bg-white text-black relative flex flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <div className="fixed inset-0 z-0 pointer-events-none gradient-background">
-        <SoftBackground />
-      </div>
-
-      <Nav />
-
-      <div className="relative z-10 flex-1 w-full max-w-3xl mx-auto px-6 pt-20 md:pt-24 pb-8 md:pb-12">
-        <article>
-          <header className="mb-10">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {(article.tags || []).map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-black/8 text-gray-700 border border-black/10"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight text-balance max-w-2xl">
-              {article.title}
-            </h1>
-            <p className="text-lg text-gray-600 mt-3">{article.description}</p>
-            <p className="text-sm text-gray-500 mt-4">
-              {article.readTime} · {formatDateDDMMYYYY(article.publishedDate)}
-            </p>
-          </header>
-
-          {article.image && (
-            <figure className="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-100 mb-10 shadow-lg">
-              <Image
-                src={article.image}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 896px"
-                priority
-                unoptimized
-              />
-            </figure>
-          )}
-
-          <div className="rt-article-body">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {article.content ? String(article.content).trim() : ""}
-            </ReactMarkdown>
-          </div>
-
-          <ShareButtons title={article.title} slug={article.slug} />
-        </article>
-      </div>
-
-      <div className="relative z-10 mt-auto">
-        <Footer />
-      </div>
-
-      {/* Mobile: Talk to the Agent */}
-      <div className="fixed bottom-6 right-6 z-50 md:hidden">
-        <Link
-          href={`/chat?ref=${article.slug}&source=insights`}
-          className="flex items-center justify-center w-14 h-14 bg-black text-white rounded-full shadow-2xl hover:scale-110 transition-transform"
-          aria-label="Talk to the Agent"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
-        </Link>
-      </div>
-    </main>
+    <>
+      <Script id={`ld-json-insight-${slug}`} type="application/ld+json">
+        {JSON.stringify(jsonLd)}
+      </Script>
+      <InsightArticleLayout article={article} relatedArticles={relatedArticles} />
+    </>
   );
 }

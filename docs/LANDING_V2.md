@@ -1,8 +1,10 @@
 # Landing V2 — Architecture, Beats & Styling
 
-**Route:** `/landing` (test / preview — `robots: noindex`)  
+**Route:** `/` (production homepage) · `/landing` (staging alias, `noindex`)  
 **Branch:** `rt2026-v3-homepage`  
-**Primary file:** `src/app/landing/landing.js`  
+**Primary file:** `src/app/home/index.js`  
+**Legacy backup:** `src/app/home/home.legacy.js`  
+**Design system:** [DESIGN.md](./DESIGN.md)  
 **Last updated:** June 2026
 
 This document describes the new homepage approach: a **split scroll model** where the opening story runs in a sticky viewport, then the rest of the page scrolls normally with entrance animations.
@@ -20,7 +22,7 @@ The page tells one continuous story in two modes:
 
 **Why split?** Beats 1–6 need precise, scroll-linked timing in one viewport. Everything after the formula payoff benefits from natural page flow (no competing sticky layers, easier mobile behavior, simpler section edits).
 
-**Production homepage** (`src/app/home/index.js`) still uses the earlier single-sticky journey. `/landing` is the candidate replacement once approved.
+**Production homepage** is `src/app/home/index.js` at `/`. The previous single-sticky version is preserved in `home.legacy.js`.
 
 ---
 
@@ -191,7 +193,7 @@ Dark macOS-style terminal linking to `/chat`. Used twice:
 
 ### Typography
 
-- **Body:** Helvetica Neue (`globals.css`)
+- **Body:** Roboto Light via `layout.js` + `src/lib/fonts.js`
 - **Headlines / serif accent:** Roboto Slab via `next/font/google` — applied through `style={serif}`
 - **Eyebrows:** `text-xs font-semibold uppercase tracking-[0.22–0.25em] text-[#8a8780]`
 
@@ -238,11 +240,9 @@ background-size: 200% auto;
 
 | File | Role |
 |------|------|
-| `src/app/landing/landing.js` | Main page component (`LandingV2`) |
-| `src/app/landing/page.js` | Route wrapper, metadata, noindex |
-| `src/app/landing/landing_rebuilt.js` | Local reference only (full single-sticky version) — **not deployed** |
-| `src/app/globals.css` | Shared animation utilities |
-| `src/app/home/index.js` | Current production homepage |
+| `src/app/home/index.js` | **Canonical homepage** (`/`) |
+| `src/app/home/home.legacy.js` | Pre-v3 homepage backup |
+| `src/app/landing/page.js` | Staging alias (`/landing`, noindex) |
 
 ---
 
@@ -264,21 +264,16 @@ When editing `/landing`, preserve unless explicitly changing:
 
 ```bash
 npm run dev
-# Open http://localhost:3000/landing
-```
+# → http://localhost:3000/
+# → http://localhost:3000/landing  (staging alias, same page)
 
-Build check:
-
-```bash
 npm run build
 ```
 
 ---
 
-## 11. Next steps (when promoting to production)
+## 11. Next steps (other pages)
 
-- [ ] Review on real devices (desktop card fan, mobile stack, sticky handoff at beat 6 → flow).
-- [ ] Replace or merge into `src/app/home/index.js` / root route.
-- [ ] Remove `robots: noindex` from route metadata.
-- [ ] Delete or archive `landing_rebuilt.js` reference copy.
-- [ ] Update sitemap / nav if `/landing` becomes `/`.
+- [ ] Align `/insights`, `/about`, `/services`, etc. to `docs/DESIGN.md`
+- [ ] Remove `robots: noindex` from `/landing` or retire the alias route
+- [ ] Archive or delete `landing_rebuilt.js` local reference if no longer needed

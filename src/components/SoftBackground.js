@@ -9,6 +9,11 @@ const SoftBackground = () => {
   const raf = useRef(null);
 
   useEffect(() => {
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return undefined;
+
     let start = null;
     const tick = (ts) => {
       if (!start) start = ts;

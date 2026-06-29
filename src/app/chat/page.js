@@ -14,7 +14,7 @@ export const metadata = {
         siteName: "Radical Thinking",
         images: [
             {
-                url: "https://radical-thinking.net/Images/OG/RT-Chat.webp",
+                url: "https://radical-thinking.net/Images/OG/OG-Chat.webp",
                 width: 1200,
                 height: 630,
                 alt: "Radical Thinking AI Chat",

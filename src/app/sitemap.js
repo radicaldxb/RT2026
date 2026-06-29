@@ -1,12 +1,12 @@
 // src/app/sitemap.js
-import { portfolio } from "@/app/portfolio/projects";
+import { portfolio } from "@/app/work/projects";
 import { articles } from "@/app/insights/articles";
 
 export default function sitemap() {
   const baseUrl = 'https://radical-thinking.net';
 
   const portfolioEntries = portfolio.map(item => ({
-    url: `${baseUrl}/portfolio/${item.slug}`,
+    url: `${baseUrl}/work/${item.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
     priority: 0.7,
@@ -33,19 +33,13 @@ export default function sitemap() {
       priority: 0.95,
     },
     {
-      url: `${baseUrl}/roadmap`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
       url: `${baseUrl}/services`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/portfolio`,
+      url: `${baseUrl}/work`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.85,

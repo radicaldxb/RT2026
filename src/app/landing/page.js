@@ -1,4 +1,4 @@
-import LandingV2 from "./landing";
+import Home from "../home";
 
 export const metadata = {
   title: "Radical Thinking",
@@ -6,6 +6,7 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
+/** Alias of `/` for staging and design review — same component, noindex. */
 export default function LandingPage() {
-  return <LandingV2 />;
+  return <Home />;
 }

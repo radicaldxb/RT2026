@@ -16,8 +16,8 @@ export default function ShareButtons({ title, slug, url: urlProp }) {
   };
 
   return (
-    <div className="flex items-center gap-3 mt-8 pt-6 border-t border-gray-100">
-      <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mr-2">Share:</span>
+    <div className="flex items-center gap-3 mt-8 pt-6 border-t border-[#e8e4dc]/90">
+      <span className="text-xs font-semibold text-[#8a8780] uppercase tracking-[0.12em] mr-2">Share</span>
       
       {/* LinkedIn */}
       <a

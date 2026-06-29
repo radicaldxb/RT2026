@@ -14,14 +14,6 @@ export const metadata = {
       "Get a free personalised AI roadmap in five minutes. Know where AI creates value in your business before your competitors do.",
     url: "https://radical-thinking.net/roadmap",
     siteName: "Radical Thinking",
-    images: [
-      {
-        url: "https://radical-thinking.net/Images/OG/RT-Landing.webp",
-        width: 1200,
-        height: 630,
-        alt: "Free AI Roadmap from Radical Thinking",
-      },
-    ],
   },
 };
 

@@ -4,15 +4,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SoftBackground from "@/components/SoftBackground";
 import Script from "next/script";
+import { robotoSlab, serif } from "@/lib/fonts";
 
 const E = [0.16, 1, 0.3, 1];
 const VP = { once: true, margin: "0px 0px -80px 0px" };
-const serif = { fontFamily: "HelveticaNeue, sans-serif" };
 
 const steps = [
   {
@@ -178,6 +177,7 @@ const serviceSchema = {
 export default function PlaybookClient() {
   return (
     <section className="relative w-full min-h-screen flex flex-col overflow-x-hidden">
+      <span className={robotoSlab.className} hidden aria-hidden />
       <Script id="faq-schema" type="application/ld+json">
         {JSON.stringify(faqSchema)}
       </Script>

@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from "react-markdown";
+import { robotoSlab, serif } from "@/lib/fonts";
 import SoftBackground from '@/components/SoftBackground';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
@@ -64,8 +65,6 @@ const quickMessages = [
     'Tell me about your services',
     'Show me your work',
 ];
-
-const FONT = "'HelveticaNeue', sans-serif";
 
 export default function Chat() {
     const [query, setQuery] = useState('');
@@ -138,11 +137,13 @@ export default function Chat() {
             } else if (refParam) {
                 hasRun.current = true;
                 const projectContexts = {
-                    'animal-intelligence': "I'd like to understand the technical architecture behind the Animal Intelligence platform.",
-                    'kahulife': "Tell me about the AI-driven SOS network in Kahulife.",
-                    'tommy-ellie': "How does the generative AI in Tommy & Ellie work?",
+                    'animal-intelligence': "I'd like to understand the Animal Intelligence animal welfare platform.",
+                    'kahulife': "Tell me about the Kahulife pet management platform and AI companion.",
+                    'tommy-ellie': "How does the Tommy & Ellie generative AI art studio work?",
                     'simon-snelder': "I'd like to learn about the premium branding and wealth management identity for Simon Snelder.",
-                    'austability': "How does the Austability platform handle global defense logistics?",
+                    'austability-web': "Tell me about the Austability enterprise web platform and digital infrastructure.",
+                    austability: "Tell me about the Austability enterprise web platform and digital infrastructure.",
+                    'austability-branding': "Tell me about the Austability brand identity and visual overhaul.",
                     'austability-video': "Tell me about the corporate storytelling approach in the Austability Video.",
                     'flexxpay': "How does the FlexxPay product video highlight fintech accessibility?",
                     'webinarlife': "What features make up the Webinarlife digital ecosystem?",
@@ -153,8 +154,10 @@ export default function Chat() {
                     'kfas-1001-inventions': "Tell me about the educational web design for KFAS / 1001 Inventions.",
                     'microsoft-ai': "How does this project showcase Microsoft's AI capabilities?",
                     'lenovo-campaigns': "Tell me about the multi-channel strategy for Lenovo Campaigns.",
+                    'payment-partners': "Tell me about the Payment Partners brand identity and corporate collateral.",
                     '1001-inventions-games': "How do the 1001 Inventions Games utilize gamification for education?",
                     'akshaak': "What is the marketplace strategy behind Akshaak?",
+                    'soundreaver': "Tell me about the Soundreaver brand and e-commerce strategy.",
                     'ai-is-rocket-fuel': "I've just read the 'AI is Rocket Fuel' article and I'd like to debate or discuss the concepts mentioned.",
                     'fluffyfriends': "I'm interested in the FluffyFriends autonomous AI factory. How does the quality assurance and n8n workflow function?",
                 };
@@ -289,16 +292,24 @@ export default function Chat() {
     };
 
     return (
-        <main className="relative min-h-screen flex flex-col overflow-x-hidden" style={{ fontFamily: FONT }}>
+        <main className="relative min-h-screen flex flex-col overflow-x-hidden">
+            <span className={robotoSlab.className} hidden aria-hidden />
+
             <div className="fixed inset-0 z-0 pointer-events-none gradient-background">
                 <SoftBackground />
             </div>
 
             <Nav />
 
-            <section className="relative z-10 flex-1 w-full px-4 pt-24 pb-12 md:pb-16">
+            <section className="relative z-10 flex-1 w-full px-4 py-14 md:py-20 pt-24 md:pt-28 pb-12 md:pb-16">
                 <div className="max-w-[700px] mx-auto text-center">
-                    <h1 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.2] text-black mb-4">
+                    <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-2">
+                        Talk to Us
+                    </span>
+                    <h1
+                        className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.1] text-black mb-4 text-balance"
+                        style={serif}
+                    >
                         Tell us about your bold idea.
                     </h1>
                     <p className="text-base text-gray-600 leading-relaxed mb-8 md:mb-10 max-w-[560px] mx-auto">
