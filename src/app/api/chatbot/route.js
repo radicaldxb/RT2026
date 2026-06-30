@@ -1,4 +1,16 @@
 // src/app/api/chatbot/route.js
+import { cookies } from "next/headers";
+import {
+  COOKIE,
+  cookieOptions,
+  getVerifySecret,
+  isPayloadValid,
+  refreshVerifiedPayload,
+  signPayload,
+  TTL,
+  verifySignedToken,
+} from "@/lib/verifyToken";
+
 const rateLimit = new Map();
 const SESSION_ID_RE = /^[a-zA-Z0-9_-]{8,64}$/;
 const REF_RE = /^[a-z0-9-]{1,64}$/;
@@ -32,8 +44,37 @@ function jsonResponse(body, status = 200) {
   });
 }
 
+async function requireVerifiedCookie() {
+  const secret = getVerifySecret();
+  if (!secret) {
+    return { error: jsonResponse({ error: "Server configuration error" }, 500) };
+  }
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get(COOKIE.verified)?.value;
+  const payload = verifySignedToken(token, secret);
+
+  if (!payload || payload.type !== "verified" || !isPayloadValid(payload)) {
+    return { error: jsonResponse({ error: "Verification required" }, 401) };
+  }
+
+  const refreshed = refreshVerifiedPayload(payload);
+  if (refreshed) {
+    cookieStore.set(
+      COOKIE.verified,
+      signPayload(refreshed, secret),
+      cookieOptions(TTL.verifySec)
+    );
+  }
+
+  return { ok: true };
+}
+
 export async function POST(req) {
   try {
+    const verified = await requireVerifiedCookie();
+    if (verified.error) return verified.error;
+
     let ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
     if (!ip) ip = req.headers.get("x-real-ip")?.trim();
     if (!ip) ip = "unknown";

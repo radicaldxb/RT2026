@@ -390,6 +390,7 @@ Guidelines for PageSpeed / Core Web Vitals and safe operation:
 - Rate limit: 40 req/min per IP
 - Input capped at 500 characters; `sessionId` and `metadata` validated/sanitized server-side
 - Webhook URL from `N8N_WEBHOOK_URL` env (server-only); never expose in client bundle
+- Chat verification cookie signed with `RT_VERIFY_SECRET` (server-only); required in production
 - 30s upstream timeout; generic error messages in production
 
 ### HTTP headers (`next.config.mjs`)

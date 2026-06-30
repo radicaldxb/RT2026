@@ -75,6 +75,7 @@ export default function Chat() {
     const [darkMode, setDarkMode] = useState(true);
     const sessionIdRef = useRef('');
     const pageContextRef = useRef({ ref: null, source: null });
+    const pendingAutoMessageRef = useRef(null);
     const searchParams = useSearchParams();
     const hasRun = useRef(false);
     const lastMessageRef = useRef('');
@@ -82,16 +83,46 @@ export default function Chat() {
     const lastMessageTimeRef = useRef(0);
     const rapidCountRef = useRef(0);
     const [isVerified, setIsVerified] = useState(false);
-    const challengeRef = useRef({ q: "5 + 2 =", a: ["7", "seven"] });
+    const challengeRef = useRef({ q: "5 + 2 =" });
 
-    const generateChallenge = () => {
-        const n1 = Math.floor(Math.random() * 9) + 1;
-        const n2 = Math.floor(Math.random() * 9) + 1;
-        const sum = n1 + n2;
-        const numberWords = { 2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve',13:'thirteen',14:'fourteen',15:'fifteen',16:'sixteen',17:'seventeen',18:'eighteen' };
-        const answers = [sum.toString()];
-        if (numberWords[sum]) answers.push(numberWords[sum]);
-        return { q: `${n1} + ${n2} =`, a: answers };
+    const issueServerChallenge = async () => {
+        try {
+            const res = await fetch('/api/verify', { credentials: 'include' });
+            if (!res.ok) return null;
+            const data = await res.json();
+            if (data?.q) challengeRef.current = { q: data.q };
+            return data?.q ?? null;
+        } catch (err) {
+            console.error('Failed to fetch verification challenge', err);
+            return null;
+        }
+    };
+
+    const submitVerificationAnswer = async (answer, isFirstAttempt) => {
+        const res = await fetch('/api/verify', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ answer }),
+        });
+
+        if (res.ok) {
+            setIsVerified(true);
+            localStorage.setItem('rt_chat_verified', 'true');
+            return { ok: true };
+        }
+
+        let data = {};
+        try {
+            data = await res.json();
+        } catch {
+            // ignore
+        }
+
+        if (data?.q) challengeRef.current = { q: data.q };
+        else await issueServerChallenge();
+
+        return { ok: false, q: challengeRef.current.q, isFirstAttempt };
     };
 
     function getTime() {
@@ -111,6 +142,7 @@ export default function Chat() {
 
         const storedVerified = localStorage.getItem('rt_chat_verified');
         if (storedVerified === 'true') setIsVerified(true);
+        else issueServerChallenge();
 
         const storedMessages = localStorage.getItem('rt_chat_messages');
         if (storedMessages) {
@@ -133,7 +165,7 @@ export default function Chat() {
         if (!hasRun.current) {
             if (initialMessage) {
                 hasRun.current = true;
-                sendMessage(initialMessage);
+                pendingAutoMessageRef.current = initialMessage;
             } else if (refParam) {
                 hasRun.current = true;
                 const projectContexts = {
@@ -162,8 +194,16 @@ export default function Chat() {
                     'fluffyfriends': "I'm interested in the FluffyFriends autonomous AI factory. How does the quality assurance and n8n workflow function?",
                 };
                 const startMsg = projectContexts[refParam] || `I'd like to learn more about the ${refParam.replace(/-/g, ' ')} project.`;
-                sendMessage(startMsg);
+                pendingAutoMessageRef.current = startMsg;
             }
+        }
+
+        if (storedVerified === 'true' && pendingAutoMessageRef.current) {
+            const pending = pendingAutoMessageRef.current;
+            pendingAutoMessageRef.current = null;
+            setTimeout(() => {
+                sendMessage(pending);
+            }, 0);
         }
     }, [searchParams]);
 
@@ -184,22 +224,39 @@ export default function Chat() {
         setShowChat(true);
         setLoading(true);
 
-        const isSystemMessage = typeof customMessage === 'string' && customMessage.length > 0;
-
-        if (!isVerified && !isSystemMessage) {
-            const answer = msg.toLowerCase().trim();
-            if (challengeRef.current.a.includes(answer)) {
-                setIsVerified(true);
-                localStorage.setItem('rt_chat_verified', 'true');
+        if (!isVerified) {
+            const isFirstAttempt = messages.length === 0;
+            try {
+                const result = await submitVerificationAnswer(msg, isFirstAttempt);
+                if (result.ok) {
+                    setTimeout(() => {
+                        setMessages((prev) => [...prev, { id: `bot-verified-${Date.now()}`, from: 'bot', type: 'text', content: "That is correct! How can I help you today?", timestamp: getTime() }]);
+                        setLoading(false);
+                        const pending = pendingAutoMessageRef.current;
+                        if (pending) {
+                            pendingAutoMessageRef.current = null;
+                            sendMessage(pending);
+                        }
+                    }, 600);
+                } else {
+                    const q = result.q || challengeRef.current.q;
+                    setTimeout(() => {
+                        setMessages((prev) => [...prev, {
+                            id: `bot-challenge-${Date.now()}`,
+                            from: 'bot',
+                            type: 'text',
+                            content: result.isFirstAttempt
+                                ? `Before we start let's make sure you are human. Please answer ${q}`
+                                : `That is incorrect. Please prove you are human: What is ${q}?`,
+                            timestamp: getTime(),
+                        }]);
+                        setLoading(false);
+                    }, 600);
+                }
+            } catch (err) {
+                console.error('Verification failed', err);
                 setTimeout(() => {
-                    setMessages((prev) => [...prev, { id: `bot-verified-${Date.now()}`, from: 'bot', type: 'text', content: "That is correct! How can I help you today?", timestamp: getTime() }]);
-                    setLoading(false);
-                }, 600);
-            } else {
-                const newChallenge = generateChallenge();
-                challengeRef.current = newChallenge;
-                setTimeout(() => {
-                    setMessages((prev) => [...prev, { id: `bot-challenge-${Date.now()}`, from: 'bot', type: 'text', content: messages.length === 0 ? `Before we start let's make sure you are human. Please answer ${newChallenge.q}` : `That is incorrect. Please prove you are human: What is ${newChallenge.q}?`, timestamp: getTime() }]);
+                    setMessages((prev) => [...prev, { id: `error-verify-${Date.now()}`, from: 'bot', type: 'text', content: 'Verification is temporarily unavailable. Please try again.', timestamp: getTime() }]);
                     setLoading(false);
                 }, 600);
             }
@@ -228,9 +285,18 @@ export default function Chat() {
             if (pageContextRef.current.source) metadata.source = pageContextRef.current.source;
             const res = await fetch('/api/chatbot', {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chatInput: msg, sessionId: sessionIdRef.current, ...(Object.keys(metadata).length > 0 && { metadata }) }),
             });
+            if (res.status === 401) {
+                localStorage.removeItem('rt_chat_verified');
+                setIsVerified(false);
+                await issueServerChallenge();
+                setMessages((prev) => [...prev, { id: `verify-expired-${Date.now()}`, from: 'bot', type: 'text', content: "Your session verification expired. Please answer the math challenge again to continue.", timestamp: getTime() }]);
+                setLoading(false);
+                return;
+            }
             if (res.status === 429) { setMessages((prev) => [...prev, { id: `rate-limit-${Date.now()}`, from: 'bot', type: 'text', content: "Whoa there! You're sending messages a bit too fast. Please take a breather and try again in a minute.", timestamp: getTime() }]); setLoading(false); return; }
             if (!res.ok) throw new Error(`Server error: ${res.status}`);
             const data = await res.json();
@@ -251,15 +317,22 @@ export default function Chat() {
         setLoading(false);
     };
 
-    const clearChat = () => {
+    const clearChat = async () => {
         const newSessionId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
         sessionIdRef.current = newSessionId;
         localStorage.setItem('rt_chat_session_id', newSessionId);
         localStorage.removeItem('rt_chat_messages');
         localStorage.removeItem('rt_chat_verified');
+        pendingAutoMessageRef.current = null;
+        try {
+            await fetch('/api/verify', { method: 'DELETE', credentials: 'include' });
+        } catch {
+            // ignore
+        }
         setIsVerified(false);
         setMessages([]);
         setShowChat(false);
+        await issueServerChallenge();
     };
 
     const theme = {
