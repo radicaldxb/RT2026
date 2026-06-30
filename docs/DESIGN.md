@@ -392,7 +392,7 @@ Guidelines for PageSpeed / Core Web Vitals and safe operation:
 - Webhook URL from `N8N_WEBHOOK_URL` env (server-only); never expose in client bundle
 - Chat verification cookie signed with `RT_VERIFY_SECRET` (server-only); required in production
 - RT-BOT knowledge base served at `GET /api/knowledge` from `rt-knowledge.md`; requires `x-knowledge-secret` header matching `RT_KNOWLEDGE_SECRET` (server-only)
-- RT-BOT system prompt: `RT-BOT-system-prompt.md` (paste into n8n Anthropic agent node for Phase 1)
+- RT-BOT system prompt served at `GET /api/prompt` from `RT-BOT-system-prompt.md`; requires `x-prompt-secret` header matching `RT_PROMPT_SECRET` (server-only). n8n fetches this live — edit the markdown in-repo only, never duplicate by hand in the n8n UI
 - 30s upstream timeout; generic error messages in production
 
 ### HTTP headers (`next.config.mjs`)
