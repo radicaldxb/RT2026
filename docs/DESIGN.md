@@ -391,6 +391,8 @@ Guidelines for PageSpeed / Core Web Vitals and safe operation:
 - Input capped at 500 characters; `sessionId` and `metadata` validated/sanitized server-side
 - Webhook URL from `N8N_WEBHOOK_URL` env (server-only); never expose in client bundle
 - Chat verification cookie signed with `RT_VERIFY_SECRET` (server-only); required in production
+- RT-BOT knowledge base served at `GET /api/knowledge` from `rt-knowledge.md`; requires `x-knowledge-secret` header matching `RT_KNOWLEDGE_SECRET` (server-only)
+- RT-BOT system prompt: `RT-BOT-system-prompt.md` (paste into n8n Anthropic agent node for Phase 1)
 - 30s upstream timeout; generic error messages in production
 
 ### HTTP headers (`next.config.mjs`)
