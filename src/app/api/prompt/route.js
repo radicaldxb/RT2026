@@ -3,7 +3,7 @@ import path from "path";
 import { timingSafeEqual } from "crypto";
 
 const PROMPT_HEADER = "x-prompt-secret";
-const PROMPT_FILE = "RT-BOT-system-prompt.md";
+const PROMPT_FILE = "RT-BOT-FINAL-system-prompt.md";
 
 function safeEqual(a, b) {
   const bufA = Buffer.from(a);

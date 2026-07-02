@@ -386,13 +386,14 @@ Guidelines for PageSpeed / Core Web Vitals and safe operation:
 - Pause `.gradient-background` animation under `prefers-reduced-motion`
 - SoftBackground skips RAF when user prefers reduced motion
 
-### API (`/api/chatbot`)
+### API (`/api/chatbot` and `/api/chat`)
 - Rate limit: 40 req/min per IP
 - Input capped at 500 characters; `sessionId` and `metadata` validated/sanitized server-side
-- Webhook URL from `N8N_WEBHOOK_URL` env (server-only); never expose in client bundle
+- `/api/chatbot`: legacy n8n proxy via `N8N_WEBHOOK_URL` (fallback, unchanged)
+- `/api/chat`: direct Anthropic API with prompt caching; Supabase conversation history; downstream events via single `N8N_CHAT_WEBHOOK` with `event` field (`qualified_lead`, `warm_lead`, `job_seeker`, `vendor_exit`)
 - Chat verification cookie signed with `RT_VERIFY_SECRET` (server-only); required in production
 - RT-BOT knowledge base served at `GET /api/knowledge` from `rt-knowledge.md`; requires `x-knowledge-secret` header matching `RT_KNOWLEDGE_SECRET` (server-only)
-- RT-BOT system prompt served at `GET /api/prompt` from `RT-BOT-system-prompt.md`; requires `x-prompt-secret` header matching `RT_PROMPT_SECRET` (server-only). n8n fetches this live — edit the markdown in-repo only, never duplicate by hand in the n8n UI
+- RT-BOT system prompt served at `GET /api/prompt` from `RT-BOT-FINAL-system-prompt.md`; requires `x-prompt-secret` header matching `RT_PROMPT_SECRET` (server-only). n8n fetches this live — edit the markdown in-repo only, never duplicate by hand in the n8n UI
 - 30s upstream timeout; generic error messages in production
 
 ### HTTP headers (`next.config.mjs`)
@@ -448,7 +449,8 @@ Guidelines for PageSpeed / Core Web Vitals and safe operation:
 | `src/app/insights/InsightArticleLayout.js` | Article template |
 | `src/app/insights/articles.js` | Structured article content |
 | `src/app/chat/chat.js` | Chat page + terminal |
-| `src/app/api/chatbot/route.js` | Chat API proxy + rate limit |
+| `src/app/api/chatbot/route.js` | Legacy chat API proxy + rate limit |
+| `src/app/api/chat/route.js` | RT-BOT direct Claude API + Supabase history |
 | `src/app/globals.css` | Fonts, gradient, utilities |
 | `next.config.mjs` | Redirects, security headers |
 | `docs/LANDING_V2.md` | Beat timing, scroll constants, regression list |
