@@ -238,10 +238,13 @@ export async function POST(req) {
     const priorUserTurns = session.messages.filter((m) => m.role === "user").length;
     const turnNumber = priorUserTurns + 1;
     const exitCategory = detectEarlyExit(chatInput, turnNumber);
+    const isFirstApiTurn = session.messages.length === 0;
 
     let userContent = chatInput;
     if (exitCategory) {
       userContent = `[System note: early_exit_category=${exitCategory}]\n\n${chatInput}`;
+    } else if (isFirstApiTurn) {
+      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?" The message below is the visitor's answer. Do not repeat that opening. Proceed to name capture (Turn 2).]\n\n${chatInput}`;
     }
 
     const conversationHistory = [
