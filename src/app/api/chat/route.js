@@ -17,7 +17,7 @@ import {
   categoryFromScore,
   scoreConversation,
 } from "@/lib/rtbot/scorer";
-import { getVisitorCountry, isGdprRequired } from "@/lib/rtbot/gdpr";
+import { applyVisitorGeo, getVisitorCountry } from "@/lib/rtbot/gdpr";
 import {
   extractLeadFields,
   isVendorExitMessage,
@@ -303,8 +303,7 @@ export async function POST(req) {
       return jsonResponse({ error: "Server configuration error" }, 500);
     }
 
-    const country = getVisitorCountry(req);
-    const gdprRequired = isGdprRequired(country);
+    const country = await getVisitorCountry(req);
 
     let session;
     try {
@@ -314,8 +313,9 @@ export async function POST(req) {
       return jsonResponse({ error: "Server configuration error" }, 500);
     }
 
-    session.meta.gdpr_required = gdprRequired;
-    session.meta.visitor_country = country || null;
+    applyVisitorGeo(session.meta, country);
+    const resolvedCountry = session.meta.visitor_country || "unknown";
+    const gdprRequired = session.meta.gdpr_required === true;
 
     const priorUserTurns = session.messages.filter((m) => m.role === "user").length;
     const turnNumber = priorUserTurns + 1;
@@ -356,7 +356,7 @@ export async function POST(req) {
             },
             {
               type: "text",
-              text: buildPageContext(metadata, country, gdprRequired),
+              text: buildPageContext(metadata, resolvedCountry, gdprRequired),
             },
           ],
           messages: conversationHistory,
