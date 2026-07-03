@@ -1,29 +1,59 @@
 const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+const SYSTEM_NOTE_RE = /^\[System note:[\s\S]*?\]\s*\n\n?/i;
 
-function userText(messages) {
-  return messages
-    .filter((m) => m.role === "user")
-    .map((m) => m.content)
-    .join("\n")
-    .toLowerCase();
+const CHITCHAT_RE =
+  /^(hello|hi|hey|yes|no|ok|okay|sure|thanks|thank you|yep|nope|correct|fine|good|great|cool|maybe|please|absolutely|definitely)\.?$/i;
+
+const NAME_LABEL_RE =
+  /(?:my name is|i am|i'm|im|this is|it's|its|call me|name's|name is)\s+([A-Za-z][A-Za-z' -]{0,48}[A-Za-z])/i;
+
+const SIMPLE_NAME_RE = /^[A-Za-z][a-z]+(?:\s+[A-Za-z][a-z'-]+){0,2}$/;
+
+/** Strip server-injected system notes from a stored user message. */
+export function stripSystemNote(content) {
+  if (typeof content !== "string") return "";
+  return content.replace(SYSTEM_NOTE_RE, "").trim();
 }
 
-function hasAny(text, patterns) {
-  return patterns.some((p) => text.includes(p));
+/** Actual visitor text only — never assistant content or system notes. */
+export function visitorMessages(messages) {
+  return messages
+    .filter((m) => m.role === "user")
+    .map((m) => stripSystemNote(m.content))
+    .filter((text) => text.length > 0);
+}
+
+function titleCaseName(raw) {
+  return raw
+    .trim()
+    .split(/\s+/)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(" ");
+}
+
+function looksLikeBareName(text) {
+  if (!text || text.length > 50) return false;
+  if (EMAIL_RE.test(text)) return false;
+  if (CHITCHAT_RE.test(text)) return false;
+  if (/\d/.test(text)) return false;
+  if (/[?!@#$%^&*(){}[\]|\\/<>,]/.test(text)) return false;
+  return SIMPLE_NAME_RE.test(text);
 }
 
 export function extractCapturedContact(messages) {
-  const combined = messages.map((m) => m.content).join("\n");
+  const visitor = visitorMessages(messages);
+  const combined = visitor.join("\n");
   const emailMatch = combined.match(EMAIL_RE);
-  let name = null;
 
-  for (const msg of [...messages].reverse()) {
-    if (msg.role !== "user") continue;
-    const nameMatch = msg.content.match(
-      /(?:my name is|i am|i'm|this is)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)/i
-    );
-    if (nameMatch) {
-      name = nameMatch[1].trim();
+  let name = null;
+  for (const text of [...visitor].reverse()) {
+    const labelMatch = text.match(NAME_LABEL_RE);
+    if (labelMatch) {
+      name = titleCaseName(labelMatch[1]);
+      break;
+    }
+    if (looksLikeBareName(text)) {
+      name = titleCaseName(text);
       break;
     }
   }
@@ -32,6 +62,52 @@ export function extractCapturedContact(messages) {
     email: emailMatch ? emailMatch[0] : null,
     name,
   };
+}
+
+export function extractCompany(messages) {
+  for (const text of [...visitorMessages(messages)].reverse()) {
+    const patterns = [
+      /(?:company(?:\s+name)?|company is)\s+(?:is\s+)?([A-Za-z0-9][A-Za-z0-9 &.'-]{1,58})/i,
+      /(?:i work at|we are|we're|work at)\s+([A-Za-z0-9][A-Za-z0-9 &.'-]{1,58})/i,
+      /(?:our company is)\s+([A-Za-z0-9][A-Za-z0-9 &.'-]{1,58})/i,
+    ];
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (match) return match[1].trim();
+    }
+  }
+  return null;
+}
+
+export function extractRoleInterest(messages) {
+  for (const text of [...visitorMessages(messages)].reverse()) {
+    if (/looking for help/i.test(text)) continue;
+    if (/bold idea|current business/i.test(text)) continue;
+
+    const patterns = [
+      /(?:role|position|job)(?:\s+i(?:'m| am)\s+looking for)?\s*(?:is\s+)?(?:a\s+)?([A-Za-z][A-Za-z0-9 /,&-]{2,80})/i,
+      /(?:interested in|looking for a)\s+(?:a\s+)?([A-Za-z][A-Za-z0-9 /,&-]{2,80})/i,
+      /(?:i(?:'m| am) a)\s+([A-Za-z][A-Za-z0-9 /,&-]{2,80})/i,
+      /(?:work as|want to be)\s+(?:a\s+)?([A-Za-z][A-Za-z0-9 /,&-]{2,80})/i,
+    ];
+
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (!match) continue;
+      const value = match[1].trim();
+      if (/^(help|work|something|a job|employment)\b/i.test(value)) continue;
+      return value;
+    }
+  }
+  return null;
+}
+
+function userText(messages) {
+  return visitorMessages(messages).join("\n").toLowerCase();
+}
+
+function hasAny(text, patterns) {
+  return patterns.some((p) => text.includes(p));
 }
 
 export function scoreConversation(messages) {

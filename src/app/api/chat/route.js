@@ -174,36 +174,53 @@ async function dispatchQualificationEvents({
     return meta;
   }
 
-  const canFireEmailWebhook =
-    wrapUp.confirmed && fields.email && meta.gdpr_opt_in !== false;
+  const hasConfirmedOptIn =
+    (wrapUp.confirmed || meta.wrap_up_confirmed) && meta.gdpr_opt_in !== false;
+
+  const canFireEmailWebhook = hasConfirmedOptIn && fields.email;
 
   if (canFireEmailWebhook) {
     const gdprOptIn = gdprRequired ? meta.gdpr_opt_in === true : true;
 
     if (score.total >= 9 && !meta.qualified_fired) {
-      meta.email_opt_in = true;
-      await fireQualifiedLead({
+      const sent = await fireQualifiedLead({
         fields,
         score,
         unsubscribeToken,
         gdprOptIn,
       });
-      meta.qualified_fired = true;
+      if (sent) {
+        meta.email_opt_in = true;
+        meta.qualified_fired = true;
+        meta.last_webhook_event = "qualified_lead";
+      } else {
+        meta.last_webhook_error = "qualified_lead_failed";
+      }
     } else if (
       score.total >= 5 &&
       score.total <= 8 &&
       fields.email &&
       !meta.warm_fired
     ) {
-      meta.email_opt_in = true;
-      await fireWarmLead({
+      const sent = await fireWarmLead({
         fields,
         score,
         unsubscribeToken,
         gdprOptIn,
       });
-      meta.warm_fired = true;
+      if (sent) {
+        meta.email_opt_in = true;
+        meta.warm_fired = true;
+        meta.last_webhook_event = "warm_lead";
+      } else {
+        meta.last_webhook_error = "warm_lead_failed";
+      }
     }
+  } else if (meta.wrap_up_pending && fields.email && !meta.wrap_up_confirmed) {
+    meta.last_webhook_skip = "awaiting_confirmation";
+  } else if (meta.wrap_up_confirmed && fields.email && !meta.qualified_fired && !meta.warm_fired) {
+    if (score.total < 5) meta.last_webhook_skip = "score_below_5";
+    else if (score.total >= 9 && meta.qualified_fired) meta.last_webhook_skip = "already_fired";
   }
 
   const vendorReady =
@@ -214,9 +231,14 @@ async function dispatchQualificationEvents({
     !meta.vendor_fired;
 
   if (vendorReady && !shouldBlockWebhook(meta)) {
-    meta.email_opt_in = true;
-    await fireVendor({ fields, unsubscribeToken });
-    meta.vendor_fired = true;
+    const sent = await fireVendor({ fields, unsubscribeToken });
+    if (sent) {
+      meta.email_opt_in = true;
+      meta.vendor_fired = true;
+      meta.last_webhook_event = "vendor";
+    } else {
+      meta.last_webhook_error = "vendor_failed";
+    }
   }
 
   if (exitCategory === "vendor") {
@@ -231,9 +253,14 @@ async function dispatchQualificationEvents({
     !meta.job_seeker_fired;
 
   if (jobReady && !shouldBlockWebhook(meta)) {
-    meta.email_opt_in = true;
-    await fireJobSeeker({ fields, unsubscribeToken });
-    meta.job_seeker_fired = true;
+    const sent = await fireJobSeeker({ fields, unsubscribeToken });
+    if (sent) {
+      meta.email_opt_in = true;
+      meta.job_seeker_fired = true;
+      meta.last_webhook_event = "job_seeker";
+    } else {
+      meta.last_webhook_error = "job_seeker_failed";
+    }
   }
 
   if (exitCategory === "jobseeker") {

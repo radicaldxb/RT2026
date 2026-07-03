@@ -1,4 +1,9 @@
-import { extractCapturedContact } from "./scorer";
+import {
+  extractCapturedContact,
+  extractCompany,
+  extractRoleInterest,
+  visitorMessages,
+} from "./scorer";
 
 const URL_RE = /https?:\/\/[^\s<>"']+|(?:www\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 
@@ -13,15 +18,27 @@ export function isWrapUpMessage(text) {
   return (
     /before i send this over/i.test(text) ||
     /does that look right/i.test(text) ||
-    /do you give permission/i.test(text)
+    /look right to you/i.test(text) ||
+    /do you give permission/i.test(text) ||
+    /permission to receive emails/i.test(text) ||
+    /you will receive a follow-up from radical thinking/i.test(text)
   );
 }
 
 export function isAffirmative(text) {
   if (!text || typeof text !== "string") return false;
   const trimmed = text.trim();
-  if (NEGATIVE_RE.test(trimmed)) return false;
-  return AFFIRMATIVE_RE.test(trimmed);
+  if (!trimmed || NEGATIVE_RE.test(trimmed)) return false;
+  if (AFFIRMATIVE_RE.test(trimmed)) return true;
+
+  // Short natural confirmations: "yes please", "that's fine", "go for it"
+  if (trimmed.length <= 60) {
+    return /\b(yes|yeah|yep|yup|sure|correct|right|fine|good|absolutely|definitely|please)\b/i.test(
+      trimmed
+    );
+  }
+
+  return false;
 }
 
 export function isNegative(text) {
@@ -34,34 +51,9 @@ export function isVendorExitMessage(text) {
   return /not looking to bring on new vendors/i.test(text);
 }
 
-function extractRoleInterest(messages) {
-  for (const msg of [...messages].reverse()) {
-    if (msg.role !== "user") continue;
-    const roleMatch = msg.content.match(
-      /(?:looking for|interested in|role|position|work as)\s+(.{3,120})/i
-    );
-    if (roleMatch) return roleMatch[1].trim();
-  }
-  return null;
-}
-
-function extractCompany(messages) {
-  const combined = messages.map((m) => m.content).join("\n");
-  const patterns = [
-    /(?:company(?:\s+name)?|we(?:'re| are)|i work at|from)\s+(?:is\s+)?([A-Z][A-Za-z0-9 &.'-]{2,60})/i,
-    /(?:at|for)\s+([A-Z][A-Za-z0-9 &.'-]{2,40})/,
-  ];
-  for (const pattern of patterns) {
-    const match = combined.match(pattern);
-    if (match) return match[1].trim();
-  }
-  return null;
-}
-
 function extractLocation(messages) {
-  for (const msg of [...messages].reverse()) {
-    if (msg.role !== "user") continue;
-    const locMatch = msg.content.match(
+  for (const text of [...visitorMessages(messages)].reverse()) {
+    const locMatch = text.match(
       /(?:based in|located in|from|i(?:'m| am) in)\s+([A-Za-z][A-Za-z\s,.-]{2,40})/i
     );
     if (locMatch) return locMatch[1].trim();
@@ -70,9 +62,7 @@ function extractLocation(messages) {
 }
 
 function extractProblemSummary(messages) {
-  for (const msg of messages) {
-    if (msg.role !== "user") continue;
-    const text = msg.content.trim();
+  for (const text of visitorMessages(messages)) {
     if (text.length < 20 || text.length > 280) continue;
     if (/^(yes|no|ok|hello|hi)\b/i.test(text)) continue;
     if (/@/.test(text)) continue;
@@ -97,8 +87,8 @@ function extractSituationRead(messages) {
 
 export function extractLeadFields(messages, meta = {}) {
   const contact = extractCapturedContact(messages);
-  const combined = messages.map((m) => m.content).join("\n");
-  const urlMatch = combined.match(URL_RE);
+  const visitorCombined = visitorMessages(messages).join("\n");
+  const urlMatch = visitorCombined.match(URL_RE);
 
   return {
     name: meta.captured_name || contact.name || null,

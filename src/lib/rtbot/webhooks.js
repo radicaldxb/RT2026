@@ -5,27 +5,47 @@ const WEBHOOK_ENV = {
   vendor: "N8N_VENDOR_WEBHOOK",
 };
 
-async function postWebhook(url, payload) {
-  if (!url) return;
+async function postWebhook(url, event, payload) {
+  if (!url) {
+    console.error(`Webhook skipped (${event}): no URL configured`);
+    return false;
+  }
+
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10_000);
-    await fetch(url, {
+    const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
     clearTimeout(timeout);
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      console.error(
+        `Webhook failed (${event}): HTTP ${res.status} ${res.statusText}`,
+        body.slice(0, 500)
+      );
+      return false;
+    }
+
+    return true;
   } catch (err) {
-    console.error("Webhook dispatch failed:", err);
+    console.error(`Webhook dispatch failed (${event}):`, err);
+    return false;
   }
 }
 
 function webhookUrl(event) {
   const key = WEBHOOK_ENV[event];
-  if (!key) return null;
-  return process.env[key] || null;
+  if (key && process.env[key]) {
+    return process.env[key];
+  }
+
+  // Legacy single-webhook fallback (payload includes event field)
+  return process.env.N8N_CHAT_WEBHOOK || null;
 }
 
 export function shouldBlockWebhook(meta) {
@@ -33,7 +53,7 @@ export function shouldBlockWebhook(meta) {
 }
 
 export async function fireQualifiedLead({ fields, score, unsubscribeToken, gdprOptIn }) {
-  await postWebhook(webhookUrl("qualified_lead"), {
+  return postWebhook(webhookUrl("qualified_lead"), "qualified_lead", {
     event: "qualified_lead",
     name: fields.name,
     email: fields.email,
@@ -48,7 +68,7 @@ export async function fireQualifiedLead({ fields, score, unsubscribeToken, gdprO
 }
 
 export async function fireWarmLead({ fields, score, unsubscribeToken, gdprOptIn }) {
-  await postWebhook(webhookUrl("warm_lead"), {
+  return postWebhook(webhookUrl("warm_lead"), "warm_lead", {
     event: "warm_lead",
     name: fields.name,
     email: fields.email,
@@ -60,7 +80,7 @@ export async function fireWarmLead({ fields, score, unsubscribeToken, gdprOptIn 
 }
 
 export async function fireJobSeeker({ fields, unsubscribeToken }) {
-  await postWebhook(webhookUrl("job_seeker"), {
+  return postWebhook(webhookUrl("job_seeker"), "job_seeker", {
     event: "job_seeker",
     name: fields.name,
     email: fields.email,
@@ -70,7 +90,7 @@ export async function fireJobSeeker({ fields, unsubscribeToken }) {
 }
 
 export async function fireVendor({ fields, unsubscribeToken }) {
-  await postWebhook(webhookUrl("vendor"), {
+  return postWebhook(webhookUrl("vendor"), "vendor", {
     event: "vendor",
     name: fields.name,
     email: fields.email,

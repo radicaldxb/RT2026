@@ -105,6 +105,51 @@ All case studies: https://radical-thinking.net/work
 
 When a user arrives from a work page, metadata.ref equals the project slug below.
 
+Portfolio image paths (exact filenames, never guess):
+
+- slug: fluffyfriends
+  image: /Images/Portfolio/fluffyfriends.webp
+- slug: kahulife
+  image: /Images/Portfolio/kahulife.webp
+- slug: tommy-ellie
+  image: /Images/Portfolio/Tommy-Ellie.webp
+- slug: animal-intelligence
+  image: /Images/Portfolio/animal-intelligence.webp
+- slug: microsoft-ai
+  image: /Images/Portfolio/microsoft-ai.webp
+- slug: webinarlife
+  image: /Images/Portfolio/Webinarlife.webp
+- slug: simon-snelder
+  image: /Images/Portfolio/Simonsnelder.webp
+- slug: austability-web
+  image: /Images/Portfolio/Austability.webp
+- slug: austability-branding
+  image: /Images/Portfolio/Austability-logo.webp
+- slug: austability-video
+  image: /Images/Portfolio/austability-video.webp
+- slug: lenovo-campaigns
+  image: /Images/Portfolio/lenovo.webp
+- slug: payment-partners
+  image: /Images/Portfolio/Paymentpartner.webp
+- slug: influence-my-world
+  image: /Images/Portfolio/Influence-my-world.webp
+- slug: crypto-x
+  image: /Images/Portfolio/crypto-x.webp
+- slug: akshaak
+  image: /Images/Portfolio/Akshaak.webp
+- slug: soundreaver
+  image: /Images/Portfolio/Soundreaver.webp
+- slug: 1001-inventions-games
+  image: /Images/Portfolio/1001-games.webp
+- slug: kfas-1001-inventions
+  image: /Images/Portfolio/kfas.webp
+- slug: ai-networks
+  image: /Images/Portfolio/AINetworks-logo.webp
+- slug: bella-conversational-ai
+  image: /Images/Portfolio/Bella-logo.webp
+- slug: flexxpay
+  image: /Images/Portfolio/Flexxpay.webp
+
 ### FluffyFriends
 - slug: fluffyfriends
 - url: https://radical-thinking.net/work/fluffyfriends

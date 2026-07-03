@@ -60,9 +60,9 @@ const ChatImage = ({ node, ...props }) => {
 };
 
 const quickMessages = [
-    'I want to start a project',
-    'What AI solutions have you built?',
-    'Tell me about your services',
+    'I have a bold idea',
+    'I need help with my business',
+    'Tell me about Radical Thinking',
     'Show me your work',
 ];
 
