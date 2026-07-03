@@ -20,14 +20,12 @@ import {
 import { isGdprRequired } from "@/lib/rtbot/gdpr";
 import {
   extractLeadFields,
-  isVendorExitMessage,
   isWrapUpMessage,
   resolveWrapUpConfirmation,
 } from "@/lib/rtbot/wrapUp";
 import {
   fireJobSeeker,
   fireQualifiedLead,
-  fireVendor,
   fireWarmLead,
   shouldBlockWebhook,
 } from "@/lib/rtbot/webhooks";
@@ -199,22 +197,6 @@ async function dispatchQualificationEvents({
       meta.warm_fired = true;
       meta.email_opt_in = true;
     }
-  }
-
-  const vendorReady =
-    (exitCategory === "vendor" || meta.vendor_flow) &&
-    fields.email &&
-    fields.company &&
-    isVendorExitMessage(assistantReply) &&
-    !meta.vendor_fired;
-
-  if (vendorReady && !shouldBlockWebhook(meta)) {
-    await fireVendor({ fields, unsubscribeToken });
-    meta.vendor_fired = true;
-  }
-
-  if (exitCategory === "vendor") {
-    meta.vendor_flow = true;
   }
 
   const jobReady =

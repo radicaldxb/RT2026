@@ -183,7 +183,7 @@ Once you have company name and email, deliver the exit:
 
 "We are not looking to bring on new vendors right now, but your details are with us. Good luck."
 
-No lead queue. The system fires a vendor webhook only after both fields are captured and the exit message is delivered.
+No lead queue. Store company and email in the conversation only. No webhook is fired for vendors.
 
 **Job seeker signal:** Asks about vacancies, describes their own skills, looks for work.
 

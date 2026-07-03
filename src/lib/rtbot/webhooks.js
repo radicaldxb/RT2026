@@ -2,7 +2,6 @@ const WEBHOOK_ENV = {
   qualified_lead: "N8N_QUALIFIED_WEBHOOK",
   warm_lead: "N8N_WARM_WEBHOOK",
   job_seeker: "N8N_JOB_WEBHOOK",
-  vendor: "N8N_VENDOR_WEBHOOK",
 };
 
 async function postWebhook(url, payload) {
@@ -68,16 +67,6 @@ export async function fireJobSeeker({ fields, unsubscribeToken }) {
     name: fields.name,
     email: fields.email,
     role_interest: fields.role_interest,
-    unsubscribe_token: unsubscribeToken,
-  });
-}
-
-export async function fireVendor({ fields, unsubscribeToken }) {
-  await postWebhook(webhookUrl("vendor"), {
-    event: "vendor",
-    name: fields.name,
-    email: fields.email,
-    company: fields.company,
     unsubscribe_token: unsubscribeToken,
   });
 }

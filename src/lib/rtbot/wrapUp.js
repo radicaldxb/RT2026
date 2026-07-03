@@ -29,11 +29,6 @@ export function isNegative(text) {
   return NEGATIVE_RE.test(text.trim());
 }
 
-export function isVendorExitMessage(text) {
-  if (!text || typeof text !== "string") return false;
-  return /not looking to bring on new vendors/i.test(text);
-}
-
 function extractRoleInterest(messages) {
   for (const msg of [...messages].reverse()) {
     if (msg.role !== "user") continue;
