@@ -23,3 +23,13 @@ yarn-debug.log*
 ts-debug.log*
 .env*.local
 .vercel
+
+# Local video capture assets (generated, not for repo)
+/public/videos/
+/public/ambient-capture.html
+/public/formula-capture.html
+/scripts/capture-ambient-video.mjs
+/scripts/capture-formula-video.mjs
+.ambient-frames/
+.ambient-capture-tmp/
+.formula-capture-tmp/
