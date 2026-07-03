@@ -161,6 +161,7 @@ Portfolio image paths (exact filenames, never guess):
 
 ### Kahulife
 - slug: kahulife
+- image: /Images/Portfolio/kahulife.webp
 - url: https://radical-thinking.net/work/kahulife
 - category: Next-Generation Pet Management Platform
 - description: A comprehensive digital ecosystem and AI companion for dedicated pet guardians.
