@@ -13,38 +13,35 @@ function jsonResponse(body, status = 200) {
   });
 }
 
-export async function POST(req) {
+async function handleUnsubscribe(token) {
+  if (!UUID_RE.test(token)) {
+    return jsonResponse({ success: false }, 404);
+  }
+
+  const conversation = await findConversationByUnsubscribeToken(token);
+  if (!conversation) {
+    return jsonResponse({ success: false }, 404);
+  }
+
+  if (conversation.meta?.no_contact === true) {
+    return jsonResponse({ success: false }, 404);
+  }
+
+  await recordUnsubscribe({
+    token,
+    sessionId: conversation.session_id,
+    meta: conversation.meta || {},
+  });
+
+  return jsonResponse({ success: true });
+}
+
+export async function GET(req) {
   try {
-    let body;
-    try {
-      body = await req.json();
-    } catch {
-      return jsonResponse({ error: "Invalid JSON body" }, 400);
-    }
-
-    const token = typeof body?.token === "string" ? body.token.trim() : "";
-    if (!UUID_RE.test(token)) {
-      return jsonResponse({ ok: false, reason: "invalid" }, 404);
-    }
-
-    const conversation = await findConversationByUnsubscribeToken(token);
-    if (!conversation) {
-      return jsonResponse({ ok: false, reason: "invalid" }, 404);
-    }
-
-    if (conversation.meta?.no_contact === true) {
-      return jsonResponse({ ok: false, reason: "already_used" }, 404);
-    }
-
-    await recordUnsubscribe({
-      token,
-      sessionId: conversation.session_id,
-      meta: conversation.meta || {},
-    });
-
-    return jsonResponse({ ok: true });
+    const token = new URL(req.url).searchParams.get("token")?.trim() || "";
+    return await handleUnsubscribe(token);
   } catch (err) {
     console.error("Unsubscribe failed:", err);
-    return jsonResponse({ error: "Server error" }, 500);
+    return jsonResponse({ success: false }, 500);
   }
 }

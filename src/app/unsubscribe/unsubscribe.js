@@ -24,14 +24,10 @@ export default function UnsubscribeClient() {
 
     (async () => {
       try {
-        const res = await fetch("/api/unsubscribe", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token }),
-        });
+        const res = await fetch(`/api/unsubscribe?token=${encodeURIComponent(token)}`);
         const data = await res.json();
         if (cancelled) return;
-        setStatus(data.ok ? "success" : "invalid");
+        setStatus(data.success ? "success" : "invalid");
       } catch {
         if (!cancelled) setStatus("invalid");
       }
@@ -72,11 +68,9 @@ export default function UnsubscribeClient() {
               >
                 You have been unsubscribed.
               </h1>
-              <p className="text-gray-600 leading-relaxed mb-2">
-                You will not receive any further emails from Radical Thinking.
-              </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                If this was a mistake, you can restart the conversation at any time.
+                You will not receive any further emails from Radical Thinking. If this was a
+                mistake, you can restart the conversation at any time.
               </p>
             </>
           ) : (
@@ -87,9 +81,6 @@ export default function UnsubscribeClient() {
               >
                 This unsubscribe link is not valid or has already been used.
               </h1>
-              <p className="text-gray-600 leading-relaxed mb-8">
-                If you still want to stop emails from us, start a new chat and ask to be removed.
-              </p>
             </>
           )}
 

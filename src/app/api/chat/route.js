@@ -17,15 +17,17 @@ import {
   categoryFromScore,
   scoreConversation,
 } from "@/lib/rtbot/scorer";
-import { isGdprRequired } from "@/lib/rtbot/gdpr";
+import { getVisitorCountry, isGdprRequired } from "@/lib/rtbot/gdpr";
 import {
   extractLeadFields,
+  isVendorExitMessage,
   isWrapUpMessage,
   resolveWrapUpConfirmation,
 } from "@/lib/rtbot/wrapUp";
 import {
   fireJobSeeker,
   fireQualifiedLead,
+  fireVendor,
   fireWarmLead,
   shouldBlockWebhook,
 } from "@/lib/rtbot/webhooks";
@@ -132,6 +134,10 @@ async function dispatchQualificationEvents({
   assistantReply,
   unsubscribeToken,
 }) {
+  if (session.meta?.no_contact === true) {
+    return { ...session.meta };
+  }
+
   const meta = { ...session.meta };
   const gdprRequired = meta.gdpr_required === true;
   const fields = extractLeadFields(conversationHistory, meta);
@@ -175,6 +181,7 @@ async function dispatchQualificationEvents({
     const gdprOptIn = gdprRequired ? meta.gdpr_opt_in === true : true;
 
     if (score.total >= 9 && !meta.qualified_fired) {
+      meta.email_opt_in = true;
       await fireQualifiedLead({
         fields,
         score,
@@ -182,21 +189,38 @@ async function dispatchQualificationEvents({
         gdprOptIn,
       });
       meta.qualified_fired = true;
-      meta.email_opt_in = true;
     } else if (
       score.total >= 5 &&
       score.total <= 8 &&
       fields.email &&
       !meta.warm_fired
     ) {
+      meta.email_opt_in = true;
       await fireWarmLead({
         fields,
+        score,
         unsubscribeToken,
         gdprOptIn,
       });
       meta.warm_fired = true;
-      meta.email_opt_in = true;
     }
+  }
+
+  const vendorReady =
+    (exitCategory === "vendor" || meta.vendor_flow) &&
+    fields.email &&
+    fields.company &&
+    isVendorExitMessage(assistantReply) &&
+    !meta.vendor_fired;
+
+  if (vendorReady && !shouldBlockWebhook(meta)) {
+    meta.email_opt_in = true;
+    await fireVendor({ fields, unsubscribeToken });
+    meta.vendor_fired = true;
+  }
+
+  if (exitCategory === "vendor") {
+    meta.vendor_flow = true;
   }
 
   const jobReady =
@@ -207,9 +231,9 @@ async function dispatchQualificationEvents({
     !meta.job_seeker_fired;
 
   if (jobReady && !shouldBlockWebhook(meta)) {
+    meta.email_opt_in = true;
     await fireJobSeeker({ fields, unsubscribeToken });
     meta.job_seeker_fired = true;
-    meta.email_opt_in = true;
   }
 
   if (exitCategory === "jobseeker") {
@@ -279,7 +303,7 @@ export async function POST(req) {
       return jsonResponse({ error: "Server configuration error" }, 500);
     }
 
-    const country = req.headers.get("x-country") || "";
+    const country = getVisitorCountry(req);
     const gdprRequired = isGdprRequired(country);
 
     let session;
@@ -302,7 +326,7 @@ export async function POST(req) {
     if (exitCategory) {
       userContent = `[System note: early_exit_category=${exitCategory}]\n\n${chatInput}`;
     } else if (isFirstApiTurn) {
-      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?" The message below is the visitor's answer. Do not repeat that opening. Proceed to name capture (Turn 2).]\n\n${chatInput}`;
+      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?" The message below is the visitor's answer. Do not repeat that opening. Ask for their name if not yet captured, then "Hi [Name], let's get into it." and route by their answer.]\n\n${chatInput}`;
     }
 
     const conversationHistory = [
