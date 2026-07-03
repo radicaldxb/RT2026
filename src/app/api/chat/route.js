@@ -31,6 +31,7 @@ import {
   fireWarmLead,
   shouldBlockWebhook,
 } from "@/lib/rtbot/webhooks";
+import { stripInternalNarration } from "@/lib/rtbot/replySanitizer";
 import { loadConversation, saveConversation } from "@/lib/rtbot/conversations";
 
 const rateLimit = new Map();
@@ -353,7 +354,7 @@ export async function POST(req) {
     if (exitCategory) {
       userContent = `[System note: early_exit_category=${exitCategory}]\n\n${chatInput}`;
     } else if (isFirstApiTurn) {
-      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?" The message below is the visitor's answer. Do not repeat that opening. Ask for their name if not yet captured, then "Hi [Name], let's get into it." and route by their answer.]\n\n${chatInput}`;
+      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?" The message below is the visitor's answer. Do not repeat that opening. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then address their message.]\n\n${chatInput}`;
     }
 
     const conversationHistory = [
@@ -400,11 +401,13 @@ export async function POST(req) {
       clearTimeout(timeout);
     }
 
-    const reply = response.content
+    const rawReply = response.content
       .filter((block) => block.type === "text")
       .map((block) => block.text)
       .join("")
       .trim();
+
+    const reply = stripInternalNarration(rawReply) || rawReply;
 
     const updatedHistory = [
       ...conversationHistory,

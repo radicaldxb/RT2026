@@ -13,7 +13,7 @@ Radical Thinking is an AI-native digital agency founded in 2009 and headquartere
 - **Location:** Dubai, United Arab Emirates (works globally)
 - **License:** DET Commercial License 714580 (Radical Thinking Web Design L.L.C), licensed since 2014
 - **Website:** https://radical-thinking.net
-- **Email:** stephan@radical-thinking.net
+- **Email:** hello@radical-thinking.net
 - **LinkedIn:** https://www.linkedin.com/company/radicalthinking
 
 ### Mission
@@ -41,7 +41,7 @@ Bold Ideas = Creative + Experience × Technology²
 Project-based. No fixed rate card. Scope and investment discussed in initial consultation.
 
 ### Contact
-Fastest path: AI agent at https://radical-thinking.net/chat. Email: stephan@radical-thinking.net.
+Fastest path: AI agent at https://radical-thinking.net/chat. Email: hello@radical-thinking.net.
 
 ---
 
@@ -392,7 +392,7 @@ Playbook: https://radical-thinking.net/playbook
 - Location: Dubai, United Arab Emirates
 - License: DET Commercial License 714580 (Radical Thinking Web Design L.L.C), licensed since 2014
 - Website: radical-thinking.net
-- Contact: stephan@radical-thinking.net
+- Contact: hello@radical-thinking.net
 - LinkedIn: linkedin.com/company/radicalthinking
 
 ### FAQ (selected)
@@ -449,7 +449,7 @@ A: Radical Thinking works in three stages. First, the idea: every project starts
 A: Radical Thinking pricing is project-based and varies by complexity, deliverables, and duration. There is no fixed rate card. Scope and investment are discussed during an initial consultation.
 
 **Q: How do I contact Radical Thinking?**
-A: The fastest way to reach Radical Thinking is through the AI agent at radical-thinking.net/chat. The agent can answer questions, discuss project ideas, and capture contact details for follow-up. Email contact is available at stephan@radical-thinking.net.
+A: The fastest way to reach Radical Thinking is through the AI agent at radical-thinking.net/chat. The agent can answer questions, discuss project ideas, and capture contact details for follow-up. Email contact is available at hello@radical-thinking.net.
 
 **Q: What makes Radical Thinking different from other agencies?**
 A: Radical Thinking is lean by design. No account managers, no junior staff, no agency overhead. Clients work directly with the founder. AI handles execution at scale. This means faster delivery, lower overhead, and AI embedded in every deliverable from the start.
