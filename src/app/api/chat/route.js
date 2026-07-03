@@ -15,9 +15,22 @@ import { getKnowledge } from "@/lib/rtbot/knowledgeLoader";
 import { detectEarlyExit } from "@/lib/rtbot/exitDetector";
 import {
   categoryFromScore,
-  extractCapturedContact,
   scoreConversation,
 } from "@/lib/rtbot/scorer";
+import { isGdprRequired } from "@/lib/rtbot/gdpr";
+import {
+  extractLeadFields,
+  isVendorExitMessage,
+  isWrapUpMessage,
+  resolveWrapUpConfirmation,
+} from "@/lib/rtbot/wrapUp";
+import {
+  fireJobSeeker,
+  fireQualifiedLead,
+  fireVendor,
+  fireWarmLead,
+  shouldBlockWebhook,
+} from "@/lib/rtbot/webhooks";
 import { loadConversation, saveConversation } from "@/lib/rtbot/conversations";
 
 const rateLimit = new Map();
@@ -91,31 +104,24 @@ async function requireVerifiedCookie() {
   return { ok: true };
 }
 
-function buildPageContext(metadata) {
-  return `Current page context:\n- ref: ${metadata.ref || "none"}\n- source: ${metadata.source || "none"}`;
+function buildPageContext(metadata, country, gdprRequired) {
+  return `Current page context:
+- ref: ${metadata.ref || "none"}
+- source: ${metadata.source || "none"}
+- gdpr_required: ${gdprRequired}
+- visitor_country: ${country || "unknown"}`;
 }
 
-async function postWebhook(url, payload) {
-  if (!url) return;
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10_000);
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
-  } catch (err) {
-    console.error("Webhook dispatch failed:", err);
-  }
-}
-
-async function postChatWebhook(event, payload) {
-  const url = process.env.N8N_CHAT_WEBHOOK;
-  if (!url) return;
-  await postWebhook(url, { event, ...payload });
+function mergeContactIntoMeta(meta, fields) {
+  if (fields.email) meta.captured_email = fields.email;
+  if (fields.name) meta.captured_name = fields.name;
+  if (fields.company) meta.captured_company = fields.company;
+  if (fields.url) meta.captured_url = fields.url;
+  if (fields.location) meta.captured_location = fields.location;
+  if (fields.problem_summary) meta.problem_summary = fields.problem_summary;
+  if (fields.situation_read) meta.situation_read = fields.situation_read;
+  if (fields.role_interest) meta.role_interest = fields.role_interest;
+  return meta;
 }
 
 async function dispatchQualificationEvents({
@@ -124,44 +130,108 @@ async function dispatchQualificationEvents({
   exitCategory,
   session,
   conversationHistory,
-  metadata,
+  chatInput,
+  assistantReply,
+  unsubscribeToken,
 }) {
-  const contact = extractCapturedContact(conversationHistory);
   const meta = { ...session.meta };
+  const gdprRequired = meta.gdpr_required === true;
+  const fields = extractLeadFields(conversationHistory, meta);
+  mergeContactIntoMeta(meta, fields);
 
-  if (contact.email) meta.captured_email = contact.email;
-  if (contact.name) meta.captured_name = contact.name;
+  const wrapUp = resolveWrapUpConfirmation({
+    priorMeta: session.meta,
+    userMessage: chatInput,
+    gdprRequired,
+  });
 
-  const basePayload = {
-    sessionId,
-    email: meta.captured_email || null,
-    name: meta.captured_name || null,
-    score: score.total,
-    conversation: conversationHistory,
-    metadata,
-  };
+  if (wrapUp.clearPending) {
+    meta.wrap_up_pending = false;
+  }
 
-  if (exitCategory === "vendor" && !meta.vendor_fired) {
-    await postChatWebhook("vendor_exit", basePayload);
+  if (wrapUp.declined) {
+    meta.wrap_up_confirmed = false;
+    if (wrapUp.gdprDeclined) {
+      meta.gdpr_opt_in = false;
+    }
+    return meta;
+  }
+
+  if (wrapUp.confirmed) {
+    meta.wrap_up_confirmed = true;
+    meta.gdpr_opt_in = true;
+  }
+
+  if (isWrapUpMessage(assistantReply)) {
+    meta.wrap_up_pending = true;
+  }
+
+  if (shouldBlockWebhook(meta)) {
+    return meta;
+  }
+
+  const canFireEmailWebhook =
+    wrapUp.confirmed && fields.email && meta.gdpr_opt_in !== false;
+
+  if (canFireEmailWebhook) {
+    const gdprOptIn = gdprRequired ? meta.gdpr_opt_in === true : true;
+
+    if (score.total >= 9 && !meta.qualified_fired) {
+      await fireQualifiedLead({
+        fields,
+        score,
+        unsubscribeToken,
+        gdprOptIn,
+      });
+      meta.qualified_fired = true;
+      meta.email_opt_in = true;
+    } else if (
+      score.total >= 5 &&
+      score.total <= 8 &&
+      fields.email &&
+      !meta.warm_fired
+    ) {
+      await fireWarmLead({
+        fields,
+        unsubscribeToken,
+        gdprOptIn,
+      });
+      meta.warm_fired = true;
+      meta.email_opt_in = true;
+    }
+  }
+
+  const vendorReady =
+    (exitCategory === "vendor" || meta.vendor_flow) &&
+    fields.email &&
+    fields.company &&
+    isVendorExitMessage(assistantReply) &&
+    !meta.vendor_fired;
+
+  if (vendorReady && !shouldBlockWebhook(meta)) {
+    await fireVendor({ fields, unsubscribeToken });
     meta.vendor_fired = true;
   }
 
-  if (exitCategory === "jobseeker" && !meta.job_seeker_fired) {
-    await postChatWebhook("job_seeker", basePayload);
-    meta.job_seeker_fired = true;
+  if (exitCategory === "vendor") {
+    meta.vendor_flow = true;
   }
 
-  if (score.total >= 9 && !meta.qualified_fired) {
-    await postChatWebhook("qualified_lead", basePayload);
-    meta.qualified_fired = true;
-  } else if (
-    score.total >= 5 &&
-    score.total <= 8 &&
-    meta.captured_email &&
-    !meta.warm_fired
-  ) {
-    await postChatWebhook("warm_lead", basePayload);
-    meta.warm_fired = true;
+  const jobReady =
+    (exitCategory === "jobseeker" || meta.job_seeker_flow) &&
+    fields.email &&
+    fields.name &&
+    fields.role_interest &&
+    !meta.job_seeker_fired;
+
+  if (jobReady && !shouldBlockWebhook(meta)) {
+    await fireJobSeeker({ fields, unsubscribeToken });
+    meta.job_seeker_fired = true;
+    meta.email_opt_in = true;
+  }
+
+  if (exitCategory === "jobseeker") {
+    meta.job_seeker_flow = true;
   }
 
   return meta;
@@ -227,6 +297,9 @@ export async function POST(req) {
       return jsonResponse({ error: "Server configuration error" }, 500);
     }
 
+    const country = req.headers.get("x-country") || "";
+    const gdprRequired = isGdprRequired(country);
+
     let session;
     try {
       session = await loadConversation(sessionId);
@@ -234,6 +307,9 @@ export async function POST(req) {
       console.error("Failed to load conversation:", err);
       return jsonResponse({ error: "Server configuration error" }, 500);
     }
+
+    session.meta.gdpr_required = gdprRequired;
+    session.meta.visitor_country = country || null;
 
     const priorUserTurns = session.messages.filter((m) => m.role === "user").length;
     const turnNumber = priorUserTurns + 1;
@@ -274,7 +350,7 @@ export async function POST(req) {
             },
             {
               type: "text",
-              text: buildPageContext(metadata),
+              text: buildPageContext(metadata, country, gdprRequired),
             },
           ],
           messages: conversationHistory,
@@ -306,6 +382,7 @@ export async function POST(req) {
     const category = categoryFromScore(score.total, exitCategory);
 
     let meta;
+    let emailOptIn = session.email_opt_in;
     try {
       meta = await dispatchQualificationEvents({
         sessionId,
@@ -313,8 +390,14 @@ export async function POST(req) {
         exitCategory,
         session,
         conversationHistory: updatedHistory,
-        metadata,
+        chatInput,
+        assistantReply: reply,
+        unsubscribeToken: session.unsubscribe_token,
       });
+      if (meta.email_opt_in === true) {
+        emailOptIn = true;
+        delete meta.email_opt_in;
+      }
     } catch (err) {
       console.error("Qualification webhook dispatch failed:", err);
       meta = session.meta;
@@ -326,6 +409,8 @@ export async function POST(req) {
         qualification_score: score.total,
         category,
         meta,
+        unsubscribe_token: session.unsubscribe_token,
+        email_opt_in: emailOptIn,
       });
     } catch (err) {
       console.error("Failed to save conversation:", err);
