@@ -140,6 +140,67 @@ function hasAny(text, patterns) {
   return patterns.some((p) => text.includes(p));
 }
 
+const SCORE_KEYS = [
+  "problemClarity",
+  "businessLegitimacy",
+  "decisionAuthority",
+  "budgetSignal",
+  "intentSignal",
+];
+
+/**
+ * Score a short visitor reply against what the bot just asked.
+ * One-word answers like "50K" or "correct" only make sense in context.
+ */
+export function scoreWithContext(visitorMessage, precedingBotMessage) {
+  if (!visitorMessage || !precedingBotMessage) return {};
+
+  const v = visitorMessage.trim().toLowerCase();
+  if (!v) return {};
+
+  const partial = {};
+
+  if (/budget|cost|invest|spend/i.test(precedingBotMessage)) {
+    if (/\d/.test(v)) partial.budgetSignal = 2;
+    else if (/flexible|open|tbd/i.test(v)) partial.budgetSignal = 1;
+  }
+
+  if (/does that|sound right|look right|correct\?/i.test(precedingBotMessage)) {
+    if (/correct|yes|right|good|perfect|yep/i.test(v)) partial.intentSignal = 2;
+  }
+
+  if (
+    /who is this for|who are you building|who is it for|who(?:'s| is) it for/i.test(
+      precedingBotMessage
+    )
+  ) {
+    if (v.length > 2) partial.businessLegitimacy = 2;
+  }
+
+  return partial;
+}
+
+function applyContextScores(score, messages) {
+  let precedingBot = null;
+
+  for (const msg of messages) {
+    if (msg.role === "assistant") {
+      precedingBot = typeof msg.content === "string" ? msg.content : "";
+      continue;
+    }
+    if (msg.role !== "user" || !precedingBot) continue;
+
+    const visitorText = stripSystemNote(msg.content);
+    const contextual = scoreWithContext(visitorText, precedingBot);
+    for (const key of SCORE_KEYS) {
+      const value = contextual[key];
+      if (typeof value === "number" && value > score[key]) {
+        score[key] = value;
+      }
+    }
+  }
+}
+
 export function scoreConversation(messages) {
   const score = {
     problemClarity: 0,
@@ -188,7 +249,10 @@ export function scoreConversation(messages) {
     score.intentSignal = 1;
   }
 
-  const total = Object.values(score).reduce((a, b) => a + b, 0);
+  // Context-aware one-word answers (budget "50K", "correct", audience replies)
+  applyContextScores(score, messages);
+
+  const total = SCORE_KEYS.reduce((sum, key) => sum + score[key], 0);
   return { total, breakdown: score };
 }
 
