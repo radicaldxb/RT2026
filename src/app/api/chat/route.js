@@ -14,7 +14,9 @@ import { getSystemPrompt } from "@/lib/rtbot/systemPrompt";
 import { getKnowledge } from "@/lib/rtbot/knowledgeLoader";
 import { detectEarlyExit } from "@/lib/rtbot/exitDetector";
 import {
+  applyConfirmedIntentFloor,
   categoryFromScore,
+  isPlausiblePersonName,
   scoreConversation,
 } from "@/lib/rtbot/scorer";
 import { applyVisitorGeo, getVisitorCountry } from "@/lib/rtbot/gdpr";
@@ -117,7 +119,11 @@ function buildPageContext(metadata, country, gdprRequired) {
 
 function mergeContactIntoMeta(meta, fields) {
   if (fields.email) meta.captured_email = fields.email;
-  if (fields.name) meta.captured_name = fields.name;
+  if (fields.name && isPlausiblePersonName(fields.name)) {
+    meta.captured_name = fields.name;
+  } else if (meta.captured_name && !isPlausiblePersonName(meta.captured_name)) {
+    meta.captured_name = null;
+  }
   if (fields.company) meta.captured_company = fields.company;
   if (fields.url) meta.captured_url = fields.url;
   if (fields.location) meta.captured_location = fields.location;
@@ -178,6 +184,13 @@ async function dispatchQualificationEvents({
   if (isWrapUpMessage(assistantReply)) {
     meta.wrap_up_pending = true;
   }
+
+  // Confirmed wrap-up + email + problem beats keyword scoring
+  applyConfirmedIntentFloor(score, {
+    wrap_up_confirmed: meta.wrap_up_confirmed,
+    email: fields.email || meta.captured_email,
+    problem_summary: fields.problem_summary || meta.problem_summary,
+  });
 
   if (shouldBlockWebhook(meta)) {
     return meta;

@@ -1,5 +1,4 @@
 const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-const SYSTEM_NOTE_RE = /^\[System note:[\s\S]*?\]\s*\n\n?/i;
 
 const CHITCHAT_RE =
   /^(hello|hi|hey|yes|no|ok|okay|sure|thanks|thank you|yep|nope|correct|fine|good|great|cool|maybe|please|absolutely|definitely)\.?$/i;
@@ -9,10 +8,27 @@ const NAME_LABEL_RE =
 
 const SIMPLE_NAME_RE = /^[A-Za-z][a-z]+(?:\s+[A-Za-z][a-z'-]+){0,2}$/;
 
+/** Opening chips / UI answers that must never be treated as a person name. */
+const NOT_A_NAME_RE =
+  /^(bold idea|current business|i have a bold idea|looking for help|i need help with my business|help with my business|tell me about|tell me about radical thinking|show me your work|radical thinking|all good|looks good|sounds good|go ahead|send summary|go deeper)\.?$/i;
+
 /** Strip server-injected system notes from a stored user message. */
 export function stripSystemNote(content) {
   if (typeof content !== "string") return "";
-  return content.replace(SYSTEM_NOTE_RE, "").trim();
+  const trimmed = content.trim();
+  if (!trimmed.startsWith("[System note:")) return trimmed;
+
+  // Notes may contain brackets (e.g. "Hi [Name]"). Split on the note/body separator.
+  const separators = ["]\n\n", "]\r\n\r\n"];
+  for (const separator of separators) {
+    const idx = trimmed.indexOf(separator);
+    if (idx !== -1) {
+      return trimmed.slice(idx + separator.length).trim();
+    }
+  }
+
+  const fallback = trimmed.match(/^\[System note:[\s\S]*\]\s+([\s\S]+)$/i);
+  return fallback ? fallback[1].trim() : trimmed;
 }
 
 /** Actual visitor text only — never assistant content or system notes. */
@@ -31,13 +47,23 @@ function titleCaseName(raw) {
     .join(" ");
 }
 
+export function isPlausiblePersonName(name) {
+  if (!name || typeof name !== "string") return false;
+  const trimmed = name.trim();
+  if (!trimmed || trimmed.length > 50) return false;
+  if (NOT_A_NAME_RE.test(trimmed)) return false;
+  if (/bold idea|current business|looking for help|radical thinking/i.test(trimmed)) {
+    return false;
+  }
+  if (EMAIL_RE.test(trimmed)) return false;
+  if (CHITCHAT_RE.test(trimmed)) return false;
+  if (/\d/.test(trimmed)) return false;
+  if (/[?!@#$%^&*(){}[\]|\\/<>,]/.test(trimmed)) return false;
+  return SIMPLE_NAME_RE.test(trimmed);
+}
+
 function looksLikeBareName(text) {
-  if (!text || text.length > 50) return false;
-  if (EMAIL_RE.test(text)) return false;
-  if (CHITCHAT_RE.test(text)) return false;
-  if (/\d/.test(text)) return false;
-  if (/[?!@#$%^&*(){}[\]|\\/<>,]/.test(text)) return false;
-  return SIMPLE_NAME_RE.test(text);
+  return isPlausiblePersonName(text);
 }
 
 export function extractCapturedContact(messages) {
@@ -49,8 +75,12 @@ export function extractCapturedContact(messages) {
   for (const text of [...visitor].reverse()) {
     const labelMatch = text.match(NAME_LABEL_RE);
     if (labelMatch) {
-      name = titleCaseName(labelMatch[1]);
-      break;
+      const candidate = titleCaseName(labelMatch[1]);
+      if (isPlausiblePersonName(candidate)) {
+        name = candidate;
+        break;
+      }
+      continue;
     }
     if (looksLikeBareName(text)) {
       name = titleCaseName(text);
@@ -160,6 +190,22 @@ export function scoreConversation(messages) {
 
   const total = Object.values(score).reduce((a, b) => a + b, 0);
   return { total, breakdown: score };
+}
+
+/**
+ * Confirmed wrap-up + email + problem description is enough intent for warm lead.
+ * Keyword matches cannot pull the score below 5 in that case.
+ */
+export function applyConfirmedIntentFloor(score, { wrap_up_confirmed, email, problem_summary }) {
+  if (!score || typeof score !== "object") return score;
+  if (wrap_up_confirmed && email && problem_summary && score.total < 5) {
+    score.total = 5;
+    score.breakdown = {
+      ...score.breakdown,
+      confirmedIntentFloor: 5,
+    };
+  }
+  return score;
 }
 
 export function categoryFromExit(exitType) {

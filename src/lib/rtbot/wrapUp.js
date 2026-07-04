@@ -2,6 +2,7 @@ import {
   extractCapturedContact,
   extractCompany,
   extractRoleInterest,
+  isPlausiblePersonName,
   visitorMessages,
 } from "./scorer";
 
@@ -92,8 +93,10 @@ export function generateSituationRead(messages, meta = {}) {
   if (extracted) return extracted;
 
   const summary = meta.problem_summary || extractProblemSummary(messages);
-  const name =
-    meta.captured_name || extractCapturedContact(messages).name || null;
+  const metaName = isPlausiblePersonName(meta.captured_name)
+    ? meta.captured_name
+    : null;
+  const name = metaName || extractCapturedContact(messages).name || null;
 
   if (summary) {
     return name
@@ -113,9 +116,12 @@ export function extractLeadFields(messages, meta = {}) {
   const contact = extractCapturedContact(messages);
   const visitorCombined = visitorMessages(messages).join("\n");
   const urlMatch = visitorCombined.match(URL_RE);
+  const metaName = isPlausiblePersonName(meta.captured_name)
+    ? meta.captured_name
+    : null;
 
   return {
-    name: meta.captured_name || contact.name || null,
+    name: metaName || contact.name || null,
     email: meta.captured_email || contact.email || null,
     company: meta.captured_company || extractCompany(messages) || null,
     url: meta.captured_url || (urlMatch ? urlMatch[0] : null),
