@@ -20,6 +20,8 @@ import {
 import { applyVisitorGeo, getVisitorCountry } from "@/lib/rtbot/gdpr";
 import {
   extractLeadFields,
+  generateSituationRead,
+  isSituationReadMessage,
   isVendorExitMessage,
   isWrapUpMessage,
   resolveWrapUpConfirmation,
@@ -144,6 +146,12 @@ async function dispatchQualificationEvents({
   const fields = extractLeadFields(conversationHistory, meta);
   mergeContactIntoMeta(meta, fields);
 
+  // Store Situation Read when delivered (not only at webhook fire time)
+  if (isSituationReadMessage(assistantReply)) {
+    meta.situation_read = assistantReply;
+    fields.situation_read = assistantReply;
+  }
+
   const wrapUp = resolveWrapUpConfirmation({
     priorMeta: session.meta,
     userMessage: chatInput,
@@ -183,7 +191,15 @@ async function dispatchQualificationEvents({
   if (canFireEmailWebhook) {
     const gdprOptIn = gdprRequired ? meta.gdpr_opt_in === true : true;
 
-    if (score.total >= 9 && !meta.qualified_fired) {
+    // Ensure situation_read is present before firing
+    if (!fields.situation_read) {
+      fields.situation_read = generateSituationRead(conversationHistory, meta);
+      if (fields.situation_read) {
+        meta.situation_read = fields.situation_read;
+      }
+    }
+
+    if (meta.wrap_up_confirmed && !meta.qualified_fired && score.total >= 9) {
       const sent = await fireQualifiedLead({
         fields,
         score,
@@ -194,14 +210,16 @@ async function dispatchQualificationEvents({
         meta.email_opt_in = true;
         meta.qualified_fired = true;
         meta.last_webhook_event = "qualified_lead";
+        delete meta.last_webhook_skip;
+        delete meta.last_webhook_error;
       } else {
         meta.last_webhook_error = "qualified_lead_failed";
       }
     } else if (
+      meta.wrap_up_confirmed &&
+      !meta.warm_fired &&
       score.total >= 5 &&
-      score.total <= 8 &&
-      fields.email &&
-      !meta.warm_fired
+      score.total < 9
     ) {
       const sent = await fireWarmLead({
         fields,
@@ -213,15 +231,19 @@ async function dispatchQualificationEvents({
         meta.email_opt_in = true;
         meta.warm_fired = true;
         meta.last_webhook_event = "warm_lead";
+        delete meta.last_webhook_skip;
+        delete meta.last_webhook_error;
       } else {
         meta.last_webhook_error = "warm_lead_failed";
       }
+    } else if (score.total < 5) {
+      meta.last_webhook_skip = "score_below_5";
     }
   } else if (meta.wrap_up_pending && fields.email && !meta.wrap_up_confirmed) {
     meta.last_webhook_skip = "awaiting_confirmation";
   } else if (meta.wrap_up_confirmed && fields.email && !meta.qualified_fired && !meta.warm_fired) {
     if (score.total < 5) meta.last_webhook_skip = "score_below_5";
-    else if (score.total >= 9 && meta.qualified_fired) meta.last_webhook_skip = "already_fired";
+    else if (!fields.email) meta.last_webhook_skip = "missing_email";
   }
 
   const vendorReady =

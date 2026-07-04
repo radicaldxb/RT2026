@@ -3,6 +3,8 @@ import "./globals.css";
 import Script from "next/script";
 import { roboto, robotoSlab } from "@/lib/fonts";
 
+const GTM_ID = "GTM-W67J42";
+
 export const metadata = {
   title: "Radical Thinking | AI-Native Agency in Dubai",
   description:
@@ -59,24 +61,28 @@ export default function RootLayout({ children }) {
         <meta name="geo.placename" content="Dubai" />
         <meta name="geo.position" content="25.276987;55.296249" />
         <meta name="ICBM" content="25.276987, 55.296249" />
+
+        {/* Google Tag Manager */}
+        <Script id="gtm" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`}
+        </Script>
       </head>
       <body className={`${roboto.className} antialiased font-light`} suppressHydrationWarning>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
         <span className={robotoSlab.className} hidden aria-hidden />
         {children}
-
-        {/* Google Analytics */}
-        <Script
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL"
-        />
-        <Script id="gtag-init" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FXY9Q2TXCL');
-          `}
-        </Script>
 
         {/*  Global Structured Data (Organization + hasPart pages) */}
         <Script id="ld-json-org" type="application/ld+json">

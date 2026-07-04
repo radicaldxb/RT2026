@@ -7,11 +7,14 @@ import {
 
 const URL_RE = /https?:\/\/[^\s<>"']+|(?:www\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 
-const AFFIRMATIVE_RE =
-  /^(yes|yeah|yep|yup|correct|that'?s right|that looks right|looks good|all good|sure|ok|okay|go ahead|please do|i agree|you have my permission|absolutely|definitely)\b/i;
+const AFFIRMATIVES =
+  /^(yes|yeah|great|perfect|correct|looks good|that'?s right|that'?s correct|yep|sure|absolutely|confirmed|go ahead|sounds good|all good|spot on)/i;
 
 const NEGATIVE_RE =
   /^(no|nope|nah|don'?t|do not|not really)\b|(?:no thanks|don'?t send|do not contact|don'?t email|withdraw)/i;
+
+const SITUATION_READ_RE =
+  /stepping stone|that gap between|that'?s exactly where radical thinking works|we have covered a lot of ground|let me summarise what i am hearing/i;
 
 export function isWrapUpMessage(text) {
   if (!text || typeof text !== "string") return false;
@@ -25,20 +28,21 @@ export function isWrapUpMessage(text) {
   );
 }
 
-export function isAffirmative(text) {
+export function isSituationReadMessage(text) {
   if (!text || typeof text !== "string") return false;
-  const trimmed = text.trim();
+  return SITUATION_READ_RE.test(text);
+}
+
+export function isConfirmation(message) {
+  if (!message || typeof message !== "string") return false;
+  const trimmed = message.trim();
   if (!trimmed || NEGATIVE_RE.test(trimmed)) return false;
-  if (AFFIRMATIVE_RE.test(trimmed)) return true;
+  return AFFIRMATIVES.test(trimmed);
+}
 
-  // Short natural confirmations: "yes please", "that's fine", "go for it"
-  if (trimmed.length <= 60) {
-    return /\b(yes|yeah|yep|yup|sure|correct|right|fine|good|absolutely|definitely|please)\b/i.test(
-      trimmed
-    );
-  }
-
-  return false;
+/** @deprecated use isConfirmation */
+export function isAffirmative(text) {
+  return isConfirmation(text);
 }
 
 export function isNegative(text) {
@@ -74,15 +78,35 @@ function extractProblemSummary(messages) {
 function extractSituationRead(messages) {
   for (const msg of [...messages].reverse()) {
     if (msg.role !== "assistant") continue;
-    if (
-      /stepping stone|that gap between|that's exactly where radical thinking works/i.test(
-        msg.content
-      )
-    ) {
+    if (isSituationReadMessage(msg.content)) {
       return msg.content;
     }
   }
   return null;
+}
+
+export function generateSituationRead(messages, meta = {}) {
+  if (meta.situation_read) return meta.situation_read;
+
+  const extracted = extractSituationRead(messages);
+  if (extracted) return extracted;
+
+  const summary = meta.problem_summary || extractProblemSummary(messages);
+  const name =
+    meta.captured_name || extractCapturedContact(messages).name || null;
+
+  if (summary) {
+    return name
+      ? `Conversation summary for ${name}: ${summary}`
+      : `Conversation summary: ${summary}`;
+  }
+
+  const recent = visitorMessages(messages).slice(-3).join(" ").trim();
+  if (!recent) return null;
+  const clipped = recent.length > 500 ? `${recent.slice(0, 497)}...` : recent;
+  return name
+    ? `Conversation summary for ${name}: ${clipped}`
+    : `Conversation summary: ${clipped}`;
 }
 
 export function extractLeadFields(messages, meta = {}) {
@@ -107,7 +131,7 @@ export function resolveWrapUpConfirmation({ priorMeta, userMessage, gdprRequired
     return { confirmed: false, declined: false, clearPending: false };
   }
 
-  if (isAffirmative(userMessage)) {
+  if (isConfirmation(userMessage)) {
     return { confirmed: true, declined: false, clearPending: true };
   }
 
@@ -120,5 +144,6 @@ export function resolveWrapUpConfirmation({ priorMeta, userMessage, gdprRequired
     };
   }
 
-  return { confirmed: false, declined: false, clearPending: true };
+  // Keep pending open for natural follow-ups that are not yet a yes/no
+  return { confirmed: false, declined: false, clearPending: false };
 }
