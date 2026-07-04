@@ -129,6 +129,7 @@ function mergeContactIntoMeta(meta, fields) {
   if (fields.location) meta.captured_location = fields.location;
   if (fields.problem_summary) meta.problem_summary = fields.problem_summary;
   if (fields.situation_read) meta.situation_read = fields.situation_read;
+  if (fields.budget) meta.captured_budget = fields.budget;
   if (fields.role_interest) meta.role_interest = fields.role_interest;
   return meta;
 }
@@ -204,12 +205,17 @@ async function dispatchQualificationEvents({
   if (canFireEmailWebhook) {
     const gdprOptIn = gdprRequired ? meta.gdpr_opt_in === true : true;
 
-    // Ensure situation_read is present before firing
-    if (!fields.situation_read) {
-      fields.situation_read = generateSituationRead(conversationHistory, meta);
-      if (fields.situation_read) {
-        meta.situation_read = fields.situation_read;
-      }
+    // Prefer full Situation Read / close summary; otherwise build from conversation
+    const richSummary = generateSituationRead(conversationHistory, {
+      ...meta,
+      situation_read: fields.situation_read,
+    });
+    if (richSummary) {
+      fields.situation_read = richSummary;
+      meta.situation_read = richSummary;
+    }
+    if (!fields.problem_summary) {
+      fields.problem_summary = meta.problem_summary;
     }
 
     if (meta.wrap_up_confirmed && !meta.qualified_fired && score.total >= 9) {

@@ -52,34 +52,38 @@ export function shouldBlockWebhook(meta) {
   return meta?.no_contact === true;
 }
 
-export async function fireQualifiedLead({ fields, score, unsubscribeToken, gdprOptIn }) {
-  return postWebhook(webhookUrl("qualified_lead"), "qualified_lead", {
-    event: "qualified_lead",
+function leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event }) {
+  return {
+    event,
     name: fields.name,
     email: fields.email,
     score: score.total,
     situation_read: fields.situation_read,
+    problem_summary: fields.problem_summary,
+    summary: fields.situation_read || fields.problem_summary,
     company: fields.company,
     url: fields.url,
     location: fields.location,
+    budget: fields.budget,
     gdpr_opt_in: gdprOptIn,
     unsubscribe_token: unsubscribeToken,
-  });
+  };
+}
+
+export async function fireQualifiedLead({ fields, score, unsubscribeToken, gdprOptIn }) {
+  return postWebhook(
+    webhookUrl("qualified_lead"),
+    "qualified_lead",
+    leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event: "qualified_lead" })
+  );
 }
 
 export async function fireWarmLead({ fields, score, unsubscribeToken, gdprOptIn }) {
-  return postWebhook(webhookUrl("warm_lead"), "warm_lead", {
-    event: "warm_lead",
-    name: fields.name,
-    email: fields.email,
-    score: score.total,
-    situation_read: fields.situation_read,
-    company: fields.company,
-    url: fields.url,
-    location: fields.location,
-    gdpr_opt_in: gdprOptIn,
-    unsubscribe_token: unsubscribeToken,
-  });
+  return postWebhook(
+    webhookUrl("warm_lead"),
+    "warm_lead",
+    leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event: "warm_lead" })
+  );
 }
 
 export async function fireJobSeeker({ fields, unsubscribeToken }) {

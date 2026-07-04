@@ -56,6 +56,14 @@ export function isVendorExitMessage(text) {
   return /not looking to bring on new vendors/i.test(text);
 }
 
+function emptyToNull(value) {
+  if (value == null) return null;
+  const trimmed = String(value).trim();
+  if (!trimmed) return null;
+  if (/^(not provided|n\/a|none|unknown|-)$/i.test(trimmed)) return null;
+  return trimmed;
+}
+
 function extractLocation(messages) {
   for (const text of [...visitorMessages(messages)].reverse()) {
     const locMatch = text.match(
@@ -66,12 +74,85 @@ function extractLocation(messages) {
   return null;
 }
 
+function extractBudget(messages) {
+  for (const text of [...visitorMessages(messages)].reverse()) {
+    const match = text.match(
+      /(\d[\d,.]*(?:\s*[kK])?(?:\s*(?:AED|USD|GBP|EUR|£|\$))?|\b(?:AED|USD|GBP|EUR)\s*\d[\d,.]*)/i
+    );
+    if (match) return match[0].trim();
+    if (/flexible|open|tbd/i.test(text) && text.length < 40) return text.trim();
+  }
+  return null;
+}
+
 function extractProblemSummary(messages) {
   for (const text of visitorMessages(messages)) {
     if (text.length < 20 || text.length > 280) continue;
     if (/^(yes|no|ok|hello|hi)\b/i.test(text)) continue;
     if (/@/.test(text)) continue;
+    if (isConfirmation(text)) continue;
+    if (isPlausiblePersonName(text)) continue;
     return text.length > 200 ? `${text.slice(0, 197)}...` : text;
+  }
+  return null;
+}
+
+/** Fields the bot already listed in the wrap-up confirmation block. */
+function extractFromWrapUpAssistant(messages) {
+  const out = {
+    name: null,
+    email: null,
+    company: null,
+    location: null,
+    url: null,
+    nutshell: null,
+  };
+
+  for (const msg of [...messages].reverse()) {
+    if (msg.role !== "assistant" || !isWrapUpMessage(msg.content)) continue;
+    const content = msg.content;
+
+    const name = content.match(/^\s*Name:\s*(.+)$/im);
+    const email = content.match(/^\s*Email:\s*(.+)$/im);
+    const company = content.match(/^\s*Company:\s*(.+)$/im);
+    const location = content.match(/^\s*Location:\s*(.+)$/im);
+    const url = content.match(/^\s*URL:\s*(.+)$/im);
+    const nutshell = content.match(/^\s*In a nutshell:\s*(.+)$/im);
+
+    const nameValue = emptyToNull(name?.[1]);
+    out.name = nameValue && isPlausiblePersonName(nameValue) ? nameValue : null;
+    out.email = emptyToNull(email?.[1]);
+    out.company = emptyToNull(company?.[1]);
+    out.location = emptyToNull(location?.[1]);
+    out.url = emptyToNull(url?.[1]);
+    out.nutshell = emptyToNull(nutshell?.[1]);
+    break;
+  }
+
+  return out;
+}
+
+/** Stage 3 plain-language summary (before go-deeper / send-summary question). */
+function extractCloseSummary(messages) {
+  for (const msg of [...messages].reverse()) {
+    if (msg.role !== "assistant") continue;
+    const content = msg.content;
+    if (!content) continue;
+
+    const nutshell = content.match(/^\s*In a nutshell:\s*(.+)$/im);
+    if (nutshell) return emptyToNull(nutshell[1]);
+
+    if (
+      /would you like to go a bit deeper|shall i send you a summary of what we discussed/i.test(
+        content
+      )
+    ) {
+      const cleaned = content
+        .replace(/Based on what you have shared[\s\S]*/i, "")
+        .replace(/Would you like to go a bit deeper[\s\S]*/i, "")
+        .trim();
+      if (cleaned.length > 40) return cleaned;
+    }
   }
   return null;
 }
@@ -86,30 +167,65 @@ function extractSituationRead(messages) {
   return null;
 }
 
+function substantiveVisitorLines(messages) {
+  return visitorMessages(messages).filter((text) => {
+    if (text.length < 8) return false;
+    if (/@/.test(text)) return false;
+    if (isConfirmation(text)) return false;
+    if (isNegative(text)) return false;
+    if (isPlausiblePersonName(text)) return false;
+    if (/^(yes|no|ok|hello|hi|thanks|thank you)\b/i.test(text)) return false;
+    if (/^(i have a bold idea|looking for help|i need help)/i.test(text)) return false;
+    return true;
+  });
+}
+
+function isThinFallbackSummary(text) {
+  return /^Conversation summary(?: for [^:]+)?:/i.test(text || "");
+}
+
 export function generateSituationRead(messages, meta = {}) {
-  if (meta.situation_read) return meta.situation_read;
+  // Keep a real Situation Read / close summary; rebuild thin one-line fallbacks
+  if (meta.situation_read && !isThinFallbackSummary(meta.situation_read)) {
+    return meta.situation_read;
+  }
 
   const extracted = extractSituationRead(messages);
   if (extracted) return extracted;
 
-  const summary = meta.problem_summary || extractProblemSummary(messages);
+  const closeSummary = extractCloseSummary(messages);
+  if (closeSummary) return closeSummary;
+
+  const wrapUp = extractFromWrapUpAssistant(messages);
+  if (wrapUp.nutshell) return wrapUp.nutshell;
+
+  const lines = substantiveVisitorLines(messages);
   const metaName = isPlausiblePersonName(meta.captured_name)
     ? meta.captured_name
     : null;
   const name = metaName || extractCapturedContact(messages).name || null;
+  const budget = extractBudget(messages);
 
-  if (summary) {
-    return name
-      ? `Conversation summary for ${name}: ${summary}`
-      : `Conversation summary: ${summary}`;
+  if (lines.length) {
+    const body = lines
+      .slice(0, 6)
+      .map((line) => (line.length > 180 ? `${line.slice(0, 177)}...` : line))
+      .join(" ");
+    const withBudget =
+      budget && !new RegExp(budget.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(body)
+        ? `${body} Budget: ${budget}.`
+        : body;
+    const clipped =
+      withBudget.length > 800 ? `${withBudget.slice(0, 797)}...` : withBudget;
+    return name ? `${name}: ${clipped}` : clipped;
   }
 
-  const recent = visitorMessages(messages).slice(-3).join(" ").trim();
-  if (!recent) return null;
-  const clipped = recent.length > 500 ? `${recent.slice(0, 497)}...` : recent;
-  return name
-    ? `Conversation summary for ${name}: ${clipped}`
-    : `Conversation summary: ${clipped}`;
+  const summary = meta.problem_summary || extractProblemSummary(messages);
+  if (summary) {
+    return name ? `${name}: ${summary}` : summary;
+  }
+
+  return null;
 }
 
 export function extractLeadFields(messages, meta = {}) {
@@ -119,15 +235,31 @@ export function extractLeadFields(messages, meta = {}) {
   const metaName = isPlausiblePersonName(meta.captured_name)
     ? meta.captured_name
     : null;
+  const wrapUp = extractFromWrapUpAssistant(messages);
 
   return {
-    name: metaName || contact.name || null,
-    email: meta.captured_email || contact.email || null,
-    company: meta.captured_company || extractCompany(messages) || null,
-    url: meta.captured_url || (urlMatch ? urlMatch[0] : null),
-    location: meta.captured_location || extractLocation(messages) || null,
-    problem_summary: meta.problem_summary || extractProblemSummary(messages) || null,
-    situation_read: meta.situation_read || extractSituationRead(messages) || null,
+    name: metaName || contact.name || wrapUp.name || null,
+    email: meta.captured_email || contact.email || wrapUp.email || null,
+    company:
+      meta.captured_company ||
+      wrapUp.company ||
+      extractCompany(messages) ||
+      null,
+    url: meta.captured_url || wrapUp.url || (urlMatch ? urlMatch[0] : null),
+    location:
+      meta.captured_location ||
+      wrapUp.location ||
+      extractLocation(messages) ||
+      null,
+    budget: meta.captured_budget || extractBudget(messages) || null,
+    problem_summary:
+      meta.problem_summary || extractProblemSummary(messages) || null,
+    situation_read:
+      meta.situation_read ||
+      extractSituationRead(messages) ||
+      extractCloseSummary(messages) ||
+      wrapUp.nutshell ||
+      null,
     role_interest: meta.role_interest || extractRoleInterest(messages) || null,
   };
 }
