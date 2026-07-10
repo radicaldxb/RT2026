@@ -29,9 +29,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:justify-between items-start gap-8 md:gap-0">
 
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={!isChat ? { opacity: 1, x: 0 } : undefined}
-            animate={isChat ? { opacity: 1, x: 0 } : undefined}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={!isChat ? { opacity: 1, y: 0 } : undefined}
+            animate={isChat ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col gap-2 text-sm"
           >
@@ -53,7 +53,7 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={!isChat ? { opacity: 1, y: 0 } : undefined}
             animate={isChat ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.6, delay: 0.4 }}

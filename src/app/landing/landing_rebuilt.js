@@ -428,10 +428,10 @@ function ScrollNarrative() {
           </div>
           <div className="text-center px-6 z-10" style={{ transform: `translateY(${b4Y}px)` }}>
             <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.04] tracking-tight text-black" style={serif}>
-              Reality happened.
+              You brought in technology to fix it
             </h2>
             <p className="text-lg text-gray-600 mt-4 max-w-lg mx-auto leading-relaxed">
-              You brought in technology to fix it. It didn&apos;t fix it.
+              It didn&apos;t fix the problem
             </p>
           </div>
         </div>
@@ -443,8 +443,8 @@ function ScrollNarrative() {
         >
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#8a8780] mb-6">The real problem</p>
-            <h2 className="text-[clamp(1.75rem,4vw,3.5rem)] font-bold leading-[1.15] tracking-tight text-black" style={{ ...serif, fontStyle: "italic" }}>
-              &ldquo;The Gap between what you intended and what your customers are experiencing.&rdquo;
+            <h2 className="text-[clamp(1.75rem,4vw,3.5rem)] font-bold leading-[1.15] tracking-tight text-black" style={serif}>
+              The Gap between what you intended and what your customers are experiencing.
             </h2>
             <p
               className="text-base text-gray-600 mt-6 max-w-xl mx-auto leading-relaxed"

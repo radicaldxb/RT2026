@@ -1,0 +1,21 @@
+# Radical Thinking
+
+> Radical Thinking is an AI-native agency in Dubai that helps businesses close the gap between what they intend and what customers experience, using a Creative × Experience × Technology² approach.
+
+Radical Thinking was founded in 2009. We audit the real problem, build production-ready AI solutions, and retain ongoing capability. Our website includes an AI agent (RT-BOT) for discovery conversations, case studies, services, and strategic insights.
+
+## Primary pages
+
+- [Home](https://radical-thinking.net/): Agency homepage and positioning.
+- [Talk to the Agent](https://radical-thinking.net/chat): Chat with RT-BOT to explore fit, services, and next steps.
+- [The Playbook](https://radical-thinking.net/playbook): Three-step process — Audit, Build, Retainer.
+- [Services](https://radical-thinking.net/services): AI strategy, development, and design services.
+- [Work](https://radical-thinking.net/work): Selected case studies and portfolio.
+- [About](https://radical-thinking.net/about): Agency story, team, and philosophy.
+- [Radical Insights](https://radical-thinking.net/insights): Articles on AI, strategy, and transformation.
+- [Animal Intelligence](https://radical-thinking.net/intelligence): AI capability and intelligence offering.
+
+## Optional
+
+- [Privacy Policy](https://radical-thinking.net/privacy-policy): Data collection and privacy practices.
+- [Terms of Use](https://radical-thinking.net/terms-of-use): Terms governing use of the website and AI agent.
