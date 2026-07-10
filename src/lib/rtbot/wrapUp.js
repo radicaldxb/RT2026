@@ -269,11 +269,21 @@ export function resolveWrapUpConfirmation({ priorMeta, userMessage, gdprRequired
     return { confirmed: false, declined: false, clearPending: false };
   }
 
-  if (isConfirmation(userMessage)) {
+  const confirmationMatch = isConfirmation(userMessage);
+  const negativeMatch = isNegative(userMessage);
+  console.log("[wrap-up confirmation check]", {
+    wrap_up_pending: priorMeta.wrap_up_pending,
+    userMessage,
+    userMessageJSON: JSON.stringify(userMessage),
+    isConfirmation: confirmationMatch,
+    isNegative: negativeMatch,
+  });
+
+  if (confirmationMatch) {
     return { confirmed: true, declined: false, clearPending: true };
   }
 
-  if (isNegative(userMessage)) {
+  if (negativeMatch) {
     return {
       confirmed: false,
       declined: true,

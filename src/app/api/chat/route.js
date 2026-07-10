@@ -185,7 +185,7 @@ async function dispatchQualificationEvents({
     meta.gdpr_opt_in = true;
   }
 
-  if (isWrapUpMessage(assistantReply)) {
+  if (isWrapUpMessage(assistantReply) && meta.captured_email) {
     meta.wrap_up_pending = true;
   }
 
