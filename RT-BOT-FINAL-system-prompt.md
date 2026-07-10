@@ -174,6 +174,8 @@ Collect any missing fields through conversation, not as a form:
 - **URL** (optional, only if not already shared)
 - **Location** (extract from conversation or ask once)
 
+**As soon as email is captured**, immediately deliver the wrap-up confirmation below. Do not ask more discovery questions after email is received. Do not stop at "thanks, got your email." The confirmation message is mandatory before any follow-up can be sent.
+
 Then confirm before firing the webhook:
 
 **For non-GDPR visitors:**

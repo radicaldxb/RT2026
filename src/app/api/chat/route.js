@@ -27,6 +27,9 @@ import {
   isVendorExitMessage,
   isWrapUpMessage,
   resolveWrapUpConfirmation,
+  buildWrapUpConfirmationMessage,
+  shouldForceWrapUpConfirmation,
+  wrapUpSystemNote,
 } from "@/lib/rtbot/wrapUp";
 import {
   fireJobSeeker,
@@ -393,9 +396,26 @@ export async function POST(req) {
     const exitCategory = detectEarlyExit(chatInput, turnNumber);
     const isFirstApiTurn = session.messages.length === 0;
 
+    const fieldsBeforeReply = extractLeadFields(
+      [...session.messages, { role: "user", content: chatInput }],
+      session.meta
+    );
+    const emailJustCaptured = Boolean(
+      fieldsBeforeReply.email && !session.meta.captured_email
+    );
+    const shouldPromptWrapUp =
+      emailJustCaptured &&
+      !exitCategory &&
+      !session.meta.wrap_up_confirmed &&
+      !session.meta.wrap_up_pending &&
+      !session.meta.vendor_flow &&
+      !session.meta.job_seeker_flow;
+
     let userContent = chatInput;
     if (exitCategory) {
       userContent = `[System note: early_exit_category=${exitCategory}]\n\n${chatInput}`;
+    } else if (shouldPromptWrapUp) {
+      userContent = `${wrapUpSystemNote({ gdprRequired })}\n\n${chatInput}`;
     } else if (isFirstApiTurn) {
       userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?" The message below is the visitor's answer. Do not repeat that opening. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then address their message.]\n\n${chatInput}`;
     }
@@ -450,7 +470,36 @@ export async function POST(req) {
       .join("")
       .trim();
 
-    const reply = stripInternalNarration(rawReply) || rawReply;
+    let reply = stripInternalNarration(rawReply) || rawReply;
+
+    const fieldsAfterReply = extractLeadFields(
+      [...conversationHistory, { role: "assistant", content: reply || "" }],
+      session.meta
+    );
+    const emailCapturedThisTurn = Boolean(
+      fieldsAfterReply.email && !session.meta.captured_email
+    );
+
+    if (
+      shouldForceWrapUpConfirmation({
+        meta: session.meta,
+        fields: fieldsAfterReply,
+        emailJustCaptured: emailCapturedThisTurn,
+        assistantReply: reply,
+      })
+    ) {
+      const nutshell = generateSituationRead(conversationHistory, {
+        ...session.meta,
+        situation_read: fieldsAfterReply.situation_read || session.meta.situation_read,
+        problem_summary: fieldsAfterReply.problem_summary || session.meta.problem_summary,
+        captured_name: fieldsAfterReply.name || session.meta.captured_name,
+      });
+      reply = buildWrapUpConfirmationMessage({
+        fields: fieldsAfterReply,
+        gdprRequired,
+        nutshell,
+      });
+    }
 
     const updatedHistory = [
       ...conversationHistory,

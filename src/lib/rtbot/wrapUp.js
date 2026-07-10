@@ -285,3 +285,91 @@ export function resolveWrapUpConfirmation({ priorMeta, userMessage, gdprRequired
   // Keep pending open for natural follow-ups that are not yet a yes/no
   return { confirmed: false, declined: false, clearPending: false };
 }
+
+/**
+ * After email is captured, the wrap-up confirmation must be shown before any
+ * lead webhook can fire. Returns true when we should inject that message.
+ */
+export function shouldForceWrapUpConfirmation({
+  meta = {},
+  fields = {},
+  emailJustCaptured = false,
+  assistantReply = "",
+}) {
+  if (!fields.email) return false;
+  if (meta.wrap_up_confirmed) return false;
+  if (meta.wrap_up_pending) return false;
+  if (meta.no_contact) return false;
+  if (meta.vendor_flow || meta.job_seeker_flow) return false;
+  if (isWrapUpMessage(assistantReply)) return false;
+  if (isVendorExitMessage(assistantReply)) return false;
+
+  // Email landed this turn and Claude did not present confirmation
+  return Boolean(emailJustCaptured);
+}
+
+export function buildWrapUpConfirmationMessage({
+  fields = {},
+  gdprRequired = false,
+  nutshell = null,
+}) {
+  const name = emptyToNull(fields.name) || "Not yet provided";
+  const email = emptyToNull(fields.email) || "Not yet provided";
+  const company = emptyToNull(fields.company);
+  const location = emptyToNull(fields.location);
+  const url = emptyToNull(fields.url);
+  const summaryRaw =
+    emptyToNull(nutshell) ||
+    emptyToNull(fields.situation_read) ||
+    emptyToNull(fields.problem_summary) ||
+    "A conversation about where you are and what you want to achieve.";
+  const summary =
+    summaryRaw.length > 220 ? `${summaryRaw.slice(0, 217)}...` : summaryRaw;
+
+  const lines = [
+    "Before I send this over, here is what I have:",
+    "",
+    `Name: ${name}`,
+    `Email: ${email}`,
+  ];
+
+  if (company) lines.push(`Company: ${company}`);
+  if (location) lines.push(`Location: ${location}`);
+  if (url) lines.push(`URL: ${url}`);
+  lines.push(`In a nutshell: ${summary}`);
+  lines.push("");
+
+  if (gdprRequired) {
+    lines.push(
+      "Do you give permission to receive emails from Radical Thinking at that address? You can withdraw consent any time."
+    );
+  } else {
+    lines.push(
+      "You will receive a follow-up from Radical Thinking at that email. You can opt out any time. Does that look right?"
+    );
+  }
+
+  return lines.join("\n");
+}
+
+/** System note so Claude delivers wrap-up immediately after email capture. */
+export function wrapUpSystemNote({ gdprRequired = false } = {}) {
+  const confirmLine = gdprRequired
+    ? 'End with: "Do you give permission to receive emails from Radical Thinking at that address? You can withdraw consent any time."'
+    : 'End with: "You will receive a follow-up from Radical Thinking at that email. You can opt out any time. Does that look right?"';
+
+  return `[System note: The visitor just provided their email. Do not ask more discovery questions. Immediately deliver the wrap-up confirmation exactly in this form:
+
+Before I send this over, here is what I have:
+
+Name: [name]
+Email: [email]
+[Company: name if given]
+[Location: location if given]
+[URL: url if given]
+In a nutshell: [one sentence plain-language summary in the visitor's words]
+
+${confirmLine}
+
+Do not fire or mention any webhook. Wait for their explicit yes/no.]`;
+}
