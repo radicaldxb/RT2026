@@ -30,6 +30,8 @@ import {
   buildWrapUpConfirmationMessage,
   shouldForceWrapUpConfirmation,
   wrapUpSystemNote,
+  isValidEmail,
+  visitorProvidedEmail,
 } from "@/lib/rtbot/wrapUp";
 import {
   fireJobSeeker,
@@ -121,7 +123,7 @@ function buildPageContext(metadata, country, gdprRequired) {
 }
 
 function mergeContactIntoMeta(meta, fields) {
-  if (fields.email) meta.captured_email = fields.email;
+  if (isValidEmail(fields.email)) meta.captured_email = fields.email.trim();
   if (fields.name && isPlausiblePersonName(fields.name)) {
     meta.captured_name = fields.name;
   } else if (meta.captured_name && !isPlausiblePersonName(meta.captured_name)) {
@@ -185,7 +187,13 @@ async function dispatchQualificationEvents({
     meta.gdpr_opt_in = true;
   }
 
-  if (isWrapUpMessage(assistantReply) && meta.captured_email) {
+  // Pending only after a real visitor-provided email is in meta — never from
+  // an assistant "Email:" line in a premature wrap-up message.
+  if (
+    isWrapUpMessage(assistantReply) &&
+    isValidEmail(meta.captured_email) &&
+    visitorProvidedEmail(conversationHistory, meta.captured_email, session.meta?.captured_email)
+  ) {
     meta.wrap_up_pending = true;
   }
 
@@ -401,7 +409,7 @@ export async function POST(req) {
       session.meta
     );
     const emailJustCaptured = Boolean(
-      fieldsBeforeReply.email && !session.meta.captured_email
+      isValidEmail(fieldsBeforeReply.email) && !isValidEmail(session.meta.captured_email)
     );
     const shouldPromptWrapUp =
       emailJustCaptured &&
@@ -477,7 +485,7 @@ export async function POST(req) {
       session.meta
     );
     const emailCapturedThisTurn = Boolean(
-      fieldsAfterReply.email && !session.meta.captured_email
+      isValidEmail(fieldsAfterReply.email) && !isValidEmail(session.meta.captured_email)
     );
 
     if (

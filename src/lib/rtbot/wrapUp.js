@@ -237,9 +237,16 @@ export function extractLeadFields(messages, meta = {}) {
     : null;
   const wrapUp = extractFromWrapUpAssistant(messages);
 
+  // Email must come from the visitor (or prior meta), never from the assistant wrap-up block.
+  // Assistant "Email:" lines were falsely populating captured_email and flipping wrap_up_pending early.
+  const email =
+    (isValidEmail(meta.captured_email) ? meta.captured_email : null) ||
+    (isValidEmail(contact.email) ? contact.email : null) ||
+    null;
+
   return {
     name: metaName || contact.name || wrapUp.name || null,
-    email: meta.captured_email || contact.email || wrapUp.email || null,
+    email,
     company:
       meta.captured_company ||
       wrapUp.company ||
@@ -262,6 +269,21 @@ export function extractLeadFields(messages, meta = {}) {
       null,
     role_interest: meta.role_interest || extractRoleInterest(messages) || null,
   };
+}
+
+export function isValidEmail(value) {
+  if (!value || typeof value !== "string") return false;
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim());
+}
+
+/** True when the visitor themselves provided this email (prior meta or user messages). */
+export function visitorProvidedEmail(messages, email, priorCapturedEmail = null) {
+  if (!isValidEmail(email)) return false;
+  if (isValidEmail(priorCapturedEmail) && priorCapturedEmail.toLowerCase() === email.toLowerCase()) {
+    return true;
+  }
+  const combined = visitorMessages(messages).join("\n").toLowerCase();
+  return combined.includes(email.trim().toLowerCase());
 }
 
 export function resolveWrapUpConfirmation({ priorMeta, userMessage, gdprRequired }) {
@@ -306,7 +328,7 @@ export function shouldForceWrapUpConfirmation({
   emailJustCaptured = false,
   assistantReply = "",
 }) {
-  if (!fields.email) return false;
+  if (!isValidEmail(fields.email)) return false;
   if (meta.wrap_up_confirmed) return false;
   if (meta.wrap_up_pending) return false;
   if (meta.no_contact) return false;
