@@ -123,6 +123,10 @@ function buildPageContext(metadata, country, gdprRequired) {
 }
 
 function mergeContactIntoMeta(meta, fields) {
+  // Drop stale placeholders like "Not yet provided"
+  if (meta.captured_email && !isValidEmail(meta.captured_email)) {
+    meta.captured_email = null;
+  }
   if (isValidEmail(fields.email)) meta.captured_email = fields.email.trim();
   if (fields.name && isPlausiblePersonName(fields.name)) {
     meta.captured_name = fields.name;
@@ -162,6 +166,19 @@ async function dispatchQualificationEvents({
   if (isSituationReadMessage(assistantReply)) {
     meta.situation_read = assistantReply;
     fields.situation_read = assistantReply;
+  }
+
+  // When wrap-up lists a real Email:, write it to meta if the visitor provided it.
+  if (isWrapUpMessage(assistantReply)) {
+    const wrapEmailMatch = assistantReply.match(/^\s*Email:\s*(.+)$/im);
+    const wrapEmail = wrapEmailMatch?.[1]?.trim() || null;
+    if (
+      isValidEmail(wrapEmail) &&
+      visitorProvidedEmail(conversationHistory, wrapEmail, session.meta?.captured_email)
+    ) {
+      meta.captured_email = wrapEmail;
+      fields.email = wrapEmail;
+    }
   }
 
   // Email submission turns must never be treated as wrap-up confirmation.

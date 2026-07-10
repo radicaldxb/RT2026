@@ -76,6 +76,9 @@ function extractLocation(messages) {
 
 function extractBudget(messages) {
   for (const text of [...visitorMessages(messages)].reverse()) {
+    // Timelines like "30 to 60 days" are not budgets
+    if (/\b(days?|weeks?|months?)\b/i.test(text)) continue;
+
     const match = text.match(
       /(\d[\d,.]*(?:\s*[kK])?(?:\s*(?:AED|USD|GBP|EUR|£|\$))?|\b(?:AED|USD|GBP|EUR)\s*\d[\d,.]*)/i
     );
@@ -121,7 +124,8 @@ function extractFromWrapUpAssistant(messages) {
 
     const nameValue = emptyToNull(name?.[1]);
     out.name = nameValue && isPlausiblePersonName(nameValue) ? nameValue : null;
-    out.email = emptyToNull(email?.[1]);
+    const emailValue = emptyToNull(email?.[1]);
+    out.email = isValidEmail(emailValue) ? emailValue.trim() : null;
     out.company = emptyToNull(company?.[1]);
     out.location = emptyToNull(location?.[1]);
     out.url = emptyToNull(url?.[1]);
@@ -237,12 +241,16 @@ export function extractLeadFields(messages, meta = {}) {
     : null;
   const wrapUp = extractFromWrapUpAssistant(messages);
 
-  // Email must come from the visitor (or prior meta), never from the assistant wrap-up block.
-  // Assistant "Email:" lines were falsely populating captured_email and flipping wrap_up_pending early.
-  const email =
-    (isValidEmail(meta.captured_email) ? meta.captured_email : null) ||
-    (isValidEmail(contact.email) ? contact.email : null) ||
-    null;
+  // Prefer visitor-typed email; allow wrap-up Email: line only when it is a
+  // real address the visitor also provided (never placeholders).
+  const metaEmail = isValidEmail(meta.captured_email) ? meta.captured_email.trim() : null;
+  const contactEmail = isValidEmail(contact.email) ? contact.email.trim() : null;
+  const wrapEmail =
+    isValidEmail(wrapUp.email) &&
+    visitorProvidedEmail(messages, wrapUp.email, metaEmail)
+      ? wrapUp.email.trim()
+      : null;
+  const email = contactEmail || metaEmail || wrapEmail || null;
 
   return {
     name: metaName || contact.name || wrapUp.name || null,
@@ -346,7 +354,7 @@ export function buildWrapUpConfirmationMessage({
   nutshell = null,
 }) {
   const name = emptyToNull(fields.name) || "Not yet provided";
-  const email = emptyToNull(fields.email) || "Not yet provided";
+  const email = isValidEmail(fields.email) ? fields.email.trim() : null;
   const company = emptyToNull(fields.company);
   const location = emptyToNull(fields.location);
   const url = emptyToNull(fields.url);
@@ -362,8 +370,9 @@ export function buildWrapUpConfirmationMessage({
     "Before I send this over, here is what I have:",
     "",
     `Name: ${name}`,
-    `Email: ${email}`,
   ];
+  if (email) lines.push(`Email: ${email}`);
+  else lines.push("Email: (waiting for your email)");
 
   if (company) lines.push(`Company: ${company}`);
   if (location) lines.push(`Location: ${location}`);
@@ -403,5 +412,6 @@ In a nutshell: [one sentence plain-language summary in the visitor's words]
 
 ${confirmLine}
 
-Do not fire or mention any webhook. Wait for their explicit yes/no.]`;
+Do not fire or mention any webhook. Wait for their explicit yes/no.
+[/System note]`;
 }

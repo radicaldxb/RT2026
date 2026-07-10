@@ -18,10 +18,20 @@ export function stripSystemNote(content) {
   const trimmed = content.trim();
   if (!trimmed.startsWith("[System note:")) return trimmed;
 
-  // Notes may contain brackets (e.g. "Hi [Name]"). Split on the note/body separator.
+  // Prefer an explicit closer so notes can contain "]" placeholders safely.
+  const explicitClosers = ["[/System note]\n\n", "[/System note]\r\n\r\n", "[/System note]"];
+  for (const closer of explicitClosers) {
+    const idx = trimmed.indexOf(closer);
+    if (idx !== -1) {
+      return trimmed.slice(idx + closer.length).trim();
+    }
+  }
+
+  // Notes may contain brackets (e.g. "Hi [Name]"). Prefer the last "]\\n\\n"
+  // so placeholder lines inside the note do not truncate early.
   const separators = ["]\n\n", "]\r\n\r\n"];
   for (const separator of separators) {
-    const idx = trimmed.indexOf(separator);
+    const idx = trimmed.lastIndexOf(separator);
     if (idx !== -1) {
       return trimmed.slice(idx + separator.length).trim();
     }
