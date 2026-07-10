@@ -46,7 +46,8 @@ Prerequisites:
 
 **Node type:** HTTP Request  
 **Method:** POST  
-**URL:** `https://jpqxyqnrejhycetehynx.supabase.co/rest/v1/briefs`
+**URL:** `{{ $env.SUPABASE_URL }}/rest/v1/briefs`  
+(Use your project URL from Netlify/Supabase env — do not hardcode it in docs or n8n exports.)
 
 **Headers:**
 
