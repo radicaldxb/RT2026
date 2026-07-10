@@ -52,9 +52,10 @@ export function shouldBlockWebhook(meta) {
   return meta?.no_contact === true;
 }
 
-function leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event }) {
+function leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event, sessionId }) {
   return {
     event,
+    sessionId,
     name: fields.name,
     email: fields.email,
     score: score.total,
@@ -70,19 +71,19 @@ function leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event }) {
   };
 }
 
-export async function fireQualifiedLead({ fields, score, unsubscribeToken, gdprOptIn }) {
+export async function fireQualifiedLead({ fields, score, unsubscribeToken, gdprOptIn, sessionId }) {
   return postWebhook(
     webhookUrl("qualified_lead"),
     "qualified_lead",
-    leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event: "qualified_lead" })
+    leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event: "qualified_lead", sessionId })
   );
 }
 
-export async function fireWarmLead({ fields, score, unsubscribeToken, gdprOptIn }) {
+export async function fireWarmLead({ fields, score, unsubscribeToken, gdprOptIn, sessionId }) {
   return postWebhook(
     webhookUrl("warm_lead"),
     "warm_lead",
-    leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event: "warm_lead" })
+    leadPayload({ fields, score, unsubscribeToken, gdprOptIn, event: "warm_lead", sessionId })
   );
 }
 

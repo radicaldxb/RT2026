@@ -224,6 +224,7 @@ async function dispatchQualificationEvents({
         score,
         unsubscribeToken,
         gdprOptIn,
+        sessionId,
       });
       if (sent) {
         meta.email_opt_in = true;
@@ -245,6 +246,7 @@ async function dispatchQualificationEvents({
         score,
         unsubscribeToken,
         gdprOptIn,
+        sessionId,
       });
       if (sent) {
         meta.email_opt_in = true;
