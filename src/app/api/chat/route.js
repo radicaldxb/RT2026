@@ -164,11 +164,16 @@ async function dispatchQualificationEvents({
     fields.situation_read = assistantReply;
   }
 
-  const wrapUp = resolveWrapUpConfirmation({
-    priorMeta: session.meta,
-    userMessage: chatInput,
-    gdprRequired,
-  });
+  // Email submission turns must never be treated as wrap-up confirmation.
+  const isEmailSubmissionTurn = /@/.test(String(chatInput || ""));
+
+  const wrapUp = isEmailSubmissionTurn
+    ? { confirmed: false, declined: false, clearPending: false }
+    : resolveWrapUpConfirmation({
+        priorMeta: session.meta,
+        userMessage: chatInput,
+        gdprRequired,
+      });
 
   if (wrapUp.clearPending) {
     meta.wrap_up_pending = false;
@@ -189,6 +194,8 @@ async function dispatchQualificationEvents({
 
   // Pending only after a real visitor-provided email is in meta — never from
   // an assistant "Email:" line in a premature wrap-up message.
+  // Email-submission turns skip confirmation above, but may still open pending
+  // once the wrap-up reply is delivered with a captured email.
   if (
     isWrapUpMessage(assistantReply) &&
     isValidEmail(meta.captured_email) &&

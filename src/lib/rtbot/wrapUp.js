@@ -9,7 +9,7 @@ import {
 const URL_RE = /https?:\/\/[^\s<>"']+|(?:www\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 
 const AFFIRMATIVES =
-  /^(yes|yeah|great|perfect|correct|looks good|that'?s right|that'?s correct|yep|sure|absolutely|confirmed|go ahead|sounds good|all good|spot on)/i;
+  /^(yes|yeah|great|perfect|correct|looks good|that'?s right|that'?s correct|yep|sure|absolutely|confirmed|go ahead|sounds good|all good|spot on|sounds about right|sounds right|that works|looks right|that'?s about right)/i;
 
 const NEGATIVE_RE =
   /^(no|nope|nah|don'?t|do not|not really)\b|(?:no thanks|don'?t send|do not contact|don'?t email|withdraw)/i;
