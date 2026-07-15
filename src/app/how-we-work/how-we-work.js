@@ -1,7 +1,5 @@
-// src/app/playbook/playbook.js
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Nav from "@/components/Nav";
@@ -18,12 +16,12 @@ const steps = [
     num: "1",
     color: "#1ACDEB",
     bg: "rgba(26,205,235,0.08)",
-    label: "Step 1: The Inside Look",
+    label: "Step 1: The Audit",
     headline: "Find the real problem.",
     body: [
-      "Most businesses know something is not working. Fewer know exactly what. The Audit is where we find out.",
-      "We spend time inside your operation. We talk to your team, look at your workflows, and map what your business intends to deliver versus what it actually delivers at every touchpoint. We are not looking for a technology fix. We are looking for the gap between your bold idea and your customer's actual experience.",
-      "The result is not a report. It is a prioritised action plan built around your specific reality, with a clear recommendation on what to build first and why.",
+      "Most businesses know something is not working. Fewer know exactly what.",
+      "We spend time inside your operation. We talk to your team, look at your workflows, and map what you intend to deliver versus what your customer actually experiences. This is not a technology audit. It is a reality audit.",
+      "The result is not a report. It is a prioritised action plan built around your specific situation, with a clear recommendation on what to build first and why.",
     ],
     gets: [
       "A reality audit of your business from the inside out",
@@ -32,13 +30,13 @@ const steps = [
       "An honest assessment of where AI can and cannot help",
     ],
     time: "Typically 5 to 10 working days",
-    cta: "Start with The Inside Look",
+    cta: "Start with The Audit",
   },
   {
     num: "2",
     color: "#E18949",
     bg: "rgba(225,137,73,0.08)",
-    label: "Step 2: The Work",
+    label: "Step 2: The Build",
     headline: "Build it properly. Not a pilot.",
     body: [
       "The Audit tells you what to build. The Build does it.",
@@ -52,17 +50,17 @@ const steps = [
       "Team onboarding so it actually gets used",
     ],
     time: "Typically 30 days, fixed price",
-    cta: "Talk about The Work",
+    cta: "Talk about The Build",
   },
   {
     num: "3",
     color: "#6B17DA",
     bg: "rgba(107,23,218,0.06)",
-    label: "Step 3: The Momentum",
+    label: "Step 3: The Partnership",
     headline: "Stay ahead. Not catch up.",
     body: [
       "The AI landscape resets every few months. New models, new capabilities, new ways to close gaps you did not know existed. What you built in January needs reviewing by June.",
-      "The Retainer is how businesses stay ahead rather than constantly catching up. We become your ongoing AI function. Monthly we review what has changed in the landscape and what that means for your stack. Quarterly we upgrade what needs upgrading. And when something breaks or something new emerges that you should know about, you have direct access.",
+      "The Partnership is how businesses stay ahead rather than constantly catching up. We become your ongoing AI function. Monthly reviews of what has changed in the landscape and what that means for your stack. Quarterly upgrades to what needs improving. And direct access when something breaks or something new emerges that you should know about.",
       "This is not a maintenance contract. It is a continuous commitment to making sure your technology keeps amplifying the right things as your business evolves.",
     ],
     gets: [
@@ -72,7 +70,7 @@ const steps = [
       "Proactive recommendations, not reactive fixes",
     ],
     time: "Monthly, cancel anytime",
-    cta: "Ask about The Momentum",
+    cta: "Ask about The Partnership",
   },
 ];
 
@@ -82,42 +80,50 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is the Radical Thinking Playbook?",
+      name: "How does Radical Thinking work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The Radical Thinking Playbook is a three-step process for AI implementation: The Inside Look maps the gap between your business intention and customer reality, The Work creates a production-ready solution to close the most important gap, and The Momentum keeps your AI operation current as the technology evolves.",
+        text: "Radical Thinking works in three engagement types, guided by the formula BI = C + Ex × T²: The Audit maps the gap between your business intention and customer reality, The Build creates a production-ready solution to close the most important gap, and The Partnership keeps your AI operation current as the technology evolves.",
       },
     },
     {
       "@type": "Question",
-      name: "How long does The Inside Look take?",
+      name: "How long does The Audit take?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The Inside Look typically takes 5 to 10 working days. It ends with a prioritised action plan built around your specific reality and a clear recommendation on what to build first.",
+        text: "The Audit typically takes 5 to 10 working days. It ends with a prioritised action plan built around your specific situation and a clear recommendation on what to build first.",
       },
     },
     {
       "@type": "Question",
-      name: "How long does The Work take?",
+      name: "How long does The Build take?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The Work is typically 30 days at a fixed price. It delivers a production-ready system your team uses every day, fully documented and built to survive technology changes.",
+        text: "The Build is typically 30 days at a fixed price. It delivers a production-ready system your team uses every day, fully documented and built to survive technology changes.",
       },
     },
     {
       "@type": "Question",
-      name: "What does The Momentum include?",
+      name: "What does The Partnership include?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The Momentum includes a monthly AI landscape review, quarterly stack upgrades, and direct access when something changes or breaks. It is a monthly commitment with no long-term contract required.",
+        text: "The Partnership includes a monthly AI landscape review, quarterly stack upgrades, and direct access when something changes or breaks. It is a monthly commitment with no long-term contract required.",
       },
     },
     {
       "@type": "Question",
-      name: "Do I have to start with The Inside Look?",
+      name: "Do I have to start with The Audit?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The Inside Look is the recommended starting point because it ensures The Work solves the right problem. However, if you already have a clear diagnosis, we can discuss starting directly with The Work. Talk to the agent to explore what makes sense for your situation.",
+        text: "The Audit is the recommended starting point because it ensures The Build solves the right problem. However, if you already have a clear diagnosis, we can discuss starting directly with The Build. Talk to the agent to explore what makes sense for your situation.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the Radical Thinking formula?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "BI = C + Ex × T² means Bold Ideas equal Creative plus Experience multiplied by Technology squared. AI advisory only works when the formula does. Every engagement applies Creative, Experience, and Technology so capability becomes commercial outcomes.",
       },
     },
     {
@@ -125,7 +131,7 @@ const faqSchema = {
       name: "How does Radical Thinking price its work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Radical Thinking does not publish fixed prices because every engagement is different. The Inside Look and The Work are fixed-price engagements sized to the specific scope. Talk to the agent to get a sense of what your situation would involve.",
+        text: "Radical Thinking does not publish fixed prices because every engagement is different. The Audit and The Build are fixed-price engagements sized to the specific scope. Talk to the agent to get a sense of what your situation would involve.",
       },
     },
   ],
@@ -134,23 +140,23 @@ const faqSchema = {
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "The Radical Thinking Playbook",
+  name: "How Radical Thinking Works",
   provider: {
     "@type": "Organization",
     name: "Radical Thinking",
     url: "https://radical-thinking.net",
   },
   description:
-    "A three-step AI implementation process: Audit, Build, and Retainer. Designed to find the real problem, build something that lasts, and keep it current as AI evolves.",
+    "Three engagement types: The Audit, The Build, and The Partnership. Designed to find the real problem, build something that lasts, and keep it current as AI evolves.",
   serviceType: "AI Implementation Consulting",
   areaServed: {
     "@type": "Place",
     name: "Global",
   },
-  url: "https://radical-thinking.net/playbook",
+  url: "https://radical-thinking.net/how-we-work",
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Playbook Steps",
+    name: "Engagement Types",
     itemListElement: [
       {
         "@type": "Offer",
@@ -166,7 +172,7 @@ const serviceSchema = {
       },
       {
         "@type": "Offer",
-        name: "The Retainer",
+        name: "The Partnership",
         description:
           "Ongoing AI capability management. Monthly reviews, quarterly upgrades, direct access.",
       },
@@ -174,7 +180,7 @@ const serviceSchema = {
   },
 };
 
-export default function PlaybookClient() {
+export default function HowWeWork() {
   return (
     <section className="relative w-full min-h-screen flex flex-col overflow-x-hidden">
       <span className={robotoSlab.className} hidden aria-hidden />
@@ -192,8 +198,6 @@ export default function PlaybookClient() {
       <Nav />
 
       <div className="relative z-10 flex-1 w-full max-w-5xl mx-auto px-4 pt-24 md:pt-32 pb-20">
-
-        {/* Page header */}
         <motion.div
           className="mb-20"
           initial={{ opacity: 0, y: 48 }}
@@ -201,29 +205,33 @@ export default function PlaybookClient() {
           transition={{ duration: 1.0, ease: E }}
         >
           <p className="text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-4">
-            The Playbook
+            How We Work
           </p>
           <h1
             className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.05] tracking-tight text-black mb-4"
             style={serif}
           >
-            One process.<br />Three steps.<br />No shortcuts.
+            We start inside the box.
           </h1>
+          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mb-4">
+            Anyone can think outside the box. The hard work is understanding what is inside it first. The people, the processes, the gaps between intention and reality. That is where the real opportunity lives.
+          </p>
+          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mb-4">
+            Every engagement runs on BI = C + Ex × T² — Creative, Experience, and Technology squared. AI advisory without the formula is just tooling. With it, bold ideas land as commercial outcomes.
+          </p>
           <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-            Whether you are building an AI agent, a digital platform, a brand, or a media system, the process is the same. Because the problem is always the same: intention and reality are out of alignment.
+            We work in three engagement types. Pick one. Combine them. Start where you need to.
           </p>
         </motion.div>
 
-        {/* The journey line + steps */}
         <div className="relative">
-          {/* Vertical timeline line */}
           <div
             className="absolute left-[27px] top-0 bottom-0 w-px hidden md:block"
             style={{ background: "#e8e4dc" }}
           />
 
           <div className="flex flex-col gap-0">
-            {steps.map((step, i) => (
+            {steps.map((step) => (
               <motion.div
                 key={step.num}
                 initial={{ opacity: 0, x: 48 }}
@@ -233,7 +241,6 @@ export default function PlaybookClient() {
                 className="relative grid pb-16"
                 style={{ gridTemplateColumns: "56px 1fr", gap: "1.5rem 2.5rem" }}
               >
-                {/* Node */}
                 <div
                   className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0 relative z-10"
                   style={{ ...serif, background: step.bg, color: step.color, border: `1.5px solid ${step.color}` }}
@@ -241,7 +248,6 @@ export default function PlaybookClient() {
                   {step.num}
                 </div>
 
-                {/* Content */}
                 <div className="pt-2">
                   <span
                     className="block text-[0.65rem] font-semibold uppercase tracking-[0.2em] mb-2"
@@ -264,7 +270,6 @@ export default function PlaybookClient() {
                     ))}
                   </div>
 
-                  {/* What you get */}
                   <div
                     className="rounded-2xl p-6 mb-6 max-w-[600px]"
                     style={{ background: step.bg, border: `0.5px solid ${step.color}22` }}
@@ -286,7 +291,7 @@ export default function PlaybookClient() {
                   </div>
 
                   <Link
-                    href="/chat"
+                    href="/chat?ref=how-we-work"
                     className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest px-5 py-3 rounded-full text-white hover:opacity-85 transition-opacity"
                     style={{ background: step.color }}
                   >
@@ -298,7 +303,6 @@ export default function PlaybookClient() {
           </div>
         </div>
 
-        {/* Pricing note */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -317,17 +321,16 @@ export default function PlaybookClient() {
             Every business is different. Every gap is different. The scope of an Audit for a five-person team looks nothing like the scope for a regional enterprise. The Build that closes one gap has nothing in common with the one that closes another.
           </p>
           <p className="text-base text-gray-600 leading-relaxed max-w-2xl mb-6">
-            What we can tell you is that the Audit and the Build are fixed-price engagements. You know the cost before we start. The Retainer is a monthly commitment with no long-term contract. Talk to the agent to get a sense of what your situation would involve.
+            What we can tell you is that The Audit and The Build are fixed-price engagements. You know the cost before we start. The Partnership is a monthly commitment with no long-term contract. Talk to the agent to get a sense of what your situation would involve.
           </p>
           <Link
-            href="/chat"
+            href="/chat?ref=how-we-work"
             className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-85 transition-opacity"
           >
-            Talk to the agent →
+            Talk to the Agent →
           </Link>
         </motion.div>
 
-        {/* FAQ section for AEO */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -349,7 +352,6 @@ export default function PlaybookClient() {
             </div>
           ))}
         </motion.div>
-
       </div>
 
       <Footer />

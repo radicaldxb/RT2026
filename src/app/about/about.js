@@ -6,83 +6,39 @@ import { robotoSlab, serif } from "@/lib/fonts";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import SoftBackground from "@/components/SoftBackground";
+import {
+  FORMULA_ADVISORY_LINE,
+  FORMULA_EQUATION,
+  FORMULA_EXPANDED,
+  FORMULA_ROWS,
+} from "@/lib/formula";
 
 const E = [0.16, 1, 0.3, 1];
 const VP = { once: false, margin: "0px 0px -100px 0px" };
 
-const FORMULA_ROWS = [
-  {
-    num: "01",
-    color: "#E18949",
-    eyebrow: "Creative",
-    title: "The idea",
-    body: "Bold before buildable. We start with what would actually make a difference, not what is easiest to execute. Every project begins by asking whether the idea is worth building at all.",
-  },
-  {
-    num: "02",
-    color: "#1ACDEB",
-    eyebrow: "Experience",
-    title: "The feeling",
-    body: "Not just used. Remembered. We design for the impression that stays after the screen closes, the campaign ends, or the conversation finishes. That feeling is what brings people back.",
-  },
-  {
-    num: "03",
-    color: "#6B17DA",
-    eyebrow: "Technology",
-    title: "The loop",
-    body: "This is where AI earns its square. We use it to test, validate, and improve continuously. What is working gets pushed further. What is not gets fixed. The idea gets smarter every cycle.",
-  },
-];
-
 const KEY_FACTS = [
   { label: "Founded", value: "2009, Dubai, UAE" },
   { label: "Founder", value: "Stephan van Wijk" },
-  { label: "Formula", value: "BI = C + Ex × T²" },
+  { label: "Formula", value: FORMULA_EQUATION },
   { label: "Location", value: "Dubai, United Arab Emirates" },
   {
-    label: "Clients",
+    label: "Selected clients",
     value:
-      "1001 Inventions, Microsoft, The Netherlands Government, Lenovo, Ministry of Finance of the UAE, Ministry of Economy of the UAE, Simon Snelder, Payment Partners, AI Networks, HP, and more.",
-  },
-  {
-    label: "Products",
-    value: "FluffyFriends, KahuLife, Animal Intelligence, Webinarlife",
+      "Microsoft, HP, Lenovo, UAE Ministry of Finance, UAE Ministry of Economy, Netherlands Government, 1001 Inventions, Payment Partners, AI Networks, and others.",
   },
   {
     label: "Services",
-    value: "AI solutions, web platforms, automations, strategy, branding, and digital.",
+    value: "AI advisory, implementation, and delivery.",
+    href: "/services",
+    linkLabel: "See services page for detail.",
   },
   {
-    label: "License",
-    value: "DET Commercial License 714580 (Radical Thinking Web Design L.L.C), licensed since 2014",
+    label: "Commercial licence",
+    value:
+      "DET Commercial Licence 714580 (Radical Thinking Web Design L.L.C), licensed since 2014.",
   },
-  { label: "Website", value: "radical-thinking.net" },
+  { label: "Website", value: "radical-thinking.net", href: "https://radical-thinking.net" },
 ];
-
-function StoryRow({ row, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: index % 2 === 0 ? -48 : 48 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.85, delay: index * 0.08, ease: E }}
-      viewport={{ once: false, margin: "0px 0px -80px 0px" }}
-      className={`grid grid-cols-[52px_1fr] md:grid-cols-[72px_1fr] gap-x-4 md:gap-x-6 py-8 md:py-10${index > 0 ? " border-t border-[#e8e4dc]/90" : ""}`}
-    >
-      <p className="text-[2.25rem] md:text-[2.75rem] font-bold leading-none" style={{ ...serif, color: row.color }}>
-        {row.num}
-      </p>
-      <div className="pt-0.5 md:pt-1">
-        <p className="text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-2">
-          {row.eyebrow}
-        </p>
-        <h3 className="text-base md:text-lg font-semibold text-black mb-2 tracking-tight" style={serif}>
-          {row.title}
-        </h3>
-        <p className="text-sm md:text-base text-gray-600 leading-relaxed">{row.body}</p>
-      </div>
-    </motion.div>
-  );
-}
 
 export default function About() {
   return (
@@ -112,7 +68,7 @@ export default function About() {
               Radical Thinking
             </h1>
             <p className="text-base text-gray-600 leading-relaxed mt-4 max-w-[560px]">
-              An AI-native agency based in Dubai. Built different by design.
+              An AI advisory based in Dubai. 20+ years of enterprise experience, turning AI experiments into results.
             </p>
           </motion.header>
 
@@ -134,31 +90,106 @@ export default function About() {
                 The crash that wiped out agencies became the launch platform. No overhead, no bloat, just sharp thinking and fast execution. For over a decade the agency punched above its weight, always at the front of the technology curve, building for some of the biggest tech brands in the region.
               </p>
               <p>
-                Then AI arrived. And it changed the question. Not &ldquo;how do we keep up?&rdquo; but &ldquo;what does an agency look like when the tools finally match the ambition?&rdquo; Radical Thinking is the answer to that question. Lean by design. AI-native by conviction. Built to deliver what used to take a floor full of people, without the floor.
+                Then AI arrived. And it changed everything. Not the tools, the questions. Radical Thinking runs on a different principle now. Senior thinking, delivered with AI where AI belongs, and human judgment where it matters. Lean by design. Focused by choice. Built to solve the kind of problems that don&apos;t have off-the-shelf answers.
               </p>
             </div>
           </motion.div>
 
-          <motion.div
+          <motion.section
             className="mb-10 md:mb-12"
+            aria-labelledby="founder-heading"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: E }}
+            viewport={VP}
+          >
+            <p className="text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-4">
+              Founder
+            </p>
+            <div className="rounded-2xl border border-[#e8e4dc]/90 bg-white p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+              <div className="flex flex-col sm:flex-row gap-6 md:gap-8">
+                <div
+                  className="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-[#f4f2ed] border border-[#e8e4dc]/90 flex items-center justify-center flex-shrink-0"
+                  role="img"
+                  aria-label="Stephan van Wijk photo placeholder"
+                >
+                  <span className="text-2xl md:text-3xl font-bold text-[#8a8780]" style={serif}>
+                    SvW
+                  </span>
+                </div>
+                <div className="min-w-0">
+                  <h2
+                    id="founder-heading"
+                    className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-1"
+                    style={serif}
+                  >
+                    Stephan van Wijk
+                  </h2>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    Founder and principal of Radical Thinking. Twenty years of digital and AI experience across the Middle East, delivered for governments, ministries, and enterprise clients across the region.
+                  </p>
+                  <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
+                    <p>
+                      Career highlights include work on the E-Dirham programme with the UAE Ministry of Finance, the EnergyAI programme, and most recently as Associate Director of Digital Engagement at EPAM. Along the way, projects with Microsoft, HP, Lenovo, 1001 Inventions, the Netherlands Government, the UAE Ministry of Economy, and others.
+                    </p>
+                    <p>
+                      Radical Thinking was founded in 2009 as the vehicle for delivering senior digital and AI work independently. It now focuses on advisory, implementation, and delivery for organisations turning AI experiments into commercial outcomes.
+                    </p>
+                    <p className="text-black font-medium">
+                      Based in Dubai. Working globally.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.section>
+
+          <motion.section
+            className="mb-10 md:mb-12"
+            aria-labelledby="formula-heading"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: E }}
             viewport={VP}
           >
             <p className="text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-2">
-              How we think
+              The formula
             </p>
             <h2
-              className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-6"
+              id="formula-heading"
+              className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-3"
               style={serif}
             >
-              BI = C + Ex × T²
+              {FORMULA_EQUATION}
             </h2>
-            {FORMULA_ROWS.map((row, index) => (
-              <StoryRow key={row.num} row={row} index={index} />
-            ))}
-          </motion.div>
+            <p className="text-sm text-gray-600 leading-relaxed mb-2 max-w-2xl">
+              {FORMULA_EXPANDED}
+            </p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-6 max-w-2xl">
+              {FORMULA_ADVISORY_LINE}
+            </p>
+            <div className="rounded-2xl border border-[#e8e4dc]/90 bg-white p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                {FORMULA_ROWS.map((row) => (
+                  <div key={row.num}>
+                    <p
+                      className="text-[1.75rem] font-bold leading-none mb-2"
+                      style={{ ...serif, color: row.color }}
+                    >
+                      {row.num}
+                    </p>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[#8a8780] mb-1">
+                      {row.eyebrow}
+                    </p>
+                    <h3 className="text-sm font-semibold text-black mb-2 tracking-tight" style={serif}>
+                      {row.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{row.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.section>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-12">
             <motion.div
@@ -172,7 +203,7 @@ export default function About() {
                 Mission
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                To help businesses stop fearing AI and start leading with it. We find where AI creates real value, build around it, and deliver products and experiences that work in the real world.
+                To help organisations turn AI capability into commercial outcomes. We find where AI creates real value, build around it, and deliver systems and strategies that work in the real world.
               </p>
             </motion.div>
             <motion.div
@@ -186,7 +217,7 @@ export default function About() {
                 Vision
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Bold ideas should not be limited by team size or budget. One sharp mind with the right tools should be able to build what used to take twenty people. That is not the future. That is now.
+                Senior thinking, applied with the right tools, should be able to solve problems that used to require whole floors of specialists. Lean does not mean small. It means focused, senior, and directly accountable for the outcome.
               </p>
             </motion.div>
           </div>
@@ -203,20 +234,37 @@ export default function About() {
             </p>
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
               {KEY_FACTS.map((fact) => (
-                <div key={fact.label}>
+                <div
+                  key={fact.label}
+                  className={
+                    fact.label === "Selected clients" || fact.label === "Services"
+                      ? "sm:col-span-2"
+                      : undefined
+                  }
+                >
                   <dt className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[#8a8780] mb-1">
                     {fact.label}
                   </dt>
                   <dd className="text-sm text-gray-600 leading-relaxed">
                     {fact.label === "Website" ? (
                       <a
-                        href="https://radical-thinking.net"
+                        href={fact.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-black font-medium hover:opacity-70 transition-opacity"
                       >
                         {fact.value}
                       </a>
+                    ) : fact.label === "Services" ? (
+                      <>
+                        {fact.value}{" "}
+                        <Link
+                          href={fact.href}
+                          className="text-black font-medium underline underline-offset-2 hover:opacity-70 transition-opacity"
+                        >
+                          {fact.linkLabel}
+                        </Link>
+                      </>
                     ) : (
                       fact.value
                     )}

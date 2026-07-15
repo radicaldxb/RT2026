@@ -17,6 +17,11 @@ import {
   services,
   techStackFacts,
 } from "./intelligenceContent";
+import {
+  FORMULA_ADVISORY_LINE,
+  FORMULA_EQUATION,
+  FORMULA_EXPANDED,
+} from "@/lib/formula";
 
 const E = [0.16, 1, 0.3, 1];
 const VP = { once: false, margin: "0px 0px -100px 0px" };
@@ -165,9 +170,12 @@ export default function Intelligence() {
               <FactGrid facts={entityFacts} />
             </ContentCard>
 
-            <ContentCard eyebrow="The formula" title="BI = C + Ex × T²" delay={0.04}>
+            <ContentCard eyebrow="The formula" title={FORMULA_EQUATION} delay={0.04}>
               <p className="text-sm text-gray-600 leading-relaxed mb-2">
-                Bold Ideas = Creative + Experience × Technology²
+                {FORMULA_EXPANDED}
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                {FORMULA_ADVISORY_LINE}
               </p>
               <div>
                 {formulaRows.map((row, index) => (
@@ -193,7 +201,7 @@ export default function Intelligence() {
               </div>
             </ContentCard>
 
-            <ContentCard eyebrow="Products and ventures" delay={0.12}>
+            <ContentCard eyebrow="Explorations and R&D" delay={0.12}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {products.map((product) => (
                   <div key={product.title}>

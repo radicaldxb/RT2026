@@ -3,14 +3,15 @@ import Script from "next/script";
 import { portfolio } from "@/app/work/projects";
 
 export const metadata = {
-  title: "Our Work | Radical Thinking",
-  description: "Explore our AI-native case studies. From autonomous agents to immersive digital ecosystems, see how we apply radical thinking to real-world challenges.",
+  title: "Work | Radical Thinking",
+  description:
+    "Radical Thinking case studies. Client work in AI, digital platforms, and brand strategy, plus our own experiments in AI product development.",
   alternates: {
     canonical: "https://radical-thinking.net/work",
   },
   openGraph: {
-    title: "Radical Thinking — Work",
-    description: "Case studies in AI strategy, development, and design.",
+    title: "Work | Radical Thinking",
+    description: "Client work and experiments in AI, digital platforms, and brand strategy.",
     url: "https://radical-thinking.net/work",
     siteName: "Radical Thinking",
     images: [
@@ -22,6 +23,13 @@ export const metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Work | Radical Thinking",
+    description:
+      "Radical Thinking case studies. Client work and experiments in AI, digital platforms, and brand strategy.",
+    images: ["https://radical-thinking.net/Images/OG/OG-Work.webp"],
+  },
 };
 
 export default function WorkPage() {
@@ -32,23 +40,24 @@ export default function WorkPage() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "Radical Thinking Work",
-          "description": "A collection of our AI-native projects and digital ecosystems.",
-          "url": "https://radical-thinking.net/work",
-          "publisher": {
+          name: "Radical Thinking Work",
+          description:
+            "Radical Thinking case studies. Client work in AI, digital platforms, and brand strategy, plus our own experiments in AI product development.",
+          url: "https://radical-thinking.net/work",
+          publisher: {
             "@type": "Organization",
-            "name": "Radical Thinking",
-            "url": "https://radical-thinking.net"
+            name: "Radical Thinking",
+            url: "https://radical-thinking.net",
           },
-          "mainEntity": {
+          mainEntity: {
             "@type": "ItemList",
-            "itemListElement": portfolio.map((item, index) => ({
+            itemListElement: portfolio.map((item, index) => ({
               "@type": "CreativeWork",
-              "position": index + 1,
-              "name": item.title,
-              "description": item.category
-            }))
-          }
+              position: index + 1,
+              name: item.title,
+              description: item.category,
+            })),
+          },
         })}
       </Script>
     </>

@@ -9,19 +9,6 @@ import { usePathname } from "next/navigation";
 export default function Footer() {
   const pathname = usePathname();
   const isChat = pathname === "/chat";
-  const isHomePage = pathname === "/" || pathname === "/landing";
-
-  const handleHashClick = (e, hash) => {
-    if (isHomePage) {
-      e.preventDefault();
-      const el = document.getElementById(hash);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        window.location.href = `/#${hash}`;
-      }
-    }
-  };
 
   return (
     <section className="w-full flex justify-center items-center px-4 py-5 relative overflow-hidden">
@@ -35,8 +22,8 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col gap-2 text-sm"
           >
-            <Link href="/#how" onClick={(e) => handleHashClick(e, "how")}>HOW WE WORK</Link>
-            <Link href="/playbook">PLAYBOOK</Link>
+            <Link href="/how-we-work">HOW WE WORK</Link>
+            <Link href="/services">SERVICES</Link>
             <Link href="/chat">CHAT</Link>
           </motion.div>
 

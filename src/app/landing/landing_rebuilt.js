@@ -197,15 +197,15 @@ function mapProgressColor(p, inputRange, colors) {
 const REALITY_BEAT = { start: 0.30, end: 0.43, moveStart: 0.315, moveEnd: 0.43 };
 
 const REALITY_LABELS = [
-  "New Website",
+  "ChatGPT",
+  "AI Tools",
+  "Copilot",
   "The CRM",
   "The ERP",
-  "SEO Agency",
-  "Tech Consultant",
+  "New Website",
+  "Prompt Library",
   "Sales Campaign",
-  "Social Campaign",
-  "Loyalty Program",
-  "The Developer",
+  "Tech Stack",
 ];
 
 const REALITY_DRIFT_LABELS = REALITY_LABELS.map((label, i) => {
@@ -364,15 +364,20 @@ function ScrollNarrative() {
 
         {/* Beat 1 */}
         <div
-          className="absolute inset-0 flex items-center justify-center px-6 text-center z-10"
+          className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10 gap-5"
           style={{ opacity: b1Op, transform: `translateY(${b1Y}px)` }}
         >
           <h1
-            className="text-[clamp(2rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-black max-w-4xl"
+            className="text-[clamp(1.85rem,4.8vw,3.75rem)] font-bold leading-[1.12] tracking-tight text-black max-w-4xl"
             style={serif}
           >
-            Is your business today what you imagined it would be?
+            The gap between AI capability and business reality.
+            <br />
+            We help you close it.
           </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+            Your partner in turning AI experiments into results.
+          </p>
         </div>
 
         {/* Beat 2 */}
@@ -794,7 +799,7 @@ function LandingMidSections() {
             transition={{ duration: 0.9, ease: E }}
             viewport={VP}
           >
-            <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-5">The Playbook</span>
+            <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-5">How We Work</span>
             <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.1] tracking-tight text-black mb-3" style={serif}>
               One process. Three steps. No shortcuts.
             </h2>
@@ -809,27 +814,27 @@ function LandingMidSections() {
             {[
               {
                 num: "1", color: "#1ACDEB", bg: "rgba(26,205,235,0.1)",
-                label: "Step 1: The Inside Look",
+                label: "Step 1: The Audit",
                 title: "Find the real problem.",
                 body: "We spend time inside your operation. We talk to your team, your customers, and your data. We map what your business intends to deliver versus what it actually delivers at every touchpoint. Then we tell you honestly where AI can close the gap and where it cannot.",
                 what: "You walk away with a prioritised action plan built around your reality, not a generic template. Fixed price. Fixed timeframe. No surprises.",
-                cta: "Start with The Inside Look",
+                cta: "Start with The Audit",
               },
               {
                 num: "2", color: "#E18949", bg: "rgba(225,137,73,0.1)",
-                label: "Step 2: The Work",
+                label: "Step 2: The Build",
                 title: "Build it properly. Not a pilot.",
                 body: "We take the top priority from the Audit and build it to production standard. Not a demo. Not a proof of concept. Something your team uses every day, documented, and built to survive the next model update. The medium depends on the gap.",
                 what: "30 days. Fixed price. One thing done right, running in your business.",
-                cta: "Talk about The Work",
+                cta: "Talk about The Build",
               },
               {
                 num: "3", color: "#6B17DA", bg: "rgba(107,23,218,0.08)",
-                label: "Step 3: The Momentum",
+                label: "Step 3: The Partnership",
                 title: "Stay ahead. Not catch up.",
                 body: "The AI landscape resets every few months. New models, new capabilities, new ways to close gaps you did not know existed. The businesses that win are not the ones who built something once. They are the ones with a partner continuously asking if they are still building the right thing.",
                 what: "Monthly capability review. Quarterly upgrades. Direct access when something changes or breaks. Cancel anytime.",
-                cta: "Ask about The Momentum",
+                cta: "Ask about The Partnership",
               },
             ].map((item, i) => (
               <motion.div

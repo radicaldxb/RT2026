@@ -15,8 +15,8 @@ export default function Nav() {
   const isChatPage = pathname === "/chat";
 
   const links = [
-    { label: "How We Work", href: "/#how" },
-    { label: "Playbook", href: "/playbook" },
+    { label: "How We Work", href: "/how-we-work" },
+    { label: "Services", href: "/services" },
     { label: "Chat", href: "/chat" },
     { label: "Insights", href: "/insights" },
     { label: "Work", href: "/work" },

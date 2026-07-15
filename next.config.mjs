@@ -56,6 +56,7 @@ const nextConfig = {
       { source: "/experience", destination: "/about", permanent: true },
       { source: "/technology", destination: "/services", permanent: true },
       { source: "/roadmap", destination: "/chat", permanent: false },
+      { source: "/playbook", destination: "/how-we-work", permanent: true },
     ];
   },
 };

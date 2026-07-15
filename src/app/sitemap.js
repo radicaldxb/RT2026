@@ -27,7 +27,7 @@ export default function sitemap() {
       priority: 1,
     },
     {
-      url: `${baseUrl}/playbook`,
+      url: `${baseUrl}/how-we-work`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.95,

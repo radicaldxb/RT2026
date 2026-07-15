@@ -2,7 +2,8 @@ import Home from "../home";
 
 export const metadata = {
   title: "Radical Thinking",
-  description: "We bring bold ideas to life.",
+  description:
+    "Your partner in turning AI experiments into results. Radical Thinking, Dubai.",
   robots: { index: false, follow: false },
 };
 

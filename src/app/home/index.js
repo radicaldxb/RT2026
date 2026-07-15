@@ -46,40 +46,22 @@ const formulaCards = [
 
 const howWeWorkRows = [
   {
-    num: "01", color: "#1ACDEB",
-    title: "We map the gap.",
-    body: "We look at your business from the inside. What does your bold idea intend to deliver? What does your customer actually experience? Where are the disconnects between the dream and the daily reality? This is not a technology audit. It is a reality audit.",
+    num: "01",
+    color: "#1ACDEB",
+    title: "The Audit",
+    body: "Find the real problem, in 5 to 10 days.",
   },
   {
-    num: "02", color: "#E18949",
-    title: "We build the bridge.",
-    body: "Once we know where the gap is, we figure out what closes it. Sometimes that is an AI agent. Sometimes a platform, a content system, or a brand overhaul. The service does not matter. The outcome does. We build it properly so it lasts.",
+    num: "02",
+    color: "#E18949",
+    title: "The Build",
+    body: "Close it properly, in 30 days.",
   },
   {
-    num: "03", color: "#6B17DA",
-    title: "We keep it honest.",
-    body: "AI capability resets every few months. Your business evolves. What you built in January needs rethinking by June. We stay alongside you as both change, so your technology keeps amplifying the right things.",
-  },
-];
-
-const playbookSteps = [
-  {
-    num: "1", color: "#1ACDEB", bg: "rgba(26,205,235,0.1)",
-    label: "Step 1: The Inside Look",
-    title: "Find the real problem.",
-    body: "We spend time inside your operation. We talk to your team, your customers, and your data. We map what your business intends to deliver versus what it actually delivers at every touchpoint.",
-  },
-  {
-    num: "2", color: "#E18949", bg: "rgba(225,137,73,0.1)",
-    label: "Step 2: The Work",
-    title: "Build it properly. Not a pilot.",
-    body: "We take the top priority from the Audit and build it to production standard. Not a demo. Not a proof of concept. Something your team uses every day, documented, and built to survive the next model update.",
-  },
-  {
-    num: "3", color: "#6B17DA", bg: "rgba(107,23,218,0.08)",
-    label: "Step 3: The Momentum",
-    title: "Stay ahead. Not catch up.",
-    body: "The AI landscape resets every few months. The businesses that win are not the ones who built something once. They are the ones with a partner continuously asking if they are still building the right thing.",
+    num: "03",
+    color: "#6B17DA",
+    title: "The Partnership",
+    body: "Keep it current, monthly.",
   },
 ];
 
@@ -455,15 +437,15 @@ function AgentTerminal({ prompt, agencyLine = false, className = "max-w-lg mx-au
 const REALITY_BEAT = { start: 0.30, end: 0.43, moveStart: 0.315, moveEnd: 0.43 };
 
 const REALITY_LABELS = [
-  "New Website",
+  "ChatGPT",
+  "AI Tools",
+  "Copilot",
   "The CRM",
   "The ERP",
-  "SEO Agency",
-  "Tech Consultant",
+  "New Website",
+  "Prompt Library",
   "Sales Campaign",
-  "Social Campaign",
-  "Loyalty Program",
-  "The Developer",
+  "Tech Stack",
 ];
 
 const REALITY_DRIFT_LABELS = REALITY_LABELS.map((label, i) => {
@@ -545,15 +527,20 @@ function ScrollNarrative() {
 
         {/* Beat 1 */}
         <div
-          className="absolute inset-0 flex items-center justify-center px-6 text-center z-10"
+          className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10 gap-5"
           style={{ opacity: b1Op, transform: `translateY(${b1Y}px)` }}
         >
           <h1
-            className="text-[clamp(2rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-black max-w-4xl"
+            className="text-[clamp(1.85rem,4.8vw,3.75rem)] font-bold leading-[1.12] tracking-tight text-black max-w-4xl"
             style={serif}
           >
-            Is your business today what you imagined it would be?
+            The gap between AI capability and business reality.
+            <br />
+            We help you close it.
           </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+            Your partner in turning AI experiments into results.
+          </p>
         </div>
 
         {/* Beat 2 */}
@@ -731,13 +718,22 @@ function LandingFlowSections() {
             We start inside the box.
           </motion.h2>
           <motion.p
-            className="text-base text-gray-600 leading-relaxed mb-10 md:mb-12 max-w-[560px]"
+            className="text-base text-gray-600 leading-relaxed mb-4 max-w-[560px]"
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: E }}
             viewport={VP}
           >
             Anyone can think outside the box. The hard work is understanding what is inside it first. The people, the processes, the gaps between intention and reality. That is where the real opportunity lives.
+          </motion.p>
+          <motion.p
+            className="text-base text-gray-600 leading-relaxed mb-10 md:mb-12 max-w-[560px]"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.25, ease: E }}
+            viewport={VP}
+          >
+            Three engagement types. One inside-out process. Guided by BI = C + Ex × T².
           </motion.p>
           <div className="space-y-0">
             {howWeWorkRows.map((item, i) => (
@@ -757,52 +753,20 @@ function LandingFlowSections() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section id="playbook" className={flowSection}>
-        <div className="max-w-3xl mx-auto text-left">
           <motion.div
-            className="mb-10 md:mb-12 max-w-[560px]"
-            initial={{ opacity: 0, y: 40 }}
+            className="mt-8 md:mt-10"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: E }}
+            transition={{ duration: 0.8, delay: 0.2, ease: E }}
             viewport={VP}
           >
-            <p className="text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-4">
-              The Playbook
-            </p>
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-black mb-3" style={serif}>
-              One process. Three steps. No shortcuts.
-            </h2>
-            <p className="text-base text-gray-600 leading-relaxed">
-              Whether you are building an AI agent, a digital platform, a brand, or a media production, the process is the same. Because the problem is always the same: intention and reality are out of alignment.
-            </p>
+            <Link
+              href="/how-we-work"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-black hover:opacity-70 transition-opacity"
+            >
+              See how we work →
+            </Link>
           </motion.div>
-          <div className="space-y-6 md:space-y-8">
-            {playbookSteps.map((item, i) => (
-              <motion.div
-                key={item.num}
-                initial={{ opacity: 0, x: 64 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.85, delay: i * 0.12, ease: E }}
-                viewport={{ once: false, margin: "0px 0px -80px 0px" }}
-                className="grid grid-cols-[48px_1fr] md:grid-cols-[56px_1fr] gap-x-4 md:gap-x-5"
-              >
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base flex-shrink-0"
-                  style={{ ...serif, background: item.bg, color: item.color }}
-                >
-                  {item.num}
-                </div>
-                <div className="pt-0.5">
-                  <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.18em] mb-1.5" style={{ color: item.color }}>{item.label}</span>
-                  <h3 className="text-lg md:text-xl font-bold leading-[1.1] text-black mb-2" style={serif}>{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.body}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 

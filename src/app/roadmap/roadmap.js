@@ -30,7 +30,7 @@ const faqSchema = {
       name: "Why is this AI roadmap free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The free AI roadmap from Radical Thinking is the entry point to our Playbook. We offer it without charge because we believe the best way to demonstrate how we think is to show you, not tell you. If the roadmap is useful, you will know whether working with us makes sense.",
+        text: "The free AI roadmap from Radical Thinking is the entry point to how we work. We offer it without charge because we believe the best way to demonstrate how we think is to show you, not tell you. If the roadmap is useful, you will know whether working with us makes sense.",
       },
     },
     {
@@ -54,7 +54,7 @@ const faqSchema = {
       name: "What happens after I get my AI roadmap?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Your roadmap will show you what to build first. If you want to act on it, the Radical Thinking Playbook starts with The Inside Look, which goes deeper into your specific situation and produces a prioritised action plan. There is no obligation to go further.",
+        text: "Your roadmap will show you what to build first. If you want to act on it, how we work starts with The Audit, which goes deeper into your specific situation and produces a prioritised action plan. There is no obligation to go further.",
       },
     },
   ],

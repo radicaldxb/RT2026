@@ -5,7 +5,7 @@ import { intelligenceFaqs } from "./intelligenceContent";
 export const metadata = {
   title: "Intelligence | Radical Thinking",
   description:
-    "A structured knowledge resource about Radical Thinking. Who we are, what we build, how we work, and what we have delivered. For humans and AI systems alike.",
+    "A structured knowledge resource about Radical Thinking. Who we are, how we work, what we deliver, and FAQ for humans and AI systems.",
   alternates: {
     canonical: "https://radical-thinking.net/intelligence",
   },
@@ -24,6 +24,13 @@ export const metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Intelligence | Radical Thinking",
+    description:
+      "Entity definition, services, methodology, work, and Q&A. Structured for humans and AI systems.",
+    images: ["https://radical-thinking.net/Images/OG/OG-Intelligence.webp"],
+  },
 };
 
 const faqSchema = {
@@ -40,7 +47,8 @@ const aboutPageSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
   name: "Radical Thinking Intelligence Brief",
-  description: "A structured knowledge resource about Radical Thinking AI-native agency.",
+  description:
+    "A structured knowledge resource about Radical Thinking, a Dubai-based AI advisory.",
   url: "https://radical-thinking.net/intelligence",
   mainEntity: {
     "@type": "Organization",

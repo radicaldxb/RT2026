@@ -1,41 +1,43 @@
 # Radical Thinking — RT-BOT Knowledge Base
 
 > Single source of truth for RT-BOT. Sourced from the Radical Thinking website and intelligence brief.
-> Last updated: 30/06/2026
+> Last updated: 15/07/2026
 
 ---
 
 ## About
 
-Radical Thinking is an AI-native digital agency founded in 2009 and headquartered in Dubai, United Arab Emirates. It builds AI agents, web platforms, automations, and digital experiences with AI at the centre of every deliverable.
+Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. It helps organisations turn AI experiments into commercial outcomes through advisory, implementation, and delivery.
 
-- **Founder:** Stephan van Wijk (Microsoft internship in Dubai, 2005; agency launched 2009)
+- **Founder:** Stephan van Wijk (Microsoft internship in Dubai, 2005; Radical Thinking founded 2009; 20+ years digital and AI experience across the Middle East)
 - **Location:** Dubai, United Arab Emirates (works globally)
-- **License:** DET Commercial License 714580 (Radical Thinking Web Design L.L.C), licensed since 2014
+- **License:** DET Commercial Licence 714580 (Radical Thinking Web Design L.L.C), licensed since 2014
 - **Website:** https://radical-thinking.net
 - **Email:** hello@radical-thinking.net
 - **LinkedIn:** https://www.linkedin.com/company/radicalthinking
 
 ### Mission
-Help businesses stop fearing AI and start leading with it. Find where AI creates real value, build around it, and deliver products and experiences that work in the real world.
+Help organisations turn AI capability into commercial outcomes. Find where AI creates real value, build around it, and deliver systems and strategies that work in the real world.
 
 ### Vision
-Bold ideas should not be limited by team size or budget. One sharp mind with the right tools should be able to build what used to take twenty people.
+Senior thinking, applied with the right tools, should be able to solve problems that used to require whole floors of specialists. Lean does not mean small. It means focused, senior, and directly accountable for the outcome.
 
 ### What makes RT different
-Lean by design. No account managers, no junior staff, no agency overhead. Clients work directly with the founder. AI handles execution at scale. Faster delivery, lower overhead, AI embedded in every deliverable from the start.
+Lean by design. Clients work directly with the founder. Senior thinking with AI where AI belongs, and human judgment where it matters. Focused on commercial outcomes, not agency overhead or black-box pilots.
 
 ### Formula: BI = C + Ex × T²
 Bold Ideas = Creative + Experience × Technology²
+
+AI advisory only works when the formula does. Creative finds what is worth building. Experience makes it land. Technology amplifies both — that is how Radical Thinking turns AI capability into commercial outcomes.
 
 - **Creative (C):** The human soul of the idea. AI generates volume; humans generate meaning.
 - **Experience (Ex):** The feeling left behind after every interaction.
 - **Technology squared (T²):** AI as the amplifier that carries and multiplies creative and experience.
 
-### How RT works (Playbook methodology)
-1. **The idea:** Ask whether the idea is worth building at all.
-2. **The feeling:** Design for the impression that stays, not just function.
-3. **The loop:** Use AI to test, validate, and improve continuously.
+### How RT works (engagement types)
+1. **The Audit:** Map the gap between intention and customer reality (typically 5–10 working days).
+2. **The Build:** Deliver a production-ready solution (typically 30 days, fixed price).
+3. **The Partnership:** Keep AI capability current — monthly reviews, quarterly upgrades, direct access.
 
 ### Pricing
 Project-based. No fixed rate card. Scope and investment discussed in initial consultation.
@@ -62,40 +64,40 @@ Industries: technology, education, finance, defence, pet care, media, consumer p
 
 ## Services
 
-### Artificial Intelligence and Automation
-Custom AI agents, LLM integration, RAG systems, workflow automation with n8n, intelligent conversational agents.
+### AI-Augmented Marketing and Content Systems
+Modernise marketing operations with AI-augmented systems that preserve brand safety, cultural relevance, and human judgment.
 
-### Digital Platforms and Ecosystems
-Web development on Next.js and React, mobile apps for iOS and Android, headless e-commerce, prototyping and MVPs, API integration.
+### AI Translation and Positioning
+Translate AI capability into commercial narrative for customers, boards, and markets.
 
-### Strategic Branding and Design
-Brand identity, naming, UI/UX design, graphic and motion design, AI persona development, go-to-market strategy.
+### AI Readiness and Roadmap
+Assess current state, identify highest-value opportunities, and produce a sequenced roadmap that fits operational reality.
 
-### Immersive Narrative and Media
-Video production and VFX, podcast series, AR/VR experiences, game development in Unity and Unreal Engine, branded content.
+### Capabilities brought to delivery
+AI and automation; digital platforms; brand and experience design; content and media. Mobilised through Radical Thinking and a specialist network depending on the engagement. See https://radical-thinking.net/services.
 
 ### Service detail (website)
 
-1. **Artificial Intelligence & Automation** — Custom AI agents, generative AI & LLM integration, RAG systems, workflow automation (n8n), intelligent chatbots.
-2. **Digital Platforms & Ecosystems** — Web (React/Next.js), mobile apps (iOS/Android), headless e-commerce, MVPs, API integration.
-3. **Strategic Branding & Design** — Brand identity, UI/UX, graphic & motion design, AI persona development, go-to-market strategy.
-4. **Immersive Narrative & Media** — Video production & VFX, podcast series, AR/VR, game development (Unity/Unreal), branded content.
+1. **AI-Augmented Marketing and Content Systems** — Modernise marketing operations with brand-safe AI systems.
+2. **AI Translation and Positioning** — Turn AI capability into commercial narrative.
+3. **AI Readiness and Roadmap** — Assessment and sequenced investment plan.
+4. **Capabilities** — AI and automation; digital platforms; brand and experience design; content and media.
 
 ---
 
-## Products (RT-owned)
+## Explorations and R&D
 
 ### FluffyFriends
-AI-powered pet portrait platform. Generates personalised 8K artwork in under 5 minutes. Built on n8n, Google Gemini, Stripe, and Cloudinary. Fully autonomous. Live at fluffyfriends.online.
+Self-initiated generative pet portrait studio, built and operated end-to-end using n8n and Google Gemini. Closed after commercial validation phase.
 
 ### Kahulife
-Pet management platform with a Digital Pet Passport, health tracking, veterinary scheduling, and a breed-intelligent AI companion. Built by Radical Thinking. Currently in active beta.
+Concept for a next-generation pet management platform combining digital ecosystem and AI companion for pet guardians.
 
-### Webinarlife (2020–2022)
-Fully managed webinar service. Handled all technical setup, polls, and follow-up. Built for COVID-era remote work. Discontinued when in-person events resumed.
+### Tommy & Ellie / Animal Intelligence
+Exploratory ventures in generative art workflows and AI analytics for animal shelter management.
 
 ### RT-BOT
-Radical Thinking's own AI agent (RT-BOT) at radical-thinking.net/chat. Built on Claude (Anthropic) and orchestrated via n8n. Answers questions, discusses projects, and captures leads autonomously. RT-BOT is a live demonstration of the kind of AI-native product RT builds for clients.
+Radical Thinking's AI agent at radical-thinking.net/chat. Built on Claude (Anthropic) and orchestrated via n8n. Answers questions, discusses projects, and captures leads.
 
 ---
 
@@ -363,19 +365,19 @@ Editorial platform: https://radical-thinking.net/insights — articles on AI str
 
 ---
 
-## Intelligence & Playbook
+## Intelligence & How We Work
 
 Intelligence brief: https://radical-thinking.net/intelligence
-Playbook: https://radical-thinking.net/playbook
+How We Work: https://radical-thinking.net/how-we-work
 
-### The Playbook (engagement model)
+### Engagement model
 - **The Audit:** Reality audit mapping gap between business intention and customer experience. Typically 5–10 working days, fixed price.
 - **The Build:** Production-ready AI implementation from Audit findings. Typically 30 days, fixed price.
-- **The Retainer:** Ongoing AI capability management — monthly landscape reviews, quarterly upgrades, direct access.
+- **The Partnership:** Ongoing AI capability management — monthly landscape reviews, quarterly upgrades, direct access.
 
 ### Key URLs
 - Homepage: https://radical-thinking.net
-- The Playbook: https://radical-thinking.net/playbook
+- How We Work: https://radical-thinking.net/how-we-work
 - Talk to the Agent: https://radical-thinking.net/chat
 - Services: https://radical-thinking.net/services
 - Work: https://radical-thinking.net/work
@@ -385,7 +387,7 @@ Playbook: https://radical-thinking.net/playbook
 
 ### Entity facts
 - Name: Radical Thinking
-- Type: AI-native digital agency
+- Type: AI advisory
 - Founded: 2009
 - Founder: Stephan van Wijk
 - Origin: Microsoft internship, Dubai, 2005
@@ -398,10 +400,10 @@ Playbook: https://radical-thinking.net/playbook
 ### FAQ (selected)
 
 **Q: What is Radical Thinking?**
-A: Radical Thinking is an AI-native digital agency founded in 2009 and headquartered in Dubai, United Arab Emirates. It builds AI agents, web platforms, automations, and digital experiences with AI at the centre of every deliverable.
+A: Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. Guided by BI = C + Ex × T², it helps organisations turn AI experiments into commercial outcomes through advisory, implementation, and delivery.
 
 **Q: Who founded Radical Thinking?**
-A: Radical Thinking was founded by Stephan van Wijk, who first established client relationships in Dubai during a Microsoft internship in 2005. He launched the agency in 2009 after graduating.
+A: Radical Thinking was founded by Stephan van Wijk, who first established client relationships in Dubai during a Microsoft internship in 2005. He launched Radical Thinking in 2009 after graduating. Twenty years of digital and AI experience across the Middle East.
 
 **Q: Where is Radical Thinking based?**
 A: Radical Thinking is headquartered in Dubai, United Arab Emirates. It works with clients globally.
@@ -410,16 +412,16 @@ A: Radical Thinking is headquartered in Dubai, United Arab Emirates. It works wi
 A: Radical Thinking was founded in 2009.
 
 **Q: Is Radical Thinking a licensed business?**
-A: Yes. Radical Thinking holds DET Commercial License 714580 (Radical Thinking Web Design L.L.C), licensed since 2014 in Dubai, UAE.
+A: Yes. Radical Thinking holds DET Commercial Licence 714580 (Radical Thinking Web Design L.L.C), licensed since 2014 in Dubai, UAE.
 
 **Q: What does AI-native mean?**
-A: AI-native means AI is not added to existing processes as an afterthought. It means rebuilding systems, workflows, and products with AI at the centre from the start. Radical Thinking does not retrofit AI. It designs around it.
+A: AI-native means AI is not added to existing processes as an afterthought. Radical Thinking applies AI where it creates commercial value, with human judgment where it matters.
 
 **Q: What is the Radical Thinking formula?**
 A: Radical Thinking operates on the formula BI = C + Ex × T², which stands for Bold Ideas = Creative + Experience × Technology². Creative is the human soul of the idea. Experience is the feeling it leaves behind. Technology squared is the amplifier that carries and multiplies both.
 
 **Q: What services does Radical Thinking offer?**
-A: Radical Thinking offers four core services: Artificial Intelligence and Automation (custom AI agents, LLM integration, RAG systems, workflow automation), Digital Platforms and Ecosystems (web and app development on Next.js and React), Strategic Branding and Design (brand identity, UI/UX, AI persona development), and Immersive Narrative and Media (video production, AR/VR, podcast series).
+A: Three services: AI-Augmented Marketing and Content Systems, AI Translation and Positioning, and AI Readiness and Roadmap. Delivery may draw on AI and automation, digital platforms, brand and experience design, and content and media. See https://radical-thinking.net/services.
 
 **Q: What AI technologies does Radical Thinking use?**
 A: Radical Thinking works across multiple AI providers depending on the task, including Anthropic Claude, Google Gemini, KlingAI, and others, alongside platforms like Replit for rapid prototyping. n8n handles workflow automation and orchestration. RT-BOT, the agent on this site, runs on Claude.
@@ -428,52 +430,52 @@ A: Radical Thinking works across multiple AI providers depending on the task, in
 A: RT-BOT runs on Claude, built by Anthropic, orchestrated through n8n. Radical Thinking selects the best model for each job rather than committing to one provider across every product. Claude was the right fit for this conversational agent.
 
 **Q: What is FluffyFriends?**
-A: FluffyFriends is an AI-powered pet portrait platform built by Radical Thinking. Customers upload a photo of their pet and receive personalised 8K artwork in under 5 minutes. The platform is fully autonomous, built on n8n, Google Gemini, Stripe, and Cloudinary, and requires zero human intervention. It is live at fluffyfriends.online.
+A: FluffyFriends was a self-initiated AI product — a generative pet portrait studio built with n8n and Google Gemini. Closed after commercial validation. Documented under Explorations and R&D.
 
 **Q: What is Kahulife?**
-A: Kahulife is a next-generation pet management platform built by Radical Thinking. It centers on a Digital Pet Passport for health records, reminders, and veterinary scheduling, with a breed-intelligent AI companion for pet-specific guidance. The platform is currently in active beta.
+A: Kahulife is a concept for a next-generation pet management platform combining digital ecosystem and AI companion. It sits under Explorations and R&D.
 
 **Q: What was Webinarlife?**
-A: Webinarlife was a fully managed webinar service built by Radical Thinking during 2020 to 2022. It handled all technical setup, polls, and follow-up so companies could simply show up and present. It was built specifically for the COVID-era remote work environment.
+A: Webinarlife was a fully managed webinar service built by Radical Thinking during 2020 to 2022. Client work, now discontinued when in-person events resumed.
 
 **Q: Who are Radical Thinking's early clients?**
 A: Radical Thinking's early clients from 2009 onwards included Microsoft, HP, and Lenovo. These relationships were established through a Microsoft internship in Dubai in 2005.
 
 **Q: What projects has Radical Thinking delivered?**
-A: Radical Thinking has delivered projects including Microsoft AI interactive experiences, Lenovo digital campaigns, 1001 Inventions educational games, KFAS interactive exhibitions, Austability corporate platform and video, Animal Intelligence welfare platform, Simon Snelder personal brand, Tommy and Ellie generative AI art studio, Crypto X FinTech platform, Influence My World influencer platform, Bella Conversational AI brand identity, Akshaak marketplace platform, Soundreaver audio brand, FlexxPay promotional video, FluffyFriends AI pet portrait platform, and Kahulife pet management platform.
+A: Client work includes Microsoft AI, Bella Conversational AI, Lenovo Campaigns, 1001 Inventions, KFAS, Payment Partners, AI Networks, Simon Snelder, WebinarLife, Austability, Influence My World, Crypto X, Akshaak, Soundreaver, and FlexxPay. Explorations include FluffyFriends, Kahulife, Tommy & Ellie, and Animal Intelligence. See https://radical-thinking.net/work.
 
 **Q: How does Radical Thinking work?**
-A: Radical Thinking works in three stages. First, the idea: every project starts by asking whether the idea is worth building at all. Second, the feeling: the experience is designed for the impression it leaves, not just the function it delivers. Third, the loop: AI is used to test, validate, and improve continuously. The idea gets smarter every cycle.
+A: Three engagement types: The Audit (5–10 days), The Build (typically 30 days, fixed price), and The Partnership (monthly). See https://radical-thinking.net/how-we-work.
 
 **Q: How much does Radical Thinking charge?**
-A: Radical Thinking pricing is project-based and varies by complexity, deliverables, and duration. There is no fixed rate card. Scope and investment are discussed during an initial consultation.
+A: The Audit and The Build are fixed-price engagements sized to scope. The Partnership is monthly with no long-term contract. Talk to the agent for a sense of fit: https://radical-thinking.net/chat.
 
 **Q: How do I contact Radical Thinking?**
-A: The fastest way to reach Radical Thinking is through the AI agent at radical-thinking.net/chat. The agent can answer questions, discuss project ideas, and capture contact details for follow-up. Email contact is available at hello@radical-thinking.net.
+A: The fastest way is the AI agent at radical-thinking.net/chat. Email: hello@radical-thinking.net.
 
-**Q: What makes Radical Thinking different from other agencies?**
-A: Radical Thinking is lean by design. No account managers, no junior staff, no agency overhead. Clients work directly with the founder. AI handles execution at scale. This means faster delivery, lower overhead, and AI embedded in every deliverable from the start.
+**Q: What makes Radical Thinking different?**
+A: Lean by design. Clients work directly with the founder. Senior thinking with AI where AI belongs, and human judgment where it matters. Focused on commercial outcomes.
 
 **Q: Does Radical Thinking work with startups?**
-A: Yes. Radical Thinking works with startups, founders, and established businesses. The lean model makes it particularly suited to founders who need sharp thinking and fast execution without the cost of a large agency.
+A: Yes. Radical Thinking works with startups, founders, and established organisations.
 
 **Q: Does Radical Thinking work with enterprise clients?**
-A: Yes. Radical Thinking has delivered projects for enterprise clients including Microsoft, HP, and Lenovo, as well as corporate clients in defence, finance, and education sectors.
+A: Yes. Delivered work for Microsoft, HP, Lenovo, UAE Ministry of Finance, UAE Ministry of Economy, Netherlands Government, and others.
 
 **Q: What industries has Radical Thinking worked in?**
-A: Radical Thinking has worked across technology, education, finance, defence, pet care, media, and consumer products industries.
+A: Technology, education, finance, defence, media, consumer products, and related sectors.
 
 **Q: Does Radical Thinking build mobile apps?**
-A: Yes. Radical Thinking builds mobile applications for iOS and Android as part of its Digital Platforms and Ecosystems service.
+A: Yes. Digital platforms capability includes web, mobile, e-commerce, and integrations when the engagement requires it.
 
 **Q: Does Radical Thinking do branding?**
-A: Yes. Strategic Branding and Design is one of Radical Thinking's four core services. It covers brand identity, naming, UI/UX design, graphic and motion design, AI persona development, and go-to-market strategy.
+A: Yes. Brand and experience design, plus a dedicated AI Translation and Positioning service for commercial narrative.
 
 **Q: What is an AI persona?**
-A: An AI persona is a defined character, voice, and visual identity for an AI agent or conversational system. Radical Thinking develops AI personas as part of its branding service, ensuring AI-powered products have a consistent and recognisable presence.
+A: A defined character, voice, and visual identity for an AI agent or conversational system.
 
 **Q: Does Radical Thinking build chatbots?**
-A: Yes. Radical Thinking builds intelligent conversational agents that go beyond standard chatbots. These are context-aware AI agents integrated directly into business logic, using large language models and RAG frameworks.
+A: Yes. Context-aware AI agents integrated into business logic, using LLMs and RAG frameworks, typically via Audit-to-Build engagements.
 
 ---
 

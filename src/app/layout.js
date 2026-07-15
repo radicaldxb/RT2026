@@ -6,9 +6,9 @@ import { roboto, robotoSlab } from "@/lib/fonts";
 const GTM_ID = "GTM-W67J42";
 
 export const metadata = {
-  title: "Radical Thinking | AI-Native Agency in Dubai",
+  title: "Radical Thinking | Turning AI Experiments into Commercial Outcomes",
   description:
-    "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
+    "Radical Thinking helps you turn AI experiments into results. Your partner in closing the gap between AI capability and business reality.",
   authors: [{ name: "Radical Thinking" }],
   creator: "Radical Thinking",
   publisher: "Radical Thinking",
@@ -16,24 +16,24 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://radical-thinking.net",
-    title: "Radical Thinking | AI-Native Agency in Dubai",
+    title: "Radical Thinking | Turning AI Experiments into Commercial Outcomes",
     description:
-      "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
+      "Radical Thinking helps you turn AI experiments into results. Your partner in closing the gap between AI capability and business reality.",
     siteName: "Radical Thinking",
     images: [
       {
         url: "https://radical-thinking.net/Images/OG/OG-Homepage.webp",
         width: 1200,
         height: 630,
-        alt: "Radical Thinking Agency",
+        alt: "Radical Thinking",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Radical Thinking | AI-Native Agency in Dubai",
+    title: "Radical Thinking | Turning AI Experiments into Commercial Outcomes",
     description:
-      "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
+      "Radical Thinking helps you turn AI experiments into results. Your partner in closing the gap between AI capability and business reality.",
     images: ["https://radical-thinking.net/Images/OG/OG-Homepage.webp"],
   },
   icons: {
@@ -99,7 +99,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               addressCountry: "AE",
             },
             description:
-              "An AI-native agency that brings bold ideas to life by combining creativity, experience, and technology.",
+              "A Dubai-based AI advisory guided by BI = C + Ex × T². Helps organisations turn AI experiments into commercial outcomes.",
             contactPoint: {
               "@type": "ContactPoint",
               contactType: "customer support",
@@ -127,28 +127,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 name: "About Us",
                 url: "https://radical-thinking.net/about",
                 description:
-                  "Learn about Radical Thinking, an AI-native agency bridging creativity and technology.",
+                  "Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk.",
               },
               {
                 "@type": "WebPage",
                 name: "Services",
                 url: "https://radical-thinking.net/services",
                 description:
-                  "Explore our AI strategy, development, and design services.",
+                  "Advisory, implementation, and delivery: AI-augmented marketing systems, AI translation and positioning, and AI readiness roadmaps.",
               },
               {
                 "@type": "WebPage",
-                name: "The Playbook",
-                url: "https://radical-thinking.net/playbook",
+                name: "How We Work",
+                url: "https://radical-thinking.net/how-we-work",
                 description:
-                  "The Radical Thinking Playbook: a three-step process for AI implementation. The Audit finds the real problem, The Build delivers a production-ready solution, The Retainer keeps it current.",
+                  "How Radical Thinking works: The Audit finds the real problem, The Build delivers a production-ready solution, The Partnership keeps it current.",
               },
               {
                 "@type": "WebPage",
                 name: "Work",
                 url: "https://radical-thinking.net/work",
                 description:
-                  "View our selected work and case studies.",
+                  "Client work and experiments in AI, digital platforms, and brand strategy.",
               },
               {
                 "@type": "WebPage",
@@ -162,7 +162,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 name: "Privacy Policy",
                 url: "https://radical-thinking.net/privacy-policy",
                 description:
-                  "Understand how we collect, use, and protect your data when you interact with our website and AI-native services.",
+                  "How we collect, use, and protect your data when you interact with our website and AI agent.",
               },
               {
                 "@type": "WebPage",

@@ -1,19 +1,19 @@
 # Radical Thinking
 
-> Radical Thinking is an AI-native agency in Dubai that helps businesses close the gap between what they intend and what customers experience, using a Creative × Experience × Technology² approach.
+> Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. Guided by the formula BI = C + Ex × T² (Bold Ideas = Creative + Experience × Technology²), it helps organisations turn AI experiments into commercial outcomes.
 
-Radical Thinking was founded in 2009. We audit the real problem, build production-ready AI solutions, and retain ongoing capability. Our website includes an AI agent (RT-BOT) for discovery conversations, case studies, services, and strategic insights.
+AI advisory only works when the formula does. Creative finds what is worth building. Experience makes it land. Technology amplifies both. Engagements run as The Audit, The Build, and The Partnership. Services cover AI-augmented marketing and content systems, AI translation and positioning, and AI readiness and roadmap. The website includes an AI agent (RT-BOT) for discovery conversations, case studies, and structured knowledge for humans and machines.
 
 ## Primary pages
 
-- [Home](https://radical-thinking.net/): Agency homepage and positioning.
+- [Home](https://radical-thinking.net/): Positioning, formula narrative, and entry point.
 - [Talk to the Agent](https://radical-thinking.net/chat): Chat with RT-BOT to explore fit, services, and next steps.
-- [The Playbook](https://radical-thinking.net/playbook): Three-step process — Audit, Build, Retainer.
-- [Services](https://radical-thinking.net/services): AI strategy, development, and design services.
-- [Work](https://radical-thinking.net/work): Selected case studies and portfolio.
-- [About](https://radical-thinking.net/about): Agency story, team, and philosophy.
+- [How We Work](https://radical-thinking.net/how-we-work): Three engagement types — Audit, Build, Partnership — run through the formula.
+- [Services](https://radical-thinking.net/services): AI-augmented marketing systems, AI translation and positioning, AI readiness and roadmap.
+- [Work](https://radical-thinking.net/work): Client work and Explorations and R&D.
+- [About](https://radical-thinking.net/about): Story, founder, formula, mission, vision, and key facts.
 - [Radical Insights](https://radical-thinking.net/insights): Articles on AI, strategy, and transformation.
-- [Animal Intelligence](https://radical-thinking.net/intelligence): AI capability and intelligence offering.
+- [Intelligence](https://radical-thinking.net/intelligence): Structured FAQ and entity knowledge for humans and AI systems.
 
 ## Optional
 

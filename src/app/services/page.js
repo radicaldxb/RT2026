@@ -1,16 +1,16 @@
 import Services from "./services";
 
 export const metadata = {
-  title: "AI Strategy & Services | Radical Thinking",
+  title: "Services | Radical Thinking",
   description:
-    "Radical Thinking offers AI agents, digital platforms, branding, and immersive media — built AI-native from the ground up. Based in Dubai, working globally.",
+    "Radical Thinking helps organisations turn AI experiments into results. Advisory, implementation, and delivery. Based in Dubai, working globally.",
   alternates: {
     canonical: "https://radical-thinking.net/services",
   },
   openGraph: {
-    title: "AI Strategy & Services | Radical Thinking",
+    title: "Services | Radical Thinking",
     description:
-      "AI agents, digital platforms, branding, and immersive media — built AI-native from the ground up.",
+      "Radical Thinking helps organisations turn AI experiments into results. Advisory, implementation, and delivery. Based in Dubai, working globally.",
     url: "https://radical-thinking.net/services",
     siteName: "Radical Thinking",
     images: [
@@ -21,6 +21,13 @@ export const metadata = {
         alt: "Radical Thinking Services",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services | Radical Thinking",
+    description:
+      "Radical Thinking helps organisations turn AI experiments into results. Advisory, implementation, and delivery. Based in Dubai, working globally.",
+    images: ["https://radical-thinking.net/Images/OG/OG-Services.webp"],
   },
 };
 

@@ -1,4 +1,3 @@
-// src/app/roadmap/page.js
 import RoadmapClient from "./roadmap";
 
 export const metadata = {
@@ -14,6 +13,12 @@ export const metadata = {
       "Get a free personalised AI roadmap in five minutes. Know where AI creates value in your business before your competitors do.",
     url: "https://radical-thinking.net/roadmap",
     siteName: "Radical Thinking",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free AI Roadmap | Radical Thinking",
+    description:
+      "Get a free personalised AI roadmap in five minutes. Know where AI creates value in your business before your competitors do.",
   },
 };
 
