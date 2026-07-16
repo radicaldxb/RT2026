@@ -61,9 +61,8 @@ const ChatImage = ({ node, ...props }) => {
 
 const quickMessages = [
     'I have a bold idea',
-    'I need help with my business',
-    'Tell me about Radical Thinking',
-    'Show me your work',
+    'I have a business problem',
+    'Get in touch',
 ];
 
 const NUMBER_WORDS = {

@@ -38,6 +38,9 @@ function defaultMeta() {
     wrap_up_pending: false,
     wrap_up_confirmed: false,
     no_contact: false,
+    flow: null,
+    quick_contact_answers: 0,
+    calendar_offered: false,
   };
 }
 

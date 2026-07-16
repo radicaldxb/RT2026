@@ -179,7 +179,9 @@ function substantiveVisitorLines(messages) {
     if (isNegative(text)) return false;
     if (isPlausiblePersonName(text)) return false;
     if (/^(yes|no|ok|hello|hi|thanks|thank you)\b/i.test(text)) return false;
-    if (/^(i have a bold idea|looking for help|i need help)/i.test(text)) return false;
+    if (/^(i have a bold idea|i have a business problem|get in touch|looking for help|i need help)/i.test(text)) {
+      return false;
+    }
     return true;
   });
 }
@@ -341,6 +343,7 @@ export function shouldForceWrapUpConfirmation({
   if (meta.wrap_up_pending) return false;
   if (meta.no_contact) return false;
   if (meta.vendor_flow || meta.job_seeker_flow) return false;
+  if (meta.flow === "quick_contact") return false;
   if (isWrapUpMessage(assistantReply)) return false;
   if (isVendorExitMessage(assistantReply)) return false;
 

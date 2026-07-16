@@ -42,6 +42,16 @@ import {
 } from "@/lib/rtbot/webhooks";
 import { stripInternalNarration } from "@/lib/rtbot/replySanitizer";
 import { loadConversation, saveConversation } from "@/lib/rtbot/conversations";
+import {
+  FLOW,
+  flowRoutingSystemNote,
+  nextQuickContactAnswerCount,
+  quickContactCalendarSystemNote,
+  quickContactExploringSystemNote,
+  resolveFlowForTurn,
+  shouldOfferQuickContactCalendar,
+  signalsExploringOnly,
+} from "@/lib/rtbot/flowRouter";
 
 const rateLimit = new Map();
 const SESSION_ID_RE = /^[a-zA-Z0-9_-]{8,64}$/;
@@ -237,7 +247,7 @@ async function dispatchQualificationEvents({
 
   const canFireEmailWebhook = hasConfirmedOptIn && fields.email;
 
-  if (canFireEmailWebhook) {
+  if (canFireEmailWebhook && meta.flow !== FLOW.QUICK_CONTACT) {
     const gdprOptIn = gdprRequired ? meta.gdpr_opt_in === true : true;
 
     // Prefer full Situation Read / close summary; otherwise build from conversation
@@ -427,6 +437,7 @@ export async function POST(req) {
     const turnNumber = priorUserTurns + 1;
     const exitCategory = detectEarlyExit(chatInput, turnNumber);
     const isFirstApiTurn = session.messages.length === 0;
+    const nameWasAlreadyKnown = Boolean(session.meta.captured_name);
 
     const fieldsBeforeReply = extractLeadFields(
       [...session.messages, { role: "user", content: chatInput }],
@@ -435,21 +446,62 @@ export async function POST(req) {
     const emailJustCaptured = Boolean(
       isValidEmail(fieldsBeforeReply.email) && !isValidEmail(session.meta.captured_email)
     );
+    mergeContactIntoMeta(session.meta, fieldsBeforeReply);
+
+    const resolvedFlow = resolveFlowForTurn({
+      meta: session.meta,
+      chatInput,
+      exitCategory,
+    });
+    const flowJustSet = Boolean(resolvedFlow && !session.meta.flow);
+    if (resolvedFlow) {
+      session.meta.flow = resolvedFlow;
+    }
+
+    if (session.meta.flow === FLOW.QUICK_CONTACT) {
+      session.meta.quick_contact_answers = nextQuickContactAnswerCount({
+        meta: session.meta,
+        chatInput,
+        nameWasAlreadyKnown,
+      });
+    }
+
     const shouldPromptWrapUp =
       emailJustCaptured &&
       !exitCategory &&
+      session.meta.flow !== FLOW.QUICK_CONTACT &&
       !session.meta.wrap_up_confirmed &&
       !session.meta.wrap_up_pending &&
       !session.meta.vendor_flow &&
       !session.meta.job_seeker_flow;
 
+    const offerCalendar =
+      shouldOfferQuickContactCalendar(session.meta) &&
+      !signalsExploringOnly(chatInput);
+    const divertToProblem =
+      shouldOfferQuickContactCalendar(session.meta) &&
+      signalsExploringOnly(chatInput);
+
+    if (divertToProblem) {
+      session.meta.flow = FLOW.BUSINESS_PROBLEM;
+      session.meta.calendar_offered = true;
+    }
+
     let userContent = chatInput;
     if (exitCategory) {
       userContent = `[System note: early_exit_category=${exitCategory}]\n\n${chatInput}`;
+    } else if (offerCalendar) {
+      userContent = `${quickContactCalendarSystemNote()}\n\n${chatInput}`;
+      session.meta.calendar_offered = true;
+    } else if (divertToProblem) {
+      userContent = `${quickContactExploringSystemNote()}\n\n${chatInput}`;
     } else if (shouldPromptWrapUp) {
       userContent = `${wrapUpSystemNote({ gdprRequired })}\n\n${chatInput}`;
     } else if (isFirstApiTurn) {
-      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?" The message below is the visitor's answer. Do not repeat that opening. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then address their message.]\n\n${chatInput}`;
+      const routingNote = flowJustSet ? ` ${flowRoutingSystemNote(resolvedFlow)}` : "";
+      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked what is on their mind. Opening chips may send: "I have a bold idea", "I have a business problem", or "Get in touch". The message below is the visitor's answer. Do not repeat that opening. Do not ask them to choose from a list. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then route from their intent and proceed.${routingNote}]\n\n${chatInput}`;
+    } else if (flowJustSet && resolvedFlow) {
+      userContent = `${flowRoutingSystemNote(resolvedFlow)}\n\n${chatInput}`;
     }
 
     const conversationHistory = [
