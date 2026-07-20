@@ -48,13 +48,8 @@ import {
   buildActiveFlowSystemBlock,
   flowRoutingSystemNote,
   isQuickContactReadyToFire,
-  nextQuickContactAnswerCount,
-  quickContactCalendarSystemNote,
-  quickContactExploringSystemNote,
-  quickContactGuidanceNote,
+  processQuickContactTurn,
   resolveFlowForTurn,
-  shouldOfferQuickContactCalendar,
-  signalsExploringOnly,
 } from "@/lib/rtbot/flowRouter";
 
 const rateLimit = new Map();
@@ -375,11 +370,11 @@ async function dispatchQualificationEvents({
       fields: {
         name: fields.name || meta.captured_name || null,
         email: fields.email || meta.captured_email || null,
-        problem: meta.qc_problem || null,
-        timeline: meta.qc_timeline || null,
-        readiness: meta.qc_readiness || null,
+        problem: meta.qc_help || meta.qc_problem || null,
+        help: meta.qc_help || meta.qc_problem || null,
       },
       unsubscribeToken,
+      sessionId,
     });
     if (sent) {
       meta.email_opt_in = true;
@@ -473,7 +468,6 @@ export async function POST(req) {
     const turnNumber = priorUserTurns + 1;
     const exitCategory = detectEarlyExit(chatInput, turnNumber);
     const isFirstApiTurn = session.messages.length === 0;
-    const nameWasAlreadyKnown = Boolean(session.meta.captured_name);
 
     const fieldsBeforeReply = extractLeadFields(
       [...session.messages, { role: "user", content: chatInput }],
@@ -504,18 +498,53 @@ export async function POST(req) {
     } else if (
       metadata.flow === FLOW.QUICK_CONTACT &&
       session.meta.flow !== FLOW.BUSINESS_PROBLEM &&
-      !session.meta.calendar_offered
+      !session.meta.quick_contact_closed
     ) {
       // Keep Get in touch locked even if a prior turn failed to persist flow.
       session.meta.flow = FLOW.QUICK_CONTACT;
     }
 
-    if (session.meta.flow === FLOW.QUICK_CONTACT) {
-      session.meta.quick_contact_answers = nextQuickContactAnswerCount({
-        meta: session.meta,
-        chatInput,
-        nameWasAlreadyKnown,
-      });
+    if (session.meta.flow === FLOW.QUICK_CONTACT && !session.meta.quick_contact_closed) {
+      const qc = processQuickContactTurn(session.meta, chatInput);
+      if (qc) {
+        Object.assign(session.meta, qc.meta);
+        const reply = qc.reply;
+        const updatedHistory = [
+          ...session.messages,
+          { role: "user", content: chatInput },
+          { role: "assistant", content: reply },
+        ];
+        const score = scoreConversation(updatedHistory);
+        let meta;
+        try {
+          meta = await dispatchQualificationEvents({
+            sessionId,
+            score,
+            exitCategory,
+            session: { ...session, meta: session.meta },
+            conversationHistory: updatedHistory,
+            chatInput,
+            assistantReply: reply,
+            unsubscribeToken: session.unsubscribe_token,
+          });
+        } catch (err) {
+          console.error("Quick contact dispatch failed:", err);
+          meta = session.meta;
+        }
+        try {
+          await saveConversation(sessionId, {
+            messages: updatedHistory,
+            qualification_score: score.total,
+            category: categoryFromScore(score.total, exitCategory),
+            meta,
+            unsubscribe_token: session.unsubscribe_token,
+            email_opt_in: meta.email_opt_in === true ? true : session.email_opt_in,
+          });
+        } catch (err) {
+          console.error("Failed to save conversation:", err);
+        }
+        return jsonResponse({ reply });
+      }
     }
 
     const shouldPromptWrapUp =
@@ -527,42 +556,14 @@ export async function POST(req) {
       !session.meta.vendor_flow &&
       !session.meta.job_seeker_flow;
 
-    const offerCalendar =
-      shouldOfferQuickContactCalendar(session.meta) &&
-      !signalsExploringOnly(chatInput);
-    const divertToProblem =
-      shouldOfferQuickContactCalendar(session.meta) &&
-      signalsExploringOnly(chatInput);
-
-    if (divertToProblem) {
-      session.meta.flow = FLOW.BUSINESS_PROBLEM;
-      session.meta.calendar_offered = true;
-    }
-
     let userContent = chatInput;
     if (exitCategory) {
       userContent = `[System note: early_exit_category=${exitCategory}]\n\n${chatInput}`;
-    } else if (offerCalendar) {
-      userContent = `${quickContactCalendarSystemNote()}\n\n${chatInput}`;
-      session.meta.calendar_offered = true;
-    } else if (divertToProblem) {
-      userContent = `${quickContactExploringSystemNote()}\n\n${chatInput}`;
     } else if (shouldPromptWrapUp) {
       userContent = `${wrapUpSystemNote({ gdprRequired })}\n\n${chatInput}`;
-    } else if (session.meta.flow === FLOW.QUICK_CONTACT) {
-      const guidance = quickContactGuidanceNote(session.meta);
-      if (isFirstApiTurn) {
-        userContent = `[System note: The chat UI already delivered Hello, human verification, and the three-way mind question (bold idea / current business / get in touch). Opening chip may be "Get in touch". Do not repeat that opening. Do not ask them to choose from a list. ${
-          guidance
-            ? guidance.replace(/^\[System note:\s*/i, "").replace(/\]$/, "")
-            : "Commit to flow=quick_contact."
-        }]\n\n${chatInput}`;
-      } else if (guidance) {
-        userContent = `${guidance}\n\n${chatInput}`;
-      }
     } else if (isFirstApiTurn) {
       const routingNote = flowJustSet ? ` ${flowRoutingSystemNote(resolvedFlow)}` : "";
-      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, looking for help with something in your current business, or do you just want to get in touch?" Opening chips may send: "I have a bold idea", "I have a business problem", or "Get in touch". The message below is the visitor's answer. Do not repeat that opening. Do not ask them to choose from a list. If they said get in touch / book an appointment / book a call, lock to Flow 5 (quick_contact) — three short questions only, then calendar. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then proceed on the locked flow.${routingNote}]\n\n${chatInput}`;
+      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, looking for help with something in your current business, or do you just want to get in touch?" Opening chips may send: "I have a bold idea", "I have a business problem", or "Get in touch". The message below is the visitor's answer. Do not repeat that opening. Do not ask them to choose from a list. If they chose get in touch, that path is handled separately. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then proceed on the locked flow.${routingNote}]\n\n${chatInput}`;
     } else if (flowJustSet && resolvedFlow) {
       userContent = `${flowRoutingSystemNote(resolvedFlow)}\n\n${chatInput}`;
     }

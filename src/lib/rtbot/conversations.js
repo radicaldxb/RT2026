@@ -40,11 +40,10 @@ function defaultMeta() {
     no_contact: false,
     flow: null,
     quick_contact_answers: 0,
-    calendar_offered: false,
+    quick_contact_closed: false,
     quick_contact_fired: false,
+    qc_help: null,
     qc_problem: null,
-    qc_timeline: null,
-    qc_readiness: null,
   };
 }
 

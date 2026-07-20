@@ -108,14 +108,14 @@ export async function fireVendor({ fields, unsubscribeToken }) {
   });
 }
 
-export async function fireQuickContact({ fields, unsubscribeToken }) {
+export async function fireQuickContact({ fields, unsubscribeToken, sessionId }) {
   return postWebhook(webhookUrl("quick_contact"), "quick_contact", {
     event: "quick_contact",
+    sessionId,
     name: fields.name || null,
     email: fields.email || null,
-    problem: fields.problem || null,
-    timeline: fields.timeline || null,
-    readiness: fields.readiness || null,
+    problem: fields.problem || fields.help || null,
+    help: fields.help || fields.problem || null,
     unsubscribe_token: unsubscribeToken,
   });
 }
