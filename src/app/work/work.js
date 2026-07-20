@@ -299,7 +299,7 @@ export default function Work() {
             viewport={VP}
           >
             <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-3">
-              Talk to Us
+              Start a conversation
             </span>
             <h2
               className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-3"
@@ -314,7 +314,7 @@ export default function Work() {
               href="/chat?ref=work&source=portfolio"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-black text-white rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-85 transition-opacity"
             >
-              Talk to the Agent
+              Start a conversation
             </Link>
           </motion.div>
         </div>

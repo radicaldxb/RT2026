@@ -54,7 +54,7 @@ const faqSchema = {
       name: "What happens after I get my AI roadmap?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Your roadmap will show you what to build first. If you want to act on it, how we work starts with The Audit, which goes deeper into your specific situation and produces a prioritised action plan. There is no obligation to go further.",
+        text: "Your roadmap will show you what to build first. If you want to act on it, how we work starts with The Pulse, which goes deeper into your specific situation and produces a prioritised recommendation. There is no obligation to go further.",
       },
     },
   ],

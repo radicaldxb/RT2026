@@ -49,6 +49,16 @@
     color: #000 !important;
   }
 
+  .profile-page .profile-formula {
+    color: transparent !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    background-image: linear-gradient(90deg, #1ACDEB, #6B17DA, #E18949) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    animation: none !important;
+  }
+
   .profile-page p,
   .profile-page li,
   .profile-page td,

@@ -376,7 +376,7 @@ function ScrollNarrative() {
             We help you close it.
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
-            Your partner in turning AI experiments into results.
+            Your partner for organisations working on bold ideas.
           </p>
         </div>
 
@@ -998,7 +998,7 @@ function LandingMidSections() {
                 <span className="ml-2 font-mono text-xs text-[#4a4a4a]">Radical Thinking / Agent</span>
               </div>
               <div className="p-6 md:p-8 text-left" style={{ background: "#0d0d0d" }}>
-                <p className="font-mono text-sm text-[#555] mb-1">Radical Thinking. AI Native Agency.</p>
+                <p className="font-mono text-sm text-[#555] mb-1">Radical Thinking.</p>
                 <p className="text-base md:text-lg text-white leading-relaxed mt-5 mb-4" style={serif}>
                   "Tell us about your bold idea."
                 </p>

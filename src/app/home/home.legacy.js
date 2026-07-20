@@ -179,7 +179,7 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.2, ease: E }}
             className="text-xs font-semibold tracking-[0.25em] uppercase text-[#8a8780]"
           >
-            AI Native Agency
+            Partner for bold ideas
           </motion.p>
 
           <motion.h1
@@ -656,7 +656,7 @@ export default function Home() {
                 <span className="ml-2 font-mono text-xs text-[#4a4a4a]">Radical Thinking / Agent</span>
               </div>
               <div className="p-6 md:p-8 text-left" style={{ background: "#0d0d0d" }}>
-                <p className="font-mono text-sm text-[#555] mb-1">Radical Thinking. AI Native Agency.</p>
+                <p className="font-mono text-sm text-[#555] mb-1">Radical Thinking.</p>
                 <p className="text-base md:text-lg text-white leading-relaxed mt-5 mb-4" style={serif}>
                   "Tell us about your bold idea."
                 </p>

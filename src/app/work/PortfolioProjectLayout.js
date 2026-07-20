@@ -86,7 +86,7 @@ export function PortfolioProjectCTA({ projectName, chatRef }) {
       viewport={VP}
     >
       <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-3">
-        Talk to Us
+        Start a conversation
       </span>
       <h2
         className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-3"
@@ -101,7 +101,7 @@ export function PortfolioProjectCTA({ projectName, chatRef }) {
         href={`/chat?ref=${chatRef}&source=portfolio`}
         className="inline-flex items-center justify-center px-8 py-3.5 bg-black text-white rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-85 transition-opacity"
       >
-        Talk to the Agent
+        Start a conversation
       </Link>
     </motion.div>
   );
@@ -297,7 +297,7 @@ export default function PortfolioProjectLayout({
           <Link
             href={`/chat?ref=${chatRef}&source=portfolio`}
             className="flex items-center justify-center w-14 h-14 bg-black text-white rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.18)] hover:opacity-90 transition-opacity"
-            aria-label="Talk to Agent"
+            aria-label="Start a conversation"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />

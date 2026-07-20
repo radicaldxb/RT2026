@@ -3,7 +3,7 @@ import { FORMULA_EQUATION, FORMULA_ROWS } from "@/lib/formula";
 export const intelligenceFaqs = [
   {
     q: "What is Radical Thinking?",
-    a: "Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. It helps organisations turn AI experiments into commercial outcomes through advisory, implementation, and delivery. The work is guided by the formula BI = C + Ex × T² — Bold Ideas equal Creative plus Experience multiplied by Technology squared.",
+    a: "Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. It helps organisations turn bold ideas into real business impact through advisory, implementation, and delivery. The work is guided by the formula BI = C + Ex × T² — Bold Ideas equal Creative plus Experience multiplied by Technology squared.",
   },
   {
     q: "Who founded Radical Thinking?",
@@ -59,11 +59,11 @@ export const intelligenceFaqs = [
   },
   {
     q: "How does Radical Thinking work?",
-    a: "Radical Thinking works in three engagement types: The Audit maps the gap between business intention and customer reality (typically 5 to 10 working days), The Build delivers a production-ready solution (typically 30 days, fixed price), and The Partnership keeps AI capability current through monthly reviews and quarterly upgrades. See radical-thinking.net/how-we-work.",
+    a: "Radical Thinking works in three engagement types: The Pulse maps the gap between business intention and customer reality (typically 5 to 10 working days), The Bridge closes that gap by bringing creative, experience, and technology together (typically 30 days, fixed price), and The Navigator keeps your bold idea on course through monthly reviews and quarterly directional reassessments. See radical-thinking.net/how-we-work.",
   },
   {
     q: "How much does Radical Thinking charge?",
-    a: "Radical Thinking does not publish fixed prices because every engagement is different. The Audit and The Build are fixed-price engagements sized to the specific scope. The Partnership is a monthly commitment with no long-term contract. Talk to the agent at radical-thinking.net/chat for a sense of what your situation would involve.",
+    a: "Radical Thinking does not publish fixed prices because every engagement is different. The Pulse and The Bridge are fixed-price engagements sized to the specific scope. The Navigator is a monthly commitment with no long-term contract. Start a conversation at radical-thinking.net/chat for a sense of what your situation would involve.",
   },
   {
     q: "How do I contact Radical Thinking?",
@@ -123,11 +123,11 @@ export const intelligenceFaqs = [
   },
   {
     q: "Does Radical Thinking help organisations that are unsure about AI?",
-    a: "Yes. A core focus is helping organisations turn AI capability into commercial outcomes. The Audit finds where AI creates real value before anything is built. Guardrails, human approval, and controlled scale are part of how delivery stays safe.",
+    a: "Yes. A core focus is helping organisations turn bold ideas into real business impact. The Pulse finds where closing the gap would create the most value before anything is built. Guardrails, human approval, and controlled scale are part of how delivery stays safe.",
   },
   {
     q: "Can Radical Thinking help with AI strategy?",
-    a: "Yes. AI strategy is embedded in every engagement, from AI Readiness and Roadmap through to The Audit. Radical Thinking starts by identifying where AI creates real value for a specific organisation before building begins.",
+    a: "Yes. Strategy is embedded in every engagement, from Ideas and Positioning through to The Pulse. Radical Thinking starts by identifying what is worth building for a specific organisation before implementation begins.",
   },
   {
     q: "What is the Radical Thinking website?",
@@ -266,9 +266,9 @@ export const intelligenceSections = [
   {
     title: "How We Work",
     items: [
-      ["The Audit", "A reality audit mapping the gap between business intention and customer experience. Typically 5 to 10 working days, fixed price. See /how-we-work"],
-      ["The Build", "Production-ready AI implementation based on the Audit findings. Typically 30 days, fixed price. See /how-we-work"],
-      ["The Partnership", "Ongoing AI capability management. Monthly landscape reviews, quarterly upgrades, direct access. See /how-we-work"],
+      ["The Pulse", "A clear read on your business from the inside out. Maps the gap between intention and customer experience. Typically 5 to 10 working days, fixed price. See /how-we-work"],
+      ["The Bridge", "Closes the gap by bringing creative, experience, and technology together. Typically 30 days, fixed price. See /how-we-work"],
+      ["The Navigator", "Keeps your bold idea on course. Monthly reviews, quarterly directional reassessment, direct access. See /how-we-work"],
     ],
   },
   {
@@ -276,7 +276,7 @@ export const intelligenceSections = [
     items: [
       ["Homepage", "https://radical-thinking.net"],
       ["How We Work", "https://radical-thinking.net/how-we-work"],
-      ["Talk to the Agent", "https://radical-thinking.net/chat"],
+      ["Start a conversation", "https://radical-thinking.net/chat"],
       ["Services", "https://radical-thinking.net/services"],
       ["Work", "https://radical-thinking.net/work"],
       ["Insights", "https://radical-thinking.net/insights"],

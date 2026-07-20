@@ -3,7 +3,7 @@ import Home from "../home";
 export const metadata = {
   title: "Radical Thinking",
   description:
-    "Your partner in turning AI experiments into results. Radical Thinking, Dubai.",
+    "Radical Thinking is a partner for organisations working on bold ideas. Creative finds what is worth building, experience makes it land, technology and AI amplify both.",
   robots: { index: false, follow: false },
 };
 

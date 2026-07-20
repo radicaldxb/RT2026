@@ -558,7 +558,7 @@ export default function Chat() {
             <section className="relative z-10 flex-1 w-full px-4 py-14 md:py-20 pt-24 md:pt-28 pb-12 md:pb-16">
                 <div className="max-w-[700px] mx-auto text-center">
                     <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-2">
-                        Talk to Us
+                        Start a conversation
                     </span>
                     <h1
                         className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.1] text-black mb-4 text-balance"

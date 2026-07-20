@@ -48,20 +48,20 @@ const howWeWorkRows = [
   {
     num: "01",
     color: "#1ACDEB",
-    title: "The Audit",
-    body: "Find the real problem, in 5 to 10 days.",
+    title: "The Pulse",
+    body: "Understand where you really are, in 5 to 10 days.",
   },
   {
     num: "02",
     color: "#E18949",
-    title: "The Build",
-    body: "Close it properly, in 30 days.",
+    title: "The Bridge",
+    body: "Close the gap and land the idea, in 30 days.",
   },
   {
     num: "03",
     color: "#6B17DA",
-    title: "The Partnership",
-    body: "Keep it current, monthly.",
+    title: "The Navigator",
+    body: "Keep the direction true, monthly.",
   },
 ];
 
@@ -399,7 +399,9 @@ function WhenTheyWorkTogether() {
   );
 }
 
-function AgentTerminal({ prompt, agencyLine = false, className = "max-w-lg mx-auto" }) {
+const REALITY_BEAT = { start: 0.30, end: 0.43, moveStart: 0.315, moveEnd: 0.43 };
+
+function AgentTerminal({ prompt, className = "max-w-lg mx-auto" }) {
   return (
     <Link
       href="/chat"
@@ -413,19 +415,16 @@ function AgentTerminal({ prompt, agencyLine = false, className = "max-w-lg mx-au
         <span className="ml-2 font-mono text-xs" style={{ color: terminalChrome }}>Radical Thinking / Agent</span>
       </div>
       <div className="p-6 md:p-8 text-left" style={{ background: "#0d0d0d" }}>
-        {agencyLine && (
-          <p className="font-mono text-sm mb-1" style={{ color: terminalMuted }}>Radical Thinking. AI Native Agency.</p>
-        )}
         <p
-          className={`text-base md:text-lg text-white leading-relaxed ${agencyLine ? "mt-5 mb-4" : ""}`}
-          style={{ ...serif, fontStyle: agencyLine ? "normal" : "italic" }}
+          className="text-base md:text-lg text-white leading-relaxed"
+          style={{ ...serif, fontStyle: "italic" }}
         >
           {prompt}
         </p>
         <div className="flex items-center gap-2 mt-4">
           <span className="text-[#28ca41] font-mono">›</span>
           <span className="font-mono text-sm" style={{ color: terminalMuted }}>
-            {agencyLine ? "Start typing your answer..." : "Start typing..."}
+            Start typing...
           </span>
           <span className="rt-cursor" />
         </div>
@@ -433,8 +432,6 @@ function AgentTerminal({ prompt, agencyLine = false, className = "max-w-lg mx-au
     </Link>
   );
 }
-
-const REALITY_BEAT = { start: 0.30, end: 0.43, moveStart: 0.315, moveEnd: 0.43 };
 
 const REALITY_LABELS = [
   "ChatGPT",
@@ -480,9 +477,13 @@ function ScrollNarrative() {
   const containerRef = useRef(null);
   const p = useNarrativeProgress(containerRef);
 
-  // Beat 1: visible on first paint at scroll top; fades out as beat 2 enters
-  const b1Op = mapProgress(p, [0, 0.065, 0.08], [1, 1, 0]);
-  const b1Y = mapProgress(p, [0, 0.04], [0, 0]);
+  // Beat 1: title line 1 → pause → line 2 → subhead; then fade for beat 2
+  const b1Op = mapProgress(p, [0, 0.072, 0.088], [1, 1, 0]);
+  const b1Line1Op = mapProgress(p, [0, 0.008], [1, 1]);
+  const b1Line2Op = mapProgress(p, [0.028, 0.042], [0, 1]);
+  const b1Line2Y = mapProgress(p, [0.028, 0.042], [18, 0]);
+  const b1SubOp = mapProgress(p, [0.048, 0.062], [0, 1]);
+  const b1SubY = mapProgress(p, [0.048, 0.062], [16, 0]);
 
   // Beat 2: 0.09 – 0.20 (third line needs room after headline)
   const b2Op = mapProgress(p, [0.09, 0.105, 0.175, 0.20], [0, 1, 1, 0]);
@@ -528,18 +529,29 @@ function ScrollNarrative() {
         {/* Beat 1 */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10 gap-5"
-          style={{ opacity: b1Op, transform: `translateY(${b1Y}px)` }}
+          style={{ opacity: b1Op }}
         >
           <h1
-            className="text-[clamp(1.85rem,4.8vw,3.75rem)] font-bold leading-[1.12] tracking-tight text-black max-w-4xl"
+            className="text-[clamp(1.85rem,4.8vw,3.75rem)] font-bold leading-[1.12] tracking-tight max-w-4xl"
             style={serif}
           >
-            The gap between AI capability and business reality.
-            <br />
-            We help you close it.
+            <span className="block text-black" style={{ opacity: b1Line1Op }}>
+              The gap between bold ideas and real business impact.
+            </span>
+            <span
+              className="block mt-2"
+              style={{ opacity: b1Line2Op, transform: `translateY(${b1Line2Y}px)`, color: "#E18949" }}
+            >
+              We help you close it.
+            </span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
-            Your partner in turning AI experiments into results.
+          <p
+            className="text-lg md:text-xl text-black max-w-2xl leading-relaxed"
+            style={{ opacity: b1SubOp, transform: `translateY(${b1SubY}px)` }}
+          >
+            Creative finds what is worth building. Experience makes it land.
+            <br />
+            Technology and AI. They amplify both.
           </p>
         </div>
 
@@ -739,16 +751,31 @@ function LandingFlowSections() {
             {howWeWorkRows.map((item, i) => (
               <motion.div
                 key={item.num}
-                initial={{ opacity: 0, x: -64 }}
+                initial={{ opacity: 0, x: -48 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.85, delay: i * 0.14, ease: E }}
+                transition={{ duration: 0.85, delay: i * 0.12, ease: E }}
                 viewport={{ once: false, margin: "0px 0px -80px 0px" }}
-                className="grid grid-cols-[52px_1fr] md:grid-cols-[72px_1fr] gap-x-4 md:gap-x-6 py-6 md:py-8"
+                className="grid grid-cols-[52px_1fr] md:grid-cols-[72px_1fr] gap-x-4 md:gap-x-6 py-4 md:py-5"
+                style={
+                  i < howWeWorkRows.length - 1
+                    ? { borderBottom: "0.5px solid #e8e4dc" }
+                    : undefined
+                }
               >
-                <p className="text-[2.5rem] md:text-[3rem] font-bold leading-none" style={{ ...serif, color: item.color }}>{item.num}</p>
+                <p
+                  className="text-[2.5rem] md:text-[3rem] font-bold leading-none"
+                  style={{ ...serif, color: item.color }}
+                >
+                  {item.num}
+                </p>
                 <div className="pt-0.5 md:pt-1">
-                  <h3 className="text-base md:text-lg font-semibold text-black mb-1.5 tracking-tight" style={serif}>{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.body}</p>
+                  <h3
+                    className="text-lg md:text-xl font-semibold text-black mb-1.5 tracking-tight"
+                    style={serif}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="text-base text-gray-600 leading-relaxed">{item.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -930,7 +957,7 @@ function LandingFlowSections() {
             transition={{ duration: 0.8, ease: E }}
             viewport={VP}
           >
-            Talk to Us
+            Start a conversation
           </motion.span>
           <motion.h2
             className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.2] text-black mb-3"
@@ -958,7 +985,6 @@ function LandingFlowSections() {
             viewport={VP}
           >
             <AgentTerminal
-              agencyLine
               prompt="&ldquo;Tell us about your bold idea.&rdquo;"
               className="max-w-lg mx-auto"
             />

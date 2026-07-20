@@ -2,14 +2,14 @@ import { Suspense } from "react";
 import Chat from "./chat";
 
 export const metadata = {
-  title: "Talk to the Agent | Radical Thinking",
+  title: "Start a Conversation | Radical Thinking",
   description:
-    "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking. Start a conversation about turning AI into commercial outcomes.",
+    "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking. Start a conversation about your bold idea.",
   alternates: {
     canonical: "https://radical-thinking.net/chat",
   },
   openGraph: {
-    title: "Talk to the Agent | Radical Thinking",
+    title: "Start a Conversation | Radical Thinking",
     description:
       "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking. Start a conversation.",
     url: "https://radical-thinking.net/chat",
@@ -25,7 +25,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Talk to the Agent | Radical Thinking",
+    title: "Start a Conversation | Radical Thinking",
     description:
       "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking. Start a conversation.",
     images: ["https://radical-thinking.net/Images/OG/OG-Chat.webp"],

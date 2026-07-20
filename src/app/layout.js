@@ -6,9 +6,9 @@ import { roboto, robotoSlab } from "@/lib/fonts";
 const GTM_ID = "GTM-W67J42";
 
 export const metadata = {
-  title: "Radical Thinking | Turning AI Experiments into Commercial Outcomes",
+  title: "Radical Thinking | A partner for organisations working on bold ideas",
   description:
-    "Radical Thinking helps you turn AI experiments into results. Your partner in closing the gap between AI capability and business reality.",
+    "Radical Thinking is a partner for organisations working on bold ideas. Creative finds what is worth building, experience makes it land, technology and AI amplify both.",
   authors: [{ name: "Radical Thinking" }],
   creator: "Radical Thinking",
   publisher: "Radical Thinking",
@@ -16,9 +16,9 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://radical-thinking.net",
-    title: "Radical Thinking | Turning AI Experiments into Commercial Outcomes",
+    title: "Radical Thinking | A partner for organisations working on bold ideas",
     description:
-      "Radical Thinking helps you turn AI experiments into results. Your partner in closing the gap between AI capability and business reality.",
+      "Radical Thinking is a partner for organisations working on bold ideas. Creative finds what is worth building, experience makes it land, technology and AI amplify both.",
     siteName: "Radical Thinking",
     images: [
       {
@@ -31,9 +31,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Radical Thinking | Turning AI Experiments into Commercial Outcomes",
+    title: "Radical Thinking | A partner for organisations working on bold ideas",
     description:
-      "Radical Thinking helps you turn AI experiments into results. Your partner in closing the gap between AI capability and business reality.",
+      "Radical Thinking. A partner for organisations working on bold ideas. Creative, experience, technology, and AI in the right ratio.",
     images: ["https://radical-thinking.net/Images/OG/OG-Homepage.webp"],
   },
   icons: {
@@ -99,7 +99,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               addressCountry: "AE",
             },
             description:
-              "A Dubai-based AI advisory guided by BI = C + Ex × T². Helps organisations turn AI experiments into commercial outcomes.",
+              "A Dubai-based partner for organisations working on bold ideas, guided by BI = C + Ex × T².",
             contactPoint: {
               "@type": "ContactPoint",
               contactType: "customer support",
@@ -117,7 +117,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             hasPart: [
               {
                 "@type": "WebPage",
-                name: "Talk to the Agent",
+                name: "Start a conversation",
                 url: "https://radical-thinking.net/chat",
                 description:
                   "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking.",
@@ -141,7 +141,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 name: "How We Work",
                 url: "https://radical-thinking.net/how-we-work",
                 description:
-                  "How Radical Thinking works: The Audit finds the real problem, The Build delivers a production-ready solution, The Partnership keeps it current.",
+                  "How Radical Thinking works: The Pulse finds where you are, The Bridge closes the gap, The Navigator keeps the direction true.",
               },
               {
                 "@type": "WebPage",

@@ -5,7 +5,7 @@ export const FORMULA_EQUATION = "BI = C + Ex × T²";
 export const FORMULA_EXPANDED = "Bold Ideas = Creative + Experience × Technology²";
 
 export const FORMULA_ADVISORY_LINE =
-  "AI advisory only works when the formula does. Creative finds what is worth building. Experience makes it land. Technology amplifies both — that is how Radical Thinking turns AI experiments into results.";
+  "Creative finds what is worth building. Experience makes it land. Technology amplifies both. That is how Radical Thinking turns bold ideas into real business impact.";
 
 export const FORMULA_ROWS = [
   {

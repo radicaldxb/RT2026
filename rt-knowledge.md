@@ -35,9 +35,9 @@ AI advisory only works when the formula does. Creative finds what is worth build
 - **Technology squared (T²):** AI as the amplifier that carries and multiplies creative and experience.
 
 ### How RT works (engagement types)
-1. **The Audit:** Map the gap between intention and customer reality (typically 5–10 working days).
-2. **The Build:** Deliver a production-ready solution (typically 30 days, fixed price).
-3. **The Partnership:** Keep AI capability current — monthly reviews, quarterly upgrades, direct access.
+1. **The Pulse:** Map the gap between intention and customer reality (typically 5–10 working days).
+2. **The Bridge:** Deliver a production-ready solution (typically 30 days, fixed price).
+3. **The Navigator:** Keep AI capability current — monthly reviews, quarterly upgrades, direct access.
 
 ### Pricing
 Project-based. No fixed rate card. Scope and investment discussed in initial consultation.
@@ -371,14 +371,14 @@ Intelligence brief: https://radical-thinking.net/intelligence
 How We Work: https://radical-thinking.net/how-we-work
 
 ### Engagement model
-- **The Audit:** Reality audit mapping gap between business intention and customer experience. Typically 5–10 working days, fixed price.
-- **The Build:** Production-ready AI implementation from Audit findings. Typically 30 days, fixed price.
-- **The Partnership:** Ongoing AI capability management — monthly landscape reviews, quarterly upgrades, direct access.
+- **The Pulse:** Reality audit mapping gap between business intention and customer experience. Typically 5–10 working days, fixed price.
+- **The Bridge:** Production-ready AI implementation from Pulse findings. Typically 30 days, fixed price.
+- **The Navigator:** Ongoing AI capability management — monthly landscape reviews, quarterly upgrades, direct access.
 
 ### Key URLs
 - Homepage: https://radical-thinking.net
 - How We Work: https://radical-thinking.net/how-we-work
-- Talk to the Agent: https://radical-thinking.net/chat
+- Start a conversation: https://radical-thinking.net/chat
 - Services: https://radical-thinking.net/services
 - Work: https://radical-thinking.net/work
 - Insights: https://radical-thinking.net/insights
@@ -445,10 +445,10 @@ A: Radical Thinking's early clients from 2009 onwards included Microsoft, HP, an
 A: Client work includes Microsoft AI, Bella Conversational AI, Lenovo Campaigns, 1001 Inventions, KFAS, Payment Partners, AI Networks, Simon Snelder, WebinarLife, Austability, Influence My World, Crypto X, Akshaak, Soundreaver, and FlexxPay. Explorations include FluffyFriends, Kahulife, Tommy & Ellie, and Animal Intelligence. See https://radical-thinking.net/work.
 
 **Q: How does Radical Thinking work?**
-A: Three engagement types: The Audit (5–10 days), The Build (typically 30 days, fixed price), and The Partnership (monthly). See https://radical-thinking.net/how-we-work.
+A: Three engagement types: The Pulse (5–10 days), The Bridge (typically 30 days, fixed price), and The Navigator (monthly). See https://radical-thinking.net/how-we-work.
 
 **Q: How much does Radical Thinking charge?**
-A: The Audit and The Build are fixed-price engagements sized to scope. The Partnership is monthly with no long-term contract. Talk to the agent for a sense of fit: https://radical-thinking.net/chat.
+A: The Pulse and The Bridge are fixed-price engagements sized to scope. The Navigator is monthly with no long-term contract. Start a conversation for a sense of fit: https://radical-thinking.net/chat.
 
 **Q: How do I contact Radical Thinking?**
 A: The fastest way is the AI agent at radical-thinking.net/chat. Email: hello@radical-thinking.net.

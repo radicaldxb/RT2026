@@ -47,7 +47,7 @@ export default function Nav() {
               href="/#agent"
               className="hidden md:inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-80 transition-opacity"
             >
-              Talk to Us
+              Start a conversation
               <span className="w-1.5 h-1.5 rounded-full bg-white" />
             </Link>
           )}

@@ -12,30 +12,52 @@ import { robotoSlab, serif } from "@/lib/fonts";
 const E = [0.16, 1, 0.3, 1];
 const VP = { once: false, margin: "0px 0px -100px 0px" };
 
+const RT_BLUE = "#1ACDEB";
+const RT_AMBER = "#E18949";
+const RT_PURPLE = "#6B17DA";
+
 const services = [
   {
-    title: "AI-Augmented Marketing and Content Systems",
-    description:
-      "For organisations that need to modernise how marketing operations run. We design and oversee the implementation of AI-augmented systems that preserve brand safety, cultural relevance, and human judgment.",
-    workOn: "content pipeline design, tooling selection, workflow integration, governance framework.",
-    engage: "end-to-end implementation partnerships, from design through to launch and handover.",
-    outcome: "a working system your team can operate, with the guardrails in place.",
+    eyebrow: "Creative",
+    color: RT_BLUE,
+    title: "Ideas and Positioning",
+    body: "For organisations with a bold idea that needs to become a real business outcome. We help you find what is worth building, define the narrative that carries it, and set the strategy for how it lands in market.",
+    workOn: [
+      "Strategic positioning",
+      "Brand narrative",
+      "Market entry strategy",
+      "Product launch strategy",
+      "Campaign strategy",
+    ],
+    when: "When you have a new product, capability, or brand that needs to land in a market that has to notice. When your existing story has not caught up with what you actually do. When AI or another technology has changed what you offer and the narrative needs to catch up.",
   },
   {
-    title: "AI Translation and Positioning",
-    description:
-      "For organisations that have invested in AI but struggle to turn capability into commercial narrative. We help you translate what your AI actually does into language that customers, boards, and markets understand and act on.",
-    workOn: "brand narrative, executive messaging, customer communication, sales enablement.",
-    engage: "from short focused sprints to embedded ongoing work.",
-    outcome: "a coherent story your organisation tells externally, and the materials to tell it.",
+    eyebrow: "Experience",
+    color: RT_AMBER,
+    title: "Experience and Design",
+    body: "For organisations whose bold idea needs to feel right when people encounter it. We design the experiences, brand systems, and touchpoints that turn an idea into something people remember and return to.",
+    workOn: [
+      "Brand identity and design systems",
+      "User and customer experience design",
+      "Product and interface design",
+      "Content systems and production",
+      "Motion, video, and immersive experiences",
+    ],
+    when: "When your customer experience has fallen behind your brand promise. When you are launching a product or campaign that needs to be felt, not just understood. When your existing touchpoints do not reflect what you want your business to be.",
   },
   {
-    title: "AI Readiness and Roadmap",
-    description:
-      "For organisations exploring or piloting AI and unsure where to invest next. We assess your current state, identify highest-value opportunities, and produce a sequenced roadmap that fits your operational reality.",
-    workOn: "capability audit, opportunity mapping, governance considerations, phased roadmap.",
-    engage: "typically a focused assessment, followed by optional implementation support.",
-    outcome: "a clear plan you can fund, sequence, and execute.",
+    eyebrow: "Technology",
+    color: RT_PURPLE,
+    title: "Implementation and Technology",
+    body: "For organisations that need the technology and AI infrastructure to make their bold idea work at scale. We build the systems, integrations, and AI components that turn a strategy into something operational.",
+    workOn: [
+      "AI implementation and integration",
+      "Digital platforms and web systems",
+      "Workflow automation",
+      "Data and content pipelines",
+      "Product engineering",
+    ],
+    when: "When you have a strategy that requires working technology to deliver. When you have an AI capability that needs to be productionised. When your operations need to be reimagined around what AI and automation can now do.",
   },
 ];
 
@@ -85,7 +107,7 @@ export default function Services() {
       name: service.title,
       acceptedAnswer: {
         "@type": "Answer",
-        text: `${service.description} What we work on: ${service.workOn} How we engage: ${service.engage} Outcome: ${service.outcome}`,
+        text: `${service.body} What we work on: ${service.workOn.join(", ")}. When to hire us: ${service.when}`,
       },
     })),
   };
@@ -107,7 +129,7 @@ export default function Services() {
       <div className="relative z-10 w-full px-4 py-14 md:py-20 pt-24 md:pt-28">
         <div className="max-w-6xl mx-auto">
           <motion.header
-            className="mb-8 md:mb-10 text-center md:text-left"
+            className="mb-10 md:mb-14 text-center md:text-left"
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: E }}
@@ -119,49 +141,78 @@ export default function Services() {
               className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold text-black tracking-tight leading-[1.1]"
               style={serif}
             >
-              How we work with you
+              Three services. One formula. Whatever your bold idea needs.
             </h1>
-            <p className="text-base text-gray-600 leading-relaxed mt-3 max-w-[560px] mx-auto md:mx-0">
-              Three services, focused on turning AI capability into commercial outcomes. Every engagement runs through our formula: BI = C + Ex × T². Pick one, or combine them.
+            <p className="text-base text-gray-600 leading-relaxed mt-4 max-w-[620px] mx-auto md:mx-0">
+              Our services map to the three legs of the formula. Creative that finds what is worth
+              building. Experience that makes it land. Technology and AI that amplify both. Pick one.
+              Combine them. Start where your idea needs help.
             </p>
           </motion.header>
 
-          <div className="space-y-4 md:space-y-5 mb-10 md:mb-12">
+          <div className="space-y-6 md:space-y-8 mb-12 md:mb-16">
             {services.map((service, index) => (
               <motion.article
                 key={service.title}
-                className="rounded-2xl border border-[#e8e4dc]/90 bg-white p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
+                className="rounded-2xl border border-[#e8e4dc]/90 bg-white overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.85, ease: E, delay: index * 0.05 }}
                 viewport={VP}
               >
-                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[#8a8780] mb-2">
-                  Service {index + 1}
-                </p>
-                <h2
-                  className="text-[clamp(1.2rem,2.3vw,1.6rem)] font-bold text-black leading-snug mb-3"
-                  style={serif}
-                >
-                  {service.title}
-                </h2>
-                <p className="text-sm text-gray-600 leading-relaxed mb-5 max-w-3xl">
-                  {service.description}
-                </p>
-                <dl className="grid grid-cols-1 gap-3 text-sm leading-relaxed max-w-3xl">
-                  <div>
-                    <dt className="font-semibold text-black inline">What we work on: </dt>
-                    <dd className="text-gray-600 inline">{service.workOn}</dd>
+                <div className="h-1.5 w-full" style={{ backgroundColor: service.color }} />
+                <div className="p-6 md:p-8">
+                  <p
+                    className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] mb-2"
+                    style={{ color: service.color }}
+                  >
+                    {service.eyebrow}
+                  </p>
+                  <h2
+                    className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-4"
+                    style={serif}
+                  >
+                    {service.title}
+                  </h2>
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6 max-w-3xl">
+                    {service.body}
+                  </p>
+
+                  <div className="mb-6">
+                    <p className="text-sm font-semibold text-black mb-3">What we work on:</p>
+                    <ul className="space-y-2">
+                      {service.workOn.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-3 text-sm text-gray-700 leading-relaxed"
+                        >
+                          <span
+                            className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                            style={{ backgroundColor: service.color }}
+                            aria-hidden
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div>
-                    <dt className="font-semibold text-black inline">How we engage: </dt>
-                    <dd className="text-gray-600 inline">{service.engage}</dd>
+
+                  <div
+                    className="rounded-xl p-5 md:p-6 max-w-3xl"
+                    style={{
+                      background: `${service.color}0f`,
+                      border: `0.5px solid ${service.color}22`,
+                    }}
+                  >
+                    <p
+                      className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                      style={{ color: service.color }}
+                    >
+                      When to hire us for this
+                    </p>
+                    <p className="text-sm text-gray-700 leading-relaxed">{service.when}</p>
                   </div>
-                  <div>
-                    <dt className="font-semibold text-black inline">Outcome: </dt>
-                    <dd className="text-gray-600 inline">{service.outcome}</dd>
-                  </div>
-                </dl>
+                </div>
               </motion.article>
             ))}
           </div>
@@ -183,7 +234,8 @@ export default function Services() {
               How we keep AI safe and sane
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-              We don't hand you a black box. We build in guardrails, human approval, and controlled scale so you stay in control and your brand stays safe.
+              We don't hand you a black box. We build in guardrails, human approval, and controlled
+              scale so you stay in control and your brand stays safe.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
               {safetyItems.map((item) => (
@@ -191,7 +243,10 @@ export default function Services() {
                   key={item.title}
                   className="rounded-2xl border border-[#e8e4dc]/90 bg-[#fafaf8] p-5 md:p-6"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white border border-[#e8e4dc]/90 flex items-center justify-center mb-4" aria-hidden>
+                  <div
+                    className="w-10 h-10 rounded-xl bg-white border border-[#e8e4dc]/90 flex items-center justify-center mb-4"
+                    aria-hidden
+                  >
                     {item.icon}
                   </div>
                   <h3 className="text-sm font-semibold text-black mb-2 tracking-tight" style={serif}>
@@ -204,20 +259,21 @@ export default function Services() {
           </motion.div>
 
           <motion.div
-            className="rounded-2xl border border-[#e8e4dc]/90 bg-white p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
+            className="rounded-2xl border border-[#e8e4dc]/90 bg-white p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)] mb-10 md:mb-12"
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: E }}
             viewport={VP}
           >
-            <p className="text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-2">
-              Capabilities
-            </p>
-            <h2 className="text-[clamp(1.2rem,2.3vw,1.6rem)] font-bold text-black leading-snug mb-3" style={serif}>
-              Capabilities we bring to delivery
+            <h2
+              className="text-[clamp(1.2rem,2.3vw,1.6rem)] font-bold text-black leading-snug mb-3"
+              style={serif}
+            >
+              Capabilities we bring across engagements
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed mb-6 max-w-2xl">
-              Depending on the engagement, we mobilise the following through Radical Thinking and our network of specialists:
+              Depending on the service and engagement, we mobilise the following through Radical
+              Thinking and our network of specialists:
             </p>
             <ul className="space-y-3">
               {capabilities.map((item) => (
@@ -230,29 +286,52 @@ export default function Services() {
           </motion.div>
 
           <motion.div
-            className="mt-12 md:mt-16 max-w-lg mx-auto text-center"
+            className="rounded-2xl border border-[#e8e4dc]/90 bg-white p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)] mb-12 md:mb-16"
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: E }}
+            viewport={VP}
+          >
+            <h2
+              className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-3"
+              style={serif}
+            >
+              How we engage
+            </h2>
+            <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6 max-w-3xl">
+              Every service can be delivered as one of three engagement types. Start with a Pulse to
+              find the real problem. Move to a Bridge to close it. Continue with a Navigator to keep
+              it current. Each service, each engagement type, sized to your specific situation.
+            </p>
+            <Link
+              href="/how-we-work"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-black hover:opacity-70 transition-opacity"
+            >
+              See how we work →
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className="max-w-lg mx-auto text-center"
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: E }}
             viewport={VP}
           >
-            <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-3">
-              Talk to Us
-            </span>
             <h2
               className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-3"
               style={serif}
             >
-              Not sure which service fits?
+              Not sure which service fits your situation?
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              Tell us what problem you're trying to solve.
+              Tell us what problem you're trying to solve. We will figure out the rest together.
             </p>
             <Link
               href="/chat?ref=services&source=services"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-black text-white rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-85 transition-opacity"
             >
-              Book an appointment
+              Start a conversation
             </Link>
           </motion.div>
         </div>

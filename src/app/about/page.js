@@ -4,14 +4,14 @@ import Script from "next/script";
 export const metadata = {
   title: "About | Radical Thinking",
   description:
-    "Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. Guided by BI = C + Ex × T². 20+ years of enterprise experience, applied to AI-native problems.",
+    "Radical Thinking is a UAE-based partner for organisations working on bold ideas. Founded in 2009 by Stephan van Wijk. 20+ years of senior digital work.",
   alternates: {
     canonical: "https://radical-thinking.net/about",
   },
   openGraph: {
     title: "About | Radical Thinking",
     description:
-      "An AI advisory based in Dubai. Guided by BI = C + Ex × T². 20+ years of enterprise experience, applied to AI-native problems.",
+      "A UAE-based partner for organisations working on bold ideas. 20+ years of senior digital work across the region.",
     url: "https://radical-thinking.net/about",
     siteName: "Radical Thinking",
     images: [
@@ -27,7 +27,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "About | Radical Thinking",
     description:
-      "Radical Thinking. AI advisory based in Dubai. Guided by BI = C + Ex × T². Turning AI capability into commercial outcomes.",
+      "Radical Thinking. A partner for organisations working on bold ideas. Founded 2009. Based in the UAE.",
     images: ["https://radical-thinking.net/Images/OG/OG-About.webp"],
   },
 };
@@ -45,7 +45,7 @@ export default function AboutPage() {
             "@type": "Organization",
             name: "Radical Thinking",
             description:
-              "An AI advisory based in Dubai. Guided by BI = C + Ex × T². 20+ years of enterprise experience, applied to AI-native problems.",
+              "A UAE-based partner for organisations working on bold ideas. Founded in 2009 by Stephan van Wijk. 20+ years of senior digital work.",
             foundingLocation: "Dubai, UAE",
             founder: {
               "@type": "Person",
@@ -83,7 +83,7 @@ export default function AboutPage() {
               name: "Where is Radical Thinking based?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Radical Thinking is headquartered in Dubai, United Arab Emirates, and works with clients globally.",
+                text: "Radical Thinking is based in the UAE and works with clients globally.",
               },
             },
             {
@@ -91,7 +91,7 @@ export default function AboutPage() {
               name: "What does Radical Thinking do?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Radical Thinking is an AI advisory that helps organisations turn AI experiments into commercial outcomes through advisory, implementation, and delivery.",
+                text: "Radical Thinking is a partner for organisations working on bold ideas. It helps clients define what is worth building, design the experience that makes it land, and use technology and AI to amplify both.",
               },
             },
             {
