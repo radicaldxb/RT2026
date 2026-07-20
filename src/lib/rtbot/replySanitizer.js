@@ -18,5 +18,7 @@ export function stripInternalNarration(reply) {
   });
 
   const result = cleaned.length ? cleaned.join("\n\n").trim() : reply.trim();
-  return result.replace(/stephan@radical-thinking\.net/gi, "hello@radical-thinking.net");
+  return result
+    .replace(/stephan@radical-thinking\.net/gi, "hello@radical-thinking.net")
+    .replace(/\s*—\s*/g, ", ");
 }

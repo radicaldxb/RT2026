@@ -50,6 +50,7 @@ import {
   isQuickContactReadyToFire,
   processQuickContactTurn,
   resolveFlowForTurn,
+  getQuickContactStep,
 } from "@/lib/rtbot/flowRouter";
 
 const rateLimit = new Map();
@@ -469,6 +470,15 @@ export async function POST(req) {
     const exitCategory = detectEarlyExit(chatInput, turnNumber);
     const isFirstApiTurn = session.messages.length === 0;
 
+    if (
+      (exitCategory === "vendor" || exitCategory === "jobseeker") &&
+      session.meta.flow === FLOW.QUICK_CONTACT &&
+      getQuickContactStep(session.meta) < 3
+    ) {
+      session.meta.flow = null;
+      session.meta.quick_contact_answers = 0;
+    }
+
     const fieldsBeforeReply = extractLeadFields(
       [...session.messages, { role: "user", content: chatInput }],
       session.meta
@@ -488,23 +498,21 @@ export async function POST(req) {
     if (resolvedFlow) {
       session.meta.flow = resolvedFlow;
     }
-    // Reinforce chip flow from client if session lost it somehow (never override an intentional divert away from quick_contact after calendar_offered exploring divert — those set business_problem intentionally).
     if (
       !session.meta.flow &&
       metadata.flow &&
-      ALLOWED_FLOWS.has(metadata.flow)
+      ALLOWED_FLOWS.has(metadata.flow) &&
+      exitCategory !== "vendor" &&
+      exitCategory !== "jobseeker"
     ) {
       session.meta.flow = metadata.flow;
-    } else if (
-      metadata.flow === FLOW.QUICK_CONTACT &&
-      session.meta.flow !== FLOW.BUSINESS_PROBLEM &&
-      !session.meta.quick_contact_closed
-    ) {
-      // Keep Get in touch locked even if a prior turn failed to persist flow.
-      session.meta.flow = FLOW.QUICK_CONTACT;
     }
 
-    if (session.meta.flow === FLOW.QUICK_CONTACT && !session.meta.quick_contact_closed) {
+    if (
+      session.meta.flow === FLOW.QUICK_CONTACT &&
+      exitCategory !== "vendor" &&
+      exitCategory !== "jobseeker"
+    ) {
       const qc = processQuickContactTurn(session.meta, chatInput);
       if (qc) {
         Object.assign(session.meta, qc.meta);
@@ -563,7 +571,7 @@ export async function POST(req) {
       userContent = `${wrapUpSystemNote({ gdprRequired })}\n\n${chatInput}`;
     } else if (isFirstApiTurn) {
       const routingNote = flowJustSet ? ` ${flowRoutingSystemNote(resolvedFlow)}` : "";
-      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, looking for help with something in your current business, or do you just want to get in touch?" Opening chips may send: "I have a bold idea", "I have a business problem", or "Get in touch". The message below is the visitor's answer. Do not repeat that opening. Do not ask them to choose from a list. If they chose get in touch, that path is handled separately. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then proceed on the locked flow.${routingNote}]\n\n${chatInput}`;
+      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? A bold idea you want to bring to life, help with something in your business, or just looking to get in touch?" Opening chips may send: "I have a bold idea", "I have a business problem", "Get in touch", or "Tell me about Radical Thinking". The message below is the visitor's answer. Do not repeat that opening. Do not ask them to choose from a list. If they chose get in touch or describe help they need, that path is handled separately. If name is not yet captured, ask for name FIRST. Do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then proceed on the locked flow.${routingNote}]\n\n${chatInput}`;
     } else if (flowJustSet && resolvedFlow) {
       userContent = `${flowRoutingSystemNote(resolvedFlow)}\n\n${chatInput}`;
     }

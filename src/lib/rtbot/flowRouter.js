@@ -1,3 +1,4 @@
+import { isJobSeekerSignal, isVendorSignal } from "./exitDetector";
 import { isPlausiblePersonName, stripSystemNote } from "./scorer";
 import { isValidEmail } from "./wrapUp";
 
@@ -10,7 +11,18 @@ export const FLOW = {
 export const QC_Q_NAME = "What is your name?";
 export const QC_Q_HELP = "How can we help? Describe what you are looking for.";
 export const QC_Q_EMAIL = "What is your email address?";
-export const QC_Q_DONE = "We will get back to you as soon as possible.";
+
+export function buildQuickContactDoneReply(name) {
+  const first =
+    name && typeof name === "string" ? name.trim().split(/\s+/)[0] : null;
+  if (first) {
+    return `Thanks, ${first}. We've got your details. Someone from Radical Thinking will generally be back to you within one business day. Is there anything else we can help with while you're here?`;
+  }
+  return "Thanks. We've got your details. Someone from Radical Thinking will generally be back to you within one business day. Is there anything else we can help with while you're here?";
+}
+
+export const QC_Q_RESPONSE_TIME =
+  "Generally within one business day. Is there anything else we can help with while you're here?";
 
 const CHIP_TO_FLOW = {
   "i have a bold idea": FLOW.BOLD_IDEA,
@@ -22,6 +34,7 @@ const QUICK_CONTACT_SIGNALS = [
   "get in touch",
   "i want to get in touch",
   "just want to get in touch",
+  "just looking to get in touch",
   "who do i speak to",
   "who should i speak to",
   "book a call",
@@ -34,10 +47,27 @@ const QUICK_CONTACT_SIGNALS = [
   "speak to someone",
   "talk to someone",
   "talk to a human",
-  "talk to stephan",
-  "speak to stephan",
   "set up a call",
   "set up a meeting",
+];
+
+const HELP_SEEKING_SIGNALS = [
+  "need help",
+  "looking for help",
+  "want help",
+  "could use help",
+  "need advice",
+  "looking for advice",
+  "need support",
+  "help us",
+  "help me with",
+  "help with",
+  "looking for someone",
+  "need someone to",
+  "ai advisory",
+  "advisory on",
+  "consulting",
+  "consultation",
 ];
 
 const BOLD_IDEA_SIGNALS = [
@@ -71,9 +101,22 @@ function normalize(text) {
 
 function isQuickContactOpener(message) {
   if (!message || typeof message !== "string") return false;
-  if (flowFromChip(message)) return true;
+  if (flowFromChip(message) === FLOW.QUICK_CONTACT) return true;
   const lower = message.toLowerCase();
   return QUICK_CONTACT_SIGNALS.some((s) => lower.includes(s));
+}
+
+function isHelpSeekingMessage(message) {
+  if (!message || typeof message !== "string") return false;
+  const lower = message.toLowerCase();
+  if (lower.length < 8) return false;
+  return HELP_SEEKING_SIGNALS.some((s) => lower.includes(s));
+}
+
+function isResponseTimeQuestion(input) {
+  return /how long|when will|get back|hear from|response time|turnaround|how soon|wait to hear/i.test(
+    input
+  );
 }
 
 /** Exact opening-chip match. */
@@ -83,10 +126,14 @@ export function flowFromChip(message) {
 
 /**
  * Route from the first substantive visitor message (or chip).
- * Vendor / job-seeker exits are handled separately by detectEarlyExit.
+ * Vendor / job-seeker are handled via detectEarlyExit in the route.
  */
 export function detectConversationFlow(message) {
   if (!message || typeof message !== "string") return null;
+
+  if (isVendorSignal(message) || isJobSeekerSignal(message)) {
+    return null;
+  }
 
   const chip = flowFromChip(message);
   if (chip) return chip;
@@ -102,6 +149,9 @@ export function detectConversationFlow(message) {
   if (BUSINESS_PROBLEM_SIGNALS.some((s) => lower.includes(s))) {
     return FLOW.BUSINESS_PROBLEM;
   }
+  if (isHelpSeekingMessage(message)) {
+    return FLOW.QUICK_CONTACT;
+  }
 
   return null;
 }
@@ -111,7 +161,7 @@ export function detectConversationFlow(message) {
  */
 export function resolveFlowForTurn({ meta, chatInput, exitCategory, requestedFlow = null }) {
   if (exitCategory === "vendor" || exitCategory === "jobseeker") {
-    return meta.flow || null;
+    return null;
   }
   if (meta.flow) return meta.flow;
   if (
@@ -124,9 +174,6 @@ export function resolveFlowForTurn({ meta, chatInput, exitCategory, requestedFlo
   return detectConversationFlow(stripSystemNote(chatInput));
 }
 
-/**
- * Flow 5 step: 0 = awaiting name, 1 = awaiting help, 2 = awaiting email, 3 = done.
- */
 export function getQuickContactStep(meta) {
   return Number(meta.quick_contact_answers) || 0;
 }
@@ -141,13 +188,25 @@ export function isQuickContactReadyToFire(meta) {
 }
 
 /**
- * Deterministic Flow 5 handler. Returns null if not in quick_contact or already closed.
+ * Deterministic Flow 5 handler. Returns null if not in quick_contact.
  */
 export function processQuickContactTurn(meta, chatInput) {
   if (meta.flow !== FLOW.QUICK_CONTACT) return null;
-  if (meta.quick_contact_closed) return null;
 
   const input = typeof chatInput === "string" ? chatInput.trim() : "";
+
+  if (meta.quick_contact_closed) {
+    if (isResponseTimeQuestion(input)) {
+      return { reply: QC_Q_RESPONSE_TIME, meta: {}, fireWebhook: false };
+    }
+    return {
+      reply:
+        "Happy to help if there is anything else. Ask about Radical Thinking, our services, or our work.",
+      meta: {},
+      fireWebhook: false,
+    };
+  }
+
   const step = getQuickContactStep(meta);
 
   // Chip or contact intent — start with question 1 (do not count as an answer).
@@ -159,10 +218,30 @@ export function processQuickContactTurn(meta, chatInput) {
     };
   }
 
+  // Free-text help that routed to Flow 5 — acknowledge briefly, then ask name.
+  if (step === 0 && isHelpSeekingMessage(input) && !isPlausiblePersonName(input)) {
+    return {
+      reply: `Happy to help. ${QC_Q_NAME}`,
+      meta: { quick_contact_answers: 0, qc_help: input, qc_problem: input },
+      fireWebhook: false,
+    };
+  }
+
   // Step 0: name
   if (step === 0) {
     if (!isPlausiblePersonName(input)) {
       return { reply: QC_Q_NAME, meta: {}, fireWebhook: false };
+    }
+    const helpAlready = meta.qc_help || meta.qc_problem;
+    if (helpAlready) {
+      return {
+        reply: QC_Q_EMAIL,
+        meta: {
+          captured_name: input,
+          quick_contact_answers: 2,
+        },
+        fireWebhook: false,
+      };
     }
     return {
       reply: QC_Q_HELP,
@@ -197,7 +276,7 @@ export function processQuickContactTurn(meta, chatInput) {
       return { reply: QC_Q_EMAIL, meta: {}, fireWebhook: false };
     }
     return {
-      reply: QC_Q_DONE,
+      reply: buildQuickContactDoneReply(meta.captured_name),
       meta: {
         captured_email: input.trim(),
         quick_contact_answers: 3,
@@ -208,7 +287,7 @@ export function processQuickContactTurn(meta, chatInput) {
   }
 
   return {
-    reply: QC_Q_DONE,
+    reply: buildQuickContactDoneReply(meta.captured_name),
     meta: { quick_contact_closed: true },
     fireWebhook: false,
   };

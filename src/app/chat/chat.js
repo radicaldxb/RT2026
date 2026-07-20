@@ -63,7 +63,11 @@ const quickMessages = [
     'I have a bold idea',
     'I have a business problem',
     'Get in touch',
+    'Tell me about Radical Thinking',
 ];
+
+/** Bump when pre-chat copy or chips change — clears stale localStorage sessions. */
+const CHAT_UI_VERSION = '4';
 
 const CHIP_FLOW = {
     'I have a bold idea': 'bold_idea',
@@ -108,7 +112,7 @@ const PRE_CHAT = {
     hello: 'Hello',
     humanCheck: (q) => `Before we start, let's confirm you're human. What is ${q}?`,
     correct: "Correct. Now we're talking.",
-    mind: "What's on your mind? Are you here with a bold idea you want to bring to life, looking for help with something in your current business, or do you just want to get in touch?",
+    mind: "What's on your mind? A bold idea you want to bring to life, help with something in your business, or just looking to get in touch?",
     wrongAnswer: (q) => `That is incorrect. What is ${q}?`,
 };
 
@@ -188,6 +192,14 @@ export default function Chat() {
     }
 
     useEffect(() => {
+        const storedUiVersion = localStorage.getItem('rt_chat_ui_version');
+        if (storedUiVersion !== CHAT_UI_VERSION) {
+            localStorage.setItem('rt_chat_ui_version', CHAT_UI_VERSION);
+            localStorage.removeItem('rt_chat_messages');
+            localStorage.removeItem('rt_chat_phase');
+            localStorage.removeItem('rt_chat_flow');
+        }
+
         let storedSessionId = localStorage.getItem('rt_chat_session_id');
         if (!storedSessionId) {
             storedSessionId = typeof crypto !== 'undefined' && crypto.randomUUID
@@ -411,6 +423,8 @@ export default function Chat() {
             if (CHIP_FLOW[msg]) {
                 localStorage.setItem('rt_chat_flow', CHIP_FLOW[msg]);
                 metadata.flow = CHIP_FLOW[msg];
+            } else if (msg === 'Tell me about Radical Thinking') {
+                localStorage.removeItem('rt_chat_flow');
             } else {
                 const typedFlow = resolveClientFlow(msg);
                 if (typedFlow) {
@@ -487,6 +501,7 @@ export default function Chat() {
         localStorage.removeItem('rt_chat_verified');
         localStorage.removeItem('rt_chat_phase');
         localStorage.removeItem('rt_chat_flow');
+        localStorage.setItem('rt_chat_ui_version', CHAT_UI_VERSION);
         pendingAutoMessageRef.current = null;
         localChallengeRef.current = createLocalChallenge();
         try {
