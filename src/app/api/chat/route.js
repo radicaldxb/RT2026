@@ -45,11 +45,13 @@ import { stripInternalNarration } from "@/lib/rtbot/replySanitizer";
 import { loadConversation, saveConversation } from "@/lib/rtbot/conversations";
 import {
   FLOW,
+  buildActiveFlowSystemBlock,
   flowRoutingSystemNote,
   isQuickContactReadyToFire,
   nextQuickContactAnswerCount,
   quickContactCalendarSystemNote,
   quickContactExploringSystemNote,
+  quickContactGuidanceNote,
   resolveFlowForTurn,
   shouldOfferQuickContactCalendar,
   signalsExploringOnly,
@@ -59,6 +61,7 @@ const rateLimit = new Map();
 const SESSION_ID_RE = /^[a-zA-Z0-9_-]{8,64}$/;
 const REF_RE = /^[a-z0-9-]{1,64}$/;
 const ALLOWED_SOURCES = new Set(["portfolio", "insights", "services", "work"]);
+const ALLOWED_FLOWS = new Set(["bold_idea", "business_problem", "quick_contact"]);
 const UPSTREAM_TIMEOUT_MS = 30_000;
 const MODEL = "claude-haiku-4-5-20251001";
 
@@ -89,6 +92,9 @@ function sanitizeMetadata(raw) {
   if (typeof raw.ref === "string" && REF_RE.test(raw.ref)) out.ref = raw.ref;
   if (typeof raw.source === "string" && ALLOWED_SOURCES.has(raw.source)) {
     out.source = raw.source;
+  }
+  if (typeof raw.flow === "string" && ALLOWED_FLOWS.has(raw.flow)) {
+    out.flow = raw.flow;
   }
   return out;
 }
@@ -126,12 +132,17 @@ async function requireVerifiedCookie() {
   return { ok: true };
 }
 
-function buildPageContext(metadata, country, gdprRequired) {
+function buildPageContext(metadata, country, gdprRequired, meta = {}) {
+  const flow = meta.flow || "none";
+  const qcAnswers = Number(meta.quick_contact_answers) || 0;
   return `Current page context:
 - ref: ${metadata.ref || "none"}
 - source: ${metadata.source || "none"}
 - gdpr_required: ${gdprRequired}
-- visitor_country: ${country || "unknown"}`;
+- visitor_country: ${country || "unknown"}
+- conversation_flow: ${flow}
+- quick_contact_answers: ${qcAnswers}
+- captured_name: ${meta.captured_name || "none"}`;
 }
 
 function mergeContactIntoMeta(meta, fields) {
@@ -477,10 +488,26 @@ export async function POST(req) {
       meta: session.meta,
       chatInput,
       exitCategory,
+      requestedFlow: metadata.flow || null,
     });
     const flowJustSet = Boolean(resolvedFlow && !session.meta.flow);
     if (resolvedFlow) {
       session.meta.flow = resolvedFlow;
+    }
+    // Reinforce chip flow from client if session lost it somehow (never override an intentional divert away from quick_contact after calendar_offered exploring divert — those set business_problem intentionally).
+    if (
+      !session.meta.flow &&
+      metadata.flow &&
+      ALLOWED_FLOWS.has(metadata.flow)
+    ) {
+      session.meta.flow = metadata.flow;
+    } else if (
+      metadata.flow === FLOW.QUICK_CONTACT &&
+      session.meta.flow !== FLOW.BUSINESS_PROBLEM &&
+      !session.meta.calendar_offered
+    ) {
+      // Keep Get in touch locked even if a prior turn failed to persist flow.
+      session.meta.flow = FLOW.QUICK_CONTACT;
     }
 
     if (session.meta.flow === FLOW.QUICK_CONTACT) {
@@ -522,9 +549,20 @@ export async function POST(req) {
       userContent = `${quickContactExploringSystemNote()}\n\n${chatInput}`;
     } else if (shouldPromptWrapUp) {
       userContent = `${wrapUpSystemNote({ gdprRequired })}\n\n${chatInput}`;
+    } else if (session.meta.flow === FLOW.QUICK_CONTACT) {
+      const guidance = quickContactGuidanceNote(session.meta);
+      if (isFirstApiTurn) {
+        userContent = `[System note: The chat UI already delivered Hello, human verification, and the three-way mind question (bold idea / current business / get in touch). Opening chip may be "Get in touch". Do not repeat that opening. Do not ask them to choose from a list. ${
+          guidance
+            ? guidance.replace(/^\[System note:\s*/i, "").replace(/\]$/, "")
+            : "Commit to flow=quick_contact."
+        }]\n\n${chatInput}`;
+      } else if (guidance) {
+        userContent = `${guidance}\n\n${chatInput}`;
+      }
     } else if (isFirstApiTurn) {
       const routingNote = flowJustSet ? ` ${flowRoutingSystemNote(resolvedFlow)}` : "";
-      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked what is on their mind. Opening chips may send: "I have a bold idea", "I have a business problem", or "Get in touch". The message below is the visitor's answer. Do not repeat that opening. Do not ask them to choose from a list. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then route from their intent and proceed.${routingNote}]\n\n${chatInput}`;
+      userContent = `[System note: The chat UI already delivered Hello, human verification, and asked: "What's on your mind? Are you here with a bold idea you want to bring to life, looking for help with something in your current business, or do you just want to get in touch?" Opening chips may send: "I have a bold idea", "I have a business problem", or "Get in touch". The message below is the visitor's answer. Do not repeat that opening. Do not ask them to choose from a list. If they said get in touch / book an appointment / book a call, lock to Flow 5 (quick_contact) — three short questions only, then calendar. If name is not yet captured, ask for name FIRST — do not answer their question or share contact details yet. Once name is confirmed, say "Hi [Name], let's get into it." then proceed on the locked flow.${routingNote}]\n\n${chatInput}`;
     } else if (flowJustSet && resolvedFlow) {
       userContent = `${flowRoutingSystemNote(resolvedFlow)}\n\n${chatInput}`;
     }
@@ -539,26 +577,32 @@ export async function POST(req) {
 
     let response;
     try {
+      const systemBlocks = [
+        {
+          type: "text",
+          text: getSystemPrompt(),
+          cache_control: { type: "ephemeral" },
+        },
+        {
+          type: "text",
+          text: getKnowledge(),
+          cache_control: { type: "ephemeral" },
+        },
+        {
+          type: "text",
+          text: buildPageContext(metadata, resolvedCountry, gdprRequired, session.meta),
+        },
+      ];
+      const flowLock = buildActiveFlowSystemBlock(session.meta);
+      if (flowLock) {
+        systemBlocks.push({ type: "text", text: flowLock });
+      }
+
       response = await anthropic.messages.create(
         {
           model: MODEL,
           max_tokens: 500,
-          system: [
-            {
-              type: "text",
-              text: getSystemPrompt(),
-              cache_control: { type: "ephemeral" },
-            },
-            {
-              type: "text",
-              text: getKnowledge(),
-              cache_control: { type: "ephemeral" },
-            },
-            {
-              type: "text",
-              text: buildPageContext(metadata, resolvedCountry, gdprRequired),
-            },
-          ],
+          system: systemBlocks,
           messages: conversationHistory,
         },
         { signal: controller.signal }

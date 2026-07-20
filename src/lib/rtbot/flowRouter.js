@@ -15,13 +15,23 @@ const CHIP_TO_FLOW = {
 const QUICK_CONTACT_SIGNALS = [
   "get in touch",
   "i want to get in touch",
+  "just want to get in touch",
   "who do i speak to",
   "who should i speak to",
   "book a call",
+  "book an appointment",
+  "book a meeting",
+  "make an appointment",
+  "schedule a call",
+  "schedule a meeting",
+  "schedule an appointment",
   "speak to someone",
   "talk to someone",
-  "schedule a call",
   "talk to a human",
+  "talk to stephan",
+  "speak to stephan",
+  "set up a call",
+  "set up a meeting",
 ];
 
 const BOLD_IDEA_SIGNALS = [
@@ -87,12 +97,20 @@ export function detectConversationFlow(message) {
 
 /**
  * Resolve flow for this turn. Once meta.flow is set, commit (do not re-route).
+ * Chip/metadata.flow wins when meta.flow is not yet set.
  */
-export function resolveFlowForTurn({ meta, chatInput, exitCategory }) {
+export function resolveFlowForTurn({ meta, chatInput, exitCategory, requestedFlow = null }) {
   if (exitCategory === "vendor" || exitCategory === "jobseeker") {
     return meta.flow || null;
   }
   if (meta.flow) return meta.flow;
+  if (
+    requestedFlow === FLOW.BOLD_IDEA ||
+    requestedFlow === FLOW.BUSINESS_PROBLEM ||
+    requestedFlow === FLOW.QUICK_CONTACT
+  ) {
+    return requestedFlow;
+  }
   return detectConversationFlow(stripSystemNote(chatInput));
 }
 
@@ -134,11 +152,91 @@ export function isQuickContactReadyToFire(meta) {
   );
 }
 
+/**
+ * Per-turn coaching for Flow 5 so the model stays on the three-question path.
+ * Returns null when calendar/exploring notes should take over instead.
+ */
+export function quickContactGuidanceNote(meta) {
+  if (meta.flow !== FLOW.QUICK_CONTACT) return null;
+  if (meta.calendar_offered) return null;
+
+  const answers = Number(meta.quick_contact_answers) || 0;
+  const hasName = Boolean(meta.captured_name);
+
+  if (!hasName) {
+    return `[System note: flow=quick_contact. Name is not confirmed yet. Ask for their name only. Do not start the three qualifying questions yet. Do not offer the calendar.]`;
+  }
+
+  if (answers <= 0) {
+    return `[System note: flow=quick_contact. Name is confirmed (${meta.captured_name}). Say "Hi ${meta.captured_name}, let's get into it." Then ask ONLY this question: "What are you trying to solve?" Do not ask anything else. No Situation Read. No brief.]`;
+  }
+
+  if (answers === 1) {
+    return `[System note: flow=quick_contact. Answer 1 (problem) received. Ask ONLY this question next: "What is the timeline?" Do not re-ask the problem. No calendar yet.]`;
+  }
+
+  if (answers === 2) {
+    return `[System note: flow=quick_contact. Answer 2 (timeline) received. Ask ONLY this question next: "Is this something you are actively looking to move on, or still at the exploring stage?" Do not ask anything else. No calendar yet.]`;
+  }
+
+  // answers >= 3 handled by calendar / exploring notes in the route
+  return null;
+}
+
+/**
+ * Hard lock block for the model system channel (not a user-message note).
+ * Keeps Flow 5 from drifting into Flow 4 diagnostic questions.
+ */
+export function buildActiveFlowSystemBlock(meta) {
+  if (!meta?.flow) return null;
+
+  if (meta.flow === FLOW.QUICK_CONTACT) {
+    if (meta.calendar_offered) {
+      return `ACTIVE FLOW LOCK: quick_contact (Flow 5). Calendar step already triggered. Do not switch to Flow 3 or Flow 4. Do not ask diagnostic questions.`;
+    }
+
+    const answers = Number(meta.quick_contact_answers) || 0;
+    const hasName = Boolean(meta.captured_name);
+    let step;
+    if (!hasName) {
+      step = `Ask for their name only. Do not start qualifying questions.`;
+    } else if (answers <= 0) {
+      step = `Say "Hi ${meta.captured_name}, let's get into it." Then ask ONLY: "What are you trying to solve?"`;
+    } else if (answers === 1) {
+      step = `Ask ONLY: "What is the timeline?"`;
+    } else if (answers === 2) {
+      step = `Ask ONLY: "Is this something you are actively looking to move on, or still at the exploring stage?"`;
+    } else {
+      step = `Three answers are complete. Offer the calendar. Do not ask more questions.`;
+    }
+
+    return `ACTIVE FLOW LOCK: quick_contact (Flow 5 — Quick Contact).
+
+You are locked to Flow 5 for this conversation. Do NOT use Flow 3 (Bold Idea) or Flow 4 (Business Problem) question lists.
+Forbidden: "What specifically is not working?", "What have you already tried?", "What does the experience look like when it is fixed?", T²/C observations, Situation Read, brief artefacts, extra discovery questions.
+Maximum three qualifying questions total. One question per reply.
+
+Current step: ${step}`;
+  }
+
+  if (meta.flow === FLOW.BOLD_IDEA) {
+    return `ACTIVE FLOW LOCK: bold_idea (Flow 3). Follow Flow 3 only. Do not switch to Flow 4 or Flow 5.`;
+  }
+
+  if (meta.flow === FLOW.BUSINESS_PROBLEM) {
+    return `ACTIVE FLOW LOCK: business_problem (Flow 4). Follow Flow 4 only. Do not switch to Flow 5 unless the visitor explicitly asks to book a call.`;
+  }
+
+  return null;
+}
+
 /** Third-answer language that should divert to Flow 4 instead of calendar. */
 export function signalsExploringOnly(message) {
   if (!message || typeof message !== "string") return false;
-  return /explor|still think|not ready|just looking|researching|early days|early stage|not sure yet|kicking tyres|kicking tires|maybe later|just curious/i.test(
-    message
+  const lower = message.toLowerCase().trim();
+  // Only clear "still exploring / not ready" readiness answers — not problem descriptions.
+  return /\b(still (at the )?explor|only explor|just explor|not ready|just looking|maybe later|just curious|kicking tyres|kicking tires|not sure yet)\b/i.test(
+    lower
   );
 }
 

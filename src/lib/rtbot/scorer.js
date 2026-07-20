@@ -10,7 +10,7 @@ const SIMPLE_NAME_RE = /^[A-Za-z][a-z]+(?:\s+[A-Za-z][a-z'-]+){0,2}$/;
 
 /** Opening chips / UI answers that must never be treated as a person name. */
 const NOT_A_NAME_RE =
-  /^(bold idea|current business|i have a bold idea|i have a business problem|get in touch|looking for help|i need help with my business|help with my business|tell me about|tell me about radical thinking|show me your work|radical thinking|all good|looks good|sounds good|go ahead|send summary|go deeper)\.?$/i;
+  /^(bold idea|current business|i have a bold idea|i have a business problem|get in touch|book an appointment|book a call|book a meeting|looking for help|i need help with my business|help with my business|tell me about|tell me about radical thinking|show me your work|radical thinking|all good|looks good|sounds good|go ahead|send summary|go deeper)\.?$/i;
 
 /** Strip server-injected system notes from a stored user message. */
 export function stripSystemNote(content) {

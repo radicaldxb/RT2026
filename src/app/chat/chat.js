@@ -65,6 +65,39 @@ const quickMessages = [
     'Get in touch',
 ];
 
+const CHIP_FLOW = {
+    'I have a bold idea': 'bold_idea',
+    'I have a business problem': 'business_problem',
+    'Get in touch': 'quick_contact',
+};
+
+/** Free-typed phrases that should lock Flow 5 the same way the chip does. */
+function detectClientQuickContact(message) {
+    const lower = String(message || '').toLowerCase();
+    return [
+        'get in touch',
+        'book an appointment',
+        'book a call',
+        'book a meeting',
+        'make an appointment',
+        'schedule a call',
+        'schedule a meeting',
+        'schedule an appointment',
+        'who do i speak to',
+        'who should i speak to',
+        'speak to someone',
+        'talk to someone',
+        'set up a call',
+        'set up a meeting',
+    ].some((s) => lower.includes(s));
+}
+
+function resolveClientFlow(message) {
+    if (CHIP_FLOW[message]) return CHIP_FLOW[message];
+    if (detectClientQuickContact(message)) return 'quick_contact';
+    return null;
+}
+
 const NUMBER_WORDS = {
     2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine',
     10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen',
@@ -75,7 +108,7 @@ const PRE_CHAT = {
     hello: 'Hello',
     humanCheck: (q) => `Before we start, let's confirm you're human. What is ${q}?`,
     correct: "Correct. Now we're talking.",
-    mind: "What's on your mind? Are you here with a bold idea you want to bring to life, or are you looking for help with something in your current business?",
+    mind: "What's on your mind? Are you here with a bold idea you want to bring to life, looking for help with something in your current business, or do you just want to get in touch?",
     wrongAnswer: (q) => `That is incorrect. What is ${q}?`,
 };
 
@@ -375,6 +408,21 @@ export default function Chat() {
             const metadata = {};
             if (pageContextRef.current.ref) metadata.ref = pageContextRef.current.ref;
             if (pageContextRef.current.source) metadata.source = pageContextRef.current.source;
+            if (CHIP_FLOW[msg]) {
+                localStorage.setItem('rt_chat_flow', CHIP_FLOW[msg]);
+                metadata.flow = CHIP_FLOW[msg];
+            } else {
+                const typedFlow = resolveClientFlow(msg);
+                if (typedFlow) {
+                    localStorage.setItem('rt_chat_flow', typedFlow);
+                    metadata.flow = typedFlow;
+                } else {
+                    const storedFlow = localStorage.getItem('rt_chat_flow');
+                    if (storedFlow && ['bold_idea', 'business_problem', 'quick_contact'].includes(storedFlow)) {
+                        metadata.flow = storedFlow;
+                    }
+                }
+            }
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 credentials: 'include',
@@ -438,6 +486,7 @@ export default function Chat() {
         localStorage.removeItem('rt_chat_messages');
         localStorage.removeItem('rt_chat_verified');
         localStorage.removeItem('rt_chat_phase');
+        localStorage.removeItem('rt_chat_flow');
         pendingAutoMessageRef.current = null;
         localChallengeRef.current = createLocalChallenge();
         try {
