@@ -3,6 +3,7 @@ const WEBHOOK_ENV = {
   warm_lead: "N8N_WARM_WEBHOOK",
   job_seeker: "N8N_JOB_WEBHOOK",
   vendor: "N8N_VENDOR_WEBHOOK",
+  quick_contact: "N8N_QUICK_CONTACT_WEBHOOK",
 };
 
 async function postWebhook(url, event, payload) {
@@ -103,6 +104,18 @@ export async function fireVendor({ fields, unsubscribeToken }) {
     name: fields.name,
     email: fields.email,
     company: fields.company,
+    unsubscribe_token: unsubscribeToken,
+  });
+}
+
+export async function fireQuickContact({ fields, unsubscribeToken }) {
+  return postWebhook(webhookUrl("quick_contact"), "quick_contact", {
+    event: "quick_contact",
+    name: fields.name || null,
+    email: fields.email || null,
+    problem: fields.problem || null,
+    timeline: fields.timeline || null,
+    readiness: fields.readiness || null,
     unsubscribe_token: unsubscribeToken,
   });
 }

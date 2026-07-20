@@ -99,6 +99,7 @@ export function resolveFlowForTurn({ meta, chatInput, exitCategory }) {
 /**
  * After name is known, each non-chip / non-name user turn counts as one
  * Flow 5 answer. Returns the updated answer count.
+ * Also stamps problem / timeline / readiness on meta in question order.
  */
 export function nextQuickContactAnswerCount({
   meta,
@@ -110,13 +111,27 @@ export function nextQuickContactAnswerCount({
   if (!meta.captured_name || !nameWasAlreadyKnown) return current;
   if (flowFromChip(chatInput)) return current;
   if (isPlausiblePersonName(chatInput)) return current;
-  return current + 1;
+
+  const next = current + 1;
+  const answer = typeof chatInput === "string" ? chatInput.trim() : "";
+  if (next === 1 && answer) meta.qc_problem = answer;
+  if (next === 2 && answer) meta.qc_timeline = answer;
+  if (next === 3 && answer) meta.qc_readiness = answer;
+  return next;
 }
 
 export function shouldOfferQuickContactCalendar(meta) {
   if (meta.flow !== FLOW.QUICK_CONTACT) return false;
   if (meta.calendar_offered) return false;
   return (Number(meta.quick_contact_answers) || 0) >= 3;
+}
+
+export function isQuickContactReadyToFire(meta) {
+  return (
+    meta.flow === FLOW.QUICK_CONTACT &&
+    !meta.quick_contact_fired &&
+    (Number(meta.quick_contact_answers) || 0) >= 3
+  );
 }
 
 /** Third-answer language that should divert to Flow 4 instead of calendar. */

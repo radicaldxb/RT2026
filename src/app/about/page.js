@@ -50,6 +50,7 @@ export default function AboutPage() {
             founder: {
               "@type": "Person",
               name: "Stephan van Wijk",
+              image: "https://radical-thinking.net/Images/Stephanvanwijk.webp",
             },
             url: "https://radical-thinking.net",
           },

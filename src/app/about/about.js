@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { robotoSlab, serif } from "@/lib/fonts";
@@ -108,14 +109,15 @@ export default function About() {
             </p>
             <div className="rounded-2xl border border-[#e8e4dc]/90 bg-white p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
               <div className="flex flex-col sm:flex-row gap-6 md:gap-8">
-                <div
-                  className="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-[#f4f2ed] border border-[#e8e4dc]/90 flex items-center justify-center flex-shrink-0"
-                  role="img"
-                  aria-label="Stephan van Wijk photo placeholder"
-                >
-                  <span className="text-2xl md:text-3xl font-bold text-[#8a8780]" style={serif}>
-                    SvW
-                  </span>
+                <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-[#e8e4dc]/90 flex-shrink-0 bg-[#f4f2ed]">
+                  <Image
+                    src="/Images/Stephanvanwijk.webp"
+                    alt="Stephan van Wijk, founder of Radical Thinking"
+                    fill
+                    sizes="128px"
+                    className="object-cover object-center"
+                    priority
+                  />
                 </div>
                 <div className="min-w-0">
                   <h2

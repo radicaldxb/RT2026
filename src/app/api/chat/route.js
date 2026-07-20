@@ -36,6 +36,7 @@ import {
 import {
   fireJobSeeker,
   fireQualifiedLead,
+  fireQuickContact,
   fireVendor,
   fireWarmLead,
   shouldBlockWebhook,
@@ -45,6 +46,7 @@ import { loadConversation, saveConversation } from "@/lib/rtbot/conversations";
 import {
   FLOW,
   flowRoutingSystemNote,
+  isQuickContactReadyToFire,
   nextQuickContactAnswerCount,
   quickContactCalendarSystemNote,
   quickContactExploringSystemNote,
@@ -354,6 +356,29 @@ async function dispatchQualificationEvents({
 
   if (exitCategory === "jobseeker") {
     meta.job_seeker_flow = true;
+  }
+
+  // Flow 5: fire only the quick-contact webhook after three answers — never qualified/warm.
+  if (isQuickContactReadyToFire(meta) && !shouldBlockWebhook(meta)) {
+    const sent = await fireQuickContact({
+      fields: {
+        name: fields.name || meta.captured_name || null,
+        email: fields.email || meta.captured_email || null,
+        problem: meta.qc_problem || null,
+        timeline: meta.qc_timeline || null,
+        readiness: meta.qc_readiness || null,
+      },
+      unsubscribeToken,
+    });
+    if (sent) {
+      meta.email_opt_in = true;
+      meta.quick_contact_fired = true;
+      meta.last_webhook_event = "quick_contact";
+      delete meta.last_webhook_skip;
+      delete meta.last_webhook_error;
+    } else {
+      meta.last_webhook_error = "quick_contact_failed";
+    }
   }
 
   return meta;

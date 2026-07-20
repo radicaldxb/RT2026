@@ -770,6 +770,8 @@ function LandingFlowSections() {
         </div>
       </section>
 
+      {/* Proof of formula — temporarily hidden */}
+      {false && (
       <section className={flowSection}>
         <div className="max-w-lg mx-auto">
           <div className="text-center mb-6 md:mb-8">
@@ -857,6 +859,7 @@ function LandingFlowSections() {
           </motion.div>
         </div>
       </section>
+      )}
 
       <section id="insights" className={flowSection}>
         <div className="max-w-6xl mx-auto">
@@ -980,6 +983,8 @@ export default function Home() {
 
       <LandingFlowSections />
 
+      {/* What we think — temporarily hidden */}
+      {false && (
       <section id="radical" className="relative z-10 w-full px-4 py-14 md:py-20 scroll-mt-24">
         <div className="max-w-[660px] mx-auto text-center">
           <motion.h2
@@ -1013,6 +1018,7 @@ export default function Home() {
           </motion.p>
         </div>
       </section>
+      )}
 
       <Footer />
     </main>
