@@ -1,0 +1,91 @@
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 16mm;
+  }
+
+  body:has(.profile-page) header,
+  body:has(.profile-page) .profile-site-footer,
+  body:has(.profile-page) .profile-bg-screen {
+    display: none !important;
+  }
+
+  .profile-page {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10pt;
+  }
+
+  .profile-page *,
+  .profile-page *::before,
+  .profile-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .profile-page .profile-cover {
+    min-height: auto !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .profile-page .profile-section-print {
+    page-break-before: always;
+    break-before: page;
+    min-height: auto !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .profile-page .profile-section-inner {
+    max-width: 100% !important;
+  }
+
+  .profile-page h1,
+  .profile-page h2,
+  .profile-page h3 {
+    color: #000 !important;
+  }
+
+  .profile-page p,
+  .profile-page li,
+  .profile-page td,
+  .profile-page th {
+    color: #000 !important;
+  }
+
+  .profile-page .text-gray-600,
+  .profile-page .profile-muted {
+    color: #333 !important;
+  }
+
+  .profile-contact-band {
+    background: #fff !important;
+    color: #000 !important;
+    border: 0.5px solid #e8e4dc !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+  }
+
+  .profile-contact-band h2,
+  .profile-contact-band p,
+  .profile-contact-band a {
+    color: #000 !important;
+  }
+
+  .profile-contact-band p {
+    opacity: 1 !important;
+  }
+
+  .profile-cta {
+    background: #fff !important;
+    color: #000 !important;
+    border: 0.5px solid #000 !important;
+  }
+
+  .profile-closing-note {
+    color: #333 !important;
+  }
+}
