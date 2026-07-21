@@ -5,14 +5,14 @@ import { intelligenceFaqs } from "./intelligenceContent";
 export const metadata = {
   title: "Intelligence | Radical Thinking",
   description:
-    "A structured knowledge resource about Radical Thinking. Who we are, how we work, what we deliver, and FAQ for humans and AI systems.",
+    "Structured knowledge about Radical Thinking. A partner for organisations working on bold ideas. Entity, formula, services, methodology, and FAQ for humans and AI systems.",
   alternates: {
     canonical: "https://radical-thinking.net/intelligence",
   },
   openGraph: {
     title: "Intelligence | Radical Thinking",
     description:
-      "Entity definition, services, methodology, work, and Q&A. Structured for humans and AI systems.",
+      "Entity, formula, services, methodology, and Q&A. Structured for humans and AI systems.",
     url: "https://radical-thinking.net/intelligence",
     siteName: "Radical Thinking",
     images: [
@@ -28,7 +28,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Intelligence | Radical Thinking",
     description:
-      "Entity definition, services, methodology, work, and Q&A. Structured for humans and AI systems.",
+      "Entity, formula, services, methodology, and Q&A. Structured for humans and AI systems.",
     images: ["https://radical-thinking.net/Images/OG/OG-Intelligence.webp"],
   },
 };
@@ -48,7 +48,7 @@ const aboutPageSchema = {
   "@type": "AboutPage",
   name: "Radical Thinking Intelligence Brief",
   description:
-    "A structured knowledge resource about Radical Thinking, a Dubai-based AI advisory.",
+    "Structured knowledge about Radical Thinking, a partner for organisations working on bold ideas.",
   url: "https://radical-thinking.net/intelligence",
   mainEntity: {
     "@type": "Organization",

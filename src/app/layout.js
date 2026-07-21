@@ -120,21 +120,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 name: "Start a conversation",
                 url: "https://radical-thinking.net/chat",
                 description:
-                  "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking.",
+                  "Ask anything. The Radical Thinking assistant knows the work, the story, and the thinking.",
               },
               {
                 "@type": "WebPage",
                 name: "About Us",
                 url: "https://radical-thinking.net/about",
                 description:
-                  "Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk.",
+                  "Radical Thinking is a UAE-based partner for organisations working on bold ideas. Founded in 2009 by Stephan van Wijk.",
               },
               {
                 "@type": "WebPage",
                 name: "Services",
                 url: "https://radical-thinking.net/services",
                 description:
-                  "Advisory, implementation, and delivery: AI-augmented marketing systems, AI translation and positioning, and AI readiness roadmaps.",
+                  "Ideas and Positioning, Experience and Design, and Implementation and Technology. Services aligned to the formula.",
               },
               {
                 "@type": "WebPage",
@@ -148,7 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 name: "Work",
                 url: "https://radical-thinking.net/work",
                 description:
-                  "Client work and experiments in AI, digital platforms, and brand strategy.",
+                  "Client engagements and self-initiated experiments across strategy, experience, and implementation.",
               },
               {
                 "@type": "WebPage",
@@ -162,14 +162,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 name: "Privacy Policy",
                 url: "https://radical-thinking.net/privacy-policy",
                 description:
-                  "How we collect, use, and protect your data when you interact with our website and AI agent.",
+                  "How we collect, use, and protect your data when you interact with our website and AI assistant.",
               },
               {
                 "@type": "WebPage",
                 name: "Terms of Use",
                 url: "https://radical-thinking.net/terms-of-use",
                 description:
-                  "Official terms governing your access to and use of the Radical Thinking website, AI agent, and other services.",
+                  "Official terms governing your access to and use of the Radical Thinking website, AI assistant, and other services.",
               },
             ],
           })}

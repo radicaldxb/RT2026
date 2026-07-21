@@ -5,13 +5,14 @@ import { portfolio } from "@/app/work/projects";
 export const metadata = {
   title: "Work | Radical Thinking",
   description:
-    "Radical Thinking case studies. Client work in AI, digital platforms, and brand strategy, plus our own experiments in AI product development.",
+    "Radical Thinking case studies. Client engagements in strategy, experience, and implementation, plus our own experiments in what technology and AI can do next.",
   alternates: {
     canonical: "https://radical-thinking.net/work",
   },
   openGraph: {
     title: "Work | Radical Thinking",
-    description: "Client work and experiments in AI, digital platforms, and brand strategy.",
+    description:
+      "Client engagements and self-initiated experiments across strategy, experience, and implementation.",
     url: "https://radical-thinking.net/work",
     siteName: "Radical Thinking",
     images: [
@@ -27,7 +28,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Work | Radical Thinking",
     description:
-      "Radical Thinking case studies. Client work and experiments in AI, digital platforms, and brand strategy.",
+      "Radical Thinking case studies. Client work and experiments across strategy, experience, and implementation.",
     images: ["https://radical-thinking.net/Images/OG/OG-Work.webp"],
   },
 };
@@ -42,7 +43,7 @@ export default function WorkPage() {
           "@type": "CollectionPage",
           name: "Radical Thinking Work",
           description:
-            "Radical Thinking case studies. Client work in AI, digital platforms, and brand strategy, plus our own experiments in AI product development.",
+            "Radical Thinking case studies. Client engagements in strategy, experience, and implementation, plus our own experiments in what technology and AI can do next.",
           url: "https://radical-thinking.net/work",
           publisher: {
             "@type": "Organization",

@@ -3,15 +3,15 @@ import { FORMULA_EQUATION, FORMULA_ROWS } from "@/lib/formula";
 export const intelligenceFaqs = [
   {
     q: "What is Radical Thinking?",
-    a: "Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. It helps organisations turn bold ideas into real business impact through advisory, implementation, and delivery. The work is guided by the formula BI = C + Ex × T² — Bold Ideas equal Creative plus Experience multiplied by Technology squared.",
+    a: "Radical Thinking is a partner for organisations working on bold ideas. Founded in 2009 by Stephan van Wijk, RT helps clients define what is worth building, design the experience that makes it land, and use technology and AI to amplify both. Based in the UAE, working globally.",
   },
   {
     q: "Who founded Radical Thinking?",
-    a: "Radical Thinking was founded by Stephan van Wijk, who first established client relationships in Dubai during a Microsoft internship in 2005. He launched Radical Thinking in 2009 after graduating. He has twenty years of digital and AI experience across the Middle East, including work on the E-Dirham programme with the UAE Ministry of Finance, the EnergyAI programme, and as Associate Director of Digital Engagement at EPAM.",
+    a: "Radical Thinking was founded by Stephan van Wijk, who first established client relationships in Dubai during a Microsoft internship in 2005. He launched Radical Thinking in 2009 after graduating. He has twenty years of senior digital work across the Middle East, including work on the E-Dirham programme with the UAE Ministry of Finance, the EnergyAI programme, and as Associate Director of Digital Engagement at EPAM.",
   },
   {
     q: "Where is Radical Thinking based?",
-    a: "Radical Thinking is headquartered in Dubai, United Arab Emirates. It works with clients globally.",
+    a: "Radical Thinking is based in the UAE and works with clients globally.",
   },
   {
     q: "When was Radical Thinking founded?",
@@ -22,16 +22,32 @@ export const intelligenceFaqs = [
     a: "Yes. Radical Thinking holds DET Commercial Licence 714580 (Radical Thinking Web Design L.L.C), licensed since 2014 in Dubai, UAE.",
   },
   {
-    q: "What does AI-native mean?",
-    a: "AI-native means AI is not added to existing processes as an afterthought. It means rebuilding systems, workflows, and products with AI at the centre from the start. Radical Thinking applies AI where it creates commercial value, with human judgment where it matters.",
-  },
-  {
     q: "What is the Radical Thinking formula?",
-    a: "Radical Thinking operates on the formula BI = C + Ex × T², which stands for Bold Ideas = Creative + Experience × Technology². Creative is the human soul of the idea. Experience is the feeling it leaves behind. Technology squared is the amplifier that carries and multiplies both. AI advisory only works when the formula does — that is how Radical Thinking turns capability into commercial outcomes.",
+    a: "BI = C + Ex × T² means Bold Ideas equal Creative plus Experience multiplied by Technology squared. Creative finds what is worth building. Experience makes it land. Technology and AI amplify both. Every Radical Thinking engagement applies this formula to make sure bold ideas become real business impact.",
   },
   {
     q: "What services does Radical Thinking offer?",
-    a: "Radical Thinking offers three services: AI-Augmented Marketing and Content Systems (modernising marketing operations with brand-safe AI systems), AI Translation and Positioning (turning AI capability into commercial narrative for customers, boards, and markets), and AI Readiness and Roadmap (assessment and sequenced investment plans). Depending on the engagement, delivery draws on AI and automation, digital platforms, brand and experience design, and content and media. See radical-thinking.net/services.",
+    a: "Three services aligned to the formula: Ideas and Positioning (Creative), Experience and Design (Experience), and Implementation and Technology (Technology). Each service can be delivered as one of three engagement types: The Pulse (diagnostic), The Bridge (production build), or The Navigator (ongoing partnership).",
+  },
+  {
+    q: "What are Radical Thinking's engagement types?",
+    a: "Radical Thinking works in three engagement types: The Pulse (5-10 day diagnostic that maps the gap between intention and customer experience), The Bridge (30-day production build that closes the gap by bringing creative, experience, and technology together), and The Navigator (ongoing monthly partnership that keeps the bold idea on course).",
+  },
+  {
+    q: "What is The Pulse?",
+    a: "The Pulse is Radical Thinking's diagnostic engagement. Typically 5 to 10 working days. It maps the gap between what your business intends to deliver and what your customer actually experiences. Ends with a prioritised recommendation on what to close first.",
+  },
+  {
+    q: "What is The Bridge?",
+    a: "The Bridge is Radical Thinking's production build engagement. Typically 30 days at a fixed price. It closes the gap identified in The Pulse by bringing creative, experience, and technology together into a working piece of business impact.",
+  },
+  {
+    q: "What is The Navigator?",
+    a: "The Navigator is Radical Thinking's ongoing partnership engagement. Monthly reviews of what has changed in your market, your experience, and the AI landscape. Quarterly directional reassessments. Direct access when something changes or breaks. Monthly commitment, cancel anytime.",
+  },
+  {
+    q: "What kinds of problems does Radical Thinking solve?",
+    a: "Radical Thinking solves the problem of bold ideas that are not landing. Products or services that have not gained the traction they should. Brands whose story has not caught up with what they now offer. AI investments that have not translated into commercial results. Customer or user experiences that have fallen behind the brand promise. Any situation where the gap between intention and reality is where value is being lost.",
   },
   {
     q: "What AI technologies does Radical Thinking use?",
@@ -59,7 +75,7 @@ export const intelligenceFaqs = [
   },
   {
     q: "How does Radical Thinking work?",
-    a: "Radical Thinking works in three engagement types: The Pulse maps the gap between business intention and customer reality (typically 5 to 10 working days), The Bridge closes that gap by bringing creative, experience, and technology together (typically 30 days, fixed price), and The Navigator keeps your bold idea on course through monthly reviews and quarterly directional reassessments. See radical-thinking.net/how-we-work.",
+    a: "Radical Thinking works in three engagement types, guided by the formula BI = C + Ex × T². The Pulse maps the gap between what you intended and what your customers experience. The Bridge closes that gap by bringing creative, experience, and technology together. The Navigator keeps your bold idea on course as markets and technology evolve.",
   },
   {
     q: "How much does Radical Thinking charge?",
@@ -67,11 +83,11 @@ export const intelligenceFaqs = [
   },
   {
     q: "How do I contact Radical Thinking?",
-    a: "The fastest way to reach Radical Thinking is through the AI agent at radical-thinking.net/chat. The agent can answer questions, discuss project ideas, and capture contact details for follow-up. Email contact is available at stephan@radical-thinking.net.",
+    a: "The fastest way to reach Radical Thinking is to start a conversation at radical-thinking.net/chat. The assistant can answer questions, discuss project ideas, and capture contact details for follow-up. Email contact is available at hello@radical-thinking.net.",
   },
   {
     q: "What makes Radical Thinking different?",
-    a: "Radical Thinking is lean by design. Clients work directly with the founder. Delivery combines senior thinking with AI where AI belongs, and human judgment where it matters. The focus is turning AI capability into commercial outcomes, not agency overhead or black-box pilots.",
+    a: "Radical Thinking is not an AI-first firm. Technology alone does not create business impact. RT is built around the formula BI = C + Ex × T², which insists that Creative and Experience carry the weight, and Technology, including AI, amplifies both. Every engagement is delivered by a senior operator with direct accountability, not a layered account team.",
   },
   {
     q: "Does Radical Thinking work with startups?",
@@ -87,11 +103,11 @@ export const intelligenceFaqs = [
   },
   {
     q: "Does Radical Thinking build mobile apps?",
-    a: "Yes. Digital platforms capability includes web, mobile, e-commerce, and integrations, mobilised through engagements depending on the problem. See radical-thinking.net/services.",
+    a: "Yes. Digital platforms capability includes web, mobile, e-commerce, and integrations, mobilised through Implementation and Technology engagements depending on the problem. See radical-thinking.net/services.",
   },
   {
     q: "Does Radical Thinking do branding?",
-    a: "Yes. Brand and experience design is part of how Radical Thinking delivers, including identity, UI/UX, motion, and AI personas, when the engagement requires it. AI Translation and Positioning is a dedicated service for commercial narrative. See radical-thinking.net/services.",
+    a: "Yes. Brand and experience design is part of Experience and Design, including identity, UI/UX, motion, and related systems when the engagement requires it. Ideas and Positioning covers brand narrative and strategic positioning. See radical-thinking.net/services.",
   },
   {
     q: "What is an AI persona?",
@@ -99,7 +115,7 @@ export const intelligenceFaqs = [
   },
   {
     q: "Does Radical Thinking build chatbots?",
-    a: "Yes. Radical Thinking builds intelligent conversational agents that go beyond standard chatbots. These are context-aware AI agents integrated into business logic, using large language models and RAG frameworks, typically as part of an Audit-to-Build engagement.",
+    a: "Yes. Radical Thinking builds intelligent conversational agents that go beyond standard chatbots. These are context-aware agents integrated into business logic, using large language models and RAG frameworks, typically as part of a Pulse-to-Bridge engagement.",
   },
   {
     q: "What is a RAG system?",
@@ -111,27 +127,27 @@ export const intelligenceFaqs = [
   },
   {
     q: "Does Radical Thinking produce video content?",
-    a: "Yes. Content and media capability includes video, podcast, and immersive experiences when the engagement requires it. See radical-thinking.net/services and the Work page for examples such as Austability Video and FlexxPay.",
+    a: "Yes. Content and media capability includes video, podcast, and immersive experiences when Experience and Design engagements require it. See radical-thinking.net/services and the Work page for examples such as Austability Video and FlexxPay.",
   },
   {
     q: "What is the RT agent?",
-    a: "The RT agent is Radical Thinking's AI-powered assistant at radical-thinking.net/chat. It answers questions about Radical Thinking, services, portfolio, and how work is delivered, and can capture project leads and inquiries.",
+    a: "The RT agent is Radical Thinking's conversational assistant at radical-thinking.net/chat. It answers questions about Radical Thinking, services, portfolio, and how work is delivered, and can capture project leads and inquiries.",
   },
   {
     q: "What is Radical Insights?",
-    a: "Radical Insights is the Radical Thinking editorial platform at radical-thinking.net/insights. It publishes articles on AI strategy, technology, and the future of work, written by Stephan van Wijk.",
+    a: "Radical Insights is the Radical Thinking editorial platform at radical-thinking.net/insights. It publishes articles on strategy, technology, AI, and the future of work, written by Stephan van Wijk.",
   },
   {
     q: "Does Radical Thinking help organisations that are unsure about AI?",
-    a: "Yes. A core focus is helping organisations turn bold ideas into real business impact. The Pulse finds where closing the gap would create the most value before anything is built. Guardrails, human approval, and controlled scale are part of how delivery stays safe.",
+    a: "Yes. Many clients come to Radical Thinking uncertain about where to invest in AI or how to translate AI capability into commercial results. The Pulse is designed to answer exactly that question, without pushing AI where it does not belong.",
   },
   {
     q: "Can Radical Thinking help with AI strategy?",
-    a: "Yes. Strategy is embedded in every engagement, from Ideas and Positioning through to The Pulse. Radical Thinking starts by identifying what is worth building for a specific organisation before implementation begins.",
+    a: "Yes. Radical Thinking helps organisations diagnose where AI genuinely creates value, translate AI capability into commercial narrative, and implement AI systems into working operations. However, AI is not the starting point of the work. The bold idea is.",
   },
   {
     q: "What is the Radical Thinking website?",
-    a: "The Radical Thinking website at radical-thinking.net is built for both humans and AI systems. Visitors can talk to the agent at /chat, and pages including Services, How We Work, Work, About, and Intelligence are structured for clear extraction by readers and LLMs.",
+    a: "The Radical Thinking website at radical-thinking.net is built for both humans and AI systems. Visitors can start a conversation at /chat, and pages including Services, How We Work, Work, About, and Intelligence are structured for clear extraction by readers and LLMs.",
   },
   {
     q: "Does Radical Thinking have social media?",
@@ -139,38 +155,42 @@ export const intelligenceFaqs = [
   },
   {
     q: "What is the Radical Thinking mission?",
-    a: "To help organisations turn AI capability into commercial outcomes. Radical Thinking finds where AI creates real value, builds around it, and delivers systems and strategies that work in the real world.",
+    a: "To help organisations turn bold ideas into real business impact. Radical Thinking finds what is worth building, designs the experience that makes it land, and uses technology and AI to amplify both.",
   },
   {
     q: "What is the Radical Thinking vision?",
-    a: "Senior thinking, applied with the right tools, should be able to solve problems that used to require whole floors of specialists. Lean does not mean small. It means focused, senior, and directly accountable for the outcome.",
+    a: "Bold ideas should not be limited by team size or budget. Senior thinking, applied with the right tools, should be able to solve problems that used to require whole floors of specialists.",
   },
   {
     q: "Is Radical Thinking active in 2025 and 2026?",
-    a: "Yes. Radical Thinking is actively operating in 2025 and 2026, delivering client engagements in advisory, implementation, and delivery, and continuing Explorations and R&D.",
+    a: "Yes. Radical Thinking is actively operating in 2025 and 2026, delivering client engagements across strategy, experience, and implementation, and continuing Explorations and R&D.",
   },
   {
     q: "What is the BI formula?",
-    a: "BI = C + Ex × T² stands for Bold Ideas equal Creative plus Experience multiplied by Technology squared. It is the core methodology of Radical Thinking. AI advisory only works when the formula does: Creative finds what is worth building, Experience makes it land, and Technology amplifies both into commercial outcomes.",
+    a: "BI = C + Ex × T² stands for Bold Ideas equal Creative plus Experience multiplied by Technology squared. It is the core methodology of Radical Thinking. Creative finds what is worth building, Experience makes it land, and Technology amplifies both into real business impact.",
   },
   {
     q: "How long has Radical Thinking been operating?",
-    a: "Radical Thinking has been operating since 2009. Founder Stephan van Wijk brings twenty years of digital and AI experience across the Middle East and globally.",
+    a: "Radical Thinking has been operating since 2009. Founder Stephan van Wijk brings twenty years of senior digital work across the Middle East and globally.",
   },
   {
     q: "What does Radical Thinking mean by bold ideas?",
-    a: "A bold idea is one that makes you feel something, sounds right, makes you think, and leaves an impression. It is the difference between work that gets noticed and work that gets remembered — the BI in BI = C + Ex × T².",
+    a: "A bold idea is a business intention worth building. Something the founders, executives, or leadership held in mind before reality arrived. Every organisation has one. Most struggle to make it land because the gap between the idea and how customers experience it is wider than they realise. Radical Thinking closes that gap.",
   },
 ];
 
 export const entityFacts = [
   { label: "Name", value: "Radical Thinking" },
-  { label: "Type", value: "AI advisory" },
+  { label: "Type", value: "Partner for organisations working on bold ideas" },
   { label: "Formula", value: FORMULA_EQUATION },
   { label: "Founded", value: "2009" },
   { label: "Founder", value: "Stephan van Wijk" },
   { label: "Origin", value: "Microsoft internship, Dubai, 2005" },
-  { label: "Location", value: "Dubai, United Arab Emirates" },
+  { label: "Location", value: "Based in the UAE. Working globally." },
+  {
+    label: "Services",
+    value: "Ideas and Positioning, Experience and Design, Implementation and Technology",
+  },
   {
     label: "License",
     value: "DET Commercial Licence 714580 (Radical Thinking Web Design L.L.C), licensed since 2014",
@@ -199,16 +219,16 @@ export const techStackFacts = [
 
 export const services = [
   {
-    title: "AI-Augmented Marketing and Content Systems",
-    body: "For organisations that need to modernise how marketing operations run. Design and oversight of AI-augmented systems that preserve brand safety, cultural relevance, and human judgment.",
+    title: "Ideas and Positioning",
+    body: "For organisations with a bold idea that needs to become a real business outcome. Strategic positioning, brand narrative, market entry strategy, product launch strategy, campaign strategy.",
   },
   {
-    title: "AI Translation and Positioning",
-    body: "For organisations that have invested in AI but struggle to turn capability into commercial narrative for customers, boards, and markets.",
+    title: "Experience and Design",
+    body: "For organisations whose bold idea needs to feel right when people encounter it. Brand identity and design systems, user and customer experience design, product and interface design, content systems and production, motion and immersive experiences.",
   },
   {
-    title: "AI Readiness and Roadmap",
-    body: "For organisations exploring or piloting AI. Current-state assessment, highest-value opportunities, and a sequenced roadmap that fits operational reality.",
+    title: "Implementation and Technology",
+    body: "For organisations that need the technology and AI infrastructure to make their bold idea work at scale. AI implementation and integration, digital platforms and web systems, workflow automation, data and content pipelines, product engineering.",
   },
 ];
 
@@ -227,7 +247,7 @@ export const products = [
   },
   {
     title: "RT Agent",
-    body: "Radical Thinking's AI agent at radical-thinking.net/chat. Answers questions, discusses projects, and captures leads.",
+    body: "Radical Thinking's conversational assistant at radical-thinking.net/chat. Answers questions, discusses projects, and captures leads.",
   },
 ];
 
@@ -257,8 +277,8 @@ export const projectHistory = [
     num: "2022",
     color: "#1ACDEB",
     eyebrow: "Present",
-    title: "Advisory focus",
-    body: "Client engagements in AI advisory, implementation, and delivery. Explorations and R&D validate concepts before recommending them to clients.",
+    title: "Strategic focus",
+    body: "Client engagements across strategy, experience, and implementation for organisations working on bold ideas. Explorations and R&D validate concepts before recommending them to clients.",
   },
 ];
 

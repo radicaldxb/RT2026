@@ -108,10 +108,13 @@ export async function POST(req) {
     }
 
     const chatInput = body?.chatInput;
-    const sessionId =
-      typeof body?.sessionId === "string" && SESSION_ID_RE.test(body.sessionId)
-        ? body.sessionId
-        : "anonymous";
+    if (
+      typeof body?.sessionId !== "string" ||
+      !SESSION_ID_RE.test(body.sessionId)
+    ) {
+      return jsonResponse({ error: "sessionId is required" }, 400);
+    }
+    const sessionId = body.sessionId;
     const metadata = sanitizeMetadata(body?.metadata);
 
     if (!chatInput || typeof chatInput !== "string") {
@@ -124,7 +127,7 @@ export async function POST(req) {
       });
     }
 
-    const webhookUrl = process.env.N8N_WEBHOOK_URL || process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL;
+    const webhookUrl = process.env.N8N_WEBHOOK_URL;
     if (!webhookUrl) {
       console.error("Missing N8N_WEBHOOK_URL environment variable");
       return jsonResponse({ error: "Server configuration error" }, 500);

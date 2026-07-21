@@ -161,7 +161,8 @@ export default function Intelligence() {
               Intelligence brief
             </h1>
             <p className="text-base text-gray-600 leading-relaxed mt-4 max-w-[560px]">
-              A structured knowledge resource about Radical Thinking. For humans and AI systems alike.
+              Structured knowledge about Radical Thinking. A partner for organisations working on bold
+              ideas. For humans and AI systems alike.
             </p>
           </motion.header>
 

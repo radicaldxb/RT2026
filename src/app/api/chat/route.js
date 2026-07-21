@@ -429,10 +429,13 @@ export async function POST(req) {
     }
 
     const chatInput = body?.chatInput;
-    const sessionId =
-      typeof body?.sessionId === "string" && SESSION_ID_RE.test(body.sessionId)
-        ? body.sessionId
-        : "anonymous";
+    if (
+      typeof body?.sessionId !== "string" ||
+      !SESSION_ID_RE.test(body.sessionId)
+    ) {
+      return jsonResponse({ error: "sessionId is required" }, 400);
+    }
+    const sessionId = body.sessionId;
     const metadata = sanitizeMetadata(body?.metadata);
 
     if (!chatInput || typeof chatInput !== "string") {

@@ -210,7 +210,8 @@ export default function Work() {
               Work
             </h1>
             <p className="text-base text-gray-600 leading-relaxed mt-3 max-w-[560px] mx-auto md:mx-0">
-              Client engagements in AI, digital platforms, and brand strategy. Plus our own experiments in what AI can do next.
+              Client engagements delivered across strategy, experience, and implementation. Plus our
+              own experiments in what technology and AI can do next.
             </p>
           </motion.header>
 
@@ -230,7 +231,7 @@ export default function Work() {
                 Client Work
               </h2>
               <p className="text-sm text-gray-600 leading-relaxed mt-2 max-w-[560px] mx-auto md:mx-0">
-                Delivered engagements across AI, digital, brand, and marketing.
+                Delivered engagements for clients across strategy, experience, and implementation.
               </p>
             </motion.div>
 
@@ -280,7 +281,8 @@ export default function Work() {
                 Explorations and R&D
               </h2>
               <p className="text-sm text-gray-600 leading-relaxed mt-2 max-w-[640px] mx-auto md:mx-0">
-                Self-initiated experiments where we test what AI can do, build products end-to-end, and validate concepts before recommending them to clients.
+                Self-initiated experiments where we test what technology and AI can do, build products
+                end-to-end, and validate concepts before recommending them to clients.
               </p>
             </motion.div>
 
@@ -298,9 +300,6 @@ export default function Work() {
             transition={{ duration: 0.9, ease: E }}
             viewport={VP}
           >
-            <span className="block text-xs font-semibold tracking-[0.22em] uppercase text-[#8a8780] mb-3">
-              Start a conversation
-            </span>
             <h2
               className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-black leading-snug mb-3"
               style={serif}
@@ -308,10 +307,11 @@ export default function Work() {
               Want the full story on any project?
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              Our agent has access to every case study: architecture, outcomes, and what we would do differently.
+              Every case study has more context, outcomes, and lessons than a card can hold. Start a
+              conversation about any of them.
             </p>
             <Link
-              href="/chat?ref=work&source=portfolio"
+              href="/chat?ref=work"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-black text-white rounded-full text-xs font-semibold uppercase tracking-widest hover:opacity-85 transition-opacity"
             >
               Start a conversation

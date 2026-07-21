@@ -8,11 +8,10 @@ function readCountry(request) {
     // Netlify global only exists on their edge/runtime
   }
 
+  // Prefer platform-set headers only. Do not trust client-spoofable x-country / cf-ipcountry.
   const fromHeader =
     request.headers.get("x-nf-country") ||
-    request.headers.get("x-country") ||
     request.headers.get("x-vercel-ip-country") ||
-    request.headers.get("cf-ipcountry") ||
     "";
 
   return fromHeader ? fromHeader.toUpperCase() : "";

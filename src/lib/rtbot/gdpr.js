@@ -5,12 +5,11 @@ export const GDPR_COUNTRIES = [
 ];
 
 function countryFromHeaders(req) {
+  // x-rt-visitor-country is set by our middleware from Netlify/Vercel geo only.
   const fromHeader =
     req.headers.get("x-rt-visitor-country") ||
-    req.headers.get("x-country") ||
     req.headers.get("x-nf-country") ||
     req.headers.get("x-vercel-ip-country") ||
-    req.headers.get("cf-ipcountry") ||
     "";
 
   return fromHeader ? fromHeader.toUpperCase() : "";

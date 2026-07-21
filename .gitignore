@@ -22,6 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 ts-debug.log*
 .env*.local
+.env
+.env.production
+.env.development
 .vercel
 
 # Local video capture assets (generated, not for repo)

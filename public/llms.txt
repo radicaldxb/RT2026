@@ -2,15 +2,15 @@
 
 > Radical Thinking is a partner for organisations working on bold ideas, founded in 2009 and based in Dubai. Guided by the formula BI = C + Ex × T² (Bold Ideas = Creative + Experience × Technology²), it helps clients define what is worth building, design the experience that makes it land, and use technology and AI to amplify both.
 
-Creative finds what is worth building. Experience makes it land. Technology amplifies both. Engagements run as The Pulse, The Bridge, and The Navigator. Services cover Ideas and Positioning, Experience and Design, and Implementation and Technology. The website includes an AI agent (RT-BOT) for discovery conversations, case studies, and structured knowledge for humans and machines.
+Creative finds what is worth building. Experience makes it land. Technology amplifies both. Engagements run as The Pulse, The Bridge, and The Navigator. Services cover Ideas and Positioning, Experience and Design, and Implementation and Technology. The website includes an AI assistant (RT Agent) for discovery conversations, case studies, and structured knowledge for humans and machines.
 
 ## Primary pages
 
 - [Home](https://radical-thinking.net/): Positioning, formula narrative, and entry point.
-- [Start a conversation](https://radical-thinking.net/chat): Chat with RT-BOT to explore fit, services, and next steps.
+- [Start a conversation](https://radical-thinking.net/chat): Chat with the Radical Thinking assistant to explore fit, services, and next steps.
 - [How We Work](https://radical-thinking.net/how-we-work): Three engagement types. The Pulse, The Bridge, and The Navigator. Run through the formula.
 - [Services](https://radical-thinking.net/services): Ideas and Positioning, Experience and Design, Implementation and Technology.
-- [Work](https://radical-thinking.net/work): Client work and Explorations and R&D.
+- [Work](https://radical-thinking.net/work): Client engagements across strategy, experience, and implementation, plus Explorations and R&D.
 - [About](https://radical-thinking.net/about): Story, founder, mission, vision, and key facts.
 - [Radical Insights](https://radical-thinking.net/insights): Articles on AI, strategy, and transformation.
 - [Intelligence](https://radical-thinking.net/intelligence): Structured FAQ and entity knowledge for humans and AI systems.
@@ -18,4 +18,4 @@ Creative finds what is worth building. Experience makes it land. Technology ampl
 ## Optional
 
 - [Privacy Policy](https://radical-thinking.net/privacy-policy): Data collection and privacy practices.
-- [Terms of Use](https://radical-thinking.net/terms-of-use): Terms governing use of the website and AI agent.
+- [Terms of Use](https://radical-thinking.net/terms-of-use): Terms governing use of the website and AI assistant.

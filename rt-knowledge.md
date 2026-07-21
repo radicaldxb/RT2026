@@ -1,13 +1,13 @@
 # Radical Thinking — RT-BOT Knowledge Base
 
 > Single source of truth for RT-BOT. Sourced from the Radical Thinking website and intelligence brief.
-> Last updated: 15/07/2026
+> Last updated: 21/07/2026
 
 ---
 
 ## About
 
-Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. It helps organisations turn AI experiments into commercial outcomes through advisory, implementation, and delivery.
+Radical Thinking is a partner for organisations working on bold ideas, founded in 2009 by Stephan van Wijk and based in Dubai. Guided by BI = C + Ex × T², it helps clients define what is worth building, design the experience that makes it land, and use technology and AI to amplify both.
 
 - **Founder:** Stephan van Wijk (Microsoft internship in Dubai, 2005; Radical Thinking founded 2009; 20+ years digital and AI experience across the Middle East)
 - **Location:** Dubai, United Arab Emirates (works globally)
@@ -17,7 +17,7 @@ Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wij
 - **LinkedIn:** https://www.linkedin.com/company/radicalthinking
 
 ### Mission
-Help organisations turn AI capability into commercial outcomes. Find where AI creates real value, build around it, and deliver systems and strategies that work in the real world.
+Help organisations turn bold ideas into real business impact. Find what is worth building, design the experience that makes it land, and use technology and AI to amplify both.
 
 ### Vision
 Senior thinking, applied with the right tools, should be able to solve problems that used to require whole floors of specialists. Lean does not mean small. It means focused, senior, and directly accountable for the outcome.
@@ -28,7 +28,7 @@ Lean by design. Clients work directly with the founder. Senior thinking with AI 
 ### Formula: BI = C + Ex × T²
 Bold Ideas = Creative + Experience × Technology²
 
-AI advisory only works when the formula does. Creative finds what is worth building. Experience makes it land. Technology amplifies both — that is how Radical Thinking turns AI capability into commercial outcomes.
+The formula only works when the parts do. Creative finds what is worth building. Experience makes it land. Technology amplifies both. That is how Radical Thinking turns bold ideas into commercial outcomes.
 
 - **Creative (C):** The human soul of the idea. AI generates volume; humans generate meaning.
 - **Experience (Ex):** The feeling left behind after every interaction.
@@ -387,7 +387,7 @@ How We Work: https://radical-thinking.net/how-we-work
 
 ### Entity facts
 - Name: Radical Thinking
-- Type: AI advisory
+- Type: Partner for organisations working on bold ideas
 - Founded: 2009
 - Founder: Stephan van Wijk
 - Origin: Microsoft internship, Dubai, 2005
@@ -400,7 +400,7 @@ How We Work: https://radical-thinking.net/how-we-work
 ### FAQ (selected)
 
 **Q: What is Radical Thinking?**
-A: Radical Thinking is a Dubai-based AI advisory founded in 2009 by Stephan van Wijk. Guided by BI = C + Ex × T², it helps organisations turn AI experiments into commercial outcomes through advisory, implementation, and delivery.
+A: Radical Thinking is a partner for organisations working on bold ideas, founded in 2009 by Stephan van Wijk and based in Dubai. Guided by BI = C + Ex × T², it helps clients define what is worth building, design the experience that makes it land, and use technology and AI to amplify both.
 
 **Q: Who founded Radical Thinking?**
 A: Radical Thinking was founded by Stephan van Wijk, who first established client relationships in Dubai during a Microsoft internship in 2005. He launched Radical Thinking in 2009 after graduating. Twenty years of digital and AI experience across the Middle East.
@@ -415,13 +415,13 @@ A: Radical Thinking was founded in 2009.
 A: Yes. Radical Thinking holds DET Commercial Licence 714580 (Radical Thinking Web Design L.L.C), licensed since 2014 in Dubai, UAE.
 
 **Q: What does AI-native mean?**
-A: AI-native means AI is not added to existing processes as an afterthought. Radical Thinking applies AI where it creates commercial value, with human judgment where it matters.
+A: Radical Thinking uses AI where it creates commercial value, with human judgment where it matters. AI is an amplifier of creative and experience, not a replacement for them.
 
 **Q: What is the Radical Thinking formula?**
 A: Radical Thinking operates on the formula BI = C + Ex × T², which stands for Bold Ideas = Creative + Experience × Technology². Creative is the human soul of the idea. Experience is the feeling it leaves behind. Technology squared is the amplifier that carries and multiplies both.
 
 **Q: What services does Radical Thinking offer?**
-A: Three services: AI-Augmented Marketing and Content Systems, AI Translation and Positioning, and AI Readiness and Roadmap. Delivery may draw on AI and automation, digital platforms, brand and experience design, and content and media. See https://radical-thinking.net/services.
+A: Three services aligned to the formula: Ideas and Positioning, Experience and Design, and Implementation and Technology. See https://radical-thinking.net/services.
 
 **Q: What AI technologies does Radical Thinking use?**
 A: Radical Thinking works across multiple AI providers depending on the task, including Anthropic Claude, Google Gemini, KlingAI, and others, alongside platforms like Replit for rapid prototyping. n8n handles workflow automation and orchestration. RT-BOT, the agent on this site, runs on Claude.
