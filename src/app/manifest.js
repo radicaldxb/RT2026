@@ -2,7 +2,7 @@ export default function manifest() {
   return {
     name: 'Radical Thinking',
     short_name: 'Radical Thinking',
-    description: 'Radical Thinking is an AI-native agency that brings bold ideas to life.',
+    description: 'Radical Thinking is a partner for organisations working on bold ideas.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
@@ -24,5 +24,5 @@ export default function manifest() {
         type: 'image/png',
       },
     ],
-  }
+  };
 }

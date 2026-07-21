@@ -1,11 +1,14 @@
 // File: app/layout.js
 import "./globals.css";
 import Script from "next/script";
+import { roboto, robotoSlab } from "@/lib/fonts";
+
+const GTM_ID = "GTM-W67J42";
 
 export const metadata = {
-  title: "Radical Thinking | AI-Native Agency in Dubai",
+  title: "Radical Thinking | A partner for organisations working on bold ideas",
   description:
-    "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
+    "Radical Thinking is a partner for organisations working on bold ideas. Creative finds what is worth building, experience makes it land, technology and AI amplify both.",
   authors: [{ name: "Radical Thinking" }],
   creator: "Radical Thinking",
   publisher: "Radical Thinking",
@@ -13,25 +16,25 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://radical-thinking.net",
-    title: "Radical Thinking | AI-Native Agency in Dubai",
+    title: "Radical Thinking | A partner for organisations working on bold ideas",
     description:
-      "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
+      "Radical Thinking is a partner for organisations working on bold ideas. Creative finds what is worth building, experience makes it land, technology and AI amplify both.",
     siteName: "Radical Thinking",
     images: [
       {
-        url: "https://radical-thinking.net/Images/OG/RT-Social-Share.webp",
+        url: "https://radical-thinking.net/Images/OG/OG-Homepage.webp",
         width: 1200,
         height: 630,
-        alt: "Radical Thinking Agency",
+        alt: "Radical Thinking",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Radical Thinking | AI-Native Agency in Dubai",
+    title: "Radical Thinking | A partner for organisations working on bold ideas",
     description:
-      "Radical Thinking is an AI-native agency that brings bold ideas to life with AI-driven solutions, innovation, and futuristic design.",
-    images: ["https://radical-thinking.net/Images/OG/RT-Social-Share.webp"],
+      "Radical Thinking. A partner for organisations working on bold ideas. Creative, experience, technology, and AI in the right ratio.",
+    images: ["https://radical-thinking.net/Images/OG/OG-Homepage.webp"],
   },
   icons: {
     icon: "/favicon-light.svg",
@@ -58,23 +61,28 @@ export default function RootLayout({ children }) {
         <meta name="geo.placename" content="Dubai" />
         <meta name="geo.position" content="25.276987;55.296249" />
         <meta name="ICBM" content="25.276987, 55.296249" />
-      </head>
-      <body className="antialiased" suppressHydrationWarning>
-        {children}
 
-        {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-FXY9Q2TXCL"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FXY9Q2TXCL');
-          `}
+        {/* Google Tag Manager */}
+        <Script id="gtm" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
+      </head>
+      <body className={`${roboto.className} antialiased font-light`} suppressHydrationWarning>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
+        <span className={robotoSlab.className} hidden aria-hidden />
+        {children}
 
         {/*  Global Structured Data (Organization + hasPart pages) */}
         <Script id="ld-json-org" type="application/ld+json">
@@ -91,7 +99,7 @@ export default function RootLayout({ children }) {
               addressCountry: "AE",
             },
             description:
-              "An AI-native agency that brings bold ideas to life by combining creativity, experience, and technology.",
+              "A Dubai-based partner for organisations working on bold ideas, guided by BI = C + Ex × T².",
             contactPoint: {
               "@type": "ContactPoint",
               contactType: "customer support",
@@ -109,31 +117,38 @@ export default function RootLayout({ children }) {
             hasPart: [
               {
                 "@type": "WebPage",
-                name: "Talk to the Agent",
+                name: "Start a conversation",
                 url: "https://radical-thinking.net/chat",
                 description:
-                  "Ask anything. The Radical Thinking agent knows the work, the story, and the thinking.",
+                  "Ask anything. The Radical Thinking assistant knows the work, the story, and the thinking.",
               },
               {
                 "@type": "WebPage",
                 name: "About Us",
                 url: "https://radical-thinking.net/about",
                 description:
-                  "Learn about Radical Thinking, an AI-native agency bridging creativity and technology.",
+                  "Radical Thinking is a UAE-based partner for organisations working on bold ideas. Founded in 2009 by Stephan van Wijk.",
               },
               {
                 "@type": "WebPage",
                 name: "Services",
                 url: "https://radical-thinking.net/services",
                 description:
-                  "Explore our AI strategy, development, and design services.",
+                  "Ideas and Positioning, Experience and Design, and Implementation and Technology. Services aligned to the formula.",
               },
               {
                 "@type": "WebPage",
-                name: "Portfolio",
-                url: "https://radical-thinking.net/portfolio",
+                name: "How We Work",
+                url: "https://radical-thinking.net/how-we-work",
                 description:
-                  "View our selected work and case studies.",
+                  "How Radical Thinking works: The Pulse finds where you are, The Bridge closes the gap, The Navigator keeps the direction true.",
+              },
+              {
+                "@type": "WebPage",
+                name: "Work",
+                url: "https://radical-thinking.net/work",
+                description:
+                  "Client engagements and self-initiated experiments across strategy, experience, and implementation.",
               },
               {
                 "@type": "WebPage",
@@ -147,14 +162,14 @@ export default function RootLayout({ children }) {
                 name: "Privacy Policy",
                 url: "https://radical-thinking.net/privacy-policy",
                 description:
-                  "Understand how we collect, use, and protect your data when you interact with our website and AI-native services.",
+                  "How we collect, use, and protect your data when you interact with our website and AI assistant.",
               },
               {
                 "@type": "WebPage",
                 name: "Terms of Use",
                 url: "https://radical-thinking.net/terms-of-use",
                 description:
-                  "Official terms governing your access to and use of the Radical Thinking website, AI agent, and other services.",
+                  "Official terms governing your access to and use of the Radical Thinking website, AI assistant, and other services.",
               },
             ],
           })}
@@ -164,7 +179,7 @@ export default function RootLayout({ children }) {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
-            name: "Stephan Snelder",
+            name: "Stephan van Wijk",
             jobTitle: "Founder",
             worksFor: {
               "@type": "Organization",

@@ -2,20 +2,20 @@ import { articles } from "@/app/insights/articles";
 import InsightsList from "./InsightsList";
 
 export const metadata = {
-  title: "Radical Insights | AI, Technology & Strategy",
+  title: "Insights | Radical Thinking",
   description:
-    "Articles and insights on AI, technology, and strategy from the Radical Thinking team.",
+    "Articles and insights on AI, technology, and strategy from Radical Thinking.",
   alternates: {
     canonical: "https://radical-thinking.net/insights",
   },
   openGraph: {
-    title: "Radical Insights | Radical Thinking",
+    title: "Insights | Radical Thinking",
     description: "Articles and insights on AI, technology, and strategy.",
     url: "https://radical-thinking.net/insights",
     siteName: "Radical Thinking",
     images: [
       {
-        url: "https://radical-thinking.net/Images/OG/RT-Landing.webp",
+        url: "https://radical-thinking.net/Images/OG/OG-Insights.webp",
         width: 1200,
         height: 630,
         alt: "Radical Thinking Insights",

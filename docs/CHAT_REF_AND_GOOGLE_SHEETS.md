@@ -36,7 +36,7 @@ When ref is not 'none': For source=portfolio, use the Portfolio sheet and prefer
   - `tommy-ellie`
   - `microsoft-ai`
   - etc.  
-  (Use the slug from the site URL, e.g. `radical-thinking.net/portfolio/fluffyfriends` → `fluffyfriends`.)
+  (Use the slug from the site URL, e.g. `radical-thinking.net/work/fluffyfriends` → `fluffyfriends`.)
 
 **Step 3 – (Optional) Insights**
 
@@ -109,41 +109,47 @@ Use these **slug** values in your Portfolio tab so they match the website 1:1. B
 
 | slug | Full URL | Title |
 |------|----------|--------|
-| ai-networks | https://radical-thinking.net/portfolio/ai-networks | AI Networks |
-| bella-conversational-ai | https://radical-thinking.net/portfolio/bella-conversational-ai | Bella Conversational AI |
-| 1001-inventions-games | https://radical-thinking.net/portfolio/1001-inventions-games | 1001 Inventions Games |
-| akshaak | https://radical-thinking.net/portfolio/akshaak | Akshaak |
-| kahulife | https://radical-thinking.net/portfolio/kahulife | Kahulife |
-| animal-intelligence | https://radical-thinking.net/portfolio/animal-intelligence | Animal Intelligence |
-| austability | https://radical-thinking.net/portfolio/austability | Austability |
-| austability-video | https://radical-thinking.net/portfolio/austability-video | Austability Video |
-| crypto-x | https://radical-thinking.net/portfolio/crypto-x | Crypto X |
-| flexxpay | https://radical-thinking.net/portfolio/flexxpay | FlexxPay |
-| influence-my-world | https://radical-thinking.net/portfolio/influence-my-world | Influence My World |
-| kfas-1001-inventions | https://radical-thinking.net/portfolio/kfas-1001-inventions | KFAS 1001 Inventions |
-| lenovo-campaigns | https://radical-thinking.net/portfolio/lenovo-campaigns | Lenovo Campaigns |
-| microsoft-ai | https://radical-thinking.net/portfolio/microsoft-ai | Microsoft AI |
-| simon-snelder | https://radical-thinking.net/portfolio/simon-snelder | Simon Snelder |
-| tommy-ellie | https://radical-thinking.net/portfolio/tommy-ellie | Tommy & Ellie |
-| webinarlife | https://radical-thinking.net/portfolio/webinarlife | WebinarLife |
-| fluffyfriends | https://radical-thinking.net/portfolio/fluffyfriends | FluffyFriends |
+| soundreaver | https://radical-thinking.net/work/soundreaver | Soundreaver |
+| ai-networks | https://radical-thinking.net/work/ai-networks | AI Networks |
+| bella-conversational-ai | https://radical-thinking.net/work/bella-conversational-ai | Bella Conversational AI |
+| 1001-inventions-games | https://radical-thinking.net/work/1001-inventions-games | 1001 Inventions Games |
+| akshaak | https://radical-thinking.net/work/akshaak | Akshaak |
+| kahulife | https://radical-thinking.net/work/kahulife | Kahulife |
+| animal-intelligence | https://radical-thinking.net/work/animal-intelligence | Animal Intelligence |
+| austability-web | https://radical-thinking.net/work/austability-web | Austability Web |
+| austability-branding | https://radical-thinking.net/work/austability-branding | Austability Branding |
+| austability-video | https://radical-thinking.net/work/austability-video | Austability Video |
+| crypto-x | https://radical-thinking.net/work/crypto-x | Crypto X |
+| flexxpay | https://radical-thinking.net/work/flexxpay | FlexxPay |
+| influence-my-world | https://radical-thinking.net/work/influence-my-world | Influence My World |
+| kfas-1001-inventions | https://radical-thinking.net/work/kfas-1001-inventions | KFAS 1001 Inventions |
+| lenovo-campaigns | https://radical-thinking.net/work/lenovo-campaigns | Lenovo Campaigns |
+| payment-partners | https://radical-thinking.net/work/payment-partners | Payment Partners |
+| microsoft-ai | https://radical-thinking.net/work/microsoft-ai | Microsoft AI |
+| simon-snelder | https://radical-thinking.net/work/simon-snelder | Simon Snelder |
+| tommy-ellie | https://radical-thinking.net/work/tommy-ellie | Tommy & Ellie |
+| webinarlife | https://radical-thinking.net/work/webinarlife | WebinarLife |
+| fluffyfriends | https://radical-thinking.net/work/fluffyfriends | FluffyFriends |
 
 **Slug-only list** (for a single column, e.g. paste into the **slug** column in order):
 
 ```
+soundreaver
 ai-networks
 bella-conversational-ai
 1001-inventions-games
 akshaak
 kahulife
 animal-intelligence
-austability
+austability-web
+austability-branding
 austability-video
 crypto-x
 flexxpay
 influence-my-world
 kfas-1001-inventions
 lenovo-campaigns
+payment-partners
 microsoft-ai
 simon-snelder
 tommy-ellie
