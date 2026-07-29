@@ -6,7 +6,7 @@ import { roboto, robotoSlab } from "@/lib/fonts";
 const GTM_ID = "GTM-W67J42";
 
 export const metadata = {
-  title: "Radical Thinking | A partner for organisations working on bold ideas",
+  title: "Radical Thinking | Creative + Experience × Technology²",
   description:
     "Radical Thinking is a partner for organisations working on bold ideas. Creative finds what is worth building, experience makes it land, technology and AI amplify both.",
   authors: [{ name: "Radical Thinking" }],
@@ -16,7 +16,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://radical-thinking.net",
-    title: "Radical Thinking | A partner for organisations working on bold ideas",
+    title: "Radical Thinking | Creative + Experience × Technology²",
     description:
       "Radical Thinking is a partner for organisations working on bold ideas. Creative finds what is worth building, experience makes it land, technology and AI amplify both.",
     siteName: "Radical Thinking",
@@ -31,7 +31,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Radical Thinking | A partner for organisations working on bold ideas",
+    title: "Radical Thinking | Creative + Experience × Technology²",
     description:
       "Radical Thinking. A partner for organisations working on bold ideas. Creative, experience, technology, and AI in the right ratio.",
     images: ["https://radical-thinking.net/Images/OG/OG-Homepage.webp"],
