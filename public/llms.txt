@@ -15,6 +15,10 @@ Creative finds what is worth building. Experience makes it land. Technology ampl
 - [Radical Insights](https://radical-thinking.net/insights): Articles on AI, strategy, and transformation.
 - [Intelligence](https://radical-thinking.net/intelligence): Structured FAQ and entity knowledge for humans and AI systems.
 
+## Latest insight
+
+- [Your competitor is not the company using AI. Your competitor is AI.](https://radical-thinking.net/insights/your-competitor-is-ai): Most business risk assessments in 2026 are pointed at the wrong threat. The real competitor is AI itself, and the next 18 months separate capability sellers from businesses with something durable underneath.
+
 ## Optional
 
 - [Privacy Policy](https://radical-thinking.net/privacy-policy): Data collection and privacy practices.

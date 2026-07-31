@@ -67,6 +67,14 @@ const howWeWorkRows = [
 
 const insightArticles = [
   {
+    date: "31 Jul 2026",
+    title: "Your competitor is not the company using AI. Your competitor is AI.",
+    desc: "Most risk assessments are pointed at the wrong threat. The real competitor is AI itself.",
+    slug: "your-competitor-is-ai",
+    image: "/Images/insights/ai-is-coming.webp",
+    tags: ["Strategy", "AI Transformation"],
+  },
+  {
     date: "20 Apr 2026",
     title: "What Actually Works",
     desc: "Start small. Measure obsessively. Rebuild instead of retrofit. Push through Month 2.",
@@ -81,14 +89,6 @@ const insightArticles = [
     slug: "why-most-ai-rollouts-fail",
     image: "/Images/insights/ai-fail.webp",
     tags: ["Strategy", "AI Transformation"],
-  },
-  {
-    date: "06 Apr 2026",
-    title: "The Agency Is Not the Answer Anymore",
-    desc: "The traditional agency model is breaking. Own your capability instead.",
-    slug: "the-agency-is-not-the-answer-anymore",
-    image: "/Images/insights/agency.webp",
-    tags: ["Strategy", "Future of Work"],
   },
 ];
 

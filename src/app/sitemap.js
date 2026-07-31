@@ -6,6 +6,12 @@ export default function sitemap() {
   const baseUrl = "https://radical-thinking.net";
   const now = new Date();
 
+  const insightDates = (Array.isArray(articles) ? articles : [])
+    .map((item) => (item.publishedDate ? new Date(item.publishedDate) : null))
+    .filter(Boolean)
+    .sort((a, b) => b - a);
+  const newestInsight = insightDates[0] || now;
+
   const portfolioEntries = portfolio.map((item) => ({
     url: `${baseUrl}/work/${item.slug}`,
     lastModified: now,
@@ -13,12 +19,19 @@ export default function sitemap() {
     priority: 0.7,
   }));
 
-  const insightEntries = articles.map((item) => ({
-    url: `${baseUrl}/insights/${item.slug}`,
-    lastModified: item.publishedDate ? new Date(item.publishedDate) : now,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  const insightEntries = articles.map((item) => {
+    const published = item.publishedDate ? new Date(item.publishedDate) : now;
+    const isRecent =
+      Number.isFinite(published.getTime()) &&
+      now - published < 1000 * 60 * 60 * 24 * 60;
+
+    return {
+      url: `${baseUrl}/insights/${item.slug}`,
+      lastModified: published,
+      changeFrequency: isRecent ? "weekly" : "monthly",
+      priority: isRecent ? 0.8 : 0.7,
+    };
+  });
 
   return [
     {
@@ -53,9 +66,9 @@ export default function sitemap() {
     },
     {
       url: `${baseUrl}/insights`,
-      lastModified: now,
+      lastModified: newestInsight,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.85,
     },
     ...insightEntries,
     ...portfolioEntries,

@@ -7,6 +7,72 @@ const SIGNATURE = "Radical Insights. One sharp idea every week.";
 
 export const articles = [
   {
+    slug: "your-competitor-is-ai",
+    title: "Your competitor is not the company using AI. Your competitor is AI.",
+    description:
+      "Most business risk assessments in 2026 are pointed at the wrong threat. The real competitor is not a company adopting AI. It is AI itself, and the next 18 months separate capability sellers from businesses with something durable underneath.",
+    ogImage: "/Images/OG/OG-Insight-AI-is-coming.webp",
+    image: "/Images/insights/ai-is-coming.webp",
+    publishedDate: "2026-07-31",
+    author: "Stephan van Wijk",
+    readTime: "6 mins",
+    tags: ["Strategy", "AI Transformation", "Future of Work"],
+    ctaTitle: "Not sure what you are actually selling?",
+    ctaBody:
+      "Start a conversation. Tell the assistant what your business sells, and pressure-test what AI can compress.",
+    imageFrame: IMAGE_FRAME,
+    leadQuote:
+      "Most business risk assessments in 2026 are still pointed at the wrong threat.",
+    intro:
+      "The dominant frame is \"how quickly will my competitors adopt AI.\" It is a comfortable question because it keeps the enemy human. Someone you can out-execute, out-price, or out-position. The uncomfortable frame, and the more accurate one, is that AI itself is now the competitor. Not a company using AI. AI directly.",
+    sections: [
+      {
+        title: "What we have been watching",
+        paragraphs: [
+          "We have been watching this land at enterprise level over the last 18 months.",
+          "Contact centres of hundreds or thousands of seats are being restructured because agentic workflows now handle a growing share of tier 1 and tier 2. The vendors are shipping this directly into their platforms. The customer does not know or care.",
+          "Business process work at scale is compressing. Entire service lines that operated on human throughput are being renegotiated because the workflow itself can now be prompted.",
+          "Enterprise SaaS tools that charged for a specific workflow are quietly at risk. The customer needs the outcome, not the tool. When the outcome can be prompted on top of raw data, the tool loses its reason to exist.",
+          "Middle management layers whose primary work is reporting, synthesis, and coordination are the quiet part of the story. Agentic workflows are eating this layer, and it will land hardest in the next 24 months.",
+        ],
+      },
+      {
+        title: "What senior operators do with that reality",
+        paragraphs: [
+          "This is not a complaint about the technology. The capability is genuinely enabling, and it is shifting what is possible faster than any previous technology wave. The question is what senior operators do with that reality.",
+          "Even the firms building on top of this shift face the same question. The capability layer keeps moving. What you sell on top of it needs to be durable in its own right, not just in relation to what the platforms offer today.",
+          "The question is not whether AI will change these businesses. It will.",
+          "The question is what you are actually selling that AI cannot compress.",
+        ],
+      },
+      {
+        title: "The optimistic answer, and the honest one",
+        paragraphs: [
+          "If what you sell is a workflow, you are exposed. If what you sell is judgment, taste, trust, relationship, or physical presence, you are more defensible.",
+          "That is the optimistic answer.",
+          "The honest one is harder. Not every business can pivot to selling judgment and taste. Some sold the workflow because that is what the market wanted. That market is changing under them, and moving up the value chain is not a solution for every business at every stage.",
+          "Some will not survive this shift. That is not a moral failing. It is a market condition.",
+        ],
+      },
+      {
+        title: "The work now",
+        paragraphs: [
+          "For the ones that will, the work now is not \"add AI to your product.\"",
+          "It is a much older kind of work. Understand what your customer actually values, not just what they pay for. Understand the difference between the capability you deliver and the reason they came to you. Rebuild the offering around what will not be prompted away.",
+          "The clock started earlier than most operators realised. It is running faster than most risk assessments account for.",
+        ],
+      },
+    ],
+    closing: {
+      title: "Capability versus something durable",
+      paragraphs: [
+        "The next 18 months separate the businesses that were selling capability from the businesses that were selling something durable underneath it.",
+        "That distinction is the one worth doing the work to understand.",
+      ],
+      signature: SIGNATURE,
+    },
+  },
+  {
     slug: "what-actually-works",
     title: "What Actually Works",
     description:
