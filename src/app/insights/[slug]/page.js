@@ -16,17 +16,26 @@ export async function generateMetadata({ params }) {
   const ogSrc = article.ogImage || article.image;
   const imageUrl = ogSrc && ogSrc.startsWith("http") ? ogSrc : `${baseUrl}${ogSrc}`;
 
+  const pageUrl = `${baseUrl}/insights/${article.slug}`;
+
   return {
     title: `${article.title} | Radical Thinking Insights`,
     description: article.description,
+    robots: {
+      index: true,
+      follow: true,
+    },
     alternates: {
-      canonical: `${baseUrl}/insights/${article.slug}`,
+      canonical: pageUrl,
     },
     openGraph: {
+      type: "article",
       title: article.title,
       description: article.description,
-      url: `${baseUrl}/insights/${article.slug}`,
+      url: pageUrl,
       siteName: "Radical Thinking",
+      publishedTime: article.publishedDate,
+      authors: article.author ? [article.author] : undefined,
       images: [
         {
           url: imageUrl,
@@ -73,27 +82,41 @@ export default async function InsightArticlePage({ params }) {
     })
     .slice(0, 4);
 
+  const pageUrl = `https://radical-thinking.net/insights/${article.slug}`;
+  const imageUrl =
+    (article.ogImage || article.image) && (article.ogImage || article.image).startsWith("http")
+      ? article.ogImage || article.image
+      : article.ogImage || article.image
+        ? `https://radical-thinking.net${article.ogImage || article.image}`
+        : undefined;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
     description: article.description,
-    image:
-      (article.ogImage || article.image) && (article.ogImage || article.image).startsWith("http")
-        ? article.ogImage || article.image
-        : article.ogImage || article.image
-          ? `https://radical-thinking.net${article.ogImage || article.image}`
-          : undefined,
+    image: imageUrl,
     datePublished: article.publishedDate,
+    dateModified: article.publishedDate,
     author: {
       "@type": "Person",
       name: article.author,
+      url: "https://radical-thinking.net/about",
     },
     publisher: {
       "@type": "Organization",
       name: "Radical Thinking",
       url: "https://radical-thinking.net",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://radical-thinking.net/logos/RT-Logo-New.svg",
+      },
     },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+    url: pageUrl,
   };
 
   return (

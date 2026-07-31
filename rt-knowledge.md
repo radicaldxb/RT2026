@@ -328,6 +328,13 @@ Portfolio image paths (exact filenames, never guess):
 
 Editorial platform: https://radical-thinking.net/insights — articles on AI strategy, technology, and the future of work by Stephan van Wijk.
 
+### Your competitor is not the company using AI. Your competitor is AI.
+- slug: your-competitor-is-ai
+- url: https://radical-thinking.net/insights/your-competitor-is-ai
+- description: Most business risk assessments in 2026 are pointed at the wrong threat. The real competitor is not a company adopting AI. It is AI itself, and the next 18 months separate capability sellers from businesses with something durable underneath.
+- author: Stephan van Wijk
+- published: 31/07/2026
+
 ### What Actually Works
 - slug: what-actually-works
 - url: https://radical-thinking.net/insights/what-actually-works

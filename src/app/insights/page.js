@@ -5,6 +5,10 @@ export const metadata = {
   title: "Insights | Radical Thinking",
   description:
     "Articles and insights on AI, technology, and strategy from Radical Thinking.",
+  robots: {
+    index: true,
+    follow: true,
+  },
   alternates: {
     canonical: "https://radical-thinking.net/insights",
   },
