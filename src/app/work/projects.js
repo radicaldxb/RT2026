@@ -295,6 +295,32 @@ export const portfolio = [
         ],
     },
     {
+        title: "1001 Women",
+        category: "Initiative Landing Page",
+        description:
+            "Landing page for a 1001 Inventions initiative spotlighting women whose impact on society, medicine, education, and science has been under-recognised.",
+        link: "/work/1001-women",
+        slug: "1001-women",
+        tags: ["Education", "Digital Platforms"],
+        image: "/Images/Portfolio/1001-Women.webp",
+        live: "https://1001women.com",
+        overview:
+            "1001 Women is a 1001 Inventions initiative to surface women whose contributions shaped modern society, medicine, education, and science but have not received the attention they deserve. Radical Thinking delivered the public landing page as the first phase of a larger programme.",
+        challenge:
+            "The initiative needed a credible, public-facing entry point that could introduce the mission clearly, respect the historical weight of the subject, and leave room for a broader programme still to come.",
+        solution:
+            "A focused landing page that establishes the story, purpose, and presence of 1001 Women, built to launch quickly and extend as the larger project kicks off.",
+        outcome:
+            "Live at 1001women.com (July 2026). Foundation for the next phase of the initiative.",
+        facts: [
+            { label: "Technology", value: "Next.js" },
+            { label: "Year", value: "2026" },
+            { label: "Delivered", value: "Landing page" },
+            { label: "URL", value: "1001women.com" },
+            { label: "Status", value: "Live · phase one" },
+        ],
+    },
+    {
         title: "AI Networks",
         category: "Branding & Visual Communication",
         description: "Premium visual identity and strategic brand guidelines for a high-tech AI collective.",

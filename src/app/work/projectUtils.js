@@ -21,6 +21,7 @@ const WORK_OG_IMAGES = {
   soundreaver: "/Images/OG/OG-Work-Soundreaver.webp",
   "1001-inventions-games": "/Images/OG/OG-Work-1001.webp",
   "kfas-1001-inventions": "/Images/OG/OG-Work-KFAS.webp",
+  "1001-women": "/Images/OG/OG-Work-1001Women.webp",
   "ai-networks": "/Images/OG/OG-Work-AInetworks.webp",
   "bella-conversational-ai": "/Images/OG/OG-Work-Bella.webp",
   flexxpay: "/Images/OG/OG-Work-Flexxpay.webp",
