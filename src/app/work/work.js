@@ -14,6 +14,7 @@ const E = [0.16, 1, 0.3, 1];
 const VP = { once: false, margin: "0px 0px -100px 0px" };
 
 const CLIENT_ORDER = [
+  "1001-women",
   "microsoft-ai",
   "bella-conversational-ai",
   "lenovo-campaigns",
@@ -51,6 +52,8 @@ const CARD_COPY = {
     "Interactive multi-device installation combining physical creativity with real-time projection mapping.",
   "kfas-1001-inventions":
     "Progressive Web App for a regional technology festival.",
+  "1001-women":
+    "Landing page for a 1001 Inventions initiative spotlighting women whose impact on society, medicine, education, and science has been under-recognised.",
   "payment-partners":
     "Corporate brand and collateral system for a payments consultancy operating in regulated industries.",
   "ai-networks":

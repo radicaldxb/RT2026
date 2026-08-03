@@ -51,7 +51,7 @@ Fastest path: AI agent at https://radical-thinking.net/chat. Email: hello@radica
 
 Notable clients and partners include:
 - Microsoft, HP, Lenovo
-- 1001 Inventions, KFAS
+- 1001 Inventions, KFAS, 1001 Women
 - The Netherlands Government
 - Ministry of Finance of the UAE
 - Ministry of Economy of the UAE
@@ -145,6 +145,8 @@ Portfolio image paths (exact filenames, never guess):
   image: /Images/Portfolio/1001-games.webp
 - slug: kfas-1001-inventions
   image: /Images/Portfolio/kfas.webp
+- slug: 1001-women
+  image: /Images/Portfolio/1001-Women.webp
 - slug: ai-networks
   image: /Images/Portfolio/AINetworks-logo.webp
 - slug: bella-conversational-ai
@@ -298,6 +300,15 @@ Portfolio image paths (exact filenames, never guess):
 - overview: Commissioned by 1001 Inventions in 2022, Radical Thinking was tasked with building the digital gateway for the KFA's Festival of Robotics and AI, a high-profile event designed to introduce children to the future of technology.
 - tags: Interactive, Education
 
+### 1001 Women
+- slug: 1001-women
+- url: https://radical-thinking.net/work/1001-women
+- category: Initiative Landing Page
+- description: Landing page for a 1001 Inventions initiative spotlighting women whose impact on society, medicine, education, and science has been under-recognised.
+- overview: 1001 Women is a 1001 Inventions initiative to surface women whose contributions shaped modern society, medicine, education, and science but have not received the attention they deserve. Radical Thinking delivered the public landing page as the first phase of a larger programme. Live at 1001women.com (July 2026).
+- tags: Education, Digital Platforms
+- live: https://1001women.com
+
 ### AI Networks
 - slug: ai-networks
 - url: https://radical-thinking.net/work/ai-networks
@@ -449,7 +460,7 @@ A: Webinarlife was a fully managed webinar service built by Radical Thinking dur
 A: Radical Thinking's early clients from 2009 onwards included Microsoft, HP, and Lenovo. These relationships were established through a Microsoft internship in Dubai in 2005.
 
 **Q: What projects has Radical Thinking delivered?**
-A: Client work includes Microsoft AI, Bella Conversational AI, Lenovo Campaigns, 1001 Inventions, KFAS, Payment Partners, AI Networks, Simon Snelder, WebinarLife, Austability, Influence My World, Crypto X, Akshaak, Soundreaver, and FlexxPay. Explorations include FluffyFriends, Kahulife, Tommy & Ellie, and Animal Intelligence. See https://radical-thinking.net/work.
+A: Client work includes Microsoft AI, Bella Conversational AI, Lenovo Campaigns, 1001 Inventions, KFAS, 1001 Women, Payment Partners, AI Networks, Simon Snelder, WebinarLife, Austability, Influence My World, Crypto X, Akshaak, Soundreaver, and FlexxPay. Explorations include FluffyFriends, Kahulife, Tommy & Ellie, and Animal Intelligence. See https://radical-thinking.net/work.
 
 **Q: How does Radical Thinking work?**
 A: Three engagement types: The Pulse (5–10 days), The Bridge (typically 30 days, fixed price), and The Navigator (monthly). See https://radical-thinking.net/how-we-work.
