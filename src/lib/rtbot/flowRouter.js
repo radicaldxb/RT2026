@@ -119,6 +119,16 @@ function isResponseTimeQuestion(input) {
   );
 }
 
+/** Short closers after quick-contact is done. Keep the canned reply for these only. */
+function isTrivialFollowUp(input) {
+  const lower = normalize(input);
+  if (!lower) return true;
+  if (lower.length > 48) return false;
+  return /^(thanks|thank you|thx|ty|ok|okay|cool|great|perfect|cheers|bye|goodbye|no|nope|nothing|nothing else|that's all|thats all|all good|no thanks|no thank you)$/i.test(
+    lower
+  );
+}
+
 /** Exact opening-chip match. */
 export function flowFromChip(message) {
   return CHIP_TO_FLOW[normalize(message)] || null;
@@ -198,6 +208,15 @@ export function processQuickContactTurn(meta, chatInput) {
   if (meta.quick_contact_closed) {
     if (isResponseTimeQuestion(input)) {
       return { reply: QC_Q_RESPONSE_TIME, meta: {}, fireWebhook: false };
+    }
+    // Real questions (work, AI, services, etc.) leave Flow 5 so Claude can answer.
+    if (!isTrivialFollowUp(input)) {
+      return {
+        reply: null,
+        handoff: true,
+        meta: { flow: null },
+        fireWebhook: false,
+      };
     }
     return {
       reply:

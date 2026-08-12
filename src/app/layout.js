@@ -2,6 +2,7 @@
 import "./globals.css";
 import Script from "next/script";
 import { roboto, robotoSlab } from "@/lib/fonts";
+import LegacyServiceWorkerCleanup from "@/components/LegacyServiceWorkerCleanup";
 
 const GTM_ID = "GTM-W67J42";
 
@@ -82,6 +83,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         <span className={robotoSlab.className} hidden aria-hidden />
+        <LegacyServiceWorkerCleanup />
         {children}
 
         {/*  Global Structured Data (Organization + hasPart pages) */}

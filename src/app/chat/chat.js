@@ -110,11 +110,39 @@ const PRE_CHAT = {
     wrongAnswer: (q) => `That is incorrect. What is ${q}?`,
 };
 
+const API_FETCH_OPTIONS = { credentials: 'include', cache: 'no-store' };
+
+const CHAT_CONNECTION_ERROR = "I couldn't reach the server. If you've visited this site before, try a hard refresh (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows) or open this page in a private window.";
+
+const CHAT_ERROR_BY_CODE = {
+    missing_anthropic_key: "Chat is temporarily unavailable (missing AI configuration). Please try again later or email hello@radical-thinking.net.",
+    missing_supabase_config: "Chat is temporarily unavailable (database not configured). Please try again later or email hello@radical-thinking.net.",
+    conversation_load_failed: "Chat could not start a session. Please refresh and try again.",
+    missing_verify_secret: "Chat verification is misconfigured. Please refresh and try again.",
+};
+
+function chatErrorMessage(err) {
+    if (err?.message === 'html-response') return CHAT_CONNECTION_ERROR;
+    if (err?.code && CHAT_ERROR_BY_CODE[err.code]) return CHAT_ERROR_BY_CODE[err.code];
+    if (err?.message && err.message !== 'Error contacting server.') return err.message;
+    return 'Error contacting server.';
+}
+
+async function readJsonResponse(res) {
+    const contentType = res.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+        const preview = (await res.text()).trim().slice(0, 80);
+        const looksLikeHtml = preview.startsWith('<!DOCTYPE') || preview.startsWith('<html');
+        throw new Error(looksLikeHtml ? 'html-response' : `non-json-response:${res.status}`);
+    }
+    return res.json();
+}
+
 async function fetchServerChallenge() {
-    const getRes = await fetch('/api/verify', { credentials: 'include' });
+    const getRes = await fetch('/api/verify', API_FETCH_OPTIONS);
     if (!getRes.ok) return null;
     try {
-        const data = await getRes.json();
+        const data = await readJsonResponse(getRes);
         return typeof data?.q === 'string' ? data.q : null;
     } catch {
         return null;
@@ -123,14 +151,14 @@ async function fetchServerChallenge() {
 
 async function submitServerAnswer(answer) {
     const postRes = await fetch('/api/verify', {
+        ...API_FETCH_OPTIONS,
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ answer: String(answer).trim() }),
     });
     let data = {};
     try {
-        data = await postRes.json();
+        data = await readJsonResponse(postRes);
     } catch {
         // ignore
     }
@@ -444,8 +472,8 @@ export default function Chat() {
                 }
             }
             const res = await fetch('/api/chat', {
+                ...API_FETCH_OPTIONS,
                 method: 'POST',
-                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chatInput: msg, sessionId: sessionIdRef.current, ...(Object.keys(metadata).length > 0 && { metadata }) }),
             });
@@ -479,8 +507,18 @@ export default function Chat() {
                 return;
             }
             if (res.status === 429) { setMessages((prev) => [...prev, { id: `rate-limit-${Date.now()}`, from: 'bot', type: 'text', content: "Whoa there! You're sending messages a bit too fast. Please take a breather and try again in a minute.", timestamp: getTime() }]); setLoading(false); return; }
-            if (!res.ok) throw new Error(`Server error: ${res.status}`);
-            const data = await res.json();
+            if (!res.ok) {
+                let payload = {};
+                try {
+                    payload = await readJsonResponse(res);
+                } catch {
+                    // ignore
+                }
+                const apiError = new Error(payload?.error || `Server error: ${res.status}`);
+                if (payload?.code) apiError.code = payload.code;
+                throw apiError;
+            }
+            const data = await readJsonResponse(res);
             let botReply = null;
             if (data) {
                 if ('reply' in data) botReply = data.reply;
@@ -493,7 +531,8 @@ export default function Chat() {
             setMessages((prev) => [...prev, { id: `bot-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'bot', type: 'text', content: safeContent, timestamp: getTime() }]);
         } catch (err) {
             console.error('Error talking to API:', err);
-            setMessages((prev) => [...prev, { id: `error-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'bot', type: 'text', content: 'Error contacting server.', timestamp: getTime() }]);
+            const content = chatErrorMessage(err);
+            setMessages((prev) => [...prev, { id: `error-${Date.now()}-${Math.random().toString(36).slice(2)}`, from: 'bot', type: 'text', content, timestamp: getTime() }]);
         }
         setLoading(false);
     };
@@ -511,7 +550,7 @@ export default function Chat() {
         challengeQuestionRef.current = '';
         resumeLiveAfterVerifyRef.current = false;
         try {
-            await fetch('/api/verify', { method: 'DELETE', credentials: 'include' });
+            await fetch('/api/verify', { ...API_FETCH_OPTIONS, method: 'DELETE' });
         } catch {
             // ignore
         }

@@ -105,7 +105,7 @@ function jsonResponse(body, status = 200) {
 async function requireVerifiedCookie() {
   const secret = getVerifySecret();
   if (!secret) {
-    return { error: jsonResponse({ error: "Server configuration error" }, 500) };
+    return { error: jsonResponse({ error: "Server configuration error", code: "missing_verify_secret" }, 500) };
   }
 
   const cookieStore = await cookies();
@@ -451,7 +451,7 @@ export async function POST(req) {
     const anthropic = getAnthropic();
     if (!anthropic) {
       console.error("Missing ANTHROPIC_API_KEY environment variable");
-      return jsonResponse({ error: "Server configuration error" }, 500);
+      return jsonResponse({ error: "Server configuration error", code: "missing_anthropic_key" }, 500);
     }
 
     const country = await getVisitorCountry(req);
@@ -461,7 +461,11 @@ export async function POST(req) {
       session = await loadConversation(sessionId);
     } catch (err) {
       console.error("Failed to load conversation:", err);
-      return jsonResponse({ error: "Server configuration error" }, 500);
+      const code =
+        err?.message === "Missing Supabase configuration"
+          ? "missing_supabase_config"
+          : "conversation_load_failed";
+      return jsonResponse({ error: "Server configuration error", code }, 500);
     }
 
     applyVisitorGeo(session.meta, country);
@@ -517,7 +521,10 @@ export async function POST(req) {
       exitCategory !== "jobseeker"
     ) {
       const qc = processQuickContactTurn(session.meta, chatInput);
-      if (qc) {
+      if (qc?.handoff) {
+        Object.assign(session.meta, qc.meta);
+        // Fall through to Anthropic for substantive post-contact questions.
+      } else if (qc) {
         Object.assign(session.meta, qc.meta);
         const reply = qc.reply;
         const updatedHistory = [
